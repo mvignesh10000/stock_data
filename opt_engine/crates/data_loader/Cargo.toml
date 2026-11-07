@@ -1,0 +1,13 @@
+[package]
+name = "data_loader"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+core_types = { path = "../core_types" }
+serde = { workspace = true }
+bincode = { workspace = true }
+rustc-hash = { workspace = true }
+parquet = { version = "55", default-features = false, features = ["arrow", "zstd", "snap"] }
+arrow-array = "55"
+memmap2 = "0.9"

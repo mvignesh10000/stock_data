@@ -1,0 +1,17 @@
+[package]
+name = "cli_runner"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "opt_engine"
+path = "src/main.rs"
+
+[dependencies]
+core_types = { path = "../core_types" }
+data_loader = { path = "../data_loader" }
+oms_simulator = { path = "../oms_simulator" }
+strategy_api = { path = "../strategy_api" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rayon = "1.10"

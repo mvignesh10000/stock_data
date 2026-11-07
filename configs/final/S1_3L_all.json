@@ -1,0 +1,45 @@
+{
+ "exec": {
+  "costs": {
+   "brokerage_per_order": 20.0
+  }
+ },
+ "gates": {
+  "capital": 300000
+ },
+ "strategy": {
+  "name": "S1_strangle_premium_dte0",
+  "structure": "strangle_premium",
+  "target_premium": 71,
+  "otm_steps": 3,
+  "hedge_premium": 2.0,
+  "hedge_min_steps": 4,
+  "dte_allowed": [
+   0
+  ],
+  "entry_minutes": [
+   8
+  ],
+  "lots": 2,
+  "or_filter_pct": 0.0,
+  "sl_mode": "leg",
+  "sl_pct": 20.2,
+  "combined_sl_pct": 13.4,
+  "move_sl_to_cost": true,
+  "cost_offset": 0.074,
+  "max_reentries": 0,
+  "reentry_cutoff": 300,
+  "wt_drop_pct": 0,
+  "wt_window": 60,
+  "max_loss_pts": 18,
+  "target_pts": 0,
+  "lock_trigger_pts": 29,
+  "lock_pct": 0.64,
+  "trail_step_pts": 10,
+  "trail_by_pts": 5,
+  "exit_minute": 347,
+  "roll_ratio": 0.0,
+  "max_rolls": 2,
+  "roll_cutoff": 270
+ }
+}

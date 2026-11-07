@@ -1,0 +1,21 @@
+{
+ "exec": {
+  "costs": {
+   "brokerage_per_order": 0.0
+  }
+ },
+ "gates": {
+  "capital": 200000
+ },
+ "strategy": {
+  "name": "B1_plain_straddle_all",
+  "structure": "straddle",
+  "entry_minutes": [
+   10
+  ],
+  "sl_pct": 30,
+  "hedge_premium": 3,
+  "exit_minute": 360,
+  "lots": 1
+ }
+}

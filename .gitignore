@@ -1,0 +1,6 @@
+data/
+opt_engine/target/
+results/discovery/batch_*.jsonl
+results/discovery/res_*.json
+results/sanity.json
+__pycache__/

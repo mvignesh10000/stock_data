@@ -1,0 +1,1 @@
+{"strategy": {"name":"sanity","structure":"straddle","entry_minutes":[10],"sl_pct":30,"hedge_premium":3,"exit_minute":360}}

@@ -1,0 +1,11 @@
+[package]
+name = "strategy_api"
+version = "0.1.0"
+edition = "2021"
+
+# NOTE: no backtest-only I/O dependencies here, so strategies can be compiled into a live binary.
+[dependencies]
+core_types = { path = "../core_types" }
+oms_simulator = { path = "../oms_simulator" }
+serde = { workspace = true }
+serde_json = { workspace = true }
