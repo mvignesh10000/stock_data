@@ -21,7 +21,7 @@ expires 2027-10-09). Put it in env `UPSTOX_ACCESS_TOKEN` or `data/upstox/token.t
 Extended tokens are read-only, so **order placement** (`execution/upstox_ironfly.py --live`) needs a normal
 access token from the daily OAuth login (these expire at 03:30 IST). Paper mode works with the extended token.
 
-## Why not run the scheduler in the cloud session?
-The cloud container is ephemeral and this branch can't be pushed (GitHub returns 403), so anything recorded there
-is lost when the container is reclaimed. Market data needs no static IP, but **order placement does** (Upstox static-IP
-rule), so the executor has to run on your registered machine anyway. Keep both on the same box.
+## Cloud (Claude scheduled tasks) instead of your machine
+See `CLAUDE_SCHEDULER.md`: every run pulls the lake from private Kaggle datasets, adds the new data and pushes a
+new version (`etl/kaggle_sync.py`), so nothing depends on the ephemeral container. Order placement still has to run
+on your registered static-IP machine.
