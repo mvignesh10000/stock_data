@@ -11,7 +11,7 @@ Output: data/upstox/bidask/date=YYYY-MM-DD/part-HHMMSS.parquet (a new part every
 Run window: starts immediately, stops itself at 15:41 IST (or --until HH:MM). Safe to start at any time; the
 scheduler (etl/scheduler/) launches it at 09:12 IST on weekdays.
 
-Token: data/upstox/token.txt or env UPSTOX_ACCESS_TOKEN (same as the backfill). Upstox tokens expire daily at 03:30
+Token: data/upstox/token.txt or env UPSTOX_ACCESS_TOKEN (the 1-year extended token is fine). Normal tokens expire at 03:30
 IST, so generate one each morning before 09:12 (see etl/scheduler/README.md).
 Market data needs no static IP (only order APIs do), so this can run on any machine.
 """

@@ -15,15 +15,11 @@ calendars can be studied), CE and PE: LTP, best bid/ask and quantities, OI, IV, 
 volume, plus the index and India VIX. Strikes re-centre every 10 minutes. About 260 instruments, ~5.9 M rows/day,
 ~40–60 MB/day zstd before compaction.
 
-## Daily token (the one manual step)
-Upstox access tokens expire at **03:30 IST every day**. Each morning before 09:12:
-1. Log in through your Upstox app's OAuth URL, exchange the `code` for an `access_token` (`/v2/login/authorization/token`).
-2. Write it to `data/upstox/token.txt` (one line). All scripts re-read this file on every 401, so running jobs
-   pick the new token up without a restart.
-
-Upstox also offers an "access token request" flow (`POST /v3/login/auth/token/request/{client_id}`), which sends an approve
-prompt to your phone and delivers the token to a notifier webhook. That removes the browser login if you host a
-small webhook receiver.
+## Token
+Data jobs (backfill, recorder, margin probe) use your **Upstox extended token** (read-only, valid 1 year; the current one
+expires 2027-10-09). Put it in env `UPSTOX_ACCESS_TOKEN` or `data/upstox/token.txt`; nothing to do daily.
+Extended tokens are read-only, so **order placement** (`execution/upstox_ironfly.py --live`) needs a normal
+access token from the daily OAuth login (these expire at 03:30 IST). Paper mode works with the extended token.
 
 ## Why not run the scheduler in the cloud session?
 The cloud container is ephemeral and this branch can't be pushed (GitHub returns 403), so anything recorded there

@@ -13,7 +13,7 @@ Requirements / caveats
   * SEBI retail-algo framework (from 1-Apr-2026): self-built API strategies under the order-rate threshold are
     allowed through the broker's API but must be tagged; check Upstox's current Algo-ID registration
     process before going live and set ALGO_TAG below accordingly.
-  * Token: data/upstox/token.txt or env UPSTOX_ACCESS_TOKEN, generated each morning (expires 03:30 IST).
+  * Token: LIVE orders need a normal daily access token (extended 1-year tokens are read-only); paper mode is fine with the extended token.
 Usage:  python execution/upstox_ironfly.py NIFTY [--lots 1] [--wing 400] [--live]
 """
 import argparse, datetime as dt, json, os, sys, time, urllib.request, urllib.error
