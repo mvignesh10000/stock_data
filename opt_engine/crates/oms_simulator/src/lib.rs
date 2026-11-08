@@ -26,7 +26,7 @@ impl Default for CostModel {
     fn default() -> Self {
         CostModel {
             brokerage_per_order: 20.0,
-            stt_sell_pct: 0.1,
+            stt_sell_pct: 0.15, // from 1-Apr-2026 (was 0.1 from 1-Oct-2024)
             exchange_txn_pct: 0.03503,
             sebi_pct: 0.0001,
             stamp_buy_pct: 0.003,
@@ -610,7 +610,7 @@ mod tests {
         let c = CostModel::default();
         // sell 65 qty @ 100 -> turnover 6500
         let sell = c.charges(Side::Sell, 100.0, 65.0);
-        let expected = 20.0 + 6.5 + 6500.0 * 0.0003503 + 6500.0 * 0.000001 + (20.0 + 6500.0 * 0.0003503 + 6500.0 * 0.000001) * 0.18;
+        let expected = 20.0 + 9.75 + 6500.0 * 0.0003503 + 6500.0 * 0.000001 + (20.0 + 6500.0 * 0.0003503 + 6500.0 * 0.000001) * 0.18;
         assert!((sell - expected).abs() < 1e-9);
         let buy = c.charges(Side::Buy, 100.0, 65.0);
         let expected_b = 20.0 + 6500.0 * 0.00003 + 6500.0 * 0.0003503 + 6500.0 * 0.000001 + (20.0 + 6500.0 * 0.0003503 + 6500.0 * 0.000001) * 0.18;

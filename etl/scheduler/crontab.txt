@@ -1,0 +1,5 @@
+# Linux / macOS cron (install: crontab -e, paste; machine clock in IST, or use CRON_TZ where supported)
+CRON_TZ=Asia/Kolkata
+12 9 * * 1-5  /path/to/stock_data/etl/scheduler/run_recorder.sh
+# optional: nightly compaction of the 1-minute parts into one file per day
+50 15 * * 1-5 cd /path/to/stock_data && python3 etl/scheduler/compact_bidask.py
