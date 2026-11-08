@@ -43,5 +43,5 @@ python etl/crosscheck_wicks.py <npartha dir> data/parquet etl/wick_model.json   
 python etl/inject_wicks.py data/parquet/NIFTY etl/wick_model.json data/parquet/NIFTY_WICK
 ./opt_engine/target/release/opt_engine build-cache --parquet-dir data/parquet/NIFTY_OHLC --parquet-dir data/parquet/NIFTY_WICK --out data/cache/nifty_wick.bin
 python research/discover_v5.py && python research/discover_v6.py && python research/discover_v7.py
-python research/finalize_v7.py && python research/report_v7.py
+python research/finalize_v7.py && python research/report_static.py   # static, JS-free report
 ```
