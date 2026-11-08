@@ -61,7 +61,7 @@ setup += ["", "## Margin you need (calibrated on the exchange SPAN file, NIFTY �
           "- Expiry day, 1 lot of this iron fly: SPAN ≈ ₹40k + exposure ≈ ₹62k + SEBI expiry-day ELM 2% ≈ ₹65k → **≈ ₹1.67–1.74 lakh**.",
           "- 2 lots therefore need ≈ ₹3.5 lakh, so **₹2L and ₹3L both run 1 lot** (quantity multiplier 1). A ₹3L account keeps ~₹1.3L as buffer.",
           "- Always place the BUY wings first (Delay entry on SELL legs), otherwise the broker blocks naked-short margin (~₹2.2L+)."]
-open(f"{ROOT}/ALGOTEST_SETUP.md", "w").write("\n".join(setup) + "\n")
+open(f"{ROOT}/results/final_v7/ALGOTEST_SETUP_base.md", "w").write("\n".join(setup) + "\n")
 
 md = ["# WINNING_STRATEGIES — NIFTY intraday non-directional selling (v2, realistic engine)", "",
       f"Generated {DATA['generated']}. Interactive report: `reports/strategy_report.html`. AlgoTest field-by-field setup: `ALGOTEST_SETUP.md`.", "",
@@ -108,5 +108,5 @@ md += ["", "## Caveats", "",
        "- Results use today's lot (65) and today's charges for every year so they read as 'what this would make now'.",
        "- The AlgoTest backtest checks overall SL at candle close; live trading checks it on LTP, so live exits can be slightly earlier or later.",
        "- This is research, not investment advice."]
-open(f"{ROOT}/WINNING_STRATEGIES.md", "w").write("\n".join(md) + "\n")
+open(f"{ROOT}/results/final_v7/WINNING_STRATEGIES_base.md", "w").write("\n".join(md) + "\n")
 print("ok")
