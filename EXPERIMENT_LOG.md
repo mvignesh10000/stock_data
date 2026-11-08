@@ -947,3 +947,28 @@ Pre-declared: SELL grid 126, BUY ORB grid 108 (1.5% slippage). Regime by India V
 
 # Run v9 — review round 3
 - Overfit audit (PBO 16–21%, one-shot v6 fails, bootstrap CI > 0, decay); compounding table; trend/sideways + OI study (no edge); sideways strangles fail OOS; Varsity structures + other trader's books; Gap-and-Go→Williams replication (GnG part survives, Williams fails); baskets with correlation ≈ 0.
+
+## Round 5: Upstox Plus data (2026-11-08)
+**Data validation (old research data vs Upstox exchange 1-min OHLC, 2026-03-03..24 overlap, 108,420 option-minutes):**
+closes identical on 100.0% of rows (the LTP dataset is exact on closes). The synthetic intra-minute wicks were too
+small: on expiry days the true wick (high / max(open, close) - 1) is median 4.1% / p90 11.9% / p99 28.2% vs the model's
+2.2% / 7.6% / 17.1%. Stop-loss triggers were under-counted, so earlier 2025-26 results are optimistic.
+
+**One-shot holdout, untouched 2026-03-25..2026-11-03 (32 NIFTY expiry days), frozen configs, STT 0.15%:**
+
+| Strategy | Net | PF | Max DD | Worst day | Winning months |
+|---|---|---|---|---|---|
+| Iron fly +/-400 (fly400) | -Rs 2,145 | 0.93 | Rs 7,741 | -Rs 2,940 | 44% |
+| Iron fly +/-600 | -Rs 1,851 | 0.94 | Rs 8,804 | -Rs 3,078 | 44% |
+| ORB directional spread | -Rs 2,880 | 0.91 | Rs 11,867 | -Rs 2,549 | 33% |
+| fly400 + spread | -Rs 5,025 | 0.90 | Rs 14,730 | -Rs 5,175 | 56% |
+| Fly with wings by premium (~Rs 3) * | +Rs 5,558 | 1.18 | Rs 7,529 | -Rs 3,001 | 56% |
+
+\* variant chosen after seeing the 2017-2020 data (below), not the holdout.
+Exit mix is unchanged (34% overall-SL days vs 36% in research), so the strategy behaves the same; its edge per trade
+has shrunk. -Rs 67/day over 32 days is about 1.5 standard errors below the earlier bootstrap mean: a warning, not yet proof.
+
+**Independent 2017-2020 (Zenodo 10899828, CC0; 47 MONTHLY expiry days, trade-only bars, no OI):** strike-based wings are
+mostly untradeable (fly400 traded on 20 of 47 days). With wings by premium (~Rs 3): all 47 days traded, +Rs 17,136,
+PF 1.80, DD Rs 5,490, worst day -Rs 2,293, positive each year (2017 +1.5k, 2018 +2.5k, 2019 +2.4k, 2020 +10.7k).
+The same rule on 2024-26 makes +Rs 92.4k, PF 1.80.
