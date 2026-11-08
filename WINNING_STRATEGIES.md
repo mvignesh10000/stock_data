@@ -169,34 +169,34 @@ Earlier strategies re-tested on the realistic engine (holdout Calmar / PF, full-
 - The AlgoTest backtest checks overall SL at candle close; live trading checks it on LTP, so live exits can be slightly earlier or later.
 - This is research, not investment advice.
 
-## v3 — VIX regime / shared-capital framework, tested (results/v8)
+## v4 — review round 3 (results/audit_v9)
 
-Pre-declared grids: 126 hedged-selling configs (wings ±100..±600, entry 09:20/09:45/10:15, SL 30/40/60%, combined MTM SL) and 108 ORB-buying configs (range end 09:25/09:30/09:35, ATM/ITM1, SL 20/30/40%, trailing, target) at 1.5% buying slippage. Regime = India VIX previous close (NSE official). Each policy is judged by quarterly walk-forward.
+### Overfitting audit of the expiry-day iron fly
+- PBO (CSCV, 252 splits): v6 grid 16%, v7 grid 21%.
+- One-shot 2024→2025-26: v6 procedure ₹-1,640 (PF 0.98): **fails**. v7 grid ₹27,049 (PF 1.43); that grid was designed after seeing v6.
+- Bootstrap mean/trade ₹798 (95% CI ₹143–₹1,484); half-year PF {'2024-H1': [26, 24194, 1.9], '2024-H2': [26, 35528, 2.45], '2025-H1': [26, 19007, 1.79], '2025-H2': [27, 12344, 1.51], '2026-H1': [12, 2300, 1.15]}.
+- All 432 variants: median ₹18,162, p75 ₹55,378, 62% profitable.
+- **Verdict: partially overfit. Plan on ₹8–25k per lot per year.**
 
-| Policy (walk-forward, 1 lot) | Net | PF | Max DD | Worst day |
-|---|---|---|---|---|
-| A pure selling, expiry-day only (v7 style) | ₹38,489 | 1.42 | ₹15,379 | ₹-3,345 |
-| B pure selling, every day | ₹-26,451 | 0.88 | ₹39,823 | ₹-10,176 |
-| C framework: sell low+mid VIX (every day), buy high VIX | ₹-56,169 | 0.52 | ₹57,639 | ₹-9,934 |
-| D framework on expiry days: sell low+mid, buy high | ₹-5,760 | 0.95 | ₹45,043 | ₹-9,934 |
-| E sell low+mid expiry only, no buying | ₹22,664 | 1.28 | ₹15,580 | ₹-2,886 |
-| F = A + skip gap days > 0.7% | ₹9,256 | 1.10 | ₹13,682 | ₹-3,593 |
-| G buy ORB in high VIX only (no selling) | ₹-28,424 | 0.38 | ₹41,125 | ₹-9,934 |
+### Capital reuse & compounding
 
-Findings:
-- ORB option buying: 0 of 108 configs were profitable on high-VIX non-expiry days, and every range length (10/15/20 min) loses. **Rejected.**
-- Buying does not hedge selling: daily correlation +0.58. On selling's 40 worst days buying lost ₹44,252.
-- VIX switch: worse than plain expiry-day selling, and the result flips sign with ±1 VIX point (see the threshold table in the report).
-- Delayed entry: plateau 09:17–09:27; 09:45 removes the edge (₹7k vs ₹93k).
-- Portfolio max profit (₹4k/₹6k) cuts net to ₹35k/₹59k. A portfolio max loss never binds (the strategy's ₹2k overall SL does), so keep it only as a live safety net.
-- Gap days: skipping them lowered the walk-forward result (₹9.3k vs ₹38.5k).
-- Wings: monotonically better wider (±200 ₹41.8k → ±600 ₹93.4k → ±700 ₹97.5k).
+| Book | ₹/yr (1 lot) | CAGR 1 lot | CAGR compounding | Max DD comp | Max DD 1 lot | Sharpe | Sortino | Calmar comp | Quarters + |
+|---|---|---|---|---|---|---|---|---|---|
+| Expiry iron fly ±400 · ₹2L | ₹32,986 | 15.1% | 16.5% | 5.4% | 5.4% (₹12,625) | 1.41 | 3.46 | 3.03 | 8/9 |
+| Expiry iron fly ±600 · ₹3L | ₹42,704 | 13.2% | 19.3% | 6.3% | 3.7% (₹12,423) | 1.44 | 3.69 | 3.09 | 9/9 |
+| Fly ±400 + ORB hedged spread (both expiry) · ₹3L | ₹52,822 | 16.1% | 25.6% | 9.1% | 4.8% (₹15,183) | 1.61 | 3.81 | 2.83 | 8/9 |
+| Fly ±600 + Gap-and-Go · ₹3L | ₹77,389 | 22.7% | 44.9% | 9.7% | 5.6% (₹24,544) | 1.68 | 3.79 | 4.65 | 9/9 |
+| Fly ±400 + ORB spread + Gap-and-Go · ₹3L | ₹87,507 | 25.3% | 37.1% | 8.3% | 7.6% (₹33,539) | 1.48 | 3.05 | 4.47 | 9/9 |
+| Gap-and-Go only (buy ITM-150, +0.2% stress) · ₹1L, 5% risk | ₹34,685 | 29.5% | 27.9% | 18.0% | 13.6% (₹21,214) | 0.84 | 1.79 | 1.55 | 8/9 |
 
-### Recommended shared-capital set-up
+### Other findings
+- Trend vs sideways: sideways days have a lower implied move (d −0.54) and a narrower opening range (d −0.51). Out of sample the prediction is weak, and strangles on predicted-sideways days lost on 2025-26 in every variant (0–1% profitable).
+- OI: walls contained the day on 59% of days (expiry 50%); max pain did not pin (38%); early OI tilt and PCR have ~0 correlation with the rest of the day. No intraday edge.
+- Varsity structures, intraday: butterflies, Batman and ratios lose; the iron condor on expiry is +₹25k. **ORB directional hedged spread on expiry: +₹43k, PF 1.42, ₹21.4k in 2024 / ₹22.0k in 2025-26; corr with the fly −0.02.** Calendars were untestable (one expiry per day in the data).
+- The other trader's selling books don't reproduce. Naked 09:20 straddle on expiry: +₹76.5k but ~₹3L margin and unbounded tail; straddle_1015 +₹26k on expiry and −₹55k other days.
+- Gap-and-Go → Williams: chain +₹66k (PF 1.14, DD ₹88k) at spec costs, −₹55k at 1.5%/side. Williams back-up loses at every cost level. **Gap-and-Go alone: +₹88k / PF 1.36 / DD ₹20k (0.1%), +₹76k / PF 1.30 (0.3%), +₹11k (1.5%); corr with fly −0.02.**
 
-| Capital | Strategy | Wings | Margin (expiry day) | Buffer | Net 2.2 yrs (1 lot) |
-|---|---|---|---|---|---|
-| ₹2L | Expiry-day iron fly, 1 lot | ±400 (OTM8) | ₹1.54L | 23% | ₹72,125 |
-| ₹3L | Expiry-day iron fly, 1 lot | ±600 (OTM12) | ₹1.68L | 44% | ₹93,372 |
-
-Layers: leg SL 60% + trail-to-breakeven, strategy overall SL ₹2,000, broker-level SL ₹4,000 (live safety net), no profit cap. Pause if drawdown exceeds ₹27k/lot (Monte-Carlo 95%) or after 3 losing months in a row. Nothing runs on non-expiry days.
+### Updated recommendation
+- ₹2L: expiry iron fly ±400 wings, 1 lot.
+- ₹3L: fly ±400 + ORB directional hedged spread on expiry day (both AlgoTest-native). Paper-trade Gap-and-Go (custom signal) as a risk-sized third book.
+- Kill-switch: Monte-Carlo 95% drawdown, or two losing quarters in a row.

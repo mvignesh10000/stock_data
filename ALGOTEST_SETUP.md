@@ -48,9 +48,22 @@ Every value below is an AlgoTest builder field (docs.algotest.in). Backtest it o
 - 2 lots therefore need ≈ ₹3.5 lakh, so **₹2L and ₹3L both run 1 lot** (quantity multiplier 1). A ₹3L account keeps ~₹1.3L as buffer.
 - Always place the BUY wings first (Delay entry on SELL legs), otherwise the broker blocks naked-short margin (~₹2.2L+).
 
-## Capital-specific wing choice (v3)
+## Second expiry-day strategy for ₹3L: ORB directional hedged spread (v4)
 
-- **₹2L account:** change legs 3–4 to **OTM8** (±400). Margin ≈ ₹1.54L, which keeps a ~23% cash buffer. Backtest net ₹72k vs ₹93k with OTM12, same rules.
-- **₹3L account:** keep **OTM12** (±600). Margin ≈ ₹1.68L, buffer ≈ 44%.
-- Add a **Broker-level Stop Loss of ₹4,000** each morning (Algo Trade → Add Settings). Do **not** set a broker-level target.
-- Do not add an ORB buying strategy or a VIX switch: both were tested and rejected (see WINNING_STRATEGIES.md §v3).
+| Field | Value |
+|---|---|
+| Strategy type / index | Intraday · NIFTY · Underlying from Cash |
+| Entry time | 09:16 (range start) |
+| Exit time | 15:15 |
+| Portfolio DTE / auto-activation | DTE 0 only (expiry day) |
+| Overall SL | MTM ₹2,000 |
+
+| # | Position | Type | Strike | SL | Range Breakout |
+|---|---|---|---|---|---|
+| 1 | Sell | PE | ATM | 40% | High of 09:16–09:31 on **Underlying** |
+| 2 | Buy | PE | OTM4 | – | High of 09:16–09:31 on **Underlying** |
+| 3 | Sell | CE | ATM | 40% | Low of 09:16–09:31 on **Underlying** |
+| 4 | Buy | CE | OTM4 | – | Low of 09:16–09:31 on **Underlying** |
+
+- An upside break enters a bull put spread and a downside break enters a bear call spread. Margin ≈ ₹0.8L when one side triggers.
+- Set **Stop monitoring after 15:14** on both strategies.

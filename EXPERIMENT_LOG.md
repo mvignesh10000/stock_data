@@ -944,3 +944,6 @@ Pre-declared: SELL grid 126, BUY ORB grid 108 (1.5% slippage). Regime by India V
 - In-sample-chosen VIX floor for expiry selling: WF +₹8.2k (worse than no floor). Rejected.
 - Portfolio max profit hurts; portfolio max loss non-binding. Entry plateau 09:17–09:27. Wings: wider is better.
 - Outcome: framework rejected except its risk layers; recommendation = expiry-day iron fly, ±400 wings on ₹2L / ±600 on ₹3L.
+
+# Run v9 — review round 3
+- Overfit audit (PBO 16–21%, one-shot v6 fails, bootstrap CI > 0, decay); compounding table; trend/sideways + OI study (no edge); sideways strangles fail OOS; Varsity structures + other trader's books; Gap-and-Go→Williams replication (GnG part survives, Williams fails); baskets with correlation ≈ 0.

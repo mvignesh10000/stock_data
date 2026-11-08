@@ -1,0 +1,102 @@
+{
+ "n_days": 549,
+ "counts": {
+  "SIDEWAYS": 129,
+  "TREND": 140,
+  "MIXED": 280
+ },
+ "effect_sizes": [
+  [
+   "implied_pct",
+   0.875,
+   1.051,
+   -0.54
+  ],
+  [
+   "or_pct",
+   0.174,
+   0.23,
+   -0.51
+  ],
+  [
+   "pwall_pct",
+   0.743,
+   1.368,
+   -0.36
+  ],
+  [
+   "vix",
+   13.495,
+   14.032,
+   -0.33
+  ],
+  [
+   "cwall_pct",
+   1.533,
+   1.982,
+   -0.29
+  ],
+  [
+   "abs_gap",
+   0.202,
+   0.231,
+   -0.25
+  ],
+  [
+   "prev_range_pct",
+   0.774,
+   0.858,
+   -0.24
+  ],
+  [
+   "prev_eff",
+   0.46,
+   0.53,
+   -0.18
+  ],
+  [
+   "dte",
+   2.0,
+   2.0,
+   -0.14
+  ],
+  [
+   "pcr",
+   0.841,
+   0.81,
+   0.13
+  ],
+  [
+   "oi_tilt",
+   0.038,
+   -0.054,
+   0.12
+  ]
+ ],
+ "predictor": {
+  "feature": "or_pct",
+  "rule": "or_pct <= 0.123",
+  "train_sideways_rate_selected": 0.44,
+  "train_base": 0.23770491803278687,
+  "train_n": 50,
+  "test_sideways_rate_selected": 0.2702702702702703,
+  "test_base": 0.23278688524590163,
+  "test_n": 37,
+  "test_trend_rate_selected": 0.13513513513513514,
+  "test_trend_base": 0.22295081967213115
+ },
+ "oi_walls": {
+  "all_days_contained_pct": 58.65209471766849,
+  "expiry_contained_pct": 50.427350427350426,
+  "median_wall_width_pct": 3.6246331342085902,
+  "expiry_close_nearer_maxpain_than_0930_pct": 38.46153846153847,
+  "expiry_median_dist_close_to_maxpain": 93.75,
+  "expiry_median_dist_close_to_0930": 67.048828125
+ },
+ "oi_direction": {
+  "oi_tilt_hit_rate_when_strong": 53.78151260504202,
+  "corr_oi_tilt_vs_rest_of_day_move": 0.00380274308566443,
+  "corr_pcr_vs_rest_of_day_move": 0.046225820590042134,
+  "n_strong": 238
+ }
+}

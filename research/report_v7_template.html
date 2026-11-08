@@ -128,6 +128,22 @@ details summary{cursor:pointer;color:var(--text-secondary)}
   </div>
   <div class="card tscroll"><h3>Shared capital: wing distance vs margin vs return (expiry day, NIFTY ≈ 25,030, lot 65)</h3><table id="feWing"></table></div>
   <div class="card" id="feFramework"></div>
+
+  <h2>8 · Review round 3: overfitting, compounding, trend vs sideways, OI, other strategies</h2>
+  <div class="card verdict" id="a9Verdict"></div>
+  <div class="card tscroll"><h3>Is the finalised strategy overfit?</h3><table id="a9Over"></table></div>
+  <div class="card tscroll"><h3>Capital reuse &amp; compounding (same columns as the other trader's table)</h3><table id="a9Comp"></table>
+    <p class="note">Intraday trades release all margin at the close, so the same capital is reused every trading day. Compounding re-sizes lots daily from equity: selling books by margin (25% cash buffer), buying books by risk (2.5% of equity at the −30% premium stop; 5% for the ₹1L book = 1 lot). Full-sample numbers are optimistic (see audit).</p></div>
+  <div class="row" style="align-items:stretch">
+    <div class="card tscroll" style="flex:1 1 380px"><h3>Trend vs sideways days: what is known by 09:30</h3><table id="a9Eff"></table><p class="note" id="a9Pred"></p></div>
+    <div class="card tscroll" style="flex:1 1 380px"><h3>Does OI decide the market's move? (intraday)</h3><table id="a9Oi"></table></div>
+  </div>
+  <div class="card tscroll"><h3>Strangles only on predicted-sideways days (filter + structure picked on 2024, tested once on 2025-26)</h3><table id="a9Side"></table></div>
+  <div class="card tscroll"><h3>Varsity structures and the other trader's selling books (1 lot, one pre-declared setting each)</h3><table id="a9Books"></table>
+    <p class="note">Calendar spreads were not testable: the dataset holds one expiry per day. The other trader's "straddle_1015 ₹3.79L/yr, Sharpe 7.6" is labelled "(model)" in their table and does not reproduce with real fills, stops and margin.</p></div>
+  <div class="card tscroll"><h3>Gap-and-Go → Williams chain (implemented exactly as specified)</h3><table id="a9Gw"></table><p class="note" id="a9GwNote"></p></div>
+  <div class="card tscroll"><h3>Reddit comments → what was done</h3><table id="a9Reddit"></table></div>
+  <div class="card" id="a9Rec"></div>
   <h2>6 · Data &amp; model validation</h2>
   <div class="row" style="align-items:stretch">
     <div class="card tscroll" style="flex:1 1 420px"><h3>Does the wick model reproduce true OHLC? (Oct–Dec 2024, same days)</h3><table id="wick"></table></div>
@@ -311,7 +327,63 @@ function frameworkSection(){
    <li><b>Kill-switch:</b> pause and re-evaluate if live drawdown exceeds the Monte-Carlo 95% level (≈ ₹27k per lot) or after 3 consecutive losing months.</li>
    <li><b>VIX:</b> watch it, don't switch on it. If you want a rule, treat VIX < 12 as a reason to be cautious, not as a signal to buy.</li></ul>`;
 }
-function renderAll(){ tiles(); charts(); heat(); frameworkSection(); }
+
+function auditSection(){
+  const a = D.a9; if(!a) return;
+  const o = a.overfit, b = o.bootstrap;
+  $('#a9Verdict').innerHTML = `<h3 style="margin-top:0">Summary</h3><ul>
+   <li><b>Overfitting:</b> partially. The structure (expiry-day iron fly at ~09:20) has a real edge: 62% of all 432 grid variants are profitable and the bootstrap CI of mean P&amp;L excludes zero. But our pick sits at the top of that distribution, a one-shot 2024→2025-26 test of the simpler v6 procedure failed (PF 0.98), and PBO is ${(o.pbo_v6.pbo*100).toFixed(0)}–${(o.pbo_v7.pbo*100).toFixed(0)}%. Plan on <b>₹8–25k per lot per year</b>, not ₹42k.</li>
+   <li><b>Capital is reused every day</b> (intraday). Compounding helps only once equity covers another lot's margin (≈ ₹1.5–1.7L each on expiry day).</li>
+   <li><b>Trend vs sideways:</b> sideways days have a lower implied move and a narrower opening range, but predicting them is weak out of sample, and <b>strangles on predicted-sideways days lost on 2025-26 in every variant</b>.</li>
+   <li><b>OI:</b> no intraday predictive value here. Walls contain the day only ${a.regime.oi_walls.all_days_contained_pct.toFixed(0)}% of the time; max-pain pinning fails; the early OI tilt has ~0 correlation with the rest-of-day move.</li>
+   <li><b>New strategies worth keeping:</b> the <b>ORB directional hedged spread on expiry day</b> (stable in both periods, uncorrelated with the fly) and the <b>Gap-and-Go buy</b> part of the other trader's chain (PF 1.30–1.36 at 0.1–0.3% costs, uncorrelated). The Williams back-up, butterflies, Batman, ratios and all non-expiry selling: rejected.</li></ul>`;
+  tbl('#a9Over', ['Test','Result','Reading'], [
+    ['PBO via CSCV (252 splits), v6 grid 960 configs', (o.pbo_v6.pbo*100).toFixed(0)+'%', 'Chance the in-sample best is below median out of sample'],
+    ['PBO via CSCV, v7 grid 432 configs', (o.pbo_v7.pbo*100).toFixed(0)+'%', 'Same; < 50% means the selection has some skill'],
+    ['One-shot: v6 procedure fit on 2024 → tested once on 2025-26', `${fmt(o.oneshot_v6.test_net_2025_26)} · PF ${n2(o.oneshot_v6.test_pf)} (${o.oneshot_v6.test_trades} trades)`, '<span class="bad">fails</span>: picked ±200 wings'],
+    ['One-shot: v7 grid fit on 2024 → 2025-26', `${fmt(o.oneshot_v7.test_net_2025_26)} · PF ${n2(o.oneshot_v7.test_pf)}`, '<span class="warn">passes, but the grid was designed after v6 saw all data</span>'],
+    ['Bootstrap of 117 trades', `mean ${fmt(b.mean)} (95% CI ${fmt(b.mean_ci95[0])}–${fmt(b.mean_ci95[1])}); PF CI ${n2(b.pf_ci95[0])}–${n2(b.pf_ci95[1])}`, `P(mean ≤ 0) = ${(b.p_mean_le_0*100).toFixed(1)}% (ignores selection)`],
+    ['Trade count', o.n_trades+' expiry days', 'Above the "40 trades" warning, still small'],
+    ['Half-year PF', Object.entries(o.half_years).map(([k,v])=>`${k}: ${v[2]}`).join(' · '), '<span class="warn">steady decay</span>'],
+    ['All 432 v7 variants on expiry days', `median ${fmt(o.grid_distribution_v7.median)}, p75 ${fmt(o.grid_distribution_v7.p75)}, max ${fmt(o.grid_distribution_v7.max)}; ${(o.grid_distribution_v7.share_profitable*100).toFixed(0)}% profitable`, 'Realistic expectation = median…p75, not the max']]);
+  $('#a9Over').querySelectorAll('td').forEach(td=>td.classList.add('l'));
+  tbl('#a9Comp', ['Book','₹ / yr (1 lot)','Simple return','CAGR (1 lot always)','CAGR (compounding)','Max DD (comp.)','Max DD (1 lot)','Worst year','Sharpe','Sortino','Calmar (comp.)','Quarters +','Max lots'],
+    Object.entries(a.comp).map(([k,m])=>[k, fmt(m.rs_per_year_1lot), pct(m.simple_return_pct), pct(m.cagr_1lot_pct), pct(m.cagr_comp_pct), pct(m.maxdd_comp_pct), `${pct(m.maxdd_1lot_pct)} (${fmt(m.maxdd_1lot_rs)})`, pct(m.worst_year_pct), n2(m.sharpe), n2(m.sortino), n2(m.calmar_comp), m.quarters_pos, m.max_lots||m.max_lots_used]));
+  tbl('#a9Eff', ['Feature (by 09:30)','Median sideways','Median trend','Effect size d'], a.regime.effect_sizes.map(r=>[r[0], r[1], r[2], r[3]]));
+  const pr = a.regime.predictor;
+  $('#a9Pred').innerHTML = `Best ex-ante rule learnt on 2024: <b>${pr.rule}</b> picked sideways days ${(pr.train_sideways_rate_selected*100).toFixed(0)}% of the time (base ${(pr.train_base*100).toFixed(0)}%). On 2025-26: ${(pr.test_sideways_rate_selected*100).toFixed(0)}% (base ${(pr.test_base*100).toFixed(0)}%), with fewer trend days (${(pr.test_trend_rate_selected*100).toFixed(0)}% vs ${(pr.test_trend_base*100).toFixed(0)}%). Weak, but not zero.`;
+  const w = a.regime.oi_walls, od = a.regime.oi_direction;
+  tbl('#a9Oi', ['OI claim','Measured','Verdict'], [
+    ['OI walls (max-OI CE above / PE below at 09:30) contain the rest of the day', `${w.all_days_contained_pct.toFixed(0)}% of days (expiry ${w.expiry_contained_pct.toFixed(0)}%); median wall width ${w.median_wall_width_pct.toFixed(1)}%`, '<span class="warn">coin-flip on expiry</span>'],
+    ['Expiry close is pinned to max pain', `close nearer max pain than to the 09:30 price on ${w.expiry_close_nearer_maxpain_than_0930_pct.toFixed(0)}% of expiries`, '<span class="bad">no pinning</span>'],
+    ['Early PE-vs-CE writing (09:15→09:30, ±200 pts) shows direction', `hit rate ${od.oi_tilt_hit_rate_when_strong.toFixed(0)}% on ${od.n_strong} strong days; corr ${n2(od.corr_oi_tilt_vs_rest_of_day_move)}`, '<span class="bad">no edge</span>'],
+    ['PCR predicts direction', `corr ${n2(od.corr_pcr_vs_rest_of_day_move)}`, '<span class="bad">no edge</span>'],
+    ['Sell strangle at the OI walls (with wings)', 'included in the sideways test below; lost out of sample', '<span class="bad">rejected</span>']]);
+  $('#a9Oi').querySelectorAll('td').forEach(td=>td.classList.add('l'));
+  tbl('#a9Side', ['Scope','Filter','2024 median net','2025-26 median net','Share profitable 2025-26'], a.side.by_filter.map(r=>[r.scope, r.filter, sgn(r.train_median), sgn(r.test_median), (r.test_share_profitable*100).toFixed(0)+'%'])
+     .concat(a.side.picks.map(p=>[`<b>${p.scope}: best on 2024</b>`, `${p.config} + ${p.filter}`, sgn(p.train_net), sgn(p.test_net)+` (PF ${n2(p.test_pf)})`, p.test_n+' trades'])));
+  tbl('#a9Books', ['Strategy','Expiry: net','PF','2024','2025-26','Non-expiry: net','PF','2024','2025-26','Peak margin'], a.books.map(r=>[r.book, sgn(r.expiry.net), n2(r.expiry.pf), sgn(r.expiry.net_2024), sgn(r.expiry.net_2025_26), sgn(r['non-expiry'].net), n2(r['non-expiry'].pf), sgn(r['non-expiry'].net_2024), sgn(r['non-expiry'].net_2025_26), fmt(Math.max(r.expiry.peak_margin, r['non-expiry'].peak_margin))]));
+  const gw = D.gw, gg = a.gng;
+  tbl('#a9Gw', ['Costs','Trades','Net (1 lot)','PF','Win %','Max DD','Gap-and-Go part','Williams part','By year','GnG only: net / PF / DD','corr with iron fly'], Object.entries(gw).map(([k,s])=>[k, s.trades, sgn(s.net), n2(s.pf), s.win.toFixed(0)+'%', fmt(s.dd), `${s.by_bot.gap_and_go[0]} tr · ${fmt(s.by_bot.gap_and_go[1])}`, `${s.by_bot.williams[0]} tr · ${fmt(s.by_bot.williams[1])}`, Object.entries(s.yearly).map(([y,v])=>`${y}: ${fmt(v)}`).join(' · '), gg[k]?`${fmt(gg[k].net)} / ${n2(gg[k].pf)} / ${fmt(gg[k].dd)}`:'–', gg[k]?n2(gg[k].corr_with_fly):'–']));
+  $('#a9GwNote').innerHTML = `The chain is not native to AlgoTest: the gap filter, "filled" and "opposite-first" stand-downs need TradingView/Signals or a small custom script. Its Gap-and-Go part survives this independent test (rules written by someone else, on other data). The Williams back-up does not.`;
+  tbl('#a9Reddit', ['Comment','What was done'], [
+    ['Start from a reason, not a search', 'Kept only economically motivated structures: expiry-day theta and the opening IV premium, trend-following spreads on breakouts. Mass searches (v5, 32k trials) are reported as rejected.'],
+    ['Split data; check once on untouched data; drop instead of tweaking', 'Quarterly walk-forward plus one-shot 2024→2025-26 tests. The v6 one-shot failed and is reported as a failure, not tweaked away.'],
+    ['Judge on expectancy and drawdown, not win rate', 'All tables lead with net, PF, max DD, Monte-Carlo DD, worst day. Gap-and-Go wins only 39% and is kept; the 54%-win iron fly is graded on expectancy.'],
+    ['Include real costs and slippage', '₹20/order, STT, exchange, SEBI, stamp, GST; 0.5% selling slippage + 1% on stops; buying stress-tested at 0.1 / 0.3 / 1.5% per side.'],
+    ['40 trades is not enough', 'Expiry strategy: 117 trades; Gap-and-Go: 182. Bootstrap CIs shown. Still small; hence paper trading.'],
+    ['Try simpler signals on the underlying first', 'Gap-and-Go is a pure underlying signal (opening-range break in the gap direction) expressed with an ITM option. ORB spreads use the underlying break. OI/PCR signals failed on the underlying itself.'],
+    ['"No holy grail"; a basket should lose less when wrong', 'Fly (quiet expiries) + ORB spread / Gap-and-Go (trend days): correlations ≈ 0. On the fly\'s 15 worst days the ORB spread made +₹12k.'],
+    ['Option sellers panic on expiry because of CAS swings', 'Exits are time-based at 15:15. AlgoTest added "Stop monitoring after" specifically so closing-auction (CAS) price spikes cannot fire stops; set it to 15:14. Live intraday swings are already in the backtest's stops and worst days.'],
+    ['Paper trade first', 'Forward-test on AlgoTest for 4–6 expiries (fly, spread). Gap-and-Go needs a custom/TradingView signal: paper-trade it for 8–12 weeks.']]);
+  $('#a9Reddit').querySelectorAll('td').forEach(td=>td.classList.add('l'));
+  $('#a9Rec').innerHTML = `<h3 style="margin-top:0">Updated recommendation (after round 3)</h3><ul>
+   <li><b>₹2L:</b> expiry-day iron fly, ±400 wings, 1 lot (AlgoTest-native). Plan for <b>~₹8–25k/yr</b> (4–12%) after accounting for overfit, with max DD around ₹15–28k.</li>
+   <li><b>₹3L:</b> the fly (±400) + the <b>ORB directional hedged spread on expiry day</b>, both AlgoTest-native (Range Breakout). These are uncorrelated and both positive in 2024 and in 2025-26. Optionally paper-trade the <b>Gap-and-Go buy</b> (custom signal) as a third, risk-sized book.</li>
+   <li><b>Not recommended:</b> VIX switching, ORB straddle buying, sideways-day strangles, OI-wall selling, butterflies/Batman/ratios intraday, any non-expiry selling, the Williams back-up, naked straddles (tail risk; ~₹3L margin on expiry day).</li>
+   <li>Kill-switch: stop if drawdown exceeds the Monte-Carlo 95% level, or if two consecutive quarters lose. The recent quarters are already weak.</li></ul>`;
+}
+function renderAll(){ tiles(); charts(); heat(); frameworkSection(); auditSection(); }
 document.querySelectorAll('[data-cap]').forEach(b=>b.onclick=()=>{ CAP=b.dataset.cap; document.querySelectorAll('[data-cap]').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderAll(); });
 document.querySelectorAll('[data-th]').forEach(b=>b.onclick=()=>{ const t=b.dataset.th; if(t==='auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t); document.querySelectorAll('[data-th]').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderAll(); });
 staticTables(); renderAll();

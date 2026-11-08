@@ -288,6 +288,23 @@ impl AlgoTestStrategy {
             "otm" => if is_call { atm + l.strike.n as i64 * step } else { atm - l.strike.n as i64 * step },
             "itm" => if is_call { atm - l.strike.n as i64 * step } else { atm + l.strike.n as i64 * step },
             "closest_premium" => return Self::closest_premium(mk, is_call, l.strike.value),
+            "max_oi" => {
+                // OI wall: the OTM strike (within n steps of ATM) with the highest open interest
+                let lim = if l.strike.n > 0 { l.strike.n as i64 } else { 20 };
+                let mut best: Option<(u32, u32)> = None;
+                for j in 1..=lim {
+                    let s = if is_call { atm + j * step } else { atm - j * step };
+                    if s <= 0 {
+                        continue;
+                    }
+                    if let Some(b) = mk.option_bar(s as u32, is_call) {
+                        if best.map(|x| b.oi > x.0).unwrap_or(true) {
+                            best = Some((b.oi, s as u32));
+                        }
+                    }
+                }
+                return best.map(|x| x.1);
+            }
             "premium_gte" => {
                 let mut best: Option<(f32, u32)> = None;
                 for s in mk.strikes() {
