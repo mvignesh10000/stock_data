@@ -71,6 +71,8 @@ pub struct Metrics {
     pub losing_months_pct: f64,
     pub ulcer_index: f64,
     pub avg_stops_per_day: f64,
+    pub peak_margin_max: f64,
+    pub peak_margin_avg: f64,
     pub fitness: f64,
     pub soft_fitness: f64,
     pub gate_passed: bool,
@@ -187,6 +189,8 @@ pub fn compute(rows: &[DayRow], g: &GateConfig) -> (Metrics, Breakdowns) {
         mt.win_rate_pct = wins.len() as f64 / tn.len() as f64 * 100.0;
         mt.expectancy_per_trade_rupees = tn.iter().sum::<f64>() / tn.len() as f64;
         mt.avg_stops_per_day = traded.iter().map(|d| d.r.n_stops as f64).sum::<f64>() / tn.len() as f64;
+        mt.peak_margin_max = traded.iter().map(|d| d.r.peak_margin).fold(0.0, f64::max);
+        mt.peak_margin_avg = traded.iter().map(|d| d.r.peak_margin).sum::<f64>() / tn.len() as f64;
     }
     mt.avg_win_rupees = if wins.is_empty() { 0.0 } else { sw / wins.len() as f64 };
     mt.avg_loss_rupees = if losses.is_empty() { 0.0 } else { -sl / losses.len() as f64 };

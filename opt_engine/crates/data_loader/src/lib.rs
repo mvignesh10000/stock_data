@@ -72,6 +72,7 @@ impl DayAcc {
             trade_date: self.trade_date,
             expiry_date: self.expiry_date,
             dte: self.dte,
+            tdte: 0,
             expiry_rank: rank,
             weekday: weekday(y, mo, d),
             strike_step: step,
@@ -182,6 +183,13 @@ pub fn build_cache(dirs: &[PathBuf], rank: u8, step: u32, instrument: &str) -> C
     }
     days.sort_by_key(|d| d.trade_date);
     days.dedup_by_key(|d| d.trade_date);
+    // trading days to expiry from the data calendar (verified == NSE trading calendar)
+    let dates: Vec<u32> = days.iter().map(|d| d.trade_date).collect();
+    for d in days.iter_mut() {
+        let a = dates.partition_point(|&x| x <= d.trade_date);
+        let b = dates.partition_point(|&x| x <= d.expiry_date);
+        d.tdte = b.saturating_sub(a).min(255) as u8;
+    }
     ChainCache { instrument: instrument.to_string(), days }
 }
 

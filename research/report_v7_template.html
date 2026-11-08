@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NIFTY Expiry-Day Iron Fly</title>
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f6f6f4; --surface-1:#fcfcfb; --surface-2:#f0efec; --border:#e1e0d9; --grid:#e1e0d9;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7a7974;
+  --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a;
+  --neg-strong:#c53a3a; --pos-strong:#1c5cab; --mid:#f0efec;
+  --good:#0ca30c; --critical:#d03b3b; --warning:#b97c00;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --bg:#121211; --surface-1:#1a1a19; --surface-2:#232321; --border:#2c2c2a; --grid:#2c2c2a;
+    --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#8f8e86;
+    --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+    --neg-strong:#e66767; --pos-strong:#86b6ef; --mid:#383835; --warning:#fab219;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#121211; --surface-1:#1a1a19; --surface-2:#232321; --border:#2c2c2a; --grid:#2c2c2a;
+    --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#8f8e86;
+    --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+    --neg-strong:#e66767; --pos-strong:#86b6ef; --mid:#383835; --warning:#fab219;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text-primary);font:14px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:24px;margin:0 0 4px} h2{font-size:18px;margin:30px 0 10px} h3{font-size:15px;margin:16px 0 8px}
+.sub{color:var(--text-secondary);margin:0 0 12px}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:16px;margin:12px 0}
+.verdict{border-left:4px solid var(--series-1)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.tile{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:12px}
+.tile .k{color:var(--text-secondary);font-size:12px} .tile .v{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.tile .s{color:var(--text-muted);font-size:12px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{background:var(--surface-1);color:var(--text-primary);border:0;padding:6px 12px;font:inherit;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-1)}
+.tscroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+th{color:var(--text-secondary);font-weight:600;font-size:12px}
+td:first-child,th:first-child{text-align:left}
+td.l,th.l{text-align:left;white-space:normal}
+.neg{color:var(--neg-strong)} .pos{color:var(--pos-strong)}
+.ok{color:var(--good);font-weight:600} .bad{color:var(--critical);font-weight:600} .warn{color:var(--warning);font-weight:600}
+svg text{fill:var(--text-secondary);font-size:11px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-secondary);margin:4px 0 6px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.tip{position:fixed;pointer-events:none;background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:6px 9px;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.15);display:none;z-index:9;font-variant-numeric:tabular-nums}
+.heat td{font-size:12px;padding:5px 6px;min-width:58px}
+.note{color:var(--text-secondary);font-size:13px}
+ol,ul{padding-left:20px;margin:6px 0} li{margin:3px 0}
+pre{background:var(--surface-2);padding:10px;border-radius:8px;overflow:auto;font-size:12px}
+details summary{cursor:pointer;color:var(--text-secondary)}
+.themebtn{margin-left:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row"><div><h1>NIFTY intraday non-directional selling — v2 (realistic engine)</h1>
+  <p class="sub" id="subtitle"></p></div>
+  <div class="seg themebtn" role="group" aria-label="Theme"><button data-th="light">Light</button><button data-th="auto" aria-pressed="true">Auto</button><button data-th="dark">Dark</button></div></div>
+
+  <div class="card verdict" id="verdict"></div>
+
+  <h2>1 · The deployable strategy: Expiry-Day Iron Fly</h2>
+  <div class="card">
+    <div class="row"><strong>View</strong>
+      <div class="seg" role="group" aria-label="Sizing"><button data-cap="1lot" aria-pressed="true">₹2 lakh · 1 lot</button><button data-cap="3L">₹3 lakh · margin-sized</button></div>
+      <span class="note" id="capnote"></span></div>
+    <div class="tiles" id="tiles" style="margin-top:12px"></div>
+  </div>
+  <div class="card"><h3>Rules</h3><ol id="rules"></ol>
+    <details><summary>Exact engine config (JSON)</summary><pre id="json"></pre></details></div>
+
+  <h2>2 · Equity: optimised vs honest walk-forward</h2>
+  <div class="card"><div class="legend" id="eqLegend"></div><div id="eq"></div>
+    <p class="note">Walk-forward = for each quarter the parameters were chosen <b>only from earlier data</b>, then traded blind. The gap between the blue line (parameters fitted on everything) and the walk-forward lines is the optimism you should expect to lose.</p></div>
+  <div class="card"><h3>Drawdown (full sample, ₹)</h3><div id="dd"></div></div>
+  <div class="card tscroll"><h3>Month-on-month net P&amp;L (₹)</h3><table class="heat" id="heat"></table></div>
+  <div class="row" style="align-items:stretch">
+    <div class="card tscroll" style="flex:1 1 360px"><h3>Quarterly (₹)</h3><div id="qbars"></div></div>
+    <div class="card tscroll" style="flex:1 1 260px"><h3>Yearly (₹)</h3><table id="yt"></table><p class="note">Edge has shrunk after SEBI's Nov-2024 F&amp;O rules and the Sep-2025 move to Tuesday expiry.</p></div>
+  </div>
+
+  <h2>3 · Stress tests &amp; statistical honesty</h2>
+  <div class="card tscroll"><table id="stress"></table></div>
+  <div class="row" style="align-items:stretch">
+    <div class="card tscroll" style="flex:1 1 360px"><h3>Same rules forced onto every day</h3><table id="forced"></table><p class="note">Why the expiry-day filter is structural, not a way of dodging bad days: every other trading-DTE loses money with these rules.</p></div>
+    <div class="card tscroll" style="flex:1 1 420px"><h3>Biggest shock days in the sample (1 lot)</h3><table id="shock"></table></div>
+  </div>
+  <div class="card tscroll"><h3>Worst 5 days (1 lot)</h3><table id="worst"></table></div>
+
+  <h2>4 · AlgoTest setup (field by field)</h2>
+  <div class="card tscroll"><table id="s1"></table></div>
+  <div class="card tscroll"><h3>Legs</h3><table id="s2"></table></div>
+  <div class="card tscroll"><h3>Overall settings</h3><table id="s3"></table></div>
+  <div class="card tscroll"><h3>Portfolio, sizing &amp; execution</h3><table id="s4"></table></div>
+
+  <h2>5 · What was rejected, and why</h2>
+  <div class="card tscroll"><h3>Walk-forward out-of-sample on the other days (1 lot)</h3><table id="rej"></table></div>
+  <div class="card tscroll"><h3>Re-test of the strategies from the first report</h3><table id="audit"></table>
+    <p class="note">The earlier P1 portfolio (holdout Calmar 11.6) does not survive realistic slippage plus intra-minute wicks. That critique was correct.</p></div>
+
+  <h2>6 · Data &amp; model validation</h2>
+  <div class="row" style="align-items:stretch">
+    <div class="card tscroll" style="flex:1 1 420px"><h3>Does the wick model reproduce true OHLC? (Oct–Dec 2024, same days)</h3><table id="wick"></table></div>
+    <div class="card tscroll" style="flex:1 1 360px"><h3>Margin model vs exchange SPAN (lot 65, NIFTY 25,030)</h3><table id="span"></table></div>
+  </div>
+  <div class="card note" id="method"></div>
+</div>
+<div class="tip" id="tip"></div>
+<script>
+const D = /*__DATA__*/null;
+const $ = s => document.querySelector(s);
+const fmt = (v, d=0) => v==null ? '–' : (v<0?'−':'') + '₹' + Math.abs(v).toLocaleString('en-IN',{maximumFractionDigits:d});
+const pct = v => (v==null||isNaN(v)) ? '–' : v.toFixed(1)+'%';
+const n2 = v => (v==null||isNaN(v)) ? '–' : v.toFixed(2);
+const dstr = d => { d=String(d); return d.slice(0,4)+'-'+d.slice(4,6)+'-'+d.slice(6); };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const tip = $('#tip');
+function showTip(e, html){ tip.innerHTML = html; tip.style.display='block'; tip.style.left=Math.min(e.clientX+14, innerWidth-tip.offsetWidth-8)+'px'; tip.style.top=(e.clientY+14)+'px'; }
+function hideTip(){ tip.style.display='none'; }
+let CAP = '1lot';
+const R = () => D.runs[CAP];
+const tbl = (el, head, rows) => { $(el).innerHTML = '<thead><tr>'+head.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')+'</tbody>'; };
+const sgn = v => `<span class="${v<0?'neg':''}">${fmt(v)}</span>`;
+
+$('#subtitle').textContent = `Backtest 2024-01-01 → 2026-03-24 · 551 trading days (117 expiry days) · generated ${D.generated} · all costs, 0.5% slippage per fill + 1% on stops, intra-minute wicks, SPAN-calibrated margin`;
+const m1 = D.runs['1lot'].metrics, w6 = D.wf6;
+$('#verdict').innerHTML = `<h3 style="margin-top:0">Verdict</h3><ul>
+<li><b>Deploy one strategy: the expiry-day iron fly</b> (trading DTE 0 — every Tuesday on today's calendar). It is the only candidate that stayed profitable in an honest anchored walk-forward: <b>${fmt(w6.net)} on 1 lot over 7 blind quarters, PF ${n2(w6.pf)}</b>. The procedure picked the same structure, entry time and stop logic in every quarter.</li>
+<li>Expected return ≈ <b>${fmt(w6.net/1.73)}/year on 1 lot (~${(w6.net/1.73/2000).toFixed(0)}% on ₹2L)</b>, max drawdown ≈ ${fmt(w6.dd)}. Fitting on all data gives ${pct(m1.roi_annual_pct)}/yr. Treat that as an upper bound.</li>
+<li><b>Nothing is deployed on Mon/Wed/Thu/Fri.</b> Morning and afternoon selling on DTE 1–4 lost money out of sample after costs, so idle capital is the right call there.</li>
+<li><b>₹3L does not buy a 2nd lot.</b> Since SEBI's 2% expiry-day ELM, one lot of this iron fly needs ≈ ₹1.7L; two need ≈ ₹3.5L.</li>
+<li><b>Caution:</b> the edge is shrinking (2025 roughly half of 2024; Q1-2026 small), and with only 117 expiry days the Deflated Sharpe is ${n2(D.dsr['1000'])}, so it is not statistically proven. Paper-trade on AlgoTest for 4–6 expiries first.</li></ul>`;
+
+function tiles(){
+  const r = R(), m = r.metrics;
+  $('#capnote').textContent = CAP==='1lot' ? 'Quantity multiplier 1 (≈ ₹1.7L expiry-day margin)' : 'Margin-sized at 90% of ₹3L: 2 lots only before the Nov-2024 ELM rule, 1 lot after';
+  const t = [['Net P&L (2.2 yrs)', fmt(m.net_pnl_rupees), `${m.traded_days} expiry days`], ['ROI / year', pct(m.roi_annual_pct), CAP==='1lot'?'on ₹2,00,000':'on ₹3,00,000'],
+    ['Max drawdown', fmt(m.max_drawdown_rupees), pct(m.max_drawdown_pct)+' of capital'], ['Calmar · PF', n2(m.calmar_ratio)+' · '+n2(m.profit_factor), 'Sharpe '+n2(m.sharpe_ratio)],
+    ['Win rate', pct(m.win_rate_pct), `max ${m.max_consecutive_losing_days} losers in a row`], ['Worst day', fmt(m.worst_day_rupees), 'best '+fmt(m.best_day_rupees)],
+    ['Monte-Carlo DD', fmt(r.mc95), '95th pct · 99th '+fmt(r.mc99)], ['Peak margin', fmt(m.peak_margin_max), 'avg '+fmt(m.peak_margin_avg)+' on trade days']];
+  $('#tiles').innerHTML = t.map(x=>`<div class="tile"><div class="k">${x[0]}</div><div class="v">${x[1]}</div><div class="s">${x[2]}</div></div>`).join('');
+}
+
+function lineChart(el, sets, opts){
+  const W = el.clientWidth || 900, H = opts.h || 260, L=64, R_=opts.rpad||40, T=10, B=24;
+  const all = sets.flatMap(s => s.pts.map(p => p[1])); let ymin = Math.min(0, ...all), ymax = Math.max(0, ...all); if (ymax===ymin) ymax=ymin+1;
+  const pad=(ymax-ymin)*.06; if(!opts.zeroTop) ymin-=pad; ymax+=opts.zeroTop?0:pad;
+  const dates = [...new Set(sets.flatMap(s=>s.pts.map(p=>p[0])))].sort((a,b)=>a-b); const idx = new Map(dates.map((d,i)=>[d,i])); const N = dates.length;
+  const x = i => L + (W-L-R_)*i/Math.max(1,N-1), y = v => T + (H-T-B)*(ymax-v)/(ymax-ymin);
+  let g = `<svg width="${W}" height="${H}" role="img" aria-label="${opts.label}">`;
+  for (let k=0;k<=4;k++){ const v = ymin + (ymax-ymin)*k/4; g += `<line x1="${L}" x2="${W-R_}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end">${fmt(Math.round(v/1000))}k</text>`; }
+  g += `<line x1="${L}" x2="${W-R_}" y1="${y(0)}" y2="${y(0)}" stroke="var(--text-muted)"/>`;
+  let ly=null; dates.forEach((d,i)=>{ const yr=String(d).slice(0,4); if(yr!==ly){ly=yr; g+=`<text x="${x(i)}" y="${H-6}">${yr}</text>`;} });
+  sets.forEach(s => { const path = s.pts.map((p,i)=>(i?'L':'M')+x(idx.get(p[0])).toFixed(1)+' '+y(p[1]).toFixed(1)).join('');
+    g += opts.area ? `<path d="${path}L${x(idx.get(s.pts[s.pts.length-1][0]))} ${y(0)}L${x(idx.get(s.pts[0][0]))} ${y(0)}Z" fill="${s.color}" opacity=".18"/><path d="${path}" fill="none" stroke="${s.color}" stroke-width="1.5"/>` : `<path d="${path}" fill="none" stroke="${s.color}" stroke-width="2"/>`;
+    if (opts.direct){ const p=s.pts[s.pts.length-1]; g += `<text x="${x(idx.get(p[0]))+4}" y="${y(p[1])+4}" style="fill:var(--text-primary)">${s.short}</text>`; } });
+  g += `<line class="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--text-muted)" stroke-dasharray="3 3" visibility="hidden"/><rect class="hit" x="${L}" y="${T}" width="${W-L-R_}" height="${H-T-B}" fill="transparent"/></svg>`;
+  el.innerHTML = g;
+  const svg = el.querySelector('svg'), xh = svg.querySelector('.xh'), maps = sets.map(s=>new Map(s.pts.map(p=>[p[0],p[1]])));
+  svg.querySelector('.hit').addEventListener('mousemove', e => { const r = svg.getBoundingClientRect(); const i = Math.max(0, Math.min(N-1, Math.round((e.clientX-r.left-L)/(W-L-R_)*(N-1)))); xh.setAttribute('x1',x(i)); xh.setAttribute('x2',x(i)); xh.setAttribute('visibility','visible');
+    showTip(e, `<b>${dstr(dates[i])}</b><br>`+sets.map((s,j)=>{ let v=null; for(let k=i;k>=0;k--){ if(maps[j].has(dates[k])){v=maps[j].get(dates[k]);break;} } return `<span style="color:${s.color}">■</span> ${s.name}: ${fmt(v)}`; }).join('<br>')); });
+  svg.querySelector('.hit').addEventListener('mouseleave', () => { xh.setAttribute('visibility','hidden'); hideTip(); });
+}
+
+function charts(){
+  const sets = [{name:'Optimised on all data (in-sample)', short:'IS', color:css('--series-1'), pts:D.equity.full},
+                {name:'Walk-forward v6 (clean, blind)', short:'WF', color:css('--series-2'), pts:D.equity.wf6},
+                {name:'Walk-forward v7 (refined grid)', short:'WF7', color:css('--series-3'), pts:D.equity.wf7}];
+  $('#eqLegend').innerHTML = sets.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('');
+  lineChart($('#eq'), sets, {h:300, label:'Equity comparison', direct:true});
+  let c=0,p=0; const dd = D.equity.full.map(([d,v])=>{ p=Math.max(p,v); return [d, v-p]; });
+  lineChart($('#dd'), [{name:'Drawdown', short:'', color:css('--neg-strong'), pts:dd}], {h:150, label:'Drawdown', area:true, zeroTop:true, rpad:12});
+}
+
+function heat(){
+  const mo = R().monthly, yr = R().yearly, mx = Math.max(1, ...Object.values(mo).map(Math.abs));
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const col = v => `color-mix(in oklab, ${v>=0?'var(--pos-strong)':'var(--neg-strong)'} ${Math.round(15+Math.min(1,Math.abs(v)/mx)*75)}%, var(--mid))`;
+  let h = `<thead><tr><th>Year</th>${months.map(m=>`<th>${m}</th>`).join('')}<th>Year</th></tr></thead><tbody>`;
+  [...new Set(Object.keys(mo).map(k=>k.slice(0,4)))].forEach(y=>{ h+=`<tr><td><b>${y}</b></td>`; for(let i=1;i<=12;i++){ const k=`${y}-${String(i).padStart(2,'0')}`; h += (k in mo && mo[k]!==0) ? `<td style="background:${col(mo[k])};${Math.abs(mo[k])/mx>.55?'color:#fff':''}" title="${k}: ${fmt(mo[k])}">${Math.round(mo[k]).toLocaleString('en-IN')}</td>` : '<td></td>'; } h+=`<td><b class="${yr[y]<0?'neg':''}">${fmt(yr[y])}</b></td></tr>`; });
+  $('#heat').innerHTML = h+'</tbody>';
+  tbl('#yt', ['Year','Net'], Object.entries(yr).map(([k,v])=>[k, sgn(v)]));
+  const q = R().quarterly, ks = Object.keys(q), vs = Object.values(q), el = $('#qbars'), W = Math.max(320, el.clientWidth||400), H=220, L=56, B=30, T=8, bw=(W-L-8)/ks.length;
+  const mxq = Math.max(1,...vs), mnq = Math.min(0,...vs), yq = v => T + (H-T-B)*(mxq-v)/(mxq-mnq);
+  let g = `<svg width="${W}" height="${H}" role="img" aria-label="Quarterly P&L">`;
+  [mnq,0,mxq].forEach(v=> g+=`<line x1="${L}" x2="${W-4}" y1="${yq(v)}" y2="${yq(v)}" stroke="var(--grid)"/><text x="${L-6}" y="${yq(v)+4}" text-anchor="end">${fmt(Math.round(v/1000))}k</text>`);
+  ks.forEach((k,i)=>{ const v=q[k], x0=L+i*bw+2, w=Math.max(2,bw-4); g+=`<rect x="${x0}" y="${Math.min(yq(v),yq(0))}" width="${w}" height="${Math.max(1,Math.abs(yq(v)-yq(0)))}" rx="3" fill="${v>=0?'var(--series-1)':'var(--neg-strong)'}" data-i="${i}"/><text x="${x0+w/2}" y="${H-12}" text-anchor="middle">${k.slice(2,4)}${k.slice(5)}</text>`; });
+  el.innerHTML = g+'</svg>';
+  el.querySelectorAll('rect[data-i]').forEach(r=>{ r.onmousemove=e=>showTip(e,`<b>${ks[r.dataset.i]}</b><br>${fmt(vs[r.dataset.i])}`); r.onmouseleave=hideTip; });
+}
+
+function staticTables(){
+  const c = D.cfg, l0 = c.legs[0], w = c.legs[2].strike.n;
+  $('#rules').innerHTML = [
+    `Trade only on <b>expiry day</b> (trading DTE 0): Thursday before 2-Sep-2025, <b>Tuesday</b> now.`,
+    `At <b>${c.entry_time}</b> (AlgoTest time = close of the 09:19 candle) sell the <b>ATM CE and ATM PE</b> (ATM from NIFTY spot).`,
+    `At the same time buy <b>OTM${w} wings</b> on both sides (±${w*50} points). Enter the buys first for the margin benefit.`,
+    `Stop-loss <b>${l0.sl.value}%</b> on each sold leg (SL-L order). <b>Trail SL to break-even (SL legs):</b> when one leg stops out, the other leg's SL moves to its entry price.`,
+    `<b>Overall SL ₹${c.overall.sl_mtm.toLocaleString('en-IN')}</b> per lot (MTM), checked at candle close. No target, no re-entry.`,
+    `Exit everything at <b>${c.exit_time}</b>.`].map(x=>`<li>${x}</li>`).join('');
+  $('#json').textContent = JSON.stringify(c, null, 1);
+  const r1 = D.runs['1lot'];
+  tbl('#stress', ['Scenario (1 lot)','Net P&L','Max DD','PF'], [
+    ['Base: wicks + 0.5%/fill + 1% on stops', sgn(r1.metrics.net_pnl_rupees), fmt(r1.metrics.max_drawdown_rupees), n2(r1.metrics.profit_factor)],
+    ['No synthetic wicks (optimistic bound)', sgn(r1.nowick.net_pnl_rupees), fmt(r1.nowick.max_drawdown_rupees), n2(r1.nowick.profit_factor)],
+    ['Slippage ×2 (1%/fill, 2% on stops, ₹0.20 min)', sgn(r1.slip2.net_pnl_rupees), fmt(r1.slip2.max_drawdown_rupees), n2(r1.slip2.profit_factor)],
+    ['Walk-forward OOS v6 (clean)', sgn(D.wf6.net), fmt(D.wf6.dd), n2(D.wf6.pf)],
+    ['Walk-forward OOS v7 (refined grid)', sgn(D.wf7.net), fmt(D.wf7.dd), n2(D.wf7.pf)],
+    ['Monte-Carlo drawdown 95th / 99th pct', '–', fmt(r1.mc95)+' / '+fmt(r1.mc99), '–'],
+    ['AlgoTest live fee (100 credits / 28 days)', '−'+fmt(r1.fee).replace('₹','₹'), '–', '–'],
+    ['Deflated Sharpe at 100 / 1,000 / 6,000 trials', n2(D.dsr['100'])+' / '+n2(D.dsr['1000'])+' / '+n2(D.dsr['6000']), 'Sharpe '+n2(D.sharpe)+' (WF '+n2(D.wf_sharpe)+')', '–']]);
+  tbl('#forced', ['Trading DTE','Days','Net (1 lot)','Win %'], Object.entries(D.forced).sort((a,b)=>+a[0]-+b[0]).map(([k,v])=>[k==='0'?'<b>0 (expiry) ✔</b>':k, v.days, sgn(v.net_rupees), pct(v.win_rate)]));
+  tbl('#shock', ['Date','Range','Open→close','DTE','Strategy (traded)','If forced'], D.shock.map(r=>[dstr(r[0]), pct(r[1]), pct(r[2]), r[3]??'–', r[4]==null?'<span class="note">not traded</span>':sgn(r[4]), r[5]==null?'–':sgn(r[5])]));
+  tbl('#worst', ['Date','DTE','Net','Stops','Final exit'], r1.worst.map(d=>[dstr(d.date), d.tdte, sgn(d.net), d.stops, `${d.exit} @ ${d.exit_time}`]));
+  tbl('#s1', ['AlgoTest field','Value'], D.sheet.settings);
+  const lh = Object.keys(D.sheet.legs[0]); tbl('#s2', lh, D.sheet.legs.map(l=>lh.map(k=>l[k])));
+  tbl('#s3', ['Field','Value'], D.sheet.overall.length?D.sheet.overall:[['-','-']]);
+  $('#s3').querySelectorAll('td').forEach(td=>td.classList.add('l')); $('#s4').innerHTML='';
+  tbl('#s4', ['Field','Value'], D.sheet.portfolio); $('#s4').querySelectorAll('td').forEach(td=>td.classList.add('l'));
+  const rej = Object.entries(D.wf_other).map(([b,v])=>[b.replace('tdte','DTE '), 'morning entries (v6 grid)', v.n?sgn(v.net):'–', v.n?n2(v.pf):'no stable config', '<span class="bad">rejected</span>'])
+    .concat(Object.entries(D.wf_h2).map(([b,v])=>[b.replace('tdte','DTE '), 'afternoon entries (v7-H2)', v.n?sgn(v.net):'–', v.n?n2(v.pf):'no stable config', '<span class="bad">rejected</span>']));
+  rej.unshift(['<b>DTE 0</b>', 'morning iron fly (v6 / v7)', sgn(D.wf6.net)+' / '+sgn(D.wf7.net), n2(D.wf6.pf)+' / '+n2(D.wf7.pf), '<span class="ok">deploy</span>']);
+  tbl('#rej', ['Day','Search','Walk-forward OOS net','OOS PF','Decision'], rej);
+  tbl('#audit', ['Strategy','Model','Holdout Calmar','Holdout PF','Full-period net','Full-period DD'], D.audit.map(r=>[r[0], r[1], n2(r[2]), n2(r[3]), sgn(r[4]), fmt(r[5])]));
+  tbl('#wick', ['Strategy','True OHLC','LTP only','LTP + wicks'], D.wick_validation.map(r=>[r[0], `${fmt(r[1])} · ${r[2]} SL`, `${fmt(r[3])} · ${r[4]} SL`, `${fmt(r[5])} · ${r[6]} SL`]));
+  tbl('#span', ['Position (1 lot)','Exchange SPAN+exposure','Engine model','Error'], D.span.map(r=>[r[0], fmt(r[1]), fmt(r[2]), ((r[2]-r[1])/r[1]*100).toFixed(1)+'%']));
+  $('#method').innerHTML = `<h3 style="margin-top:0">How this was done</h3>
+  <p><b>Resources reviewed.</b> The full AlgoTest documentation (356 pages; every strategy-builder, backtest, execution, margin and portfolio page read in full) — the strategy is written only in AlgoTest fields. The Mendeley dataset 9gm4f29d32: NIFTY <i>daily</i> monthly-option data 2017-21, unusable for intraday tests. The Kaggle notebook "strike-magnetism-gamma-exposure-tradyflow": a US options-flow pinning study, not NIFTY data. Kaggle datasets: pariminikhil (LTP 2024-26), senthilkumarvaithi (true OHLC 2024), npartha (true OHLC 2024 + Oct-2026; used to cross-check and calibrate), rahultr1 (daily only, unusable).</p>
+  <p><b>Data checks.</b> Our 2024 data matches an independent ICICI Breeze source on ${D.crosscheck.crosscheck_rows.toLocaleString('en-IN')} bars (${D.crosscheck.close_exact_match_pct.toFixed(2)}% identical closes). The 2025-26 source has only last-traded price per minute. Real 1-minute candles wick far beyond that: for a ₹10–30 expiry-day option the median is 2.4%, the 99th percentile 22.7%. So wicks were calibrated on true OHLC and injected; the table above shows this reproduces true-OHLC results.</p>
+  <p><b>Engine.</b> Rust, 1-minute bars, AlgoTest candle convention. Leg SL/target hit on high/low; a gap-through fills at the next open, plus 1% stop slippage. Overall SL/lock are checked at candle close, as AlgoTest's backtester does. If a stop is moved inside a bar (move-to-cost), it is re-checked on that same bar (pessimistic). Every fill pays 0.5% slippage (min ₹0.10), AlgoTest's own recommendation for selling. Charges: ₹20/order brokerage, 0.1% STT on sells, NSE 0.03503%, SEBI, stamp duty and GST, at today's rates and today's lot of 65 for every year. Margin: scenario SPAN plus exposure plus SEBI's 2% expiry-day ELM, calibrated against the exchange SPAN file. DTE counts trading days, as AlgoTest does.</p>
+  <p><b>Search.</b> v1–v4 (first report) were superseded. v5 ran a 32,610-trial free search with walk-forward: rejected, it overfits. v6 used a 4,800-config pre-declared grid with plateau selection and anchored quarterly walk-forward; only expiry day survived. v7 refined expiry day (432 configs) and tested afternoon theta on DTE 1–4 (576 configs): the afternoon idea was rejected. The full log is in EXPERIMENT_LOG.md.</p>`;
+}
+
+function renderAll(){ tiles(); charts(); heat(); }
+document.querySelectorAll('[data-cap]').forEach(b=>b.onclick=()=>{ CAP=b.dataset.cap; document.querySelectorAll('[data-cap]').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderAll(); });
+document.querySelectorAll('[data-th]').forEach(b=>b.onclick=()=>{ const t=b.dataset.th; if(t==='auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t); document.querySelectorAll('[data-th]').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderAll(); });
+staticTables(); renderAll();
+addEventListener('resize', ()=>{ clearTimeout(window._rz); window._rz=setTimeout(renderAll,150); });
+</script>
+</body>
+</html>

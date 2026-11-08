@@ -1,6 +1,7 @@
 //! Strategy plugin interface: `MarketView` (look-ahead-free read-only chain view),
 //! the `IntradayStrategy` trait, and the built-in parameterised non-directional seller.
 
+pub mod algotest;
 pub mod nd_seller;
 
 use core_types::{DayMetadata, OhlcBar, SpotBar, TradingDayData};
@@ -37,6 +38,10 @@ impl<'a> MarketView<'a> {
             return None;
         }
         self.day.bar(strike, is_call, k).copied()
+    }
+    /// All strikes on the day's grid (ascending).
+    pub fn strikes(&self) -> impl Iterator<Item = u32> + '_ {
+        (0..self.day.n_strikes as usize).map(move |i| self.day.strike_at(i))
     }
     pub fn strike_step(&self) -> u32 {
         self.day.strike_step

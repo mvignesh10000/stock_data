@@ -9,15 +9,22 @@
 | Parquet ETL | `etl/` |
 | Discovery loop / final evaluation / report | `research/` |
 
-## Headline (1 lot = ₹2L, all costs + slippage, Jan-2024 → Mar-2026)
+## Headline (v2 — realistic engine, after external review)
 
-| | Tier | Net | ROI/yr | Max DD | Holdout Calmar / PF |
-|---|---|---|---|---|---|
-| S1 expiry-day (DTE 0) premium-matched strangle | A (all gates) | ₹85.4k | 19.5% | ₹6.1k (2.1%) | 5.05 / 1.92 |
-| S3 DTE 4–6 premium-matched strangle | B | ₹53.2k | 12.2% | ₹4.8k | 6.44 / 1.55 |
-| **P1 = S1 + S3 (live calendar)** | portfolio | **₹1.39L** | **31.7%** | **₹5.7k (2.6%)** | 11.6 / 1.69 |
+| Deliverable | Where |
+|---|---|
+| AlgoTest field-by-field setup of the deployable strategy | `ALGOTEST_SETUP.md` |
 
-Use 2 lots on ₹3L (see report). S2 (DTE 2–3) is not deployable since NIFTY moved to Tuesday expiry. This is research, not advice; paper-trade first.
+**Deploy one strategy: the NIFTY expiry-day iron fly** (trading DTE 0, i.e. every Tuesday). At 09:20 sell ATM CE+PE with a 60% SL each and buy OTM12 wings; trail SL to break-even on the SL legs; overall SL ₹2,000; exit 15:15.
+
+| 1 lot (₹2L) | Net | Max DD | PF |
+|---|---|---|---|
+| Honest walk-forward OOS (7 blind quarters) | ₹41.9k (≈ ₹24k/yr, ~12%) | ₹15.4k | 1.44 |
+| Full sample, parameters fitted on everything (upper bound) | ₹93.4k (21%/yr) | ₹12.4k | 1.81 |
+
+Intraday selling on DTE 1–4 lost money out of sample and is not deployed. ₹3L also runs 1 lot, because the 2% expiry-day ELM makes one lot need ≈ ₹1.7L. The edge is shrinking (2024 > 2025 > 2026-Q1) and is not statistically proven (Deflated Sharpe 0.07 at 1,000 trials). Paper-trade first. This is research, not advice.
+
+v1 (first report) claimed P1 = S1+S3 with holdout Calmar 11.6. Re-tested with realistic slippage and intra-minute wicks it falls to 0.7, so v1 is superseded (see `WINNING_STRATEGIES.md` §rejected).
 
 ## Reproduce
 
@@ -32,5 +39,9 @@ cargo build --release --manifest-path opt_engine/Cargo.toml
 ./opt_engine/target/release/opt_engine build-cache --parquet-dir data/parquet/NIFTY_OHLC --parquet-dir data/parquet/NIFTY --out data/cache/nifty.bin
 ./opt_engine/target/release/opt_engine backtest --cache data/cache/nifty.bin --strategy-config configs/final/P1_2L_all.json --out /tmp/p1.json
 python research/discover_loop.py --generations 8 --pop 400 --label v2     # (see EXPERIMENT_LOG for v3/v4 flags)
-python research/finalize.py && python research/report.py
+python etl/crosscheck_wicks.py <npartha dir> data/parquet etl/wick_model.json   # verify 2024 data + calibrate wicks
+python etl/inject_wicks.py data/parquet/NIFTY etl/wick_model.json data/parquet/NIFTY_WICK
+./opt_engine/target/release/opt_engine build-cache --parquet-dir data/parquet/NIFTY_OHLC --parquet-dir data/parquet/NIFTY_WICK --out data/cache/nifty_wick.bin
+python research/discover_v5.py && python research/discover_v6.py && python research/discover_v7.py
+python research/finalize_v7.py && python research/report_v7.py
 ```

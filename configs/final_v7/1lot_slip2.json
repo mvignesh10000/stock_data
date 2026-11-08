@@ -1,0 +1,70 @@
+{
+ "strategy": {
+  "kind": "algotest",
+  "name": "NIFTY_ExpiryDay_IronFly",
+  "entry_time": "09:20",
+  "exit_time": "15:15",
+  "no_reentry_after": "14:30",
+  "dte": [
+   0
+  ],
+  "underlying": "cash",
+  "legs": [
+   {
+    "side": "sell",
+    "opt": "CE",
+    "strike": {
+     "mode": "atm"
+    },
+    "sl": {
+     "kind": "pct",
+     "value": 60
+    }
+   },
+   {
+    "side": "sell",
+    "opt": "PE",
+    "strike": {
+     "mode": "atm"
+    },
+    "sl": {
+     "kind": "pct",
+     "value": 60
+    }
+   },
+   {
+    "side": "buy",
+    "opt": "CE",
+    "strike": {
+     "mode": "otm",
+     "n": 12
+    }
+   },
+   {
+    "side": "buy",
+    "opt": "PE",
+    "strike": {
+     "mode": "otm",
+     "n": 12
+    }
+   }
+  ],
+  "square_off": "partial",
+  "trail_to_breakeven": "sl_legs",
+  "overall": {
+   "sl_mtm": 2000
+  },
+  "sizing": {
+   "mode": "fixed",
+   "multiplier": 1
+  }
+ },
+ "gates": {
+  "capital": 200000
+ },
+ "exec": {
+  "entry_slippage_pct": 1.0,
+  "sl_slippage_pct": 2.0,
+  "min_slippage_pts": 0.2
+ }
+}

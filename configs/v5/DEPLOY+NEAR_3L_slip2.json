@@ -1,0 +1,179 @@
+{
+ "portfolio": [
+  {
+   "kind": "algotest",
+   "name": "ironfly_tdte0",
+   "entry_time": "09:25",
+   "exit_time": "15:20",
+   "no_reentry_after": "14:30",
+   "dte": [
+    0
+   ],
+   "underlying": "cash",
+   "legs": [
+    {
+     "side": "sell",
+     "opt": "CE",
+     "strike": {
+      "mode": "atm"
+     },
+     "sl": {
+      "kind": "pct",
+      "value": 20
+     },
+     "trail": {
+      "kind": "pct",
+      "x": 10,
+      "y": 5
+     },
+     "momentum": {
+      "kind": "pct_down",
+      "value": 5
+     }
+    },
+    {
+     "side": "sell",
+     "opt": "PE",
+     "strike": {
+      "mode": "atm"
+     },
+     "sl": {
+      "kind": "pct",
+      "value": 20
+     },
+     "trail": {
+      "kind": "pct",
+      "x": 10,
+      "y": 5
+     },
+     "momentum": {
+      "kind": "pct_down",
+      "value": 5
+     }
+    },
+    {
+     "side": "buy",
+     "opt": "CE",
+     "strike": {
+      "mode": "otm",
+      "n": 20
+     }
+    },
+    {
+     "side": "buy",
+     "opt": "PE",
+     "strike": {
+      "mode": "otm",
+      "n": 20
+     }
+    }
+   ],
+   "square_off": "partial",
+   "trail_to_breakeven": "none",
+   "overall": {
+    "sl_mtm": 1500,
+    "tgt_mtm": 6000,
+    "lock_reach": 1500,
+    "lock_profit": 600,
+    "trail_every": 250,
+    "trail_by": 125
+   },
+   "sizing": {
+    "mode": "margin",
+    "capital": 300000,
+    "util": 0.9,
+    "max_multiplier": 6
+   }
+  },
+  {
+   "kind": "algotest",
+   "name": "ironfly_tdte2",
+   "entry_time": "11:05",
+   "exit_time": "14:45",
+   "no_reentry_after": "14:15",
+   "dte": [
+    2
+   ],
+   "underlying": "cash",
+   "legs": [
+    {
+     "side": "sell",
+     "opt": "CE",
+     "strike": {
+      "mode": "atm"
+     },
+     "sl": {
+      "kind": "pct",
+      "value": 70
+     },
+     "re_sl": {
+      "kind": "asap",
+      "count": 1
+     },
+     "momentum": {
+      "kind": "pct_down",
+      "value": 15
+     }
+    },
+    {
+     "side": "sell",
+     "opt": "PE",
+     "strike": {
+      "mode": "atm"
+     },
+     "sl": {
+      "kind": "pct",
+      "value": 70
+     },
+     "re_sl": {
+      "kind": "asap",
+      "count": 1
+     },
+     "momentum": {
+      "kind": "pct_down",
+      "value": 15
+     }
+    },
+    {
+     "side": "buy",
+     "opt": "CE",
+     "strike": {
+      "mode": "otm",
+      "n": 8
+     }
+    },
+    {
+     "side": "buy",
+     "opt": "PE",
+     "strike": {
+      "mode": "otm",
+      "n": 8
+     }
+    }
+   ],
+   "square_off": "partial",
+   "trail_to_breakeven": "sl_legs",
+   "overall": {
+    "tgt_mtm": 4500,
+    "lock_reach": 2500,
+    "lock_profit": 1000,
+    "trail_every": 500,
+    "trail_by": 250
+   },
+   "sizing": {
+    "mode": "margin",
+    "capital": 300000,
+    "util": 0.9,
+    "max_multiplier": 6
+   }
+  }
+ ],
+ "gates": {
+  "capital": 300000
+ },
+ "exec": {
+  "entry_slippage_pct": 1.0,
+  "sl_slippage_pct": 2.0,
+  "min_slippage_pts": 0.2
+ }
+}

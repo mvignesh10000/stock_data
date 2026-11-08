@@ -885,3 +885,47 @@ Costs: ₹20/order brokerage, STT 0.1% sell, NSE txn 0.03503%, SEBI 0.0001%, sta
 - Dead regions (not re-sampled): straddle/DTE[2, 3], strangle_premium/DTE[2, 3]
 - Next-gen bucket weights: d23=3.40, d456=3.40
 
+
+# Run v5 — realistic engine + AlgoTest-expressible space + anchored walk-forward
+
+Pre-registered protocol (written before running):
+- Data: 2024 true OHLC + 2025-26 LTP with synthetic wicks (validated vs true OHLC on Oct-Dec 2024).
+- Costs: Rs20/order, STT 0.1% sell, NSE 0.03503%, SEBI, stamp, GST; slippage 0.5%/fill (min Rs0.10) + 1% on stops.
+- One strategy per TRADING-DTE bucket (0..4) so every weekday can use the capital; 1 lot, Rs2L gates.
+- Walk-forward: for each quarter from 2024-Q3 the optimiser (LHS-style sampling + mutation, stability audit:
+  entry +-1/+-2 min, SL +-2.5/+-5 pts, ratio >= 0.75) sees only earlier data, then trades the quarter blind.
+- Final configs: same optimiser on all data; deploy only if hard gate passes on the full sample, stability >= 0.75,
+  walk-forward OOS of that bucket is profitable with PF >= 1.2, and Deflated Sharpe >= 0.90.
+
+- WF fold 2024-Q3 (train 20240101-20240628, test 20240701-20240930): tdte0 ironfly OOS Rs-9,123; tdte1 ironfly OOS Rs-12,921; tdte2 ironfly OOS Rs-1,410; tdte3 ironfly OOS Rs-15,605; tdte4 atm_pct OOS Rs2,802;
+- WF fold 2024-Q4 (train 20240101-20240930, test 20241001-20241231): tdte0 ironfly OOS Rs16,595; tdte1 ironcondor OOS Rs-882; tdte2 prem_strangle OOS Rs2,919; tdte3 no stable config; tdte4 ironfly OOS Rs-7,224;
+- WF fold 2025-Q1 (train 20240101-20241231, test 20250101-20250328): tdte0 no stable config; tdte1 atm_pct OOS Rs-6,389; tdte2 ironfly OOS Rs2,907; tdte3 ironcondor OOS Rs-1,436; tdte4 no stable config;
+- WF fold 2025-Q2 (train 20240101-20250328, test 20250401-20250630): tdte0 ironfly OOS Rs-7,531; tdte1 prem_strangle OOS Rs-13,310; tdte2 ironcondor OOS Rs8,020; tdte3 prem_strangle OOS Rs-244; tdte4 ironfly OOS Rs-1,230;
+- WF fold 2025-Q3 (train 20240101-20250630, test 20250701-20250930): tdte0 no stable config; tdte1 ironfly OOS Rs115; tdte2 ironfly OOS Rs2,504; tdte3 prem_strangle OOS Rs4,547; tdte4 prem_strangle OOS Rs-9,947;
+- WF fold 2025-Q4 (train 20240101-20250930, test 20251001-20251231): tdte0 ironfly OOS Rs-4,363; tdte1 ironfly OOS Rs-135; tdte2 ironcondor OOS Rs2,342; tdte3 no stable config; tdte4 prem_strangle OOS Rs1,249;
+- WF fold 2026-Q1 (train 20240101-20251231, test 20260101-20260324): tdte0 prem_strangle OOS Rs16,688; tdte1 ironfly OOS Rs256; tdte2 ironcondor OOS Rs-11,559; tdte3 atm_pct OOS Rs-5,197; tdte4 atm_pct OOS Rs-7,844;
+- FINAL tdte0: ironfly stab 0.80 | net Rs59,969 DD Rs5,701 Calmar 4.81 PF 2.11 gate False losing months 25.9% > 15%
+- FINAL tdte1: ironfly stab 0.81 | net Rs55,150 DD Rs8,313 Calmar 3.03 PF 1.72 gate False tail: worst day ₹8313 > 2.5x p90 win ₹2946; tail: worst day ₹8313 > 1.5% of capital; losing months 33.3% > 15%
+- FINAL tdte2: ironfly stab 0.88 | net Rs62,220 DD Rs9,091 Calmar 3.13 PF 1.80 gate False tail: worst day ₹5180 > 1.5% of capital
+- FINAL tdte3: prem_strangle stab 0.50 | net Rs35,674 DD Rs8,106 Calmar 2.01 PF 1.44 gate False thin edge: expectancy ₹310 < ₹450; tail: worst day ₹3004 > 1.5% of capital; losing months 25.9% > 15%
+- FINAL tdte4: prem_strangle stab 0.54 | net Rs39,103 DD Rs4,329 Calmar 4.13 PF 2.13 gate False losing months 38.5% > 15%
+- Trials evaluated in v5: 32610 (var of daily Sharpe across trials 0.00888); wall 220s
+
+# Runs v6 / v7 — parsimonious grids, plateau selection, anchored walk-forward
+
+v5 verdict: rejected. The 32,610-trial free search changed structure every quarter, walk-forward OOS summed to −₹55k (only DTE 0 +₹12k PF 1.20), and the Deflated Sharpe was ≈ 0.
+
+v6 (pre-declared grid, 960 configs per trading-DTE, plateau selection, every config backtested once and selection replayed per fold):
+- DTE 0: WF OOS +₹41,902, PF 1.44, DD ₹15,417. Picked the iron fly in all 7 folds (entry 09:20, SL 50%, trail-to-BE on SL legs, overall SL ₹2,500; wings ±200 to ±600).
+- DTE 1: −₹13,496 (PF 0.56). DTE 2: −₹23,091 (PF 0.75). DTE 3: no config had a profitable plateau. DTE 4: −₹20,015 (PF 0.71). All rejected.
+
+v7 (two hypotheses written down before running):
+- H1 refine DTE 0 (432 configs): WF OOS +₹60,585, PF 1.66, DD ₹13,371. Final: ATM iron fly, OTM12 wings, 09:20 entry, SL 60%, trail-to-BE on SL legs, overall SL ₹2,000, exit 15:15. The search region was informed by v6's walk-forward, so this WF figure is mildly optimistic; v6's figure is the clean one.
+- H2 afternoon theta on DTE 1–4 (144 configs each): DTE 1 WF −₹18,886 (PF 0.44); DTE 2–4 no stable config. Rejected.
+
+Final grading (results/final_v7/final.json):
+- 1 lot: +₹93,372 over 551 days (117 expiry days), max DD ₹12,423, PF 1.81, worst day −₹3,345.
+- Stress: no wicks ₹107k; 2× slippage ₹74k; Monte-Carlo DD95 ₹27.4k.
+- Deflated Sharpe 0.30 / 0.07 / 0.02 at 100 / 1,000 / 6,000 trials.
+- The same rules forced onto every non-expiry DTE lose money; 4-Jun-2024 (DTE 2) would have cost −₹8,051.
+- Hard gates: expectancy pass, underwater pass, worst-day fail (₹3,345 > ₹3,000), losing months fail (29.6%).

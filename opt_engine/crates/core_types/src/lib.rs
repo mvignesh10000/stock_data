@@ -43,6 +43,9 @@ pub struct TradingDayData {
     pub dte: u8,
     pub expiry_rank: u8,
     pub weekday: u8, // 1 = Monday .. 5 = Friday
+    /// Trading days to expiry (AlgoTest definition: weekends & exchange holidays excluded).
+    #[serde(default)]
+    pub tdte: u8,
     pub strike_step: u32,
     pub min_strike: u32,
     pub n_strikes: u32,
@@ -87,6 +90,7 @@ impl TradingDayData {
             trade_date: self.trade_date,
             expiry_date: self.expiry_date,
             dte: self.dte,
+            tdte: self.tdte,
             weekday: self.weekday,
             strike_step: self.strike_step,
         }
@@ -98,6 +102,7 @@ pub struct DayMetadata {
     pub trade_date: u32,
     pub expiry_date: u32,
     pub dte: u8,
+    pub tdte: u8,
     pub weekday: u8,
     pub strike_step: u32,
 }
@@ -133,7 +138,9 @@ pub struct ChainCache {
     pub days: Vec<TradingDayData>,
 }
 
+/// Wall-clock time at which a fill on bar `m` happens = the bar's CLOSE (AlgoTest convention:
+/// the "09:20" candle is the broker's 09:19:00-09:19:59 bar).
 pub fn minute_to_hhmm(m: usize) -> String {
-    let t = 9 * 60 + 15 + m;
+    let t = 9 * 60 + 15 + m + 1;
     format!("{:02}:{:02}", t / 60, t % 60)
 }

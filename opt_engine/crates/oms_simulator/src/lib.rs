@@ -64,17 +64,76 @@ pub struct ExecConfig {
     /// Auto square-off minute (370 = 15:25).
     pub eod_minute: usize,
     pub costs: CostModel,
+    pub margin: MarginModel,
+    /// After a stop moves (e.g. SL-to-breakeven) re-check it against the SAME bar's high/low.
+    /// 1-minute bars do not tell which leg moved first, so assume the worst.
+    pub pessimistic_same_bar: bool,
+}
+
+/// NSE margin approximation calibrated on the exchange SPAN file (via a broker SPAN calculator,
+/// NIFTY 25,030 / VIX 17.7 / lot 65, Nov-2026):
+///   naked short ATM CE  SPAN 150,917  -> model 151,000 (PSR 9.3%)
+///   iron fly +-300      SPAN  20,307  -> model  19,500 x 1.03
+///   exposure            31,197 per short lot = 1.92% of notional
+/// plus SEBI's additional 2% ELM on short options on expiry day (from 20-Nov-2024).
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(default)]
+pub struct MarginModel {
+    pub psr_pct: f64,
+    pub span_mult: f64,
+    pub exposure_pct: f64,
+    pub expiry_elm_pct: f64,
+    pub expiry_elm_from: u32,
+}
+
+impl Default for MarginModel {
+    fn default() -> Self {
+        MarginModel { psr_pct: 9.3, span_mult: 1.03, exposure_pct: 1.92, expiry_elm_pct: 2.0, expiry_elm_from: 20241120 }
+    }
+}
+
+/// (strike, is_call, side, lots)
+pub type MarginLeg = (u32, bool, Side, u32);
+
+impl MarginModel {
+    /// Rupee margin for a set of legs at spot `s`.
+    pub fn margin(&self, legs: &[MarginLeg], s: f64, lot_size: f64, expiry_day: bool, trade_date: u32) -> f64 {
+        if legs.is_empty() {
+            return 0.0;
+        }
+        let mut worst = 0.0f64;
+        for k in -6i32..=6 {
+            let sp = s * (1.0 + self.psr_pct / 100.0 * k as f64 / 6.0);
+            let mut loss = 0.0;
+            for &(strike, is_call, side, lots) in legs {
+                let intr = if is_call { (sp - strike as f64).max(0.0) } else { (strike as f64 - sp).max(0.0) };
+                // a short loses its intrinsic, a long gains it
+                loss -= side.sign() * intr * lots as f64;
+            }
+            worst = worst.max(loss);
+        }
+        let span = worst * lot_size * self.span_mult;
+        let short_lots: u32 = legs.iter().filter(|l| l.2 == Side::Sell).map(|l| l.3).sum();
+        let notional = s * lot_size * short_lots as f64;
+        let mut m = span + notional * self.exposure_pct / 100.0;
+        if expiry_day && trade_date >= self.expiry_elm_from {
+            m += notional * self.expiry_elm_pct / 100.0;
+        }
+        m
+    }
 }
 
 impl Default for ExecConfig {
     fn default() -> Self {
         ExecConfig {
             lot_size: 65.0,
-            entry_slippage_pct: 0.3,
-            sl_slippage_pct: 0.5,
-            min_slippage_pts: 0.05,
+            entry_slippage_pct: 0.5,
+            sl_slippage_pct: 1.0,
+            min_slippage_pts: 0.10,
             eod_minute: 370,
             costs: CostModel::default(),
+            margin: MarginModel::default(),
+            pessimistic_same_bar: true,
         }
     }
 }
@@ -153,6 +212,7 @@ pub struct DayResult {
     pub exit_reason: String,
     pub last_exit_minute: usize,
     pub max_lots: u32,
+    pub peak_margin: f64,
 }
 
 pub struct VirtualOms<'a> {
@@ -168,6 +228,7 @@ pub struct VirtualOms<'a> {
     last_reason: String,
     last_exit_minute: usize,
     max_lots: u32,
+    peak_margin: f64,
 }
 
 impl<'a> VirtualOms<'a> {
@@ -185,7 +246,96 @@ impl<'a> VirtualOms<'a> {
             last_reason: String::new(),
             last_exit_minute: 0,
             max_lots: 0,
+            peak_margin: 0.0,
         }
+    }
+
+    pub fn is_expiry_day(&self) -> bool {
+        self.day.tdte == 0
+    }
+
+    /// Margin of the currently open positions plus `extra` legs (what-if), at the current spot.
+    pub fn margin_with(&self, extra: &[MarginLeg]) -> f64 {
+        let mut legs: Vec<MarginLeg> = self.positions.iter().filter(|p| p.is_open()).map(|p| (p.strike, p.is_call, p.side, p.lots)).collect();
+        legs.extend_from_slice(extra);
+        let s = self.day.spot[self.minute].close as f64;
+        self.cfg.margin.margin(&legs, s, self.cfg.lot_size, self.is_expiry_day(), self.day.trade_date)
+    }
+
+    pub fn update_margin(&mut self) {
+        let m = self.margin_with(&[]);
+        if m > self.peak_margin {
+            self.peak_margin = m;
+        }
+    }
+
+    /// Pessimistic same-bar check of one position's stop against the CURRENT bar (used right after a
+    /// stop was moved inside this minute). Returns true if it fired.
+    pub fn check_stop_now(&mut self, id: usize) -> bool {
+        if !self.cfg.pessimistic_same_bar {
+            return false;
+        }
+        let m = self.minute;
+        let p = &self.positions[id];
+        if !p.is_open() || p.entry_minute >= m {
+            return false;
+        }
+        let (sl, side, lots) = match p.stop {
+            Some(sl) => (sl, p.side, p.lots),
+            None => return false,
+        };
+        let bar = match self.day.bar(p.strike, p.is_call, m) {
+            Some(b) => *b,
+            None => return false,
+        };
+        let hit = match side {
+            Side::Sell => bar.high as f64 >= sl,
+            Side::Buy => (bar.low as f64) <= sl,
+        };
+        if !hit {
+            return false;
+        }
+        // we do not know when inside the bar it happened: fill at the stop (+ stop slippage)
+        let fill = match side {
+            Side::Sell => sl * (1.0 + self.cfg.sl_slippage_pct / 100.0) + self.cfg.min_slippage_pts,
+            Side::Buy => (sl * (1.0 - self.cfg.sl_slippage_pct / 100.0) - self.cfg.min_slippage_pts).max(0.0),
+        };
+        self.slippage_points += (fill - sl).abs() * lots as f64;
+        self.book_fill(side.opposite(), fill, lots);
+        let p = &mut self.positions[id];
+        p.exit_price = Some(fill);
+        p.exit_minute = Some(m);
+        p.exit_reason = Some("SL".to_string());
+        self.n_stops += 1;
+        self.last_reason = "SL".to_string();
+        self.last_exit_minute = m;
+        self.events.push(TriggerEvent { position_id: id, kind: "SL", fill_price: fill });
+        true
+    }
+
+    /// Fill a limit-style entry at `price` (used by RE-COST / momentum entries that rest at a level).
+    pub fn submit_at_price(&mut self, strike: u32, is_call: bool, side: Side, lots: u32, price: f64, tag: &str) -> Result<usize, OrderRejected> {
+        if self.minute >= self.cfg.eod_minute {
+            return Err(OrderRejected::MarketClosed);
+        }
+        let bar = *self.bar(strike, is_call, self.minute).ok_or(OrderRejected::NoSuchContract)?;
+        if bar.volume == 0 {
+            return Err(OrderRejected::IlliquidStrike);
+        }
+        let s = self.slip(price, self.cfg.entry_slippage_pct);
+        let fill = match side {
+            Side::Buy => price + s,
+            Side::Sell => (price - s).max(0.05),
+        };
+        self.slippage_points += (fill - price).abs() * lots as f64;
+        self.book_fill(side, fill, lots);
+        let id = self.positions.len();
+        self.positions.push(Position {
+            id, strike, is_call, side, lots, entry_price: fill, entry_minute: self.minute,
+            exit_price: None, exit_minute: None, exit_reason: None, stop: None, target: None, tag: tag.to_string(),
+        });
+        self.update_margin();
+        Ok(id)
     }
 
     #[inline]
@@ -249,6 +399,7 @@ impl<'a> VirtualOms<'a> {
         });
         let open_lots: u32 = self.positions.iter().filter(|p| p.is_open() && p.side == Side::Sell).map(|p| p.lots).sum();
         self.max_lots = self.max_lots.max(open_lots);
+        self.update_margin();
         Ok(id)
     }
 
@@ -407,6 +558,7 @@ impl<'a> VirtualOms<'a> {
             exit_reason: self.last_reason.clone(),
             last_exit_minute: self.last_exit_minute,
             max_lots: self.max_lots,
+            peak_margin: self.peak_margin,
         }
     }
 
@@ -434,6 +586,24 @@ impl<'a> VirtualOms<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn margin_model_matches_exchange_span_points() {
+        let m = MarginModel::default();
+        let s = 25030.0;
+        // naked short ATM CE: exchange total 182,114
+        let a = m.margin(&[(25050, true, Side::Sell, 1)], s, 65.0, false, 20261106);
+        assert!((a - 182_114.0).abs() / 182_114.0 < 0.06, "naked {}", a);
+        // iron fly +-300: exchange total 82,700
+        let b = m.margin(&[(25050, true, Side::Sell, 1), (25050, false, Side::Sell, 1), (25350, true, Side::Buy, 1), (24750, false, Side::Buy, 1)], s, 65.0, false, 20261106);
+        assert!((b - 82_700.0).abs() / 82_700.0 < 0.06, "ironfly {}", b);
+        // iron fly +-1000: exchange total 128,866
+        let c = m.margin(&[(25050, true, Side::Sell, 1), (25050, false, Side::Sell, 1), (26050, true, Side::Buy, 1), (24050, false, Side::Buy, 1)], s, 65.0, false, 20261106);
+        assert!((c - 128_866.0).abs() / 128_866.0 < 0.06, "ironfly1000 {}", c);
+        // expiry day adds 2% per short lot
+        let d = m.margin(&[(25050, true, Side::Sell, 1), (25050, false, Side::Sell, 1), (25350, true, Side::Buy, 1), (24750, false, Side::Buy, 1)], s, 65.0, true, 20261106);
+        assert!((d - b - 2.0 * s * 65.0 * 0.02).abs() < 1.0);
+    }
 
     #[test]
     fn statutory_costs_match_hand_calc() {

@@ -1,0 +1,94 @@
+{
+ "strategy": {
+  "kind": "algotest",
+  "name": "prem_strangle_tdte4",
+  "entry_time": "09:40",
+  "exit_time": "15:05",
+  "no_reentry_after": "14:30",
+  "dte": [
+   4
+  ],
+  "underlying": "synthetic",
+  "legs": [
+   {
+    "side": "sell",
+    "opt": "CE",
+    "strike": {
+     "mode": "closest_premium",
+     "value": 65
+    },
+    "sl": {
+     "kind": "pct",
+     "value": 70
+    },
+    "trail": {
+     "kind": "pct",
+     "x": 20,
+     "y": 10
+    },
+    "re_sl": {
+     "kind": "cost",
+     "count": 2
+    },
+    "momentum": {
+     "kind": "pct_down",
+     "value": 5
+    }
+   },
+   {
+    "side": "sell",
+    "opt": "PE",
+    "strike": {
+     "mode": "closest_premium",
+     "value": 65
+    },
+    "sl": {
+     "kind": "pct",
+     "value": 70
+    },
+    "trail": {
+     "kind": "pct",
+     "x": 20,
+     "y": 10
+    },
+    "re_sl": {
+     "kind": "cost",
+     "count": 2
+    },
+    "momentum": {
+     "kind": "pct_down",
+     "value": 5
+    }
+   },
+   {
+    "side": "buy",
+    "opt": "CE",
+    "strike": {
+     "mode": "closest_premium",
+     "value": 12
+    }
+   },
+   {
+    "side": "buy",
+    "opt": "PE",
+    "strike": {
+     "mode": "closest_premium",
+     "value": 12
+    }
+   }
+  ],
+  "square_off": "partial",
+  "trail_to_breakeven": "sl_legs",
+  "overall": {
+   "sl_mtm": 2000,
+   "tgt_mtm": 4500
+  },
+  "sizing": {
+   "mode": "fixed",
+   "multiplier": 1
+  }
+ },
+ "gates": {
+  "capital": 200000
+ }
+}

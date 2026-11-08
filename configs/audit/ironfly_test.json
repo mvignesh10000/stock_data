@@ -1,0 +1,8 @@
+{"strategy": {"kind": "algotest", "name": "ironfly_test", "entry_time": "09:30", "exit_time": "15:15", "dte": [0],
+  "legs": [
+    {"side": "sell", "opt": "CE", "strike": {"mode": "atm"}, "sl": {"kind": "pct", "value": 30}, "re_sl": {"kind": "cost", "count": 1}},
+    {"side": "sell", "opt": "PE", "strike": {"mode": "atm"}, "sl": {"kind": "pct", "value": 30}, "re_sl": {"kind": "cost", "count": 1}},
+    {"side": "buy", "opt": "CE", "strike": {"mode": "otm", "n": 6}},
+    {"side": "buy", "opt": "PE", "strike": {"mode": "otm", "n": 6}}],
+  "trail_to_breakeven": "sl_legs", "overall": {"sl_mtm": 3000, "lock_reach": 2500, "lock_profit": 1000, "trail_every": 500, "trail_by": 250},
+  "sizing": {"mode": "margin", "capital": 200000, "util": 0.9, "max_multiplier": 3}}}

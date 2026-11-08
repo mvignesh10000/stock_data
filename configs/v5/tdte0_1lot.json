@@ -1,0 +1,88 @@
+{
+ "strategy": {
+  "kind": "algotest",
+  "name": "ironfly_tdte0",
+  "entry_time": "09:25",
+  "exit_time": "15:20",
+  "no_reentry_after": "14:30",
+  "dte": [
+   0
+  ],
+  "underlying": "cash",
+  "legs": [
+   {
+    "side": "sell",
+    "opt": "CE",
+    "strike": {
+     "mode": "atm"
+    },
+    "sl": {
+     "kind": "pct",
+     "value": 20
+    },
+    "trail": {
+     "kind": "pct",
+     "x": 10,
+     "y": 5
+    },
+    "momentum": {
+     "kind": "pct_down",
+     "value": 5
+    }
+   },
+   {
+    "side": "sell",
+    "opt": "PE",
+    "strike": {
+     "mode": "atm"
+    },
+    "sl": {
+     "kind": "pct",
+     "value": 20
+    },
+    "trail": {
+     "kind": "pct",
+     "x": 10,
+     "y": 5
+    },
+    "momentum": {
+     "kind": "pct_down",
+     "value": 5
+    }
+   },
+   {
+    "side": "buy",
+    "opt": "CE",
+    "strike": {
+     "mode": "otm",
+     "n": 20
+    }
+   },
+   {
+    "side": "buy",
+    "opt": "PE",
+    "strike": {
+     "mode": "otm",
+     "n": 20
+    }
+   }
+  ],
+  "square_off": "partial",
+  "trail_to_breakeven": "none",
+  "overall": {
+   "sl_mtm": 1500,
+   "tgt_mtm": 6000,
+   "lock_reach": 1500,
+   "lock_profit": 600,
+   "trail_every": 250,
+   "trail_by": 125
+  },
+  "sizing": {
+   "mode": "fixed",
+   "multiplier": 1
+  }
+ },
+ "gates": {
+  "capital": 200000
+ }
+}

@@ -20,6 +20,7 @@ use std::collections::HashMap;
 use std::io::{BufRead, BufReader};
 use std::path::PathBuf;
 use std::time::Instant;
+use strategy_api::algotest::AlgoTestStrategy;
 use strategy_api::nd_seller::NdSeller;
 use strategy_api::{IntradayStrategy, MarketView};
 
@@ -72,7 +73,10 @@ pub struct DayOut {
 
 /// Engine loop for one strategy across a slice of days.
 fn run_single(days: &[TradingDayData], strat_cfg: &Value, exec: &ExecConfig, keep_trades: bool) -> Result<Vec<DayOut>, String> {
-    let mut strat = NdSeller::from_value(strat_cfg.clone())?;
+    let mut strat: Box<dyn IntradayStrategy> = match strat_cfg.get("kind").and_then(|k| k.as_str()) {
+        Some("algotest") => Box::new(AlgoTestStrategy::from_value(strat_cfg.clone())?),
+        _ => Box::new(NdSeller::from_value(strat_cfg.clone())?),
+    };
     let mut out = Vec::with_capacity(days.len());
     for day in days {
         let meta = day.meta();
@@ -136,6 +140,7 @@ fn run_config(days: &[TradingDayData], v: &Value, keep_trades: bool) -> Result<(
                     p.n_orders += q.n_orders;
                     p.n_stops += q.n_stops;
                     p.max_lots += q.max_lots;
+                    p.peak_margin += q.peak_margin;
                     if q.traded {
                         p.exit_reason = format!("{}{}{}", p.exit_reason, if p.exit_reason.is_empty() { "" } else { "+" }, q.exit_reason);
                         p.last_exit_minute = p.last_exit_minute.max(q.last_exit_minute);
@@ -196,11 +201,12 @@ fn main() {
             let exec_ms = t1.elapsed().as_secs_f64() * 1000.0;
             let rows = day_rows(&outs);
             let (m, bd) = compute(&rows, &gates);
+            let days_tdte: HashMap<u32, u8> = days.iter().map(|d| (d.trade_date, d.tdte)).collect();
             let daily: Vec<Value> = outs
                 .iter()
                 .map(|d| {
                     let r = &d.result;
-                    json!({"date": r.trade_date, "dte": r.dte, "wd": r.weekday, "active": d.active, "traded": r.traded,
+                    json!({"date": r.trade_date, "dte": r.dte, "tdte": days_tdte.get(&r.trade_date).copied().unwrap_or(0), "wd": r.weekday, "margin": r.peak_margin.round(), "lots": r.max_lots, "active": d.active, "traded": r.traded,
                            "net": (r.net_rupees * 100.0).round() / 100.0, "points": (r.points * 100.0).round() / 100.0,
                            "charges": (r.charges_rupees * 100.0).round() / 100.0, "stops": r.n_stops, "orders": r.n_orders,
                            "exit": r.exit_reason, "exit_time": core_types::minute_to_hhmm(r.last_exit_minute)})
@@ -246,7 +252,8 @@ fn main() {
                             let (m, bd) = compute(&rows, &gates);
                             let mut v = json!({"id": id, "status": "SUCCESS", "summary_metrics": m, "monthly_pnl": bd.monthly, "dte_breakdown": bd.dte});
                             if with_daily {
-                                v["daily"] = json!(outs.iter().map(|d| [d.result.trade_date as f64, (d.result.net_rupees * 100.0).round() / 100.0, d.result.dte as f64, d.result.n_stops as f64, d.result.last_exit_minute as f64]).collect::<Vec<_>>());
+                                let tmap: HashMap<u32, u8> = days.iter().map(|d| (d.trade_date, d.tdte)).collect();
+                                v["daily"] = json!(outs.iter().map(|d| [d.result.trade_date as f64, (d.result.net_rupees * 100.0).round() / 100.0, *tmap.get(&d.result.trade_date).unwrap_or(&0) as f64, d.result.n_stops as f64, d.result.last_exit_minute as f64, d.result.peak_margin.round(), d.result.max_lots as f64, if d.result.traded {1.0} else {0.0}]).collect::<Vec<_>>());
                                 v["daily_exit"] = json!(outs.iter().map(|d| d.result.exit_reason.clone()).collect::<Vec<_>>());
                             }
                             v

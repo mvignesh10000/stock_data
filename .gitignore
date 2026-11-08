@@ -4,3 +4,10 @@ results/discovery/batch_*.jsonl
 results/discovery/res_*.json
 results/sanity.json
 __pycache__/
+results/v5/b*.jsonl
+results/v5/r*.json
+results/v6/b*.jsonl
+results/v6/r*.json
+results/v7/b*.jsonl
+results/v7/r*.json
+results/sanity.json
