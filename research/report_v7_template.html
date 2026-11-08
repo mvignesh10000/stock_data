@@ -111,6 +111,23 @@ details summary{cursor:pointer;color:var(--text-secondary)}
   <div class="card tscroll"><h3>Re-test of the strategies from the first report</h3><table id="audit"></table>
     <p class="note">The earlier P1 portfolio (holdout Calmar 11.6) does not survive realistic slippage plus intra-minute wicks. That critique was correct.</p></div>
 
+
+  <h2>7 · Your VIX regime / shared-capital framework, tested</h2>
+  <div class="card verdict" id="feVerdict"></div>
+  <div class="card tscroll"><h3>Claim-by-claim check (551 days, realistic engine, 1 lot)</h3><table id="feClaims"></table></div>
+  <div class="card"><h3>Walk-forward (blind quarters) of each policy</h3><div class="legend" id="feLegend"></div><div id="feEq"></div>
+    <div class="tscroll"><table id="feWf"></table></div>
+    <p class="note">Every policy picks its parameters each quarter only from earlier data (plateau selection over pre-declared grids: 126 selling and 108 ORB-buying configs). Regime = India VIX previous close (NSE official data), which is known before the open.</p></div>
+  <div class="row" style="align-items:stretch">
+    <div class="card tscroll" style="flex:1 1 420px"><h3>Each side by VIX regime (grid median vs best of all configs)</h3><table id="feReg"></table></div>
+    <div class="card tscroll" style="flex:1 1 300px"><h3>Regime-threshold sensitivity (walk-forward net)</h3><table id="feThr"></table><p class="note">A robust rule should not flip sign when the threshold moves by 1 VIX point.</p></div>
+  </div>
+  <div class="row" style="align-items:stretch">
+    <div class="card tscroll" style="flex:1 1 420px"><h3>Entry-time sweep (deployed strategy, 1 lot)</h3><div id="feEt"></div><p class="note">There is a broad plateau from 09:17 to 09:27. Waiting until 09:45 removes almost the whole edge: the expiry-day edge is selling the opening volatility premium.</p></div>
+    <div class="card tscroll" style="flex:1 1 320px"><h3>Deployed strategy by VIX regime</h3><table id="feVix"></table><h3>Portfolio-level max loss / max profit</h3><table id="fePl"></table></div>
+  </div>
+  <div class="card tscroll"><h3>Shared capital: wing distance vs margin vs return (expiry day, NIFTY ≈ 25,030, lot 65)</h3><table id="feWing"></table></div>
+  <div class="card" id="feFramework"></div>
   <h2>6 · Data &amp; model validation</h2>
   <div class="row" style="align-items:stretch">
     <div class="card tscroll" style="flex:1 1 420px"><h3>Does the wick model reproduce true OHLC? (Oct–Dec 2024, same days)</h3><table id="wick"></table></div>
@@ -244,7 +261,57 @@ function staticTables(){
   <p><b>Search.</b> v1–v4 (first report) were superseded. v5 ran a 32,610-trial free search with walk-forward: rejected, it overfits. v6 used a 4,800-config pre-declared grid with plateau selection and anchored quarterly walk-forward; only expiry day survived. v7 refined expiry day (432 configs) and tested afternoon theta on DTE 1–4 (576 configs): the afternoon idea was rejected. The full log is in EXPERIMENT_LOG.md.</p>`;
 }
 
-function renderAll(){ tiles(); charts(); heat(); }
+
+function frameworkSection(){
+  const fe = D.fe; if(!fe) return;
+  const wf = fe.wf, A = wf[Object.keys(wf).find(k=>k.startsWith('A'))];
+  $('#feVerdict').innerHTML = `<h3 style="margin-top:0">Verdict on the framework</h3><ul>
+   <li><b>ORB option buying has no edge in any VIX regime here.</b> 0 of 108 buying configs were profitable on high-VIX non-expiry days, and the 10/15/20-minute ranges all lose.</li>
+   <li><b>Buying does not hedge selling.</b> Daily P&amp;L correlation is <b>+${n2(fe.synergy.corr_median_configs)}</b>. On selling's 40 worst days the buying side also lost ${fmt(fe.synergy.buy_on_those_days)} (wins ${fe.synergy.buy_win_rate_on_those_days.toFixed(0)}%). Both lose on whipsaw days.</li>
+   <li><b>The VIX switch hurts</b> versus plain expiry-day selling (walk-forward ${fmt(A.net)}), and its result flips sign with ±1 VIX point.</li>
+   <li><b>What does work, and is kept:</b> hedged non-directional selling, a combined MTM stop, a cash buffer and portfolio-level loss control. Use them on expiry day only, entering at ~09:20, with wings sized to your capital (below).</li></ul>`;
+  const by = r => fe.by_regime.filter(x=>x[0]===r);
+  const g = (side, reg) => fe.by_regime.find(x=>x[0]===side && x[1]===reg);
+  tbl('#feClaims', ['Framework claim','Evidence','Verdict'], [
+    ['Low VIX (<13.5): keep selling active', `Selling on low-VIX expiry days: grid median ${fmt(g('SELL','low/expiry')[3])}, ${g('SELL','low/expiry')[5]}% of configs profitable; deployed strategy PF ${fe.deployed_by_vix[0][3]}`, '<span class="warn">weakest regime for selling</span>'],
+    ['High VIX (>16.5): switch to buying', `ORB buying, high-VIX non-expiry days: grid median ${fmt(g('BUY','high/non-expiry')[3])}, best ${fmt(g('BUY','high/non-expiry')[4])}, ${g('BUY','high/non-expiry')[5]}% profitable`, '<span class="bad">rejected</span>'],
+    ['Buying offsets selling losses on trend days', `corr +${n2(fe.synergy.corr_median_configs)}; buy P&amp;L on selling's 40 worst days ${fmt(fe.synergy.buy_on_those_days)}`, '<span class="bad">rejected</span>'],
+    ['Wait until 09:45 / 10:15 to enter', 'Plateau 09:17–09:27 (₹62k–₹106k); 09:45 → ₹7k', '<span class="bad">rejected for expiry day</span>'],
+    ['Wings 100–200 pts away', `±200: ${fmt(fe.wing_exact['4'][0])} vs ±600: ${fmt(fe.wing_exact['12'][0])}`, '<span class="warn">costly; widen if capital allows</span>'],
+    ['Skip / shrink on big gap days', 'Walk-forward with gap days skipped: ₹9.3k vs ₹38.5k (gap days pay sellers on expiry)', '<span class="bad">rejected</span>'],
+    ['Portfolio max profit', 'Target ₹4k/₹6k cuts net from ₹93k to ₹35k/₹59k (fat right tail)', '<span class="bad">don\'t cap profit</span>'],
+    ['Portfolio max loss / combined MTM SL', 'Combined SL ₹2,000 is part of the deployed strategy; a broker-level ₹4k stop never binds in the backtest, but protects live if a limit order fails to fill', '<span class="ok">keep</span>'],
+    ['20–30% cash buffer', '₹2L + ±600 wings = 84% margin. Use ±400 wings (77%) on ₹2L, or ₹3L (56%)', '<span class="ok">keep</span>'],
+    ['Simple, non-curve-fitted logic', 'One structure, one entry window, every parameter on a smooth plateau', '<span class="ok">satisfied</span>']]);
+  $('#feClaims').querySelectorAll('td').forEach(td=>td.classList.add('l'));
+  const cols = [css('--series-1'), css('--series-2'), css('--series-3'), css('--neg-strong')];
+  const names = Object.keys(fe.wf_eq);
+  const sets = names.map((k,i)=>({name:k, short:k[0], color:cols[i%4], pts:fe.wf_eq[k]}));
+  $('#feLegend').innerHTML = sets.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('');
+  lineChart($('#feEq'), sets, {h:280, label:'Walk-forward equity by policy', direct:true});
+  tbl('#feWf', ['Policy','Net','PF','Max DD','Trades','Worst day','MC-DD 95%'], Object.entries(wf).map(([k,v])=>[k, sgn(v.net), n2(v.pf), fmt(v.dd), v.n, fmt(v.worst), fmt(v.mc95)]));
+  tbl('#feReg', ['Side','VIX regime / day','Days','Grid median','Best config','% configs profitable'], fe.by_regime.map(r=>[r[0], r[1], r[2], sgn(r[3]), sgn(r[4]), r[5]+'%']));
+  tbl('#feThr', ['Policy','Low <','High >','Net','PF'], fe.thresholds.map(r=>[r[0], r[1], r[2], r[3]===0&&r[4]===99?'no picks':sgn(r[3]), r[3]===0&&r[4]===99?'–':n2(r[4])]));
+  const et = fe.entry_sweep, el = $('#feEt'), W = Math.max(340, el.clientWidth||420), H=200, L=56, B=40, T=8, bw=(W-L-6)/et.length;
+  const mx = Math.max(...et.map(r=>r[1])), mn = Math.min(0, ...et.map(r=>r[1])), y = v => T+(H-T-B)*(mx-v)/(mx-mn);
+  let gsvg = `<svg width="${W}" height="${H}" role="img" aria-label="Entry time sweep">`;
+  [mn,0,mx].forEach(v=> gsvg+=`<line x1="${L}" x2="${W-4}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end">${fmt(Math.round(v/1000))}k</text>`);
+  et.forEach((r,i)=>{ const x0=L+i*bw+1, w=Math.max(2,bw-2); gsvg+=`<rect x="${x0}" y="${Math.min(y(r[1]),y(0))}" width="${w}" height="${Math.max(1,Math.abs(y(r[1])-y(0)))}" rx="2" fill="${r[1]>=0?'var(--series-1)':'var(--neg-strong)'}" data-i="${i}"/>`; if(i%2===0) gsvg+=`<text x="${x0+w/2}" y="${H-24}" text-anchor="end" transform="rotate(-45 ${x0+w/2} ${H-24})">${r[0]}</text>`; });
+  el.innerHTML = gsvg+'</svg>';
+  el.querySelectorAll('rect[data-i]').forEach(r=>{ const e_=et[r.dataset.i]; r.onmousemove=e=>showTip(e,`<b>${e_[0]}</b><br>net ${fmt(e_[1])}<br>DD ${fmt(e_[2])} · PF ${e_[3]}`); r.onmouseleave=hideTip; });
+  tbl('#feVix', ['VIX prev close','Days','Net','PF','Win %','Worst'], fe.deployed_by_vix.map(r=>[r[0], r[1], sgn(r[2]), n2(r[3]), r[4]+'%', fmt(r[5])]));
+  tbl('#fePl', ['Portfolio SL','Portfolio TGT','Net','Max DD'], fe.portfolio_limits.map(r=>[r[0]==='0'?'off':fmt(+r[0]), r[1]==='0'?'off':fmt(+r[1]), sgn(r[2]), fmt(r[3])]));
+  const mw = Object.fromEntries(fe.margin_by_wing.map(r=>[String(r[0]), r]));
+  tbl('#feWing', ['Wings','Net (1 lot)','Max DD','PF','Worst day','Margin (expiry day)','% of ₹2L','% of ₹3L'], Object.entries(fe.wing_exact).map(([w,r])=>{ const mm = mw[w]; return [`±${w*50}`, sgn(r[0]), fmt(r[1]), n2(r[2]), fmt(r[3]), mm?fmt(mm[1]):'≈ '+fmt(r[4]), mm?mm[2]+'%':'–', mm?mm[3]+'%':'–']; }));
+  $('#feFramework').innerHTML = `<h3 style="margin-top:0">Recommended shared-capital framework</h3><ul>
+   <li><b>₹2 lakh:</b> 1 lot of the expiry-day iron fly with <b>±400 wings</b> (OTM8): margin ≈ ₹1.54L (77%), keeping a ~23% buffer. Net ${fmt(fe.wing_exact['8'][0])} over 2.2 yrs. Keep ±600 only if you accept a 16% buffer.</li>
+   <li><b>₹3 lakh:</b> 1 lot with <b>±600 wings</b> (OTM12): margin ≈ ₹1.68L (56%), 44% buffer. Two lots need ≈ ₹3.35L+ (2% expiry-day ELM), so 2 lots would breach the buffer rule.</li>
+   <li><b>Other days:</b> no strategy. The idle capital earns nothing, but every tested weekday/buying alternative lost money out of sample. Keep it in a liquid fund or pledged collateral.</li>
+   <li><b>Risk layers:</b> leg SL 60% + trail-to-breakeven + strategy overall SL ₹2,000/lot. Add a <b>broker-level SL of ₹4,000</b> as a live catastrophe stop. No portfolio profit target.</li>
+   <li><b>Kill-switch:</b> pause and re-evaluate if live drawdown exceeds the Monte-Carlo 95% level (≈ ₹27k per lot) or after 3 consecutive losing months.</li>
+   <li><b>VIX:</b> watch it, don't switch on it. If you want a rule, treat VIX < 12 as a reason to be cautious, not as a signal to buy.</li></ul>`;
+}
+function renderAll(){ tiles(); charts(); heat(); frameworkSection(); }
 document.querySelectorAll('[data-cap]').forEach(b=>b.onclick=()=>{ CAP=b.dataset.cap; document.querySelectorAll('[data-cap]').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderAll(); });
 document.querySelectorAll('[data-th]').forEach(b=>b.onclick=()=>{ const t=b.dataset.th; if(t==='auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t); document.querySelectorAll('[data-th]').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderAll(); });
 staticTables(); renderAll();

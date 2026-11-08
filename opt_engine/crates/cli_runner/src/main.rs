@@ -112,10 +112,128 @@ fn split_config(v: &Value) -> (Vec<Value>, ExecConfig, GateConfig) {
     (strats, exec, gates)
 }
 
+fn item_exec(v: &Value, idx: usize) -> ExecConfig {
+    // portfolio-level exec, overridden field-by-field by the item's own "exec"
+    let mut base = v.get("exec").cloned().unwrap_or(json!({}));
+    if let Some(Value::Array(p)) = v.get("portfolio") {
+        if let Some(Value::Object(o)) = p.get(idx).and_then(|x| x.get("exec")) {
+            if let Value::Object(b) = &mut base {
+                for (k, val) in o {
+                    b.insert(k.clone(), val.clone());
+                }
+            }
+        }
+    }
+    serde_json::from_value(base).expect("exec config")
+}
+
+fn make_strategy(cfg: &Value) -> Result<Box<dyn IntradayStrategy>, String> {
+    Ok(match cfg.get("kind").and_then(|k| k.as_str()) {
+        Some("algotest") => Box::new(AlgoTestStrategy::from_value(cfg.clone())?),
+        _ => Box::new(NdSeller::from_value(cfg.clone())?),
+    })
+}
+
+/// Shared-capital portfolio: all strategies are stepped together minute by minute so that a
+/// portfolio-level max loss / max profit (AlgoTest "broker-level" SL/Target, checked at candle close)
+/// can stop everything for the day.
+fn run_joint(days: &[TradingDayData], v: &Value, strats: &[Value], keep_trades: bool) -> Result<Vec<DayOut>, String> {
+    let po = v.get("portfolio_overall").cloned().unwrap_or(json!({}));
+    let sl = po.get("sl_mtm").and_then(|x| x.as_f64()).unwrap_or(0.0);
+    let tgt = po.get("tgt_mtm").and_then(|x| x.as_f64()).unwrap_or(0.0);
+    let execs: Vec<ExecConfig> = (0..strats.len()).map(|i| item_exec(v, i)).collect();
+    let mut ss: Vec<Box<dyn IntradayStrategy>> = strats.iter().map(make_strategy).collect::<Result<_, _>>()?;
+    let mut out = Vec::with_capacity(days.len());
+    for day in days {
+        let meta = day.meta();
+        let mut omss: Vec<VirtualOms> = execs.iter().map(|e| VirtualOms::new(day, e)).collect();
+        let act: Vec<bool> = ss.iter_mut().map(|s| s.on_day_start(&meta)).collect();
+        let any = act.iter().any(|a| *a);
+        let mut halted = false;
+        let mut reason = String::new();
+        if any {
+            let eod = execs.iter().map(|e| e.eod_minute).min().unwrap_or(370);
+            for m in 0..MINUTES {
+                for o in omss.iter_mut() {
+                    o.process_triggers(m);
+                }
+                if m >= eod {
+                    break;
+                }
+                if !halted {
+                    let view = MarketView::new(day, m);
+                    for (i, s) in ss.iter_mut().enumerate() {
+                        if act[i] {
+                            s.on_minute(m, &view, &mut omss[i]);
+                        }
+                    }
+                    let tot: f64 = omss.iter().map(|o| o.mtm_points() * o.cfg.lot_size).sum();
+                    if (sl > 0.0 && tot <= -sl) || (tgt > 0.0 && tot >= tgt) {
+                        halted = true;
+                        reason = if tot <= -sl && sl > 0.0 { "PORTFOLIO_SL".into() } else { "PORTFOLIO_TGT".into() };
+                        for o in omss.iter_mut() {
+                            o.square_off_all(&reason);
+                        }
+                    }
+                }
+            }
+            for (i, s) in ss.iter_mut().enumerate() {
+                if act[i] {
+                    s.on_day_end(&mut omss[i]);
+                }
+            }
+            for o in omss.iter_mut() {
+                o.square_off_all("EOD");
+            }
+        }
+        let mut res = omss[0].result();
+        let mut trades = if keep_trades { omss[0].trade_records() } else { vec![] };
+        for (i, o) in omss.iter().enumerate().skip(1) {
+            let q = o.result();
+            res.traded |= q.traded;
+            res.points += q.points;
+            res.slippage_points += q.slippage_points;
+            res.charges_rupees += q.charges_rupees;
+            res.net_rupees += q.net_rupees;
+            res.n_orders += q.n_orders;
+            res.n_stops += q.n_stops;
+            res.max_lots += q.max_lots;
+            res.peak_margin += q.peak_margin;
+            if q.traded {
+                res.exit_reason = format!("{}{}{}", res.exit_reason, if res.exit_reason.is_empty() { "" } else { "+" }, q.exit_reason);
+                res.last_exit_minute = res.last_exit_minute.max(q.last_exit_minute);
+            }
+            if keep_trades {
+                let name = strats[i].get("name").and_then(|x| x.as_str()).unwrap_or("s");
+                trades.extend(o.trade_records().into_iter().map(|mut t| {
+                    t.tag = format!("{}:{}", name, t.tag);
+                    t
+                }));
+            }
+        }
+        if keep_trades {
+            let name0 = strats[0].get("name").and_then(|x| x.as_str()).unwrap_or("s");
+            let n0 = omss[0].trade_records().len();
+            for t in trades.iter_mut().take(n0) {
+                t.tag = format!("{}:{}", name0, t.tag);
+            }
+        }
+        if halted {
+            res.exit_reason = reason;
+        }
+        out.push(DayOut { active: any, result: res, trades });
+    }
+    Ok(out)
+}
+
 fn run_config(days: &[TradingDayData], v: &Value, keep_trades: bool) -> Result<(Vec<DayOut>, GateConfig), String> {
-    let (strats, exec, gates) = split_config(v);
+    let (strats, _exec, gates) = split_config(v);
+    if v.get("portfolio").is_some() && v.get("portfolio_overall").is_some() {
+        return Ok((run_joint(days, v, &strats, keep_trades)?, gates));
+    }
     let mut acc: Option<Vec<DayOut>> = None;
     for (si, s) in strats.iter().enumerate() {
+        let exec = item_exec(v, si);
         let mut r = run_single(days, s, &exec, keep_trades)?;
         if strats.len() > 1 {
             let name = s.get("name").and_then(|x| x.as_str()).unwrap_or("s").to_string();

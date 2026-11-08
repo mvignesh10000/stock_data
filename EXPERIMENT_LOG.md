@@ -929,3 +929,18 @@ Final grading (results/final_v7/final.json):
 - Deflated Sharpe 0.30 / 0.07 / 0.02 at 100 / 1,000 / 6,000 trials.
 - The same rules forced onto every non-expiry DTE lose money; 4-Jun-2024 (DTE 2) would have cost −₹8,051.
 - Hard gates: expectancy pass, underwater pass, worst-day fail (₹3,345 > ₹3,000), losing months fail (29.6%).
+
+# Run v8 — VIX regime / shared-capital framework (user-supplied framework)
+
+Pre-declared: SELL grid 126, BUY ORB grid 108 (1.5% slippage). Regime by India VIX previous close (NSE). Quarterly walk-forward per policy:
+- A pure selling, expiry-day only (v7 style): net ₹38,489, PF 1.42, DD ₹15,379
+- B pure selling, every day: net ₹-26,451, PF 0.88, DD ₹39,823
+- C framework: sell low+mid VIX (every day), buy high VIX: net ₹-56,169, PF 0.52, DD ₹57,639
+- D framework on expiry days: sell low+mid, buy high: net ₹-5,760, PF 0.95, DD ₹45,043
+- E sell low+mid expiry only, no buying: net ₹22,664, PF 1.28, DD ₹15,580
+- F = A + skip gap days > 0.7%: net ₹9,256, PF 1.10, DD ₹13,682
+- G buy ORB in high VIX only (no selling): net ₹-28,424, PF 0.38, DD ₹41,125
+- Threshold sensitivity (D): 12.5/15.5 −₹27.7k; 13/16 +₹37.1k; 13.5/16.5 −₹5.8k; 14/17 +₹32.2k; 15/18 +₹49.3k → unstable, rejected.
+- In-sample-chosen VIX floor for expiry selling: WF +₹8.2k (worse than no floor). Rejected.
+- Portfolio max profit hurts; portfolio max loss non-binding. Entry plateau 09:17–09:27. Wings: wider is better.
+- Outcome: framework rejected except its risk layers; recommendation = expiry-day iron fly, ±400 wings on ₹2L / ±600 on ₹3L.

@@ -71,11 +71,25 @@ pub struct LegCfg {
     pub re_sl: Option<ReCfg>,
     pub re_tgt: Option<ReCfg>,
     pub momentum: Option<Thr>,
+    /// AlgoTest "Range Breakout": range from the strategy entry time to `end`; enter when the
+    /// underlying (or the instrument) breaks the range `side` ("high" | "low"). Strike is fixed at entry time.
+    pub orb: Option<OrbCfg>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct OrbCfg {
+    pub end: String,
+    pub side: String,
+    #[serde(default = "default_orb_on")]
+    pub on: String,
+}
+fn default_orb_on() -> String {
+    "underlying".into()
 }
 
 impl Default for LegCfg {
     fn default() -> Self {
-        LegCfg { side: "sell".into(), opt: "CE".into(), lots: 1, strike: StrikeCfg { mode: "atm".into(), n: 0, value: 0.0 }, sl: None, target: None, trail: None, re_sl: None, re_tgt: None, momentum: None }
+        LegCfg { side: "sell".into(), opt: "CE".into(), lots: 1, strike: StrikeCfg { mode: "atm".into(), n: 0, value: 0.0 }, sl: None, target: None, trail: None, re_sl: None, re_tgt: None, momentum: None, orb: None }
     }
 }
 
@@ -135,6 +149,8 @@ pub struct AtConfig {
     pub trail_to_breakeven: String,
     pub overall: OverallCfg,
     pub sizing: SizingCfg,
+    /// Manual activation calendar (e.g. VIX regime decided before the open). Empty = every day.
+    pub allowed_dates: Vec<u32>,
 }
 
 impl Default for AtConfig {
@@ -152,6 +168,7 @@ impl Default for AtConfig {
             trail_to_breakeven: "none".into(),
             overall: OverallCfg::default(),
             sizing: SizingCfg::default(),
+            allowed_dates: vec![],
         }
     }
 }
@@ -163,6 +180,8 @@ enum St {
     WaitMomentum { reference: f64, since: usize },
     /// RE-COST: waiting for the same strike to return to `price`
     WaitCost { price: f64, since: usize },
+    /// waiting for a range breakout (range = (entry, end])
+    WaitOrb { end: usize },
     Open,
     Done,
 }
@@ -427,7 +446,8 @@ impl IntradayStrategy for AlgoTestStrategy {
         self.last_margin_1x = 0.0;
         let dte_ok = self.cfg.dte.is_empty() || self.cfg.dte.contains(&meta.tdte);
         let wd_ok = self.cfg.weekdays.is_empty() || self.cfg.weekdays.contains(&meta.weekday);
-        self.active = dte_ok && wd_ok;
+        let date_ok = self.cfg.allowed_dates.is_empty() || self.cfg.allowed_dates.binary_search(&meta.trade_date).is_ok();
+        self.active = dte_ok && wd_ok && date_ok;
         self.active
     }
 
@@ -454,7 +474,11 @@ impl IntradayStrategy for AlgoTestStrategy {
             }
             // sizing on margin (hedges reduce SPAN)
             let legs1: Vec<MarginLeg> = self.cfg.legs.iter().zip(&strikes).map(|(l, &k)| (k, Self::is_call(l), Self::side(l), l.lots)).collect();
-            let m1 = oms.margin_with(&legs1);
+            let premium_paid: f64 = self.cfg.legs.iter().zip(&strikes)
+                .filter(|(l, _)| Self::side(l) == Side::Buy)
+                .map(|(l, &k)| mk.option_bar(k, Self::is_call(l)).map(|b| b.close as f64).unwrap_or(0.0) * l.lots as f64 * oms.cfg.lot_size)
+                .sum();
+            let m1 = oms.margin_with(&legs1) + premium_paid;
             self.last_margin_1x = m1;
             if self.cfg.sizing.mode == "margin" {
                 let cap = self.cfg.sizing.capital * self.cfg.sizing.util;
@@ -473,7 +497,9 @@ impl IntradayStrategy for AlgoTestStrategy {
                 let l = self.cfg.legs[i].clone();
                 let k = strikes[i];
                 self.legs[i].strike = k;
-                if let Some(mo) = &l.momentum {
+                if let Some(o) = &l.orb {
+                    self.legs[i].st = St::WaitOrb { end: hhmm_to_idx(&o.end) };
+                } else if let Some(mo) = &l.momentum {
                     let _ = mo;
                     let r = mk.option_bar(k, Self::is_call(&l)).map(|b| b.close as f64).unwrap_or(0.0);
                     self.legs[i].st = St::WaitMomentum { reference: r, since: m };
@@ -651,6 +677,50 @@ impl IntradayStrategy for AlgoTestStrategy {
                         };
                         if let Ok(id) = oms.submit_at_price(k, Self::is_call(&l), side, l.lots * self.mult, px, &Self::tag(i, n)) {
                             self.arm(i, id, oms);
+                        }
+                    }
+                }
+                St::WaitOrb { end } if m > end => {
+                    let o = match &l.orb {
+                        Some(o) => o.clone(),
+                        None => continue,
+                    };
+                    let k = self.legs[i].strike;
+                    let is_call = Self::is_call(&l);
+                    let side = Self::side(&l);
+                    let lo_m = self.entry_m + 1;
+                    if o.on == "instrument" {
+                        let (mut hi, mut lo) = (f64::MIN, f64::MAX);
+                        for t in lo_m..=end {
+                            if let Some(b) = mk.option_bar_at(k, is_call, t) {
+                                hi = hi.max(b.high as f64);
+                                lo = lo.min(b.low as f64);
+                            }
+                        }
+                        let bar = match mk.option_bar(k, is_call) {
+                            Some(b) if b.volume > 0 => b,
+                            _ => continue,
+                        };
+                        let (hit, px) = if o.side == "high" { (bar.high as f64 > hi, hi.max(bar.open as f64)) } else { (bar.low as f64 >= 0.0 && (bar.low as f64) < lo, lo.min(bar.open as f64)) };
+                        if hit && hi > f64::MIN {
+                            if let Ok(id) = oms.submit_at_price(k, is_call, side, l.lots * self.mult, px, &Self::tag(i, n)) {
+                                self.arm(i, id, oms);
+                            }
+                        }
+                    } else {
+                        let hist = mk.spot_history();
+                        if hist.len() <= end {
+                            continue;
+                        }
+                        let hi = hist[lo_m..=end].iter().map(|b| b.high).fold(f32::MIN, f32::max);
+                        let lo = hist[lo_m..=end].iter().map(|b| b.low).fold(f32::MAX, f32::min);
+                        let sb = mk.spot();
+                        let hit = if o.side == "high" { sb.high > hi } else { sb.low < lo };
+                        if hit {
+                            // option bought at this minute's close (+ slippage); AlgoTest checks the index on LTP
+                            if self.enter_market(i, k, oms, n) {
+                                // reached
+                            }
                         }
                     }
                 }

@@ -168,3 +168,35 @@ Earlier strategies re-tested on the realistic engine (holdout Calmar / PF, full-
 - Results use today's lot (65) and today's charges for every year so they read as 'what this would make now'.
 - The AlgoTest backtest checks overall SL at candle close; live trading checks it on LTP, so live exits can be slightly earlier or later.
 - This is research, not investment advice.
+
+## v3 — VIX regime / shared-capital framework, tested (results/v8)
+
+Pre-declared grids: 126 hedged-selling configs (wings ±100..±600, entry 09:20/09:45/10:15, SL 30/40/60%, combined MTM SL) and 108 ORB-buying configs (range end 09:25/09:30/09:35, ATM/ITM1, SL 20/30/40%, trailing, target) at 1.5% buying slippage. Regime = India VIX previous close (NSE official). Each policy is judged by quarterly walk-forward.
+
+| Policy (walk-forward, 1 lot) | Net | PF | Max DD | Worst day |
+|---|---|---|---|---|
+| A pure selling, expiry-day only (v7 style) | ₹38,489 | 1.42 | ₹15,379 | ₹-3,345 |
+| B pure selling, every day | ₹-26,451 | 0.88 | ₹39,823 | ₹-10,176 |
+| C framework: sell low+mid VIX (every day), buy high VIX | ₹-56,169 | 0.52 | ₹57,639 | ₹-9,934 |
+| D framework on expiry days: sell low+mid, buy high | ₹-5,760 | 0.95 | ₹45,043 | ₹-9,934 |
+| E sell low+mid expiry only, no buying | ₹22,664 | 1.28 | ₹15,580 | ₹-2,886 |
+| F = A + skip gap days > 0.7% | ₹9,256 | 1.10 | ₹13,682 | ₹-3,593 |
+| G buy ORB in high VIX only (no selling) | ₹-28,424 | 0.38 | ₹41,125 | ₹-9,934 |
+
+Findings:
+- ORB option buying: 0 of 108 configs were profitable on high-VIX non-expiry days, and every range length (10/15/20 min) loses. **Rejected.**
+- Buying does not hedge selling: daily correlation +0.58. On selling's 40 worst days buying lost ₹44,252.
+- VIX switch: worse than plain expiry-day selling, and the result flips sign with ±1 VIX point (see the threshold table in the report).
+- Delayed entry: plateau 09:17–09:27; 09:45 removes the edge (₹7k vs ₹93k).
+- Portfolio max profit (₹4k/₹6k) cuts net to ₹35k/₹59k. A portfolio max loss never binds (the strategy's ₹2k overall SL does), so keep it only as a live safety net.
+- Gap days: skipping them lowered the walk-forward result (₹9.3k vs ₹38.5k).
+- Wings: monotonically better wider (±200 ₹41.8k → ±600 ₹93.4k → ±700 ₹97.5k).
+
+### Recommended shared-capital set-up
+
+| Capital | Strategy | Wings | Margin (expiry day) | Buffer | Net 2.2 yrs (1 lot) |
+|---|---|---|---|---|---|
+| ₹2L | Expiry-day iron fly, 1 lot | ±400 (OTM8) | ₹1.54L | 23% | ₹72,125 |
+| ₹3L | Expiry-day iron fly, 1 lot | ±600 (OTM12) | ₹1.68L | 44% | ₹93,372 |
+
+Layers: leg SL 60% + trail-to-breakeven, strategy overall SL ₹2,000, broker-level SL ₹4,000 (live safety net), no profit cap. Pause if drawdown exceeds ₹27k/lot (Monte-Carlo 95%) or after 3 losing months in a row. Nothing runs on non-expiry days.

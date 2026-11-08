@@ -32,6 +32,7 @@ DATA = {
     "forced": {k: v for k, v in F["forced"]["tdte"].items()}, "shock": F["shock_table"],
     "audit": A["audit"], "wick_validation": A["wick_validation"], "crosscheck": A["crosscheck"], "wick_q": A["wick_quantiles"], "span": A["span_calibration"],
     "trades_worst": F["runs"]["1lot"].get("trades_worst", []),
+    "fe": (lambda fe: {**{k: v for k, v in fe.items() if k != "wf_eq"}, "wf_eq": {k: cum(v) for k, v in fe["wf_eq"].items()}})(json.load(open(f"{ROOT}/results/v8/framework_eval.json"))),
 }
 tpl = open(f"{ROOT}/research/report_v7_template.html").read()
 os.makedirs(f"{ROOT}/reports", exist_ok=True)
