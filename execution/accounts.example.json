@@ -1,0 +1,7 @@
+{
+  "_comment": "Copy to execution/accounts.json (git-ignored). One entry per broker account. token_file holds that account's normal daily Upstox access token (live orders need it; the 1-year extended token is read-only). Start with live=false (paper) for 8 expiries.",
+  "accounts": [
+    {"name": "acct1", "token_file": "~/secrets/upstox_acct1.txt", "lots": 1, "live": false},
+    {"name": "acct2", "token_file": "~/secrets/upstox_acct2.txt", "lots": 1, "live": false}
+  ]
+}

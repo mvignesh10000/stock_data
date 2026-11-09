@@ -25,6 +25,8 @@ IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 STEP = {"NIFTY": 50, "SENSEX": 100}
 ALGO_TAG = "ironfly_v7"
 LOGF = os.path.join(LAKE, "exec.log")
+LEDGER = os.path.join(LAKE, "b_ledger.csv")
+KILL_DD_PER_LOT, KILL_LOSING_MONTHS = 40000.0, 4
 
 
 def now():
@@ -123,6 +125,52 @@ class Broker:
                 o.update(status="complete", avg=min(o["price"], p * (1 + 2 * self.slip)) if buy else max(o["price"], p * (1 - 2 * self.slip)))
 
 
+def kill_switch(lots):
+    """Reason string if the account's own ledger breaches the Strategy B kill-switch, else None."""
+    if not os.path.exists(LEDGER):
+        return None
+    rows = [r.split(",") for r in open(LEDGER).read().strip().splitlines()[1:]]
+    live = [(r[0], int(r[2]), float(r[5])) for r in rows if r[1] == "live"]
+    eq = peak = dd = 0.0
+    months = {}
+    for d, n_lots, net in live:
+        per_lot = net / max(n_lots, 1)
+        eq += per_lot
+        peak = max(peak, eq)
+        dd = max(dd, peak - eq)
+        months[d[:7]] = months.get(d[:7], 0.0) + per_lot
+    if dd > KILL_DD_PER_LOT:
+        return f"drawdown {dd:,.0f} per lot > {KILL_DD_PER_LOT:,.0f}"
+    mv = [months[k] for k in sorted(months)]
+    run = 0
+    for v in mv[:-1]:  # completed months only
+        run = run + 1 if v <= 0 else 0
+        if run >= KILL_LOSING_MONTHS:
+            return f"{KILL_LOSING_MONTHS} losing months in a row"
+    return None
+
+
+def fit_lots(k, lot, want):
+    """Largest lot count <= want whose broker margin (Upstox /v2/charges/margin, x1.10 buffer) fits the available funds."""
+    try:
+        legs = lambda n: [{"instrument_key": k[g], "quantity": lot * n, "transaction_type": t, "product": "I"}
+                          for g, t in (("lce", "BUY"), ("lpe", "BUY"), ("sce", "SELL"), ("spe", "SELL"))]
+        body = json.dumps({"instruments": legs(1)}).encode()
+        req = urllib.request.Request("https://api.upstox.com/v2/charges/margin", data=body, method="POST", headers={
+            "Accept": "application/json", "Content-Type": "application/json", "User-Agent": "stock-data-exec/1.0", "Authorization": "Bearer " + token()})
+        per_lot = float(json.loads(urllib.request.urlopen(req, timeout=15).read())["data"]["final_margin"])
+        freq = urllib.request.Request("https://api.upstox.com/v2/user/get-funds-and-margin?segment=SEC", headers={
+            "Accept": "application/json", "User-Agent": "stock-data-exec/1.0", "Authorization": "Bearer " + token()})
+        funds = json.loads(urllib.request.urlopen(freq, timeout=15).read()).get("data", {})  # one attempt, no retry loop
+        avail = float((funds.get("equity") or funds).get("available_margin", 0) or 0)
+    except Exception as e:  # noqa: BLE001
+        log("margin check unavailable (", e, ") - keeping requested lots; make sure funds cover ~Rs 1.7L per lot")
+        return want
+    fit = int(avail // (per_lot * 1.10)) if per_lot > 0 else want
+    log(f"margin per lot Rs {per_lot:,.0f}, available Rs {avail:,.0f}, fits {fit} lot(s)")
+    return max(0, min(want, fit))
+
+
 def fill_limit(br, key, side, qty, buffer_pct, timeout=60):
     """Marketable LIMIT with buffer, re-priced every 3 s until filled. Returns avg fill price."""
     p = br.ltp([key])[key]
@@ -158,8 +206,17 @@ def main():
     ap.add_argument("--buffer", type=float, default=8.0, help="limit price buffer %% (market orders not allowed)")
     ap.add_argument("--live", action="store_true")
     ap.add_argument("--force", action="store_true", help="run even if today is not expiry (paper testing)")
+    ap.add_argument("--account", default="default", help="account label: separate log and ledger per account")
+    ap.add_argument("--ignore-kill-switch", action="store_true")
     a = ap.parse_args()
+    global LOGF, LEDGER
+    LOGF = os.path.join(LAKE, f"exec_{a.account}.log")
+    LEDGER = os.path.join(LAKE, f"b_ledger_{a.account}.csv")
     name, st = a.name, STEP[a.name]
+    reason = kill_switch(a.lots)
+    if reason and not a.ignore_kill_switch:
+        log("KILL-SWITCH ACTIVE, not trading:", reason, "(review, then remove the ledger rows or pass --ignore-kill-switch)")
+        return
     br = Broker(a.live)
     log("==== start", name, "LIVE" if a.live else "PAPER", vars(a))
 
@@ -189,6 +246,14 @@ def main():
     k = {"sce": cons[(atm, "CE")]["instrument_key"], "spe": cons[(atm, "PE")]["instrument_key"],
          "lce": cons[(kc, "CE")]["instrument_key"], "lpe": cons[(kp, "PE")]["instrument_key"]}
     log("spot", spot, "ATM", atm, "wings", kc, "CE /", kp, "PE", "qty", qty, k)
+    lots = fit_lots(k, lot, a.lots)
+    if lots == 0:
+        log("not enough margin for even 1 lot - skipping today")
+        return
+    if lots != a.lots:
+        log(f"margin check: reducing lots {a.lots} -> {lots}")
+    qty = lot * lots
+    a.lots = lots
 
     entry = {}
     entry["lce"] = fill_limit(br, k["lce"], "BUY", qty, a.buffer)  # wings first: margin benefit + no naked exposure
@@ -246,8 +311,15 @@ def main():
         # on strong trend days a wing can run from ~Rs 3 to Rs 100+)
         time.sleep(1)
     l = br.ltp(list(k.values()))
-    log("==== done", name, "gross P&L Rs", round(mtm(l), 0), "entries", {g: round(v, 2) for g, v in entry.items()},
+    gross = mtm(l)
+    est_cost = 8 * 20 * 1.18 + sum(entry[g] for g in ("sce", "spe")) * qty * 0.0015 + sum(exit_px.get(g, 0) for g in ("lce", "lpe")) * qty * 0.0015
+    log("==== done", name, "gross P&L Rs", round(gross, 0), "est. charges Rs", round(est_cost, 0), "entries", {g: round(v, 2) for g, v in entry.items()},
         "exits", {g: round(v, 2) for g, v in exit_px.items()})
+    new = not os.path.exists(LEDGER)
+    with open(LEDGER, "a") as f:
+        if new:
+            f.write("date,mode,lots,gross,est_charges,net\n")
+        f.write(f"{now().date()},{'live' if a.live else 'paper'},{a.lots},{gross:.0f},{est_cost:.0f},{gross - est_cost:.0f}\n")
 
 
 if __name__ == "__main__":

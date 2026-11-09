@@ -32,6 +32,9 @@ def log(*a):
 
 
 def token():
+    f = os.environ.get("UPSTOX_TOKEN_FILE")  # per-account token (execution/run_b.py)
+    if f and os.path.exists(os.path.expanduser(f)):
+        return open(os.path.expanduser(f)).read().strip()
     p = os.path.join(LAKE, "token.txt")
     if os.path.exists(p):
         t = open(p).read().strip()

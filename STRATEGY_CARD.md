@@ -65,3 +65,23 @@ On ₹5L: 1 lot ≈ **5 %/yr, max DD 5 %** (bad-case DD 8 %); 2 lots ≈ 10 %/yr
 * 4 consecutive losing months;
 * average live slippage > 2 % per fill over 8 expiries;
 * exchange rule change touching expiry day (ELM, lot size, expiry weekday, settlement method).
+
+## Running Strategy B at size (multi-lot, multi-account)
+| Capital | Setup | Margin used (expiry day) | Expected / yr | Max DD (5 y) | Bad-case DD (95 %) | Worst day |
+|---|---|---|---|---|---|---|
+| ₹5L | 1 lot | ~₹1.7L | ~₹24.7k (4.9 %) | ₹24.7k (4.9 %) | ₹41k (8.2 %) | –₹3.9k |
+| ₹5L | 2 lots (one account, or 1 + 1 across two) | ~₹3.4L | ~₹49.5k (9.9 %) | ₹49.5k (9.9 %) | ₹82k (16.5 %) | –₹7.8k |
+Lots scale P&L and drawdown linearly; margin per lot ~₹1.6-1.7L on expiry day (SPAN + exposure + 2 % ELM), so ₹5L holds 2 lots
+with ~₹1.6L spare. Splitting the same lots across accounts does not diversify (same trade); it only spreads broker/operational risk.
+
+**Implementation** (`execution/run_b.py` + `execution/upstox_ironfly.py`):
+1. `cp execution/accounts.example.json execution/accounts.json`; one entry per account: `token_file` (that account's normal
+   daily Upstox token), `lots`, `live` (start `false`).
+2. Schedule `python execution/run_b.py` at 09:12 IST on weekdays (cron / Task Scheduler). On non-expiry days every account exits
+   immediately; on expiry day one executor process runs per account, in parallel.
+3. Before placing orders each account asks the Upstox margin API for the per-lot margin and its available funds and trades the
+   largest lot count that fits with a 10 % buffer (falls back to the configured lots if the funds API is unavailable).
+4. Each account keeps its own log (`data/upstox/exec_<name>.log`) and ledger (`data/upstox/b_ledger_<name>.csv`). The kill-switch
+   reads the live rows and refuses to trade after a drawdown above ₹40k per lot or 4 losing months in a row (reset by review).
+5. Wings stay open after both shorts stop (as in the backtest); exit 15:15; orders are limit orders with an 8 % buffer.
+Tested in paper mode on 9 Nov 2026 (2 lots, ledger written, margin fallback exercised; kill-switch unit-tested).
