@@ -18,6 +18,7 @@
 |---|---|
 | `upstox-nifty-sensex-1min` | Upstox lake: NIFTY/SENSEX/VIX 1-min index + expired NIFTY/SENSEX weekly options (1-min OHLC+OI) |
 | `upstox-bidask-1s-YYYY-MM` | 1-second bid/ask recordings (etl/bidask_recorder.py), one dataset per month |
+| `dhan-expired-options-rolling-1min` | Dhan rolling ATM±10 expired weekly options (NIFTY/SENSEX/BANKNIFTY, 2021-11 →), raw per-window Parquet |
 | `nifty-1min-2017-2020` | Zenodo 10899828 mirror (CC0) + canonical Parquet of the monthly-expiry options |
 | `stock-data` | the user's own older archive, do not modify |
 
@@ -25,6 +26,10 @@
 - `UPSTOX_ACCESS_TOKEN` is an environment variable of the "Strategy" cloud environment: an extended token valid to
   2027-10-09, read-only (data APIs). Live orders need a normal daily token and the user's static IP, so they run on
   the user's machine, never here.
+- Dhan: read-only access token (short-lived, about 1 day) supplied by the user in chat; keep it in `data/dhan/token.txt`
+  (git-ignored) or env `DHAN_ACCESS_TOKEN`. Data plan valid to 2027-11-06. API quirks in `etl/dhan_rolling.py` docstring:
+  rollingoption only accepts toDate = fromDate + 1 day (returns both days), needs the `client-id` header, and
+  expiryCode 1 is the current expiry. Limits: 5 req/s, 100k/day.
 - `KAGGLE_API_TOKEN`: use the environment variable if present. Never write tokens into tracked files or logs.
 
 ## Project map
