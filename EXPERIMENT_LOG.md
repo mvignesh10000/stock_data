@@ -1030,3 +1030,17 @@ same sign 99.2 %.
 Side finding (control): plain short ATM straddle at 09:20, leg SL 50 %, overall SL Rs 2,000: 5-year PF 1.72-1.76,
 DD Rs 17.6k, but the 2026 holdout PF 0.76 (Strategy B: 1.31), about 1.7x the margin of Strategy B, and no protection
 against a gap through the stops. Not adopted; Strategy B stays the candidate.
+
+## Round 8: trend days and adjustments (2026-11-09)
+Last week NIFTY rallied 23,053 -> 25,030 (+8.6 %, 30 Oct -> 6 Nov; 6 Nov +492 pts open-to-close).
+Strategy B trades only on expiry days: 27 Oct +Rs 1,256, 3 Nov (+229 pt trend day) +Rs 3,724.
+Run on EVERY day 26 Oct - 6 Nov with the same rules (4-6 Nov from Upstox live-contract history): total +Rs 11,852 for one lot;
+6 Nov +Rs 5,238 (short CE stopped 09:51 at -83.6 pts, short PE decayed 192 -> 36 = +156.6 pts); only loss -Rs 3,317 on 28 Oct, a
+reversal (CE stopped 13:00, then overall stop 14:38).
+**Trend vs whipsaw over 252 expiry days (2022-26):** big trend days are the best days (|09:20->15:15 move| >= 1.5 %: 9 days,
+avg +Rs 5,115, 89 % winners; 0.8-1.5 %: PF 1.6-2.3). Losses come from moderate moves (0.4-0.6 %: PF 0.55) and whipsaws
+(range minus trend >= 0.7 %: 39 days, avg -Rs 1.1k..-1.4k, 28-31 % winners).
+**Adjustment tested: re-entry after a stop** (pre-declared, 2 variants): RE-COST x1: 5-year PF 1.20, net Rs 58.9k, 2026 holdout PF 0.76;
+RE-ASAP x1: PF 1.22, net Rs 61.3k, DD Rs 50k, holdout PF 0.82. Both worse than B (PF 1.50, holdout 1.31). **No adjustment adopted.**
+Note: the 5-year cache now contains 4-6 Nov (contracts expiring 9 Nov); until today's data is added, 6 Nov carries tdte 0 because
+the 9 Nov expiry is not yet in the cache. Strategy B backtests should use --date-to 20261103 until the cache is refreshed.
