@@ -1044,3 +1044,25 @@ avg +Rs 5,115, 89 % winners; 0.8-1.5 %: PF 1.6-2.3). Losses come from moderate m
 RE-ASAP x1: PF 1.22, net Rs 61.3k, DD Rs 50k, holdout PF 0.82. Both worse than B (PF 1.50, holdout 1.31). **No adjustment adopted.**
 Note: the 5-year cache now contains 4-6 Nov (contracts expiring 9 Nov); until today's data is added, 6 Nov carries tdte 0 because
 the 9 Nov expiry is not yet in the cache. Strategy B backtests should use --date-to 20261103 until the cache is refreshed.
+
+## Round 9: simulator, features, where the premium is (2026-11-09)
+**New Python simulator** (`research/sim/`: store.py day store, engine.py, features.py): multi-day positions, adjustments,
+signal-driven entries, approximate SPAN margin. Validated against opt_engine on Strategy B over 5 years: net Rs 1,23,188 vs
+Rs 1,22,694 (0.4 %), per-day |diff| median Rs 6, same sign 100 % (validate.py). 5 years run in ~2-9 s.
+Found while validating: after both shorts stop, opt_engine/AlgoTest keeps the wings to 15:15 (12-Sep-2024 the CE wing ran
+Rs 3.65 -> Rs 161). The live executor and paper script closed the wings; fixed to keep them, matching the backtest.
+**Feature table** (1,232 days, values known at 09:20): gap, opening range, prior-day return/range, RV5/RV20, VIX + change
+(2022+), ATM IV (straddle-implied), next-expiry IV, IV/RV, IV rank, PCR (+/-2 % band), PCR change, max-pain distance, OI walls.
+**Volatility risk premium by days-to-expiry** (sell ATM straddle at 09:20, 1 lot, before costs):
+| tdte at entry | intraday (09:20 -> 15:15) | held to expiry | 5 % worst week, held |
+|---|---|---|---|
+| 0 | +Rs 290 | +Rs 287 | -Rs 12.1k |
+| 1 | +Rs 86 | +Rs 756 | -Rs 14.2k |
+| 2 | +Rs 149 | +Rs 1,353 | -Rs 20.6k |
+| 3 | +Rs 143 | +Rs 1,283 | -Rs 23.2k |
+| 4 | -Rs 42 | +Rs 1,631 | -Rs 25.1k |
+Intraday selling on non-expiry days earns about the round-trip cost (~Rs 160): no edge, which explains every earlier failure
+there. The premium is earned overnight: holding from 2-4 days before expiry earns ~5x the expiry-day edge per lot, with fat
+tails. IV/RV5 buckets do not sort the outcomes (RV5 is too noisy).
+Lesson from the first positional smoke test: wings priced at Rs 5-10 sit ~1,100 points away at 3 DTE; on the 3-Feb-2026
+~3 % gap-up, a 1-lot "fly" lost Rs 49.8k in one morning. Multi-day positions need wings by distance (v14 grid uses 1.5 % / 3 %).
