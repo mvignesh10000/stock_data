@@ -16,3 +16,7 @@ configs 576
 168 strangle|T-2@15:15|wd0.015|sl100|osl4000|none|close {'net': -44788, 'pf': 0.91, 'dd': 138758, 'worst_day': -37568, 'win_months': 44.3, 'per_year': -9008}
 180 strangle|T-2@15:15|wd0.03|sl0|osl8000|none|close {'net': 25951, 'pf': 1.05, 'dd': 87037, 'worst_day': -17539, 'win_months': 34.4, 'per_year': 5220}
 192 fly|T-3@09:20|wp20|sl0|osl4000|none|close {'net': 79076, 'pf': 1.07, 'dd': 82839, 'worst_day': -20744, 'win_months': 47.5, 'per_year': 15905}
+configs 576
+204 fly|T-3@09:20|wp20|sl100|osl8000|none|close {'net': 309614, 'pf': 1.25, 'dd': 107689, 'worst_day': -32380, 'win_months': 59.0, 'per_year': 62274}
+216 fly|T-3@09:20|wd0.015|sl100|osl4000|none|close {'net': 202388, 'pf': 1.2, 'dd': 66799, 'worst_day': -16845, 'win_months': 54.1, 'per_year': 40707}
+228 fly|T-3@09:20|wd0.03|sl0|osl8000|none|close {'net': 239247, 'pf': 1.21, 'dd': 91895, 'worst_day': -20663, 'win_months': 47.5, 'per_year': 48121}
