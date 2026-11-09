@@ -4,9 +4,9 @@
 Rolling -> per-contract: every row carries the actual strike, so each minute the union of offsets ATM-10..ATM+10 gives
 the bars of all contracts within +/-10 strikes of spot. Duplicate (minute, strike, type) rows coming from different
 offsets are collapsed (they are the same contract; agreement is reported).
-Expiry date of the rank-0 (expiryCode 1) series is not in the response. It is inferred: a trading day is an expiry
-day when the ATM straddle (offset 0 CE + PE) closes at 15:29 below 0.12% of spot (non-expiry days are far above),
-and expiry_date(d) = first inferred expiry >= d. The weekday distribution of inferred expiries is printed as a check.
+Expiry date of the rank-0 (expiryCode 1) series is not in the response. It comes from the exchange calendar rule
+(weekly expiry weekday per period, moved to the previous trading day on holidays; trading days = days in the data) and
+is checked against the data: the ATM straddle must jump on the day after each expiry (printed).
 A contract that drifts outside the +/-10 band has no bars; within a day it is forward-filled from its last close
 (affects far wings only; the share of filled bars is printed).
 Rank 1 (expiryCode 2, NIFTY_W2, +/-3 strikes) is written with expiry_rank 1 when available.
@@ -30,15 +30,40 @@ def load(setname):
 
 
 r0 = load(f"{name}_W1")
-# ---- expiry inference
-atm = r0.filter((pl.col("offset") == 0) & (pl.col("m") == 374)).group_by("d").agg(
-    pl.col("close").sum().alias("straddle"), pl.col("spot").first().alias("spot"), pl.len().alias("n"))
-atm = atm.filter(pl.col("n") == 2).with_columns((pl.col("straddle") / pl.col("spot") * 100).alias("pct")).sort("d")
-exp_days = atm.filter(pl.col("pct") < 0.12)["d"].to_list()
-wd = pl.Series([d.weekday() for d in exp_days]).value_counts().sort("")
-print(name, "inferred expiry days:", len(exp_days), "weekday counts (0=Mon):", dict(zip(*[wd[c].to_list() for c in wd.columns])))
-print("  straddle% at 15:29 — expiry days max", round(atm.filter(pl.col("pct") < 0.12)["pct"].max(), 3),
-      "| other days min", round(atm.filter(pl.col("pct") >= 0.12)["pct"].min(), 3))
+# ---- expiry calendar: weekly expiry weekday per period; holiday -> previous trading day (exchange rule).
+# (Settlement uses the last-30-min average spot, so 15:29 premiums cannot identify expiry days.)
+import datetime as _dt
+WEEKDAY = {  # name: [(from_date, weekday 0=Mon)]
+    "NIFTY": [(_dt.date(2000, 1, 1), 3), (_dt.date(2025, 9, 1), 1)],
+    "BANKNIFTY": [(_dt.date(2000, 1, 1), 3), (_dt.date(2023, 9, 4), 2)],
+    "SENSEX": [(_dt.date(2000, 1, 1), 4), (_dt.date(2025, 1, 1), 1), (_dt.date(2025, 9, 1), 3)],
+}[name]
+tdays = sorted(r0["d"].unique().to_list())
+tset = set(tdays)
+exp_days = []
+wk = {}
+for d in tdays:
+    wd = [w for f, w in WEEKDAY if d >= f][-1]
+    target = d + _dt.timedelta(days=(wd - d.weekday()) % 7)
+    if target > tdays[-1]:
+        continue  # expiry beyond the data end: unknown, drop those days
+    e = target
+    while e not in tset and e >= d:
+        e -= _dt.timedelta(days=1)
+    if e >= d:
+        wk[d] = e
+exp_days = sorted(set(wk.values()))
+# check: ATM straddle at 09:20 should jump on the trading day after each expiry (new, longer-dated contract)
+st = r0.filter((pl.col("offset") == 0) & (pl.col("m") == 5)).group_by("d").agg((pl.col("close").sum() / pl.col("spot").first() * 100).alias("s")).sort("d")
+smap = dict(zip(st["d"].to_list(), st["s"].to_list()))
+jumps = []
+for e in exp_days:
+    i = tdays.index(e)
+    if i + 1 < len(tdays) and e in smap and tdays[i + 1] in smap:
+        jumps.append(smap[tdays[i + 1]] / smap[e])
+jumps.sort()
+print(name, "expiry days:", len(exp_days), "| straddle(next day)/straddle(expiry) at 09:20: p5 %.2f median %.2f (expect >> 1)" % (jumps[len(jumps) // 20], jumps[len(jumps) // 2]))
+print("  weekdays of expiries:", {k: v for k, v in sorted(pl.Series([e.weekday() for e in exp_days]).value_counts().iter_rows())})
 emap = pl.DataFrame({"e": exp_days}).sort("e")
 
 
