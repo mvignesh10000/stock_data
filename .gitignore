@@ -11,3 +11,5 @@ results/v6/r*.json
 results/v7/b*.jsonl
 results/v7/r*.json
 results/sanity.json
+results/v11/batch.jsonl
+results/v11/res.json
