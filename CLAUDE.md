@@ -1,5 +1,9 @@
 # Working rules for this repo (read first)
 
+Current focus (user, 2026-11-09): **NIFTY only**. SENSEX/BANKNIFTY downloads were stopped on purpose; the live candidate is
+Strategy B in `STRATEGY_CARD.md`; 5-year NIFTY cache = `opt_engine build-cache --parquet-dir data/parquet/NIFTY_UPX
+--parquet-dir data/parquet/NIFTY_OHLC --parquet-dir data/parquet/NIFTY_DHAN --out data/cache/nifty_5y.bin`.
+
 ## Persistence: the cloud container can be recycled at any time
 - Nothing on local disk is safe. Background `nohup` processes die with the container, which happens soon after the
   session goes idle. Run long jobs as tracked background tasks (`run_in_background`, at most 2 h; use
@@ -18,7 +22,7 @@
 |---|---|
 | `upstox-nifty-sensex-1min` | Upstox lake: NIFTY/SENSEX/VIX 1-min index + expired NIFTY/SENSEX weekly options (1-min OHLC+OI) |
 | `upstox-bidask-1s-YYYY-MM` | 1-second bid/ask recordings (etl/bidask_recorder.py), one dataset per month |
-| `dhan-expired-options-rolling-1min` | Dhan rolling ATM±10 expired weekly options (NIFTY/SENSEX/BANKNIFTY, 2021-11 →), raw per-window Parquet |
+| `nifty-dhan-weekly-1min-2021-2024` | NIFTY weekly options 2021-11..2024-10 from Dhan, canonical Parquet per year (rank 0 = current week ATM±10, rank 1 = next week ATM±3) |
 | `nifty-1min-2017-2020` | Zenodo 10899828 mirror (CC0) + canonical Parquet of the monthly-expiry options |
 | `stock-data` | the user's own older archive, do not modify |
 
