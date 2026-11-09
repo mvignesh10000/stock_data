@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Expiry-day iron fly executor for Upstox (OrderApiV3).  PAPER mode by default; --live sends real orders.
 
-Strategy (= research v7/v4 recommendation, see WINNING_STRATEGIES.md):
+Strategy B (research v11/v12, see STRATEGY_CARD.md). Defaults = strategy B:
   * runs only when today is the nearest expiry of the chosen index (NIFTY Tue / SENSEX Thu, holiday-shifted)
-  * 09:20 IST: BUY wings first (ATM +/- W) then SELL ATM CE + ATM PE, LIMIT orders with a price buffer
-  * each short leg gets an exchange-resident SL-LIMIT at entry x (1 + SL%)        (default 60 %)
+  * 09:20 IST: BUY wings first (OTM CE / PE whose premium is closest to Rs 3) then SELL ATM CE + ATM PE, LIMIT orders
+  * each short leg gets an exchange-resident SL-LIMIT at entry x (1 + SL%)        (default 50 %)
   * when one short SL fills, the other short's SL is moved to its entry price  (trail to breakeven)
-  * whole-position MTM stop (default Rs 2,000 per lot): exits everything
+  * whole-position MTM stop (default Rs 3,000 per lot): exits everything
   * 15:15 IST: exit everything (shorts first, then wings)
 Requirements / caveats
   * Upstox order APIs only accept calls from your registered STATIC IP -> run this on that machine.
@@ -14,7 +14,7 @@ Requirements / caveats
     allowed through the broker's API but must be tagged; check Upstox's current Algo-ID registration
     process before going live and set ALGO_TAG below accordingly.
   * Token: LIVE orders need a normal daily access token (extended 1-year tokens are read-only); paper mode is fine with the extended token.
-Usage:  python execution/upstox_ironfly.py NIFTY [--lots 1] [--wing 400] [--live]
+Usage:  python execution/upstox_ironfly.py NIFTY [--lots 1] [--wing-prem 3] [--live]
 """
 import argparse, datetime as dt, json, os, sys, time, urllib.request, urllib.error
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "etl"))
@@ -149,9 +149,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("name", choices=["NIFTY", "SENSEX"])
     ap.add_argument("--lots", type=int, default=1)
-    ap.add_argument("--wing", type=int, default=None, help="wing distance in points (NIFTY default 400)")
-    ap.add_argument("--sl", type=float, default=60.0, help="short-leg SL %% of entry")
-    ap.add_argument("--mtm-sl", type=float, default=2000.0, help="overall MTM stop, Rs per lot")
+    ap.add_argument("--wing", type=int, default=None, help="fixed wing distance in points (overrides --wing-prem)")
+    ap.add_argument("--wing-prem", type=float, default=3.0, help="wings = OTM strike whose LTP is closest to this premium (strategy B: Rs 3)")
+    ap.add_argument("--sl", type=float, default=50.0, help="short-leg SL %% of entry (strategy B: 50)")
+    ap.add_argument("--mtm-sl", type=float, default=3000.0, help="overall MTM stop, Rs per lot (strategy B: 3000)")
     ap.add_argument("--entry", default="09:20")
     ap.add_argument("--exit", default="15:15")
     ap.add_argument("--buffer", type=float, default=8.0, help="limit price buffer %% (market orders not allowed)")
@@ -159,7 +160,6 @@ def main():
     ap.add_argument("--force", action="store_true", help="run even if today is not expiry (paper testing)")
     a = ap.parse_args()
     name, st = a.name, STEP[a.name]
-    wing = a.wing or (400 if name == "NIFTY" else 1000)
     br = Broker(a.live)
     log("==== start", name, "LIVE" if a.live else "PAPER", vars(a))
 
@@ -175,9 +175,20 @@ def main():
     wait_until(a.entry)
     spot = br.ltp([IDX[name]])[IDX[name]]
     atm = round(spot / st) * st
+    if a.wing:
+        kc, kp = atm + a.wing, atm - a.wing
+    else:  # closest-premium wings (same rule as the backtest: OTM strike whose LTP is closest to --wing-prem)
+        ce = {s_: c["instrument_key"] for (s_, t), c in cons.items() if t == "CE" and atm < s_ <= atm + 60 * st}
+        pe = {s_: c["instrument_key"] for (s_, t), c in cons.items() if t == "PE" and atm - 60 * st <= s_ < atm}
+        q = {}
+        keys = list(ce.values()) + list(pe.values())
+        for i in range(0, len(keys), 450):
+            q.update(br.ltp(keys[i:i + 450]))
+        kc = min(ce, key=lambda s_: abs(q.get(ce[s_], 1e9) - a.wing_prem))
+        kp = min(pe, key=lambda s_: abs(q.get(pe[s_], 1e9) - a.wing_prem))
     k = {"sce": cons[(atm, "CE")]["instrument_key"], "spe": cons[(atm, "PE")]["instrument_key"],
-         "lce": cons[(atm + wing, "CE")]["instrument_key"], "lpe": cons[(atm - wing, "PE")]["instrument_key"]}
-    log("spot", spot, "ATM", atm, "wings ±", wing, "qty", qty, k)
+         "lce": cons[(kc, "CE")]["instrument_key"], "lpe": cons[(kp, "PE")]["instrument_key"]}
+    log("spot", spot, "ATM", atm, "wings", kc, "CE /", kp, "PE", "qty", qty, k)
 
     entry = {}
     entry["lce"] = fill_limit(br, k["lce"], "BUY", qty, a.buffer)  # wings first: margin benefit + no naked exposure
