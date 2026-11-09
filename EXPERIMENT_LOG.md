@@ -1066,3 +1066,22 @@ there. The premium is earned overnight: holding from 2-4 days before expiry earn
 tails. IV/RV5 buckets do not sort the outcomes (RV5 is too noisy).
 Lesson from the first positional smoke test: wings priced at Rs 5-10 sit ~1,100 points away at 3 DTE; on the 3-Feb-2026
 ~3 % gap-up, a 1-lot "fly" lost Rs 49.8k in one morning. Multi-day positions need wings by distance (v14 grid uses 1.5 % / 3 %).
+
+## Round 10: strictly intraday basket, every day (2026-11-09), research/v15_intraday.py
+Store now carries option lows (long stops / short targets were checked on open/close before; re-validated vs engine: unchanged
+for Strategy B). 32 base configs on all 1,230 days (1 lot, exits by 15:15):
+| Family | PF 2021-23 | PF 2024-26 | PF 2026 |
+|---|---|---|---|
+| SELL 09:20/10:00 straddle + wings 1-2 %, leg SL 30/50 %, trail, overall SL (16) | 0.57-0.79 | 0.69-0.87 | 0.54-0.89 |
+| BUY ORB 09:30/09:45 breakout, SL 25/35 %, ratchet trail (8) | 0.81-0.96 | 0.84-0.96 | 0.64-0.78 |
+| BUY momentum +15/25 % premium trigger (8) | 0.86-0.99 | 0.79-0.97 | 0.73-1.06 |
+Signal layer: 288 tercile filters (gap, opening range, prior-day range, VIX, IV, IV rank, IV/RV5, PCR, tdte) chosen on
+2024-26: 20 reached selection PF >= 1.2; the only one that held in both test blocks is tdte = 0 (expiry day, i.e. Strategy B's
+family). OI/PCR, VIX, IV and opening-range filters all failed out of sample.
+Cost sensitivity (5 years): best buy (MOM 25 %) PF 0.98 realistic -> 1.02 without slippage -> 1.06 without slippage and charges;
+ORB 0.88 -> 0.92 -> 0.97; every-day sell 0.81 -> 0.95 -> 1.21. Realistic friction (~Rs 300-400 per trade) consumes any edge.
+**Conclusion: no intraday NIFTY option strategy outside expiry day survives realistic costs in 5 years of data.**
+Positional preview (v14, stopped at 193/576 configs because the user requires intraday only): weekly fly entered 2 trading days
+before expiry with wings 3 % beyond the shorts is positive in all three blocks in 33 configs, e.g. T-2 15:15 entry, no leg SL,
+weekly stop Rs 4k, exit expiry morning: PF 1.26 / 1.35 / 1.42, ~Rs 30k/yr per lot, but 5-year DD Rs 47k and worst day -Rs 22k
+(overnight gaps), margin ~Rs 1.15L. Parked, not pursued.

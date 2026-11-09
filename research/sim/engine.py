@@ -104,11 +104,12 @@ class Ctx:
         c = ch["c"][t, i, m]
         if np.isnan(c):
             return None
-        return float(ch["o"][t, i, m]), float(ch["h"][t, i, m]), float(c)
+        lo = ch["l"][t, i, m] if "l" in ch else min(ch["o"][t, i, m], c)
+        return float(ch["o"][t, i, m]), float(ch["h"][t, i, m]), float(c), float(lo)
 
     def px(self, expiry, strike, opt, m):
         b = self.bar(expiry, strike, opt, m)
-        return None if b is None else b[2]
+        return None if b is None else b[2]  # close
 
     def oi(self, expiry, opt, m):
         ch = self._chain(expiry)
@@ -221,17 +222,17 @@ def run(strategy, days, features, date_from=0, date_to=99999999):
                     b = ctx.bar(leg.expiry, leg.strike, leg.opt, m)
                     if b is None or (leg.entry_date == d and leg.entry_m == m):
                         continue
-                    o, h, c = b
+                    o, h, c, lo = b
                     if leg.side == "S":
                         if leg.sl is not None and h >= leg.sl:
                             ctx._fill_close(leg, max(leg.sl, o) * 1.01, m, "SL", stop=True)
                             fired.append(leg)
                             continue
-                        if leg.tgt is not None and min(o, c) <= leg.tgt:
+                        if leg.tgt is not None and lo <= leg.tgt:
                             ctx._fill_close(leg, min(leg.tgt, o), m, "TGT")
                             continue
                     else:
-                        if leg.sl is not None and min(o, c) <= leg.sl:
+                        if leg.sl is not None and lo <= leg.sl:
                             ctx._fill_close(leg, min(leg.sl, o) * 0.99, m, "SL", stop=True)
                             fired.append(leg)
                             continue

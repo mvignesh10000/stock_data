@@ -1,0 +1,8354 @@
+[
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": -61096,
+   "pf": 0.74,
+   "dd": 66927,
+   "win_months": 29.6,
+   "per_year": -27350
+  },
+  "OLD": {
+   "trades": 113,
+   "net": -3367,
+   "pf": 0.97,
+   "dd": 32086,
+   "win_months": 42.3,
+   "per_year": -1587
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -7174,
+   "pf": 0.85,
+   "dd": 36615,
+   "win_months": 22.2,
+   "per_year": -11629
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 184,
+   "net": -38347,
+   "pf": 0.84,
+   "dd": 75802,
+   "win_months": 33.3,
+   "per_year": -17166
+  },
+  "OLD": {
+   "trades": 40,
+   "net": 7570,
+   "pf": 1.14,
+   "dd": 21900,
+   "win_months": 15.4,
+   "per_year": 3569
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -15632,
+   "pf": 0.61,
+   "dd": 21700,
+   "win_months": 22.2,
+   "per_year": -25337
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": 7060,
+   "pf": 1.03,
+   "dd": 100825,
+   "win_months": 48.1,
+   "per_year": 3160
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -50193,
+   "pf": 0.72,
+   "dd": 74148,
+   "win_months": 23.1,
+   "per_year": -23665
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -3695,
+   "pf": 0.94,
+   "dd": 33447,
+   "win_months": 55.6,
+   "per_year": -5989
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 183,
+   "net": -39272,
+   "pf": 0.84,
+   "dd": 96310,
+   "win_months": 29.6,
+   "per_year": -17580
+  },
+  "OLD": {
+   "trades": 67,
+   "net": 5237,
+   "pf": 1.08,
+   "dd": 16210,
+   "win_months": 19.2,
+   "per_year": 2469
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -14998,
+   "pf": 0.62,
+   "dd": 28944,
+   "win_months": 11.1,
+   "per_year": -24311
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 184,
+   "net": -30210,
+   "pf": 0.88,
+   "dd": 92075,
+   "win_months": 29.6,
+   "per_year": -13524
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -34504,
+   "pf": 0.72,
+   "dd": 36148,
+   "win_months": 26.9,
+   "per_year": -16268
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -9266,
+   "pf": 0.84,
+   "dd": 41508,
+   "win_months": 44.4,
+   "per_year": -15020
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 183,
+   "net": -57517,
+   "pf": 0.71,
+   "dd": 79946,
+   "win_months": 22.2,
+   "per_year": -25747
+  },
+  "OLD": {
+   "trades": 262,
+   "net": -116706,
+   "pf": 0.57,
+   "dd": 127472,
+   "win_months": 23.1,
+   "per_year": -55025
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -15762,
+   "pf": 0.41,
+   "dd": 21102,
+   "win_months": 0.0,
+   "per_year": -25549
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "iv_rv5",
+  "rule": "0.952<=iv_rv5<1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -51817,
+   "pf": 0.78,
+   "dd": 65319,
+   "win_months": 33.3,
+   "per_year": -23196
+  },
+  "OLD": {
+   "trades": 184,
+   "net": -90703,
+   "pf": 0.58,
+   "dd": 96753,
+   "win_months": 23.1,
+   "per_year": -42765
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -22900,
+   "pf": 0.6,
+   "dd": 42721,
+   "win_months": 22.2,
+   "per_year": -37119
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 183,
+   "net": -25684,
+   "pf": 0.9,
+   "dd": 80795,
+   "win_months": 37.0,
+   "per_year": -11498
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -13108,
+   "pf": 0.95,
+   "dd": 40125,
+   "win_months": 38.5,
+   "per_year": -6180
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -11988,
+   "pf": 0.7,
+   "dd": 30719,
+   "win_months": 22.2,
+   "per_year": -19431
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 23608,
+   "pf": 1.17,
+   "dd": 30727,
+   "win_months": 44.4,
+   "per_year": 10568
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -21039,
+   "pf": 0.8,
+   "dd": 33543,
+   "win_months": 34.6,
+   "per_year": -9919
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 26285,
+   "pf": 2.07,
+   "dd": 10576,
+   "win_months": 55.6,
+   "per_year": 42605
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": -41087,
+   "pf": 0.84,
+   "dd": 59875,
+   "win_months": 33.3,
+   "per_year": -18393
+  },
+  "OLD": {
+   "trades": 113,
+   "net": 3459,
+   "pf": 1.03,
+   "dd": 36273,
+   "win_months": 50.0,
+   "per_year": 1631
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -10037,
+   "pf": 0.81,
+   "dd": 41108,
+   "win_months": 33.3,
+   "per_year": -16268
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 183,
+   "net": -23083,
+   "pf": 0.9,
+   "dd": 75038,
+   "win_months": 33.3,
+   "per_year": -10333
+  },
+  "OLD": {
+   "trades": 444,
+   "net": -188377,
+   "pf": 0.65,
+   "dd": 209825,
+   "win_months": 34.6,
+   "per_year": -88817
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -18860,
+   "pf": 0.36,
+   "dd": 22501,
+   "win_months": 11.1,
+   "per_year": -30571
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": 18061,
+   "pf": 1.07,
+   "dd": 100816,
+   "win_months": 44.4,
+   "per_year": 8085
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -58564,
+   "pf": 0.69,
+   "dd": 82642,
+   "win_months": 23.1,
+   "per_year": -27612
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -14947,
+   "pf": 0.79,
+   "dd": 40552,
+   "win_months": 33.3,
+   "per_year": -24227
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 183,
+   "net": -34167,
+   "pf": 0.87,
+   "dd": 86702,
+   "win_months": 37.0,
+   "per_year": -15295
+  },
+  "OLD": {
+   "trades": 67,
+   "net": 1665,
+   "pf": 1.02,
+   "dd": 16321,
+   "win_months": 19.2,
+   "per_year": 785
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -15312,
+   "pf": 0.63,
+   "dd": 30915,
+   "win_months": 11.1,
+   "per_year": -24819
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 184,
+   "net": -10488,
+   "pf": 0.96,
+   "dd": 75040,
+   "win_months": 33.3,
+   "per_year": -4695
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -25144,
+   "pf": 0.79,
+   "dd": 26212,
+   "win_months": 30.8,
+   "per_year": -11855
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -13910,
+   "pf": 0.78,
+   "dd": 44615,
+   "win_months": 44.4,
+   "per_year": -22547
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 183,
+   "net": -51853,
+   "pf": 0.75,
+   "dd": 75731,
+   "win_months": 29.6,
+   "per_year": -23212
+  },
+  "OLD": {
+   "trades": 262,
+   "net": -118508,
+   "pf": 0.56,
+   "dd": 128064,
+   "win_months": 26.9,
+   "per_year": -55874
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -17217,
+   "pf": 0.39,
+   "dd": 22558,
+   "win_months": 0.0,
+   "per_year": -27908
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "iv_rv5",
+  "rule": "0.952<=iv_rv5<1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -63376,
+   "pf": 0.75,
+   "dd": 74827,
+   "win_months": 40.7,
+   "per_year": -28370
+  },
+  "OLD": {
+   "trades": 184,
+   "net": -98038,
+   "pf": 0.57,
+   "dd": 104927,
+   "win_months": 23.1,
+   "per_year": -46223
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -31560,
+   "pf": 0.53,
+   "dd": 51087,
+   "win_months": 22.2,
+   "per_year": -51156
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 183,
+   "net": -26974,
+   "pf": 0.9,
+   "dd": 73664,
+   "win_months": 29.6,
+   "per_year": -12075
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -5178,
+   "pf": 0.98,
+   "dd": 35638,
+   "win_months": 42.3,
+   "per_year": -2441
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -12234,
+   "pf": 0.72,
+   "dd": 29891,
+   "win_months": 22.2,
+   "per_year": -19830
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl30|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 18332,
+   "pf": 1.12,
+   "dd": 32636,
+   "win_months": 44.4,
+   "per_year": 8206
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -13715,
+   "pf": 0.88,
+   "dd": 37238,
+   "win_months": 38.5,
+   "per_year": -6467
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 24248,
+   "pf": 1.91,
+   "dd": 11429,
+   "win_months": 55.6,
+   "per_year": 39304
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": -42967,
+   "pf": 0.79,
+   "dd": 71881,
+   "win_months": 25.9,
+   "per_year": -19234
+  },
+  "OLD": {
+   "trades": 113,
+   "net": -13495,
+   "pf": 0.85,
+   "dd": 33759,
+   "win_months": 42.3,
+   "per_year": -6363
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -15599,
+   "pf": 0.6,
+   "dd": 15599,
+   "win_months": 22.2,
+   "per_year": -25285
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 183,
+   "net": -44147,
+   "pf": 0.78,
+   "dd": 75981,
+   "win_months": 29.6,
+   "per_year": -19763
+  },
+  "OLD": {
+   "trades": 444,
+   "net": -214533,
+   "pf": 0.51,
+   "dd": 229114,
+   "win_months": 15.4,
+   "per_year": -101149
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -7731,
+   "pf": 0.53,
+   "dd": 10159,
+   "win_months": 22.2,
+   "per_year": -12531
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 184,
+   "net": -41840,
+   "pf": 0.77,
+   "dd": 49898,
+   "win_months": 40.7,
+   "per_year": -18730
+  },
+  "OLD": {
+   "trades": 188,
+   "net": -63624,
+   "pf": 0.59,
+   "dd": 73170,
+   "win_months": 19.2,
+   "per_year": -29998
+  },
+  "NEW": {
+   "trades": 47,
+   "net": 977,
+   "pf": 1.03,
+   "dd": 12782,
+   "win_months": 33.3,
+   "per_year": 1584
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "vix",
+  "rule": "vix>=14.5",
+  "SEL": {
+   "trades": 185,
+   "net": -50782,
+   "pf": 0.8,
+   "dd": 69691,
+   "win_months": 22.2,
+   "per_year": -22733
+  },
+  "OLD": {
+   "trades": 258,
+   "net": -145822,
+   "pf": 0.53,
+   "dd": 147928,
+   "win_months": 7.7,
+   "per_year": -68753
+  },
+  "NEW": {
+   "trades": 71,
+   "net": -42937,
+   "pf": 0.55,
+   "dd": 49810,
+   "win_months": 22.2,
+   "per_year": -69597
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 184,
+   "net": -13615,
+   "pf": 0.93,
+   "dd": 68575,
+   "win_months": 33.3,
+   "per_year": -6095
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -81087,
+   "pf": 0.36,
+   "dd": 81087,
+   "win_months": 23.1,
+   "per_year": -38231
+  },
+  "NEW": {
+   "trades": 50,
+   "net": 11139,
+   "pf": 1.25,
+   "dd": 18644,
+   "win_months": 55.6,
+   "per_year": 18055
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 192,
+   "net": -18090,
+   "pf": 0.93,
+   "dd": 58314,
+   "win_months": 29.6,
+   "per_year": -8098
+  },
+  "OLD": {
+   "trades": 29,
+   "net": -37507,
+   "pf": 0.22,
+   "dd": 37507,
+   "win_months": 11.5,
+   "per_year": -17684
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -44926,
+   "pf": 0.38,
+   "dd": 44926,
+   "win_months": 11.1,
+   "per_year": -72822
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -34731,
+   "pf": 0.83,
+   "dd": 51404,
+   "win_months": 37.0,
+   "per_year": -15547
+  },
+  "OLD": {
+   "trades": 153,
+   "net": -73735,
+   "pf": 0.48,
+   "dd": 84700,
+   "win_months": 15.4,
+   "per_year": -34765
+  },
+  "NEW": {
+   "trades": 47,
+   "net": -17720,
+   "pf": 0.63,
+   "dd": 18642,
+   "win_months": 33.3,
+   "per_year": -28723
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 184,
+   "net": -57772,
+   "pf": 0.73,
+   "dd": 74048,
+   "win_months": 37.0,
+   "per_year": -25862
+  },
+  "OLD": {
+   "trades": 165,
+   "net": -115340,
+   "pf": 0.33,
+   "dd": 126130,
+   "win_months": 11.5,
+   "per_year": -54381
+  },
+  "NEW": {
+   "trades": 75,
+   "net": -26072,
+   "pf": 0.67,
+   "dd": 26705,
+   "win_months": 22.2,
+   "per_year": -42261
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 44869,
+   "pf": 1.35,
+   "dd": 25662,
+   "win_months": 55.6,
+   "per_year": 20086
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -8065,
+   "pf": 0.92,
+   "dd": 29388,
+   "win_months": 38.5,
+   "per_year": -3802
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 842,
+   "pf": 1.02,
+   "dd": 8417,
+   "win_months": 66.7,
+   "per_year": 1365
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": 3573,
+   "pf": 1.02,
+   "dd": 38423,
+   "win_months": 44.4,
+   "per_year": 1599
+  },
+  "OLD": {
+   "trades": 113,
+   "net": -7666,
+   "pf": 0.91,
+   "dd": 32511,
+   "win_months": 46.2,
+   "per_year": -3615
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -3904,
+   "pf": 0.91,
+   "dd": 19431,
+   "win_months": 33.3,
+   "per_year": -6327
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 184,
+   "net": -29275,
+   "pf": 0.87,
+   "dd": 72412,
+   "win_months": 44.4,
+   "per_year": -13105
+  },
+  "OLD": {
+   "trades": 40,
+   "net": 3425,
+   "pf": 1.08,
+   "dd": 17305,
+   "win_months": 15.4,
+   "per_year": 1615
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -10846,
+   "pf": 0.75,
+   "dd": 16420,
+   "win_months": 22.2,
+   "per_year": -17581
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": -4123,
+   "pf": 0.98,
+   "dd": 86365,
+   "win_months": 48.1,
+   "per_year": -1846
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -57952,
+   "pf": 0.64,
+   "dd": 72542,
+   "win_months": 30.8,
+   "per_year": -27323
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -12727,
+   "pf": 0.8,
+   "dd": 26659,
+   "win_months": 33.3,
+   "per_year": -20630
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 183,
+   "net": -20756,
+   "pf": 0.91,
+   "dd": 82916,
+   "win_months": 33.3,
+   "per_year": -9292
+  },
+  "OLD": {
+   "trades": 67,
+   "net": -1900,
+   "pf": 0.97,
+   "dd": 18731,
+   "win_months": 15.4,
+   "per_year": -896
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -23516,
+   "pf": 0.46,
+   "dd": 36430,
+   "win_months": 11.1,
+   "per_year": -38118
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 184,
+   "net": 17867,
+   "pf": 1.09,
+   "dd": 53974,
+   "win_months": 37.0,
+   "per_year": 7998
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -73687,
+   "pf": 0.41,
+   "dd": 73687,
+   "win_months": 26.9,
+   "per_year": -34742
+  },
+  "NEW": {
+   "trades": 50,
+   "net": 4684,
+   "pf": 1.09,
+   "dd": 27102,
+   "win_months": 55.6,
+   "per_year": 7593
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 192,
+   "net": -3341,
+   "pf": 0.99,
+   "dd": 63738,
+   "win_months": 25.9,
+   "per_year": -1496
+  },
+  "OLD": {
+   "trades": 29,
+   "net": -30568,
+   "pf": 0.36,
+   "dd": 30568,
+   "win_months": 11.5,
+   "per_year": -14412
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -10474,
+   "pf": 0.86,
+   "dd": 41340,
+   "win_months": 33.3,
+   "per_year": -16978
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -29148,
+   "pf": 0.87,
+   "dd": 63155,
+   "win_months": 37.0,
+   "per_year": -13048
+  },
+  "OLD": {
+   "trades": 153,
+   "net": -38778,
+   "pf": 0.72,
+   "dd": 79285,
+   "win_months": 19.2,
+   "per_year": -18283
+  },
+  "NEW": {
+   "trades": 47,
+   "net": -6117,
+   "pf": 0.89,
+   "dd": 24944,
+   "win_months": 33.3,
+   "per_year": -9914
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 183,
+   "net": -19550,
+   "pf": 0.92,
+   "dd": 69903,
+   "win_months": 37.0,
+   "per_year": -8752
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -35147,
+   "pf": 0.84,
+   "dd": 70595,
+   "win_months": 34.6,
+   "per_year": -16571
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -5696,
+   "pf": 0.83,
+   "dd": 30621,
+   "win_months": 22.2,
+   "per_year": -9232
+  }
+ },
+ {
+  "base": "SELL|09:20|w1%|sl50|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 66055,
+   "pf": 1.48,
+   "dd": 16483,
+   "win_months": 59.3,
+   "per_year": 29570
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -18364,
+   "pf": 0.83,
+   "dd": 33198,
+   "win_months": 30.8,
+   "per_year": -8658
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 11339,
+   "pf": 1.33,
+   "dd": 9512,
+   "win_months": 77.8,
+   "per_year": 18379
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": -46034,
+   "pf": 0.78,
+   "dd": 52593,
+   "win_months": 37.0,
+   "per_year": -20607
+  },
+  "OLD": {
+   "trades": 113,
+   "net": -3688,
+   "pf": 0.96,
+   "dd": 33025,
+   "win_months": 46.2,
+   "per_year": -1739
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -9767,
+   "pf": 0.78,
+   "dd": 30435,
+   "win_months": 22.2,
+   "per_year": -15831
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 184,
+   "net": -46191,
+   "pf": 0.77,
+   "dd": 77982,
+   "win_months": 25.9,
+   "per_year": -20677
+  },
+  "OLD": {
+   "trades": 443,
+   "net": -141260,
+   "pf": 0.67,
+   "dd": 165267,
+   "win_months": 34.6,
+   "per_year": -66602
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -13951,
+   "pf": 0.38,
+   "dd": 16594,
+   "win_months": 11.1,
+   "per_year": -22613
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": -38556,
+   "pf": 0.83,
+   "dd": 99475,
+   "win_months": 44.4,
+   "per_year": -17260
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -39959,
+   "pf": 0.74,
+   "dd": 62458,
+   "win_months": 26.9,
+   "per_year": -18840
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -4230,
+   "pf": 0.92,
+   "dd": 26680,
+   "win_months": 44.4,
+   "per_year": -6857
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -41995,
+   "pf": 0.81,
+   "dd": 75358,
+   "win_months": 29.6,
+   "per_year": -18799
+  },
+  "OLD": {
+   "trades": 66,
+   "net": -8071,
+   "pf": 0.86,
+   "dd": 15922,
+   "win_months": 11.5,
+   "per_year": -3805
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -9263,
+   "pf": 0.74,
+   "dd": 19735,
+   "win_months": 11.1,
+   "per_year": -15014
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 184,
+   "net": -43063,
+   "pf": 0.75,
+   "dd": 61730,
+   "win_months": 22.2,
+   "per_year": -19277
+  },
+  "OLD": {
+   "trades": 173,
+   "net": -92933,
+   "pf": 0.41,
+   "dd": 98956,
+   "win_months": 15.4,
+   "per_year": -43816
+  },
+  "NEW": {
+   "trades": 35,
+   "net": -15296,
+   "pf": 0.51,
+   "dd": 21988,
+   "win_months": 22.2,
+   "per_year": -24794
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 183,
+   "net": -64789,
+   "pf": 0.64,
+   "dd": 79974,
+   "win_months": 14.8,
+   "per_year": -29003
+  },
+  "OLD": {
+   "trades": 261,
+   "net": -103225,
+   "pf": 0.56,
+   "dd": 110919,
+   "win_months": 19.2,
+   "per_year": -48669
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -13006,
+   "pf": 0.49,
+   "dd": 18393,
+   "win_months": 22.2,
+   "per_year": -21081
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "iv_rv5",
+  "rule": "0.952<=iv_rv5<1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -28749,
+   "pf": 0.86,
+   "dd": 47347,
+   "win_months": 44.4,
+   "per_year": -12869
+  },
+  "OLD": {
+   "trades": 183,
+   "net": -80689,
+   "pf": 0.58,
+   "dd": 85004,
+   "win_months": 26.9,
+   "per_year": -38043
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -16539,
+   "pf": 0.7,
+   "dd": 34245,
+   "win_months": 22.2,
+   "per_year": -26808
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 184,
+   "net": -55410,
+   "pf": 0.76,
+   "dd": 74358,
+   "win_months": 33.3,
+   "per_year": -24804
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -738,
+   "pf": 1.0,
+   "dd": 32561,
+   "win_months": 38.5,
+   "per_year": -348
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -10802,
+   "pf": 0.72,
+   "dd": 24623,
+   "win_months": 33.3,
+   "per_year": -17509
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 18513,
+   "pf": 1.15,
+   "dd": 16184,
+   "win_months": 55.6,
+   "per_year": 8287
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 18320,
+   "pf": 1.22,
+   "dd": 22571,
+   "win_months": 42.3,
+   "per_year": 8637
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 14748,
+   "pf": 1.59,
+   "dd": 7809,
+   "win_months": 66.7,
+   "per_year": 23905
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": -35665,
+   "pf": 0.84,
+   "dd": 51020,
+   "win_months": 37.0,
+   "per_year": -15966
+  },
+  "OLD": {
+   "trades": 113,
+   "net": 778,
+   "pf": 1.01,
+   "dd": 34566,
+   "win_months": 50.0,
+   "per_year": 367
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -11486,
+   "pf": 0.76,
+   "dd": 32230,
+   "win_months": 22.2,
+   "per_year": -18617
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 184,
+   "net": -25020,
+   "pf": 0.87,
+   "dd": 66532,
+   "win_months": 29.6,
+   "per_year": -11200
+  },
+  "OLD": {
+   "trades": 443,
+   "net": -148347,
+   "pf": 0.67,
+   "dd": 171314,
+   "win_months": 34.6,
+   "per_year": -69943
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -18057,
+   "pf": 0.33,
+   "dd": 20701,
+   "win_months": 0.0,
+   "per_year": -29270
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": -22964,
+   "pf": 0.9,
+   "dd": 100808,
+   "win_months": 48.1,
+   "per_year": -10280
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -40229,
+   "pf": 0.74,
+   "dd": 61504,
+   "win_months": 30.8,
+   "per_year": -18967
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -17009,
+   "pf": 0.75,
+   "dd": 35883,
+   "win_months": 44.4,
+   "per_year": -27570
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -39220,
+   "pf": 0.83,
+   "dd": 74353,
+   "win_months": 33.3,
+   "per_year": -17557
+  },
+  "OLD": {
+   "trades": 66,
+   "net": -9549,
+   "pf": 0.84,
+   "dd": 13782,
+   "win_months": 11.5,
+   "per_year": -4502
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -12173,
+   "pf": 0.68,
+   "dd": 24021,
+   "win_months": 11.1,
+   "per_year": -19731
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 184,
+   "net": -32085,
+   "pf": 0.86,
+   "dd": 79205,
+   "win_months": 37.0,
+   "per_year": -14363
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -12042,
+   "pf": 0.87,
+   "dd": 20715,
+   "win_months": 34.6,
+   "per_year": -5678
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -7304,
+   "pf": 0.87,
+   "dd": 29106,
+   "win_months": 44.4,
+   "per_year": -11839
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 178,
+   "net": -53562,
+   "pf": 0.76,
+   "dd": 68990,
+   "win_months": 37.0,
+   "per_year": -23977
+  },
+  "OLD": {
+   "trades": 134,
+   "net": -42619,
+   "pf": 0.72,
+   "dd": 45196,
+   "win_months": 30.8,
+   "per_year": -20094
+  },
+  "NEW": {
+   "trades": 75,
+   "net": -18345,
+   "pf": 0.8,
+   "dd": 42059,
+   "win_months": 33.3,
+   "per_year": -29736
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "iv_rv5",
+  "rule": "0.952<=iv_rv5<1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -36571,
+   "pf": 0.84,
+   "dd": 49549,
+   "win_months": 51.9,
+   "per_year": -16371
+  },
+  "OLD": {
+   "trades": 183,
+   "net": -78038,
+   "pf": 0.59,
+   "dd": 81835,
+   "win_months": 34.6,
+   "per_year": -36793
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -24243,
+   "pf": 0.61,
+   "dd": 41622,
+   "win_months": 22.2,
+   "per_year": -39297
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 184,
+   "net": -57750,
+   "pf": 0.77,
+   "dd": 72385,
+   "win_months": 29.6,
+   "per_year": -25852
+  },
+  "OLD": {
+   "trades": 222,
+   "net": 2219,
+   "pf": 1.01,
+   "dd": 33125,
+   "win_months": 46.2,
+   "per_year": 1046
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -1883,
+   "pf": 0.95,
+   "dd": 20254,
+   "win_months": 33.3,
+   "per_year": -3052
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl30|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 11805,
+   "pf": 1.09,
+   "dd": 20289,
+   "win_months": 48.1,
+   "per_year": 5285
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 17063,
+   "pf": 1.2,
+   "dd": 22571,
+   "win_months": 42.3,
+   "per_year": 8045
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 14082,
+   "pf": 1.55,
+   "dd": 7809,
+   "win_months": 66.7,
+   "per_year": 22825
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": -7445,
+   "pf": 0.96,
+   "dd": 41042,
+   "win_months": 51.9,
+   "per_year": -3333
+  },
+  "OLD": {
+   "trades": 113,
+   "net": -14982,
+   "pf": 0.81,
+   "dd": 35604,
+   "win_months": 46.2,
+   "per_year": -7064
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -14432,
+   "pf": 0.64,
+   "dd": 16724,
+   "win_months": 33.3,
+   "per_year": -23393
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "or5_pct",
+  "rule": "or5_pct>=0.297",
+  "SEL": {
+   "trades": 185,
+   "net": -31789,
+   "pf": 0.87,
+   "dd": 53187,
+   "win_months": 44.4,
+   "per_year": -14230
+  },
+  "OLD": {
+   "trades": 41,
+   "net": 14271,
+   "pf": 1.37,
+   "dd": 16068,
+   "win_months": 38.5,
+   "per_year": 6729
+  },
+  "NEW": {
+   "trades": 94,
+   "net": -34132,
+   "pf": 0.67,
+   "dd": 39742,
+   "win_months": 22.2,
+   "per_year": -55324
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 184,
+   "net": -13698,
+   "pf": 0.92,
+   "dd": 28736,
+   "win_months": 44.4,
+   "per_year": -6132
+  },
+  "OLD": {
+   "trades": 188,
+   "net": -59429,
+   "pf": 0.6,
+   "dd": 64594,
+   "win_months": 23.1,
+   "per_year": -28020
+  },
+  "NEW": {
+   "trades": 47,
+   "net": 7900,
+   "pf": 1.27,
+   "dd": 11710,
+   "win_months": 44.4,
+   "per_year": 12805
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "vix",
+  "rule": "vix>=14.5",
+  "SEL": {
+   "trades": 185,
+   "net": -20558,
+   "pf": 0.91,
+   "dd": 34495,
+   "win_months": 33.3,
+   "per_year": -9203
+  },
+  "OLD": {
+   "trades": 258,
+   "net": -84309,
+   "pf": 0.67,
+   "dd": 89425,
+   "win_months": 11.5,
+   "per_year": -39750
+  },
+  "NEW": {
+   "trades": 71,
+   "net": -36610,
+   "pf": 0.58,
+   "dd": 42029,
+   "win_months": 11.1,
+   "per_year": -59341
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "iv",
+  "rule": "iv>=12.4",
+  "SEL": {
+   "trades": 185,
+   "net": -9541,
+   "pf": 0.96,
+   "dd": 41248,
+   "win_months": 29.6,
+   "per_year": -4271
+  },
+  "OLD": {
+   "trades": 227,
+   "net": -43941,
+   "pf": 0.81,
+   "dd": 61035,
+   "win_months": 26.9,
+   "per_year": -20717
+  },
+  "NEW": {
+   "trades": 68,
+   "net": -48403,
+   "pf": 0.45,
+   "dd": 48403,
+   "win_months": 0.0,
+   "per_year": -78458
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 192,
+   "net": 27042,
+   "pf": 1.11,
+   "dd": 34632,
+   "win_months": 40.7,
+   "per_year": 12105
+  },
+  "OLD": {
+   "trades": 29,
+   "net": -10546,
+   "pf": 0.7,
+   "dd": 15335,
+   "win_months": 19.2,
+   "per_year": -4972
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -35914,
+   "pf": 0.43,
+   "dd": 35914,
+   "win_months": 11.1,
+   "per_year": -58214
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "iv_rv5",
+  "rule": "0.952<=iv_rv5<1.35",
+  "SEL": {
+   "trades": 184,
+   "net": -9419,
+   "pf": 0.95,
+   "dd": 40722,
+   "win_months": 44.4,
+   "per_year": -4217
+  },
+  "OLD": {
+   "trades": 183,
+   "net": -59547,
+   "pf": 0.62,
+   "dd": 66247,
+   "win_months": 23.1,
+   "per_year": -28075
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -18145,
+   "pf": 0.61,
+   "dd": 21659,
+   "win_months": 33.3,
+   "per_year": -29411
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 184,
+   "net": -19777,
+   "pf": 0.9,
+   "dd": 31864,
+   "win_months": 44.4,
+   "per_year": -8853
+  },
+  "OLD": {
+   "trades": 165,
+   "net": -66151,
+   "pf": 0.57,
+   "dd": 76371,
+   "win_months": 23.1,
+   "per_year": -31189
+  },
+  "NEW": {
+   "trades": 75,
+   "net": -25904,
+   "pf": 0.66,
+   "dd": 26151,
+   "win_months": 11.1,
+   "per_year": -41989
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 74566,
+   "pf": 1.66,
+   "dd": 11077,
+   "win_months": 63.0,
+   "per_year": 33380
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 34022,
+   "pf": 1.44,
+   "dd": 22147,
+   "win_months": 57.7,
+   "per_year": 16041
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -2858,
+   "pf": 0.92,
+   "dd": 8371,
+   "win_months": 33.3,
+   "per_year": -4632
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 184,
+   "net": 754,
+   "pf": 1.0,
+   "dd": 35275,
+   "win_months": 51.9,
+   "per_year": 338
+  },
+  "OLD": {
+   "trades": 113,
+   "net": -797,
+   "pf": 0.99,
+   "dd": 31427,
+   "win_months": 50.0,
+   "per_year": -376
+  },
+  "NEW": {
+   "trades": 37,
+   "net": 1390,
+   "pf": 1.04,
+   "dd": 11008,
+   "win_months": 44.4,
+   "per_year": 2253
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "or5_pct",
+  "rule": "or5_pct>=0.297",
+  "SEL": {
+   "trades": 185,
+   "net": -14670,
+   "pf": 0.94,
+   "dd": 41540,
+   "win_months": 48.1,
+   "per_year": -6567
+  },
+  "OLD": {
+   "trades": 41,
+   "net": 26716,
+   "pf": 1.72,
+   "dd": 12325,
+   "win_months": 42.3,
+   "per_year": 12596
+  },
+  "NEW": {
+   "trades": 94,
+   "net": -21560,
+   "pf": 0.8,
+   "dd": 51325,
+   "win_months": 22.2,
+   "per_year": -34947
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 184,
+   "net": -11629,
+   "pf": 0.93,
+   "dd": 27428,
+   "win_months": 48.1,
+   "per_year": -5206
+  },
+  "OLD": {
+   "trades": 188,
+   "net": -62052,
+   "pf": 0.6,
+   "dd": 69692,
+   "win_months": 26.9,
+   "per_year": -29256
+  },
+  "NEW": {
+   "trades": 47,
+   "net": 7547,
+   "pf": 1.25,
+   "dd": 13361,
+   "win_months": 33.3,
+   "per_year": 12233
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -16722,
+   "pf": 0.92,
+   "dd": 64032,
+   "win_months": 33.3,
+   "per_year": -7486
+  },
+  "OLD": {
+   "trades": 66,
+   "net": -11885,
+   "pf": 0.77,
+   "dd": 16640,
+   "win_months": 11.5,
+   "per_year": -5603
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -19225,
+   "pf": 0.55,
+   "dd": 29912,
+   "win_months": 11.1,
+   "per_year": -31163
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 184,
+   "net": 398,
+   "pf": 1.0,
+   "dd": 51031,
+   "win_months": 40.7,
+   "per_year": 178
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -53095,
+   "pf": 0.51,
+   "dd": 56677,
+   "win_months": 34.6,
+   "per_year": -25033
+  },
+  "NEW": {
+   "trades": 50,
+   "net": 7369,
+   "pf": 1.15,
+   "dd": 17625,
+   "win_months": 55.6,
+   "per_year": 11944
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 192,
+   "net": 23252,
+   "pf": 1.09,
+   "dd": 35890,
+   "win_months": 33.3,
+   "per_year": 10409
+  },
+  "OLD": {
+   "trades": 29,
+   "net": -7025,
+   "pf": 0.79,
+   "dd": 16682,
+   "win_months": 19.2,
+   "per_year": -3312
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -26926,
+   "pf": 0.61,
+   "dd": 45786,
+   "win_months": 22.2,
+   "per_year": -43646
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "iv_rv5",
+  "rule": "0.952<=iv_rv5<1.35",
+  "SEL": {
+   "trades": 184,
+   "net": 398,
+   "pf": 1.0,
+   "dd": 24861,
+   "win_months": 44.4,
+   "per_year": 178
+  },
+  "OLD": {
+   "trades": 183,
+   "net": -62830,
+   "pf": 0.62,
+   "dd": 70370,
+   "win_months": 26.9,
+   "per_year": -29623
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -29380,
+   "pf": 0.49,
+   "dd": 31674,
+   "win_months": 22.2,
+   "per_year": -47623
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 184,
+   "net": -18239,
+   "pf": 0.92,
+   "dd": 34236,
+   "win_months": 48.1,
+   "per_year": -8165
+  },
+  "OLD": {
+   "trades": 165,
+   "net": -42814,
+   "pf": 0.72,
+   "dd": 66309,
+   "win_months": 34.6,
+   "per_year": -20186
+  },
+  "NEW": {
+   "trades": 75,
+   "net": -27240,
+   "pf": 0.67,
+   "dd": 31800,
+   "win_months": 22.2,
+   "per_year": -44154
+  }
+ },
+ {
+  "base": "SELL|09:20|w2%|sl50|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 64552,
+   "pf": 1.52,
+   "dd": 13070,
+   "win_months": 63.0,
+   "per_year": 28897
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 31480,
+   "pf": 1.39,
+   "dd": 22221,
+   "win_months": 57.7,
+   "per_year": 14842
+  },
+  "NEW": {
+   "trades": 32,
+   "net": 3049,
+   "pf": 1.1,
+   "dd": 8236,
+   "win_months": 55.6,
+   "per_year": 4943
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 185,
+   "net": 17353,
+   "pf": 1.08,
+   "dd": 82392,
+   "win_months": 37.0,
+   "per_year": 7768
+  },
+  "OLD": {
+   "trades": 271,
+   "net": -106026,
+   "pf": 0.65,
+   "dd": 131391,
+   "win_months": 30.8,
+   "per_year": -49989
+  },
+  "NEW": {
+   "trades": 70,
+   "net": -39816,
+   "pf": 0.58,
+   "dd": 42218,
+   "win_months": 33.3,
+   "per_year": -64539
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "or5_pct",
+  "rule": "or5_pct>=0.297",
+  "SEL": {
+   "trades": 185,
+   "net": -4689,
+   "pf": 0.98,
+   "dd": 71542,
+   "win_months": 48.1,
+   "per_year": -2099
+  },
+  "OLD": {
+   "trades": 41,
+   "net": -8848,
+   "pf": 0.86,
+   "dd": 36507,
+   "win_months": 26.9,
+   "per_year": -4172
+  },
+  "NEW": {
+   "trades": 94,
+   "net": -64747,
+   "pf": 0.5,
+   "dd": 78685,
+   "win_months": 22.2,
+   "per_year": -104950
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": 26183,
+   "pf": 1.12,
+   "dd": 48253,
+   "win_months": 55.6,
+   "per_year": 11721
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -35087,
+   "pf": 0.77,
+   "dd": 51152,
+   "win_months": 38.5,
+   "per_year": -16543
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -26840,
+   "pf": 0.59,
+   "dd": 29837,
+   "win_months": 22.2,
+   "per_year": -43505
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 183,
+   "net": -20685,
+   "pf": 0.88,
+   "dd": 44072,
+   "win_months": 29.6,
+   "per_year": -9260
+  },
+  "OLD": {
+   "trades": 166,
+   "net": -41317,
+   "pf": 0.67,
+   "dd": 45452,
+   "win_months": 3.8,
+   "per_year": -19480
+  },
+  "NEW": {
+   "trades": 49,
+   "net": -6308,
+   "pf": 0.85,
+   "dd": 25141,
+   "win_months": 22.2,
+   "per_year": -10225
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 25297,
+   "pf": 1.13,
+   "dd": 32064,
+   "win_months": 44.4,
+   "per_year": 11324
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -43146,
+   "pf": 0.64,
+   "dd": 44316,
+   "win_months": 30.8,
+   "per_year": -20343
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -28936,
+   "pf": 0.53,
+   "dd": 32755,
+   "win_months": 22.2,
+   "per_year": -46903
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 182,
+   "net": -14836,
+   "pf": 0.91,
+   "dd": 48221,
+   "win_months": 33.3,
+   "per_year": -6642
+  },
+  "OLD": {
+   "trades": 263,
+   "net": -77201,
+   "pf": 0.64,
+   "dd": 77201,
+   "win_months": 15.4,
+   "per_year": -36399
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -11077,
+   "pf": 0.55,
+   "dd": 17818,
+   "win_months": 11.1,
+   "per_year": -17954
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 183,
+   "net": 39714,
+   "pf": 1.19,
+   "dd": 27026,
+   "win_months": 51.9,
+   "per_year": 17778
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -42968,
+   "pf": 0.8,
+   "dd": 65109,
+   "win_months": 42.3,
+   "per_year": -20259
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -52372,
+   "pf": 0.36,
+   "dd": 52372,
+   "win_months": 0.0,
+   "per_year": -84891
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 184,
+   "net": 15195,
+   "pf": 1.07,
+   "dd": 41719,
+   "win_months": 44.4,
+   "per_year": 6802
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -8408,
+   "pf": 0.96,
+   "dd": 39535,
+   "win_months": 38.5,
+   "per_year": -3964
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -31417,
+   "pf": 0.34,
+   "dd": 45355,
+   "win_months": 22.2,
+   "per_year": -50924
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": -13567,
+   "pf": 0.9,
+   "dd": 32300,
+   "win_months": 44.4,
+   "per_year": -6073
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -12946,
+   "pf": 0.86,
+   "dd": 23955,
+   "win_months": 38.5,
+   "per_year": -6104
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -18070,
+   "pf": 0.53,
+   "dd": 18432,
+   "win_months": 33.3,
+   "per_year": -29290
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 185,
+   "net": -3943,
+   "pf": 0.98,
+   "dd": 111600,
+   "win_months": 33.3,
+   "per_year": -1765
+  },
+  "OLD": {
+   "trades": 271,
+   "net": -120875,
+   "pf": 0.64,
+   "dd": 155457,
+   "win_months": 30.8,
+   "per_year": -56991
+  },
+  "NEW": {
+   "trades": 70,
+   "net": -20142,
+   "pf": 0.81,
+   "dd": 36099,
+   "win_months": 33.3,
+   "per_year": -32648
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "or5_pct",
+  "rule": "or5_pct>=0.297",
+  "SEL": {
+   "trades": 185,
+   "net": -33999,
+   "pf": 0.88,
+   "dd": 98710,
+   "win_months": 44.4,
+   "per_year": -15220
+  },
+  "OLD": {
+   "trades": 41,
+   "net": -15306,
+   "pf": 0.78,
+   "dd": 38879,
+   "win_months": 30.8,
+   "per_year": -7217
+  },
+  "NEW": {
+   "trades": 94,
+   "net": -38792,
+   "pf": 0.72,
+   "dd": 66286,
+   "win_months": 22.2,
+   "per_year": -62879
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": 34007,
+   "pf": 1.15,
+   "dd": 55736,
+   "win_months": 51.9,
+   "per_year": 15223
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -55562,
+   "pf": 0.68,
+   "dd": 71217,
+   "win_months": 34.6,
+   "per_year": -26197
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -35571,
+   "pf": 0.52,
+   "dd": 38569,
+   "win_months": 11.1,
+   "per_year": -57658
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -26042,
+   "pf": 0.89,
+   "dd": 62121,
+   "win_months": 40.7,
+   "per_year": -11658
+  },
+  "OLD": {
+   "trades": 68,
+   "net": 15168,
+   "pf": 1.29,
+   "dd": 12044,
+   "win_months": 15.4,
+   "per_year": 7152
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -22334,
+   "pf": 0.51,
+   "dd": 32050,
+   "win_months": 11.1,
+   "per_year": -36202
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 13956,
+   "pf": 1.06,
+   "dd": 33754,
+   "win_months": 44.4,
+   "per_year": 6247
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -53342,
+   "pf": 0.59,
+   "dd": 54406,
+   "win_months": 30.8,
+   "per_year": -25150
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -39353,
+   "pf": 0.45,
+   "dd": 42205,
+   "win_months": 22.2,
+   "per_year": -63788
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 182,
+   "net": -30625,
+   "pf": 0.83,
+   "dd": 57609,
+   "win_months": 25.9,
+   "per_year": -13709
+  },
+  "OLD": {
+   "trades": 263,
+   "net": -88845,
+   "pf": 0.61,
+   "dd": 88845,
+   "win_months": 19.2,
+   "per_year": -41889
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -10513,
+   "pf": 0.56,
+   "dd": 17255,
+   "win_months": 11.1,
+   "per_year": -17041
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 183,
+   "net": 21942,
+   "pf": 1.09,
+   "dd": 32705,
+   "win_months": 40.7,
+   "per_year": 9822
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -63264,
+   "pf": 0.73,
+   "dd": 86378,
+   "win_months": 42.3,
+   "per_year": -29828
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -46025,
+   "pf": 0.46,
+   "dd": 46667,
+   "win_months": 22.2,
+   "per_year": -74603
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 184,
+   "net": -4321,
+   "pf": 0.98,
+   "dd": 51832,
+   "win_months": 44.4,
+   "per_year": -1934
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -17730,
+   "pf": 0.92,
+   "dd": 51116,
+   "win_months": 50.0,
+   "per_year": -8359
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -32013,
+   "pf": 0.36,
+   "dd": 45951,
+   "win_months": 22.2,
+   "per_year": -51890
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl30|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": -19710,
+   "pf": 0.86,
+   "dd": 33598,
+   "win_months": 44.4,
+   "per_year": -8823
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -19713,
+   "pf": 0.8,
+   "dd": 29050,
+   "win_months": 38.5,
+   "per_year": -9294
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -21394,
+   "pf": 0.49,
+   "dd": 21394,
+   "win_months": 33.3,
+   "per_year": -34679
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 183,
+   "net": -40666,
+   "pf": 0.78,
+   "dd": 47734,
+   "win_months": 37.0,
+   "per_year": -18204
+  },
+  "OLD": {
+   "trades": 114,
+   "net": -13663,
+   "pf": 0.82,
+   "dd": 28562,
+   "win_months": 30.8,
+   "per_year": -6442
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -8519,
+   "pf": 0.76,
+   "dd": 18134,
+   "win_months": 33.3,
+   "per_year": -13808
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 183,
+   "net": -4812,
+   "pf": 0.97,
+   "dd": 20094,
+   "win_months": 44.4,
+   "per_year": -2154
+  },
+  "OLD": {
+   "trades": 40,
+   "net": -17966,
+   "pf": 0.55,
+   "dd": 25692,
+   "win_months": 11.5,
+   "per_year": -8471
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -6542,
+   "pf": 0.8,
+   "dd": 12941,
+   "win_months": 22.2,
+   "per_year": -10603
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": -8551,
+   "pf": 0.96,
+   "dd": 48349,
+   "win_months": 44.4,
+   "per_year": -3828
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -36541,
+   "pf": 0.7,
+   "dd": 53985,
+   "win_months": 34.6,
+   "per_year": -17228
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -8514,
+   "pf": 0.8,
+   "dd": 18991,
+   "win_months": 22.2,
+   "per_year": -13800
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -24212,
+   "pf": 0.88,
+   "dd": 45929,
+   "win_months": 40.7,
+   "per_year": -10838
+  },
+  "OLD": {
+   "trades": 68,
+   "net": 7016,
+   "pf": 1.15,
+   "dd": 12304,
+   "win_months": 19.2,
+   "per_year": 3308
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -8662,
+   "pf": 0.66,
+   "dd": 18300,
+   "win_months": 11.1,
+   "per_year": -14041
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 18587,
+   "pf": 1.11,
+   "dd": 22199,
+   "win_months": 51.9,
+   "per_year": 8321
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -36349,
+   "pf": 0.58,
+   "dd": 38502,
+   "win_months": 30.8,
+   "per_year": -17138
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -11795,
+   "pf": 0.72,
+   "dd": 16289,
+   "win_months": 33.3,
+   "per_year": -19119
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 182,
+   "net": -36445,
+   "pf": 0.77,
+   "dd": 57106,
+   "win_months": 29.6,
+   "per_year": -16315
+  },
+  "OLD": {
+   "trades": 263,
+   "net": -74965,
+   "pf": 0.56,
+   "dd": 74965,
+   "win_months": 7.7,
+   "per_year": -35345
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -11931,
+   "pf": 0.39,
+   "dd": 16312,
+   "win_months": 11.1,
+   "per_year": -19340
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 183,
+   "net": 4535,
+   "pf": 1.02,
+   "dd": 32132,
+   "win_months": 44.4,
+   "per_year": 2030
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -27099,
+   "pf": 0.82,
+   "dd": 54702,
+   "win_months": 46.2,
+   "per_year": -12777
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -30828,
+   "pf": 0.51,
+   "dd": 33431,
+   "win_months": 22.2,
+   "per_year": -49969
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 184,
+   "net": -20476,
+   "pf": 0.9,
+   "dd": 62625,
+   "win_months": 29.6,
+   "per_year": -9166
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -1819,
+   "pf": 0.99,
+   "dd": 36792,
+   "win_months": 34.6,
+   "per_year": -858
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -21720,
+   "pf": 0.4,
+   "dd": 31837,
+   "win_months": 22.2,
+   "per_year": -35206
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 3227,
+   "pf": 1.03,
+   "dd": 24440,
+   "win_months": 40.7,
+   "per_year": 1445
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -20082,
+   "pf": 0.76,
+   "dd": 26776,
+   "win_months": 38.5,
+   "per_year": -9468
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -16651,
+   "pf": 0.57,
+   "dd": 18936,
+   "win_months": 33.3,
+   "per_year": -26990
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 185,
+   "net": -23825,
+   "pf": 0.89,
+   "dd": 87093,
+   "win_months": 37.0,
+   "per_year": -10665
+  },
+  "OLD": {
+   "trades": 271,
+   "net": -115696,
+   "pf": 0.57,
+   "dd": 138009,
+   "win_months": 23.1,
+   "per_year": -54549
+  },
+  "NEW": {
+   "trades": 70,
+   "net": -4983,
+   "pf": 0.93,
+   "dd": 20163,
+   "win_months": 33.3,
+   "per_year": -8077
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 183,
+   "net": -27712,
+   "pf": 0.85,
+   "dd": 33517,
+   "win_months": 40.7,
+   "per_year": -12405
+  },
+  "OLD": {
+   "trades": 40,
+   "net": -14214,
+   "pf": 0.66,
+   "dd": 26721,
+   "win_months": 11.5,
+   "per_year": -6702
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -12178,
+   "pf": 0.68,
+   "dd": 15990,
+   "win_months": 22.2,
+   "per_year": -19739
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": 4668,
+   "pf": 1.02,
+   "dd": 48701,
+   "win_months": 51.9,
+   "per_year": 2090
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -52772,
+   "pf": 0.61,
+   "dd": 67895,
+   "win_months": 30.8,
+   "per_year": -24881
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -14856,
+   "pf": 0.7,
+   "dd": 20277,
+   "win_months": 22.2,
+   "per_year": -24080
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -17374,
+   "pf": 0.92,
+   "dd": 47018,
+   "win_months": 48.1,
+   "per_year": -7778
+  },
+  "OLD": {
+   "trades": 68,
+   "net": 3032,
+   "pf": 1.06,
+   "dd": 16190,
+   "win_months": 19.2,
+   "per_year": 1429
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -9640,
+   "pf": 0.63,
+   "dd": 18703,
+   "win_months": 11.1,
+   "per_year": -15626
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 21672,
+   "pf": 1.12,
+   "dd": 27595,
+   "win_months": 44.4,
+   "per_year": 9702
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -42329,
+   "pf": 0.54,
+   "dd": 44047,
+   "win_months": 30.8,
+   "per_year": -19957
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -15127,
+   "pf": 0.67,
+   "dd": 18344,
+   "win_months": 22.2,
+   "per_year": -24519
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "iv_rank",
+  "rule": "iv_rank<36",
+  "SEL": {
+   "trades": 182,
+   "net": -31373,
+   "pf": 0.8,
+   "dd": 60084,
+   "win_months": 37.0,
+   "per_year": -14044
+  },
+  "OLD": {
+   "trades": 263,
+   "net": -85400,
+   "pf": 0.53,
+   "dd": 85400,
+   "win_months": 11.5,
+   "per_year": -40265
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -12782,
+   "pf": 0.38,
+   "dd": 17162,
+   "win_months": 11.1,
+   "per_year": -20718
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 183,
+   "net": 43336,
+   "pf": 1.22,
+   "dd": 25528,
+   "win_months": 51.9,
+   "per_year": 19400
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -35941,
+   "pf": 0.79,
+   "dd": 56789,
+   "win_months": 42.3,
+   "per_year": -16946
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -35829,
+   "pf": 0.48,
+   "dd": 38113,
+   "win_months": 11.1,
+   "per_year": -58075
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 184,
+   "net": -16966,
+   "pf": 0.92,
+   "dd": 73644,
+   "win_months": 33.3,
+   "per_year": -7595
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -22048,
+   "pf": 0.88,
+   "dd": 52448,
+   "win_months": 38.5,
+   "per_year": -10395
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -29531,
+   "pf": 0.33,
+   "dd": 39649,
+   "win_months": 22.2,
+   "per_year": -47868
+  }
+ },
+ {
+  "base": "SELL|10:00|w1%|sl50|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": 1095,
+   "pf": 1.01,
+   "dd": 29557,
+   "win_months": 40.7,
+   "per_year": 490
+  },
+  "OLD": {
+   "trades": 111,
+   "net": -28649,
+   "pf": 0.69,
+   "dd": 34808,
+   "win_months": 38.5,
+   "per_year": -13508
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -17188,
+   "pf": 0.57,
+   "dd": 19917,
+   "win_months": 33.3,
+   "per_year": -27860
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 184,
+   "net": 6116,
+   "pf": 1.03,
+   "dd": 86961,
+   "win_months": 37.0,
+   "per_year": 2738
+  },
+  "OLD": {
+   "trades": 270,
+   "net": -99401,
+   "pf": 0.63,
+   "dd": 118707,
+   "win_months": 26.9,
+   "per_year": -46866
+  },
+  "NEW": {
+   "trades": 70,
+   "net": -38875,
+   "pf": 0.55,
+   "dd": 40475,
+   "win_months": 22.2,
+   "per_year": -63013
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 183,
+   "net": -33823,
+   "pf": 0.81,
+   "dd": 58943,
+   "win_months": 48.1,
+   "per_year": -15141
+  },
+  "OLD": {
+   "trades": 40,
+   "net": -11898,
+   "pf": 0.74,
+   "dd": 18510,
+   "win_months": 15.4,
+   "per_year": -5610
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -18680,
+   "pf": 0.58,
+   "dd": 18680,
+   "win_months": 11.1,
+   "per_year": -30278
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": -23416,
+   "pf": 0.88,
+   "dd": 61337,
+   "win_months": 44.4,
+   "per_year": -10482
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -35232,
+   "pf": 0.74,
+   "dd": 43051,
+   "win_months": 42.3,
+   "per_year": -16611
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -20757,
+   "pf": 0.65,
+   "dd": 25957,
+   "win_months": 22.2,
+   "per_year": -33645
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 183,
+   "net": -24618,
+   "pf": 0.84,
+   "dd": 39725,
+   "win_months": 25.9,
+   "per_year": -11020
+  },
+  "OLD": {
+   "trades": 166,
+   "net": -39744,
+   "pf": 0.64,
+   "dd": 40838,
+   "win_months": 11.5,
+   "per_year": -18738
+  },
+  "NEW": {
+   "trades": 49,
+   "net": -3524,
+   "pf": 0.9,
+   "dd": 19183,
+   "win_months": 22.2,
+   "per_year": -5712
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 51,
+   "pf": 1.0,
+   "dd": 32346,
+   "win_months": 48.1,
+   "per_year": 23
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -38470,
+   "pf": 0.62,
+   "dd": 43758,
+   "win_months": 34.6,
+   "per_year": -18138
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -21372,
+   "pf": 0.61,
+   "dd": 26658,
+   "win_months": 33.3,
+   "per_year": -34643
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 192,
+   "net": -12202,
+   "pf": 0.95,
+   "dd": 90182,
+   "win_months": 18.5,
+   "per_year": -5462
+  },
+  "OLD": {
+   "trades": 29,
+   "net": -23725,
+   "pf": 0.43,
+   "dd": 24356,
+   "win_months": 11.5,
+   "per_year": -11186
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -44888,
+   "pf": 0.38,
+   "dd": 54006,
+   "win_months": 22.2,
+   "per_year": -72760
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 184,
+   "net": 8492,
+   "pf": 1.05,
+   "dd": 40405,
+   "win_months": 48.1,
+   "per_year": 3802
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -53488,
+   "pf": 0.72,
+   "dd": 68476,
+   "win_months": 38.5,
+   "per_year": -25219
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -36683,
+   "pf": 0.47,
+   "dd": 36683,
+   "win_months": 22.2,
+   "per_year": -59460
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 183,
+   "net": -21875,
+   "pf": 0.89,
+   "dd": 44519,
+   "win_months": 40.7,
+   "per_year": -9792
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -12240,
+   "pf": 0.93,
+   "dd": 36022,
+   "win_months": 46.2,
+   "per_year": -5771
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -19409,
+   "pf": 0.47,
+   "dd": 30127,
+   "win_months": 22.2,
+   "per_year": -31460
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": -20756,
+   "pf": 0.82,
+   "dd": 41243,
+   "win_months": 55.6,
+   "per_year": -9292
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 17097,
+   "pf": 1.23,
+   "dd": 10165,
+   "win_months": 46.2,
+   "per_year": 8061
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -17204,
+   "pf": 0.5,
+   "dd": 19503,
+   "win_months": 33.3,
+   "per_year": -27886
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 184,
+   "net": -12594,
+   "pf": 0.95,
+   "dd": 103626,
+   "win_months": 33.3,
+   "per_year": -5638
+  },
+  "OLD": {
+   "trades": 270,
+   "net": -102024,
+   "pf": 0.65,
+   "dd": 122386,
+   "win_months": 34.6,
+   "per_year": -48103
+  },
+  "NEW": {
+   "trades": 70,
+   "net": -17521,
+   "pf": 0.81,
+   "dd": 29648,
+   "win_months": 33.3,
+   "per_year": -28400
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 184,
+   "net": -35719,
+   "pf": 0.8,
+   "dd": 75091,
+   "win_months": 33.3,
+   "per_year": -15990
+  },
+  "OLD": {
+   "trades": 443,
+   "net": -125939,
+   "pf": 0.68,
+   "dd": 135029,
+   "win_months": 30.8,
+   "per_year": -59378
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -4336,
+   "pf": 0.71,
+   "dd": 11590,
+   "win_months": 22.2,
+   "per_year": -7028
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 184,
+   "net": -9607,
+   "pf": 0.95,
+   "dd": 55991,
+   "win_months": 48.1,
+   "per_year": -4301
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -38300,
+   "pf": 0.72,
+   "dd": 46801,
+   "win_months": 34.6,
+   "per_year": -18058
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -28950,
+   "pf": 0.57,
+   "dd": 34396,
+   "win_months": 22.2,
+   "per_year": -46926
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 183,
+   "net": -27010,
+   "pf": 0.83,
+   "dd": 40669,
+   "win_months": 22.2,
+   "per_year": -12091
+  },
+  "OLD": {
+   "trades": 166,
+   "net": -38654,
+   "pf": 0.65,
+   "dd": 39748,
+   "win_months": 7.7,
+   "per_year": -18225
+  },
+  "NEW": {
+   "trades": 49,
+   "net": -5745,
+   "pf": 0.85,
+   "dd": 20635,
+   "win_months": 22.2,
+   "per_year": -9312
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 1834,
+   "pf": 1.01,
+   "dd": 33733,
+   "win_months": 44.4,
+   "per_year": 821
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -39087,
+   "pf": 0.62,
+   "dd": 44692,
+   "win_months": 34.6,
+   "per_year": -18429
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -27932,
+   "pf": 0.55,
+   "dd": 33217,
+   "win_months": 22.2,
+   "per_year": -45275
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 192,
+   "net": -28946,
+   "pf": 0.89,
+   "dd": 107884,
+   "win_months": 22.2,
+   "per_year": -12958
+  },
+  "OLD": {
+   "trades": 29,
+   "net": -20986,
+   "pf": 0.49,
+   "dd": 22888,
+   "win_months": 11.5,
+   "per_year": -9894
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -25276,
+   "pf": 0.67,
+   "dd": 44920,
+   "win_months": 33.3,
+   "per_year": -40970
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 184,
+   "net": -11068,
+   "pf": 0.95,
+   "dd": 52119,
+   "win_months": 40.7,
+   "per_year": -4955
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -50220,
+   "pf": 0.75,
+   "dd": 69882,
+   "win_months": 38.5,
+   "per_year": -23678
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -33392,
+   "pf": 0.56,
+   "dd": 37294,
+   "win_months": 33.3,
+   "per_year": -54125
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 183,
+   "net": -26630,
+   "pf": 0.87,
+   "dd": 48338,
+   "win_months": 40.7,
+   "per_year": -11921
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -10789,
+   "pf": 0.94,
+   "dd": 42812,
+   "win_months": 53.8,
+   "per_year": -5087
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -26531,
+   "pf": 0.39,
+   "dd": 37249,
+   "win_months": 22.2,
+   "per_year": -43004
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl30|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": -25248,
+   "pf": 0.79,
+   "dd": 43387,
+   "win_months": 51.9,
+   "per_year": -11302
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 16302,
+   "pf": 1.22,
+   "dd": 10346,
+   "win_months": 46.2,
+   "per_year": 7686
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -18579,
+   "pf": 0.48,
+   "dd": 19503,
+   "win_months": 33.3,
+   "per_year": -30115
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 184,
+   "net": -36981,
+   "pf": 0.81,
+   "dd": 53240,
+   "win_months": 33.3,
+   "per_year": -16555
+  },
+  "OLD": {
+   "trades": 270,
+   "net": -95961,
+   "pf": 0.57,
+   "dd": 107418,
+   "win_months": 19.2,
+   "per_year": -45244
+  },
+  "NEW": {
+   "trades": 70,
+   "net": 998,
+   "pf": 1.02,
+   "dd": 14694,
+   "win_months": 44.4,
+   "per_year": 1618
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 183,
+   "net": -19321,
+   "pf": 0.88,
+   "dd": 29725,
+   "win_months": 40.7,
+   "per_year": -8649
+  },
+  "OLD": {
+   "trades": 40,
+   "net": -6830,
+   "pf": 0.78,
+   "dd": 15706,
+   "win_months": 26.9,
+   "per_year": -3220
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -3505,
+   "pf": 0.88,
+   "dd": 12608,
+   "win_months": 33.3,
+   "per_year": -5681
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 184,
+   "net": -27816,
+   "pf": 0.83,
+   "dd": 52108,
+   "win_months": 40.7,
+   "per_year": -12452
+  },
+  "OLD": {
+   "trades": 188,
+   "net": -21486,
+   "pf": 0.8,
+   "dd": 31164,
+   "win_months": 34.6,
+   "per_year": -10130
+  },
+  "NEW": {
+   "trades": 47,
+   "net": 692,
+   "pf": 1.03,
+   "dd": 8193,
+   "win_months": 44.4,
+   "per_year": 1121
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -11275,
+   "pf": 0.94,
+   "dd": 33953,
+   "win_months": 48.1,
+   "per_year": -5047
+  },
+  "OLD": {
+   "trades": 66,
+   "net": -5341,
+   "pf": 0.88,
+   "dd": 13957,
+   "win_months": 19.2,
+   "per_year": -2518
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -5485,
+   "pf": 0.78,
+   "dd": 14271,
+   "win_months": 22.2,
+   "per_year": -8891
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 2907,
+   "pf": 1.02,
+   "dd": 21208,
+   "win_months": 48.1,
+   "per_year": 1301
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -30361,
+   "pf": 0.62,
+   "dd": 39896,
+   "win_months": 42.3,
+   "per_year": -14315
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -454,
+   "pf": 0.99,
+   "dd": 12343,
+   "win_months": 55.6,
+   "per_year": -736
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 178,
+   "net": -34274,
+   "pf": 0.8,
+   "dd": 48825,
+   "win_months": 48.1,
+   "per_year": -15343
+  },
+  "OLD": {
+   "trades": 134,
+   "net": -23100,
+   "pf": 0.77,
+   "dd": 31812,
+   "win_months": 30.8,
+   "per_year": -10891
+  },
+  "NEW": {
+   "trades": 75,
+   "net": 4251,
+   "pf": 1.07,
+   "dd": 12595,
+   "win_months": 44.4,
+   "per_year": 6891
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 184,
+   "net": -4540,
+   "pf": 0.97,
+   "dd": 18920,
+   "win_months": 51.9,
+   "per_year": -2032
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -31457,
+   "pf": 0.78,
+   "dd": 53232,
+   "win_months": 34.6,
+   "per_year": -14831
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -7695,
+   "pf": 0.85,
+   "dd": 18571,
+   "win_months": 33.3,
+   "per_year": -12473
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 183,
+   "net": -19383,
+   "pf": 0.9,
+   "dd": 51901,
+   "win_months": 33.3,
+   "per_year": -8677
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -16156,
+   "pf": 0.9,
+   "dd": 43234,
+   "win_months": 38.5,
+   "per_year": -7617
+  },
+  "NEW": {
+   "trades": 31,
+   "net": -16999,
+   "pf": 0.49,
+   "dd": 24196,
+   "win_months": 22.2,
+   "per_year": -27555
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl2000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": -1144,
+   "pf": 0.99,
+   "dd": 19994,
+   "win_months": 44.4,
+   "per_year": -512
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 7805,
+   "pf": 1.11,
+   "dd": 9917,
+   "win_months": 53.8,
+   "per_year": 3680
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -6843,
+   "pf": 0.78,
+   "dd": 19816,
+   "win_months": 44.4,
+   "per_year": -11091
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 184,
+   "net": -25807,
+   "pf": 0.88,
+   "dd": 64492,
+   "win_months": 40.7,
+   "per_year": -11553
+  },
+  "OLD": {
+   "trades": 270,
+   "net": -113017,
+   "pf": 0.55,
+   "dd": 124100,
+   "win_months": 23.1,
+   "per_year": -53285
+  },
+  "NEW": {
+   "trades": 70,
+   "net": 4048,
+   "pf": 1.07,
+   "dd": 17614,
+   "win_months": 55.6,
+   "per_year": 6561
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 183,
+   "net": -24379,
+   "pf": 0.86,
+   "dd": 29451,
+   "win_months": 40.7,
+   "per_year": -10913
+  },
+  "OLD": {
+   "trades": 40,
+   "net": -7549,
+   "pf": 0.78,
+   "dd": 18749,
+   "win_months": 30.8,
+   "per_year": -3559
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -7923,
+   "pf": 0.76,
+   "dd": 14483,
+   "win_months": 33.3,
+   "per_year": -12842
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 184,
+   "net": -31761,
+   "pf": 0.81,
+   "dd": 55845,
+   "win_months": 40.7,
+   "per_year": -14218
+  },
+  "OLD": {
+   "trades": 188,
+   "net": -20296,
+   "pf": 0.81,
+   "dd": 29171,
+   "win_months": 38.5,
+   "per_year": -9569
+  },
+  "NEW": {
+   "trades": 47,
+   "net": 427,
+   "pf": 1.02,
+   "dd": 8910,
+   "win_months": 33.3,
+   "per_year": 692
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 184,
+   "net": -24986,
+   "pf": 0.87,
+   "dd": 45880,
+   "win_months": 48.1,
+   "per_year": -11185
+  },
+  "OLD": {
+   "trades": 66,
+   "net": -7957,
+   "pf": 0.83,
+   "dd": 17142,
+   "win_months": 19.2,
+   "per_year": -3751
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -3499,
+   "pf": 0.85,
+   "dd": 11806,
+   "win_months": 11.1,
+   "per_year": -5671
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 386,
+   "pf": 1.0,
+   "dd": 29473,
+   "win_months": 44.4,
+   "per_year": 173
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -30398,
+   "pf": 0.62,
+   "dd": 40499,
+   "win_months": 46.2,
+   "per_year": -14332
+  },
+  "NEW": {
+   "trades": 50,
+   "net": -3170,
+   "pf": 0.92,
+   "dd": 13277,
+   "win_months": 33.3,
+   "per_year": -5139
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 178,
+   "net": -33651,
+   "pf": 0.81,
+   "dd": 46491,
+   "win_months": 44.4,
+   "per_year": -15064
+  },
+  "OLD": {
+   "trades": 134,
+   "net": -24636,
+   "pf": 0.76,
+   "dd": 33396,
+   "win_months": 34.6,
+   "per_year": -11615
+  },
+  "NEW": {
+   "trades": 75,
+   "net": 26,
+   "pf": 1.0,
+   "dd": 15705,
+   "win_months": 44.4,
+   "per_year": 42
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 184,
+   "net": 1273,
+   "pf": 1.01,
+   "dd": 26508,
+   "win_months": 48.1,
+   "per_year": 570
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -36994,
+   "pf": 0.76,
+   "dd": 52179,
+   "win_months": 42.3,
+   "per_year": -17442
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -14920,
+   "pf": 0.75,
+   "dd": 24509,
+   "win_months": 33.3,
+   "per_year": -24184
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 184,
+   "net": -34629,
+   "pf": 0.82,
+   "dd": 49525,
+   "win_months": 40.7,
+   "per_year": -15502
+  },
+  "OLD": {
+   "trades": 165,
+   "net": -91303,
+   "pf": 0.39,
+   "dd": 97681,
+   "win_months": 30.8,
+   "per_year": -43048
+  },
+  "NEW": {
+   "trades": 75,
+   "net": -7310,
+   "pf": 0.88,
+   "dd": 24935,
+   "win_months": 44.4,
+   "per_year": -11849
+  }
+ },
+ {
+  "base": "SELL|10:00|w2%|sl50|osl3000",
+  "feature": "tdte",
+  "rule": "tdte=0",
+  "SEL": {
+   "trades": 116,
+   "net": -9740,
+   "pf": 0.92,
+   "dd": 25872,
+   "win_months": 40.7,
+   "per_year": -4360
+  },
+  "OLD": {
+   "trades": 110,
+   "net": 2839,
+   "pf": 1.04,
+   "dd": 11622,
+   "win_months": 50.0,
+   "per_year": 1339
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -8295,
+   "pf": 0.75,
+   "dd": 21269,
+   "win_months": 44.4,
+   "per_year": -13446
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 181,
+   "net": -11173,
+   "pf": 0.95,
+   "dd": 44801,
+   "win_months": 33.3,
+   "per_year": -5002
+  },
+  "OLD": {
+   "trades": 114,
+   "net": 5131,
+   "pf": 1.06,
+   "dd": 14675,
+   "win_months": 53.8,
+   "per_year": 2419
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -15898,
+   "pf": 0.63,
+   "dd": 28494,
+   "win_months": 33.3,
+   "per_year": -25769
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 182,
+   "net": -5125,
+   "pf": 0.97,
+   "dd": 37479,
+   "win_months": 37.0,
+   "per_year": -2294
+  },
+  "OLD": {
+   "trades": 445,
+   "net": -26780,
+   "pf": 0.93,
+   "dd": 46449,
+   "win_months": 46.2,
+   "per_year": -12626
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -16278,
+   "pf": 0.3,
+   "dd": 16455,
+   "win_months": 11.1,
+   "per_year": -26385
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 180,
+   "net": 15029,
+   "pf": 1.08,
+   "dd": 62389,
+   "win_months": 37.0,
+   "per_year": 6728
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -36520,
+   "pf": 0.73,
+   "dd": 42233,
+   "win_months": 38.5,
+   "per_year": -17218
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -16836,
+   "pf": 0.76,
+   "dd": 37946,
+   "win_months": 33.3,
+   "per_year": -27289
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 181,
+   "net": -14005,
+   "pf": 0.92,
+   "dd": 55198,
+   "win_months": 29.6,
+   "per_year": -6270
+  },
+  "OLD": {
+   "trades": 166,
+   "net": -26450,
+   "pf": 0.77,
+   "dd": 28292,
+   "win_months": 15.4,
+   "per_year": -12471
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -8981,
+   "pf": 0.78,
+   "dd": 20765,
+   "win_months": 11.1,
+   "per_year": -14558
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 182,
+   "net": 1928,
+   "pf": 1.01,
+   "dd": 34712,
+   "win_months": 40.7,
+   "per_year": 863
+  },
+  "OLD": {
+   "trades": 175,
+   "net": -7542,
+   "pf": 0.93,
+   "dd": 19883,
+   "win_months": 23.1,
+   "per_year": -3556
+  },
+  "NEW": {
+   "trades": 35,
+   "net": 2740,
+   "pf": 1.11,
+   "dd": 12403,
+   "win_months": 11.1,
+   "per_year": 4441
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 176,
+   "net": 206,
+   "pf": 1.0,
+   "dd": 37217,
+   "win_months": 48.1,
+   "per_year": 92
+  },
+  "OLD": {
+   "trades": 134,
+   "net": 3955,
+   "pf": 1.03,
+   "dd": 22717,
+   "win_months": 34.6,
+   "per_year": 1865
+  },
+  "NEW": {
+   "trades": 74,
+   "net": -37441,
+   "pf": 0.63,
+   "dd": 53004,
+   "win_months": 33.3,
+   "per_year": -60689
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 179,
+   "net": -32529,
+   "pf": 0.83,
+   "dd": 70135,
+   "win_months": 40.7,
+   "per_year": -14562
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -31196,
+   "pf": 0.82,
+   "dd": 39798,
+   "win_months": 34.6,
+   "per_year": -14708
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -16770,
+   "pf": 0.78,
+   "dd": 40009,
+   "win_months": 33.3,
+   "per_year": -27183
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 180,
+   "net": -356,
+   "pf": 1.0,
+   "dd": 35457,
+   "win_months": 37.0,
+   "per_year": -159
+  },
+  "OLD": {
+   "trades": 222,
+   "net": 21812,
+   "pf": 1.12,
+   "dd": 32804,
+   "win_months": 57.7,
+   "per_year": 10284
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -6076,
+   "pf": 0.85,
+   "dd": 18367,
+   "win_months": 33.3,
+   "per_year": -9848
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 197,
+   "net": -8904,
+   "pf": 0.97,
+   "dd": 62390,
+   "win_months": 48.1,
+   "per_year": -3986
+  },
+  "OLD": {
+   "trades": 193,
+   "net": -29037,
+   "pf": 0.86,
+   "dd": 55066,
+   "win_months": 42.3,
+   "per_year": -13691
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -36979,
+   "pf": 0.55,
+   "dd": 39401,
+   "win_months": 0.0,
+   "per_year": -59939
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 181,
+   "net": -7252,
+   "pf": 0.97,
+   "dd": 51490,
+   "win_months": 44.4,
+   "per_year": -3246
+  },
+  "OLD": {
+   "trades": 114,
+   "net": 11127,
+   "pf": 1.11,
+   "dd": 12298,
+   "win_months": 42.3,
+   "per_year": 5246
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -16619,
+   "pf": 0.64,
+   "dd": 36295,
+   "win_months": 33.3,
+   "per_year": -26938
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 182,
+   "net": 11303,
+   "pf": 1.05,
+   "dd": 50345,
+   "win_months": 40.7,
+   "per_year": 5060
+  },
+  "OLD": {
+   "trades": 445,
+   "net": -61813,
+   "pf": 0.86,
+   "dd": 68018,
+   "win_months": 34.6,
+   "per_year": -29144
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -15178,
+   "pf": 0.42,
+   "dd": 15178,
+   "win_months": 0.0,
+   "per_year": -24602
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 180,
+   "net": 29077,
+   "pf": 1.13,
+   "dd": 76692,
+   "win_months": 37.0,
+   "per_year": 13016
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -51004,
+   "pf": 0.68,
+   "dd": 54849,
+   "win_months": 38.5,
+   "per_year": -24047
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -21278,
+   "pf": 0.71,
+   "dd": 42069,
+   "win_months": 33.3,
+   "per_year": -34490
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 181,
+   "net": 2654,
+   "pf": 1.01,
+   "dd": 60387,
+   "win_months": 37.0,
+   "per_year": 1188
+  },
+  "OLD": {
+   "trades": 68,
+   "net": -2385,
+   "pf": 0.96,
+   "dd": 18090,
+   "win_months": 11.5,
+   "per_year": -1124
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -27421,
+   "pf": 0.42,
+   "dd": 34603,
+   "win_months": 11.1,
+   "per_year": -44447
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 19964,
+   "pf": 1.09,
+   "dd": 53060,
+   "win_months": 33.3,
+   "per_year": 8937
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -16431,
+   "pf": 0.83,
+   "dd": 26913,
+   "win_months": 23.1,
+   "per_year": -7747
+  },
+  "NEW": {
+   "trades": 49,
+   "net": -36648,
+   "pf": 0.41,
+   "dd": 48573,
+   "win_months": 11.1,
+   "per_year": -59403
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 176,
+   "net": -15151,
+   "pf": 0.93,
+   "dd": 47068,
+   "win_months": 33.3,
+   "per_year": -6782
+  },
+  "OLD": {
+   "trades": 134,
+   "net": -19317,
+   "pf": 0.88,
+   "dd": 36880,
+   "win_months": 26.9,
+   "per_year": -9108
+  },
+  "NEW": {
+   "trades": 74,
+   "net": -35733,
+   "pf": 0.67,
+   "dd": 60444,
+   "win_months": 33.3,
+   "per_year": -57920
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 179,
+   "net": -12081,
+   "pf": 0.94,
+   "dd": 76974,
+   "win_months": 44.4,
+   "per_year": -5408
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -40401,
+   "pf": 0.79,
+   "dd": 54676,
+   "win_months": 30.8,
+   "per_year": -19048
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -19158,
+   "pf": 0.77,
+   "dd": 43822,
+   "win_months": 33.3,
+   "per_year": -31054
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 180,
+   "net": 6045,
+   "pf": 1.03,
+   "dd": 42188,
+   "win_months": 40.7,
+   "per_year": 2706
+  },
+  "OLD": {
+   "trades": 222,
+   "net": 6398,
+   "pf": 1.03,
+   "dd": 29790,
+   "win_months": 53.8,
+   "per_year": 3016
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -11439,
+   "pf": 0.73,
+   "dd": 24631,
+   "win_months": 33.3,
+   "per_year": -18541
+  }
+ },
+ {
+  "base": "ORB|09:30|sl25|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 197,
+   "net": -5540,
+   "pf": 0.98,
+   "dd": 64854,
+   "win_months": 55.6,
+   "per_year": -2480
+  },
+  "OLD": {
+   "trades": 193,
+   "net": -25410,
+   "pf": 0.89,
+   "dd": 59882,
+   "win_months": 42.3,
+   "per_year": -11980
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -41000,
+   "pf": 0.54,
+   "dd": 48368,
+   "win_months": 0.0,
+   "per_year": -66458
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "gap_abs",
+  "rule": "0.132<=gap_abs<0.307",
+  "SEL": {
+   "trades": 183,
+   "net": 1999,
+   "pf": 1.01,
+   "dd": 37044,
+   "win_months": 48.1,
+   "per_year": 895
+  },
+  "OLD": {
+   "trades": 140,
+   "net": -45288,
+   "pf": 0.69,
+   "dd": 64384,
+   "win_months": 26.9,
+   "per_year": -21353
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -24489,
+   "pf": 0.58,
+   "dd": 33807,
+   "win_months": 11.1,
+   "per_year": -39694
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 182,
+   "net": 49906,
+   "pf": 1.27,
+   "dd": 32761,
+   "win_months": 51.9,
+   "per_year": 22340
+  },
+  "OLD": {
+   "trades": 445,
+   "net": -69724,
+   "pf": 0.84,
+   "dd": 73905,
+   "win_months": 38.5,
+   "per_year": -32874
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -16930,
+   "pf": 0.33,
+   "dd": 18609,
+   "win_months": 22.2,
+   "per_year": -27442
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 180,
+   "net": 32885,
+   "pf": 1.15,
+   "dd": 66339,
+   "win_months": 48.1,
+   "per_year": 14721
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -66832,
+   "pf": 0.61,
+   "dd": 71717,
+   "win_months": 23.1,
+   "per_year": -31510
+  },
+  "NEW": {
+   "trades": 52,
+   "net": 129,
+   "pf": 1.0,
+   "dd": 22638,
+   "win_months": 44.4,
+   "per_year": 209
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 181,
+   "net": -4231,
+   "pf": 0.98,
+   "dd": 45254,
+   "win_months": 37.0,
+   "per_year": -1894
+  },
+  "OLD": {
+   "trades": 68,
+   "net": -2449,
+   "pf": 0.96,
+   "dd": 22113,
+   "win_months": 11.5,
+   "per_year": -1155
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -26380,
+   "pf": 0.45,
+   "dd": 28746,
+   "win_months": 0.0,
+   "per_year": -42759
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 182,
+   "net": 1571,
+   "pf": 1.01,
+   "dd": 35547,
+   "win_months": 40.7,
+   "per_year": 703
+  },
+  "OLD": {
+   "trades": 175,
+   "net": -20375,
+   "pf": 0.85,
+   "dd": 32342,
+   "win_months": 23.1,
+   "per_year": -9606
+  },
+  "NEW": {
+   "trades": 35,
+   "net": -946,
+   "pf": 0.97,
+   "dd": 17784,
+   "win_months": 11.1,
+   "per_year": -1533
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 176,
+   "net": 13452,
+   "pf": 1.07,
+   "dd": 35228,
+   "win_months": 48.1,
+   "per_year": 6022
+  },
+  "OLD": {
+   "trades": 134,
+   "net": -7159,
+   "pf": 0.95,
+   "dd": 24688,
+   "win_months": 34.6,
+   "per_year": -3375
+  },
+  "NEW": {
+   "trades": 74,
+   "net": -17101,
+   "pf": 0.84,
+   "dd": 33356,
+   "win_months": 44.4,
+   "per_year": -27719
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 179,
+   "net": 15111,
+   "pf": 1.08,
+   "dd": 32707,
+   "win_months": 51.9,
+   "per_year": 6765
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -36940,
+   "pf": 0.81,
+   "dd": 48631,
+   "win_months": 34.6,
+   "per_year": -17417
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -12889,
+   "pf": 0.84,
+   "dd": 33226,
+   "win_months": 44.4,
+   "per_year": -20892
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 180,
+   "net": 57309,
+   "pf": 1.29,
+   "dd": 31009,
+   "win_months": 48.1,
+   "per_year": 25654
+  },
+  "OLD": {
+   "trades": 222,
+   "net": 3784,
+   "pf": 1.02,
+   "dd": 46250,
+   "win_months": 46.2,
+   "per_year": 1784
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -888,
+   "pf": 0.98,
+   "dd": 14544,
+   "win_months": 44.4,
+   "per_year": -1440
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 197,
+   "net": 540,
+   "pf": 1.0,
+   "dd": 48590,
+   "win_months": 48.1,
+   "per_year": 242
+  },
+  "OLD": {
+   "trades": 193,
+   "net": -49094,
+   "pf": 0.8,
+   "dd": 71273,
+   "win_months": 38.5,
+   "per_year": -23147
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -22368,
+   "pf": 0.74,
+   "dd": 30332,
+   "win_months": 22.2,
+   "per_year": -36256
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 181,
+   "net": -917,
+   "pf": 1.0,
+   "dd": 43428,
+   "win_months": 44.4,
+   "per_year": -410
+  },
+  "OLD": {
+   "trades": 114,
+   "net": -1890,
+   "pf": 0.98,
+   "dd": 20507,
+   "win_months": 42.3,
+   "per_year": -891
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -12079,
+   "pf": 0.76,
+   "dd": 32430,
+   "win_months": 33.3,
+   "per_year": -19578
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 182,
+   "net": 57018,
+   "pf": 1.26,
+   "dd": 41002,
+   "win_months": 51.9,
+   "per_year": 25524
+  },
+  "OLD": {
+   "trades": 445,
+   "net": -111131,
+   "pf": 0.79,
+   "dd": 119429,
+   "win_months": 34.6,
+   "per_year": -52396
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -17712,
+   "pf": 0.39,
+   "dd": 17712,
+   "win_months": 11.1,
+   "per_year": -28709
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 180,
+   "net": 47320,
+   "pf": 1.18,
+   "dd": 77155,
+   "win_months": 44.4,
+   "per_year": 21183
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -91456,
+   "pf": 0.55,
+   "dd": 93346,
+   "win_months": 34.6,
+   "per_year": -43120
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -6854,
+   "pf": 0.92,
+   "dd": 29380,
+   "win_months": 44.4,
+   "per_year": -11110
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 181,
+   "net": 23825,
+   "pf": 1.09,
+   "dd": 58023,
+   "win_months": 40.7,
+   "per_year": 10665
+  },
+  "OLD": {
+   "trades": 68,
+   "net": -10932,
+   "pf": 0.84,
+   "dd": 23303,
+   "win_months": 11.5,
+   "per_year": -5154
+  },
+  "NEW": {
+   "trades": 33,
+   "net": -34202,
+   "pf": 0.38,
+   "dd": 39485,
+   "win_months": 0.0,
+   "per_year": -55438
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 183,
+   "net": 44375,
+   "pf": 1.16,
+   "dd": 45373,
+   "win_months": 40.7,
+   "per_year": 19865
+  },
+  "OLD": {
+   "trades": 124,
+   "net": -29493,
+   "pf": 0.76,
+   "dd": 35194,
+   "win_months": 26.9,
+   "per_year": -13906
+  },
+  "NEW": {
+   "trades": 49,
+   "net": -14833,
+   "pf": 0.76,
+   "dd": 30215,
+   "win_months": 22.2,
+   "per_year": -24043
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 176,
+   "net": -1106,
+   "pf": 1.0,
+   "dd": 47386,
+   "win_months": 44.4,
+   "per_year": -495
+  },
+  "OLD": {
+   "trades": 134,
+   "net": -37763,
+   "pf": 0.8,
+   "dd": 45284,
+   "win_months": 26.9,
+   "per_year": -17804
+  },
+  "NEW": {
+   "trades": 74,
+   "net": -6864,
+   "pf": 0.94,
+   "dd": 30474,
+   "win_months": 44.4,
+   "per_year": -11127
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 179,
+   "net": 30628,
+   "pf": 1.13,
+   "dd": 40705,
+   "win_months": 44.4,
+   "per_year": 13711
+  },
+  "OLD": {
+   "trades": 182,
+   "net": -49266,
+   "pf": 0.78,
+   "dd": 61416,
+   "win_months": 30.8,
+   "per_year": -23228
+  },
+  "NEW": {
+   "trades": 62,
+   "net": -13185,
+   "pf": 0.85,
+   "dd": 36093,
+   "win_months": 44.4,
+   "per_year": -21372
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 180,
+   "net": 49988,
+   "pf": 1.21,
+   "dd": 42310,
+   "win_months": 40.7,
+   "per_year": 22377
+  },
+  "OLD": {
+   "trades": 222,
+   "net": -12212,
+   "pf": 0.95,
+   "dd": 45497,
+   "win_months": 42.3,
+   "per_year": -5758
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -7018,
+   "pf": 0.84,
+   "dd": 22841,
+   "win_months": 44.4,
+   "per_year": -11376
+  }
+ },
+ {
+  "base": "ORB|09:30|sl35|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 197,
+   "net": 6428,
+   "pf": 1.02,
+   "dd": 39969,
+   "win_months": 59.3,
+   "per_year": 2877
+  },
+  "OLD": {
+   "trades": 193,
+   "net": -51840,
+   "pf": 0.81,
+   "dd": 87921,
+   "win_months": 34.6,
+   "per_year": -24442
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -30620,
+   "pf": 0.68,
+   "dd": 37988,
+   "win_months": 11.1,
+   "per_year": -49633
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 163,
+   "net": 21665,
+   "pf": 1.12,
+   "dd": 46013,
+   "win_months": 51.9,
+   "per_year": 9699
+  },
+  "OLD": {
+   "trades": 266,
+   "net": 8723,
+   "pf": 1.04,
+   "dd": 40385,
+   "win_months": 50.0,
+   "per_year": 4113
+  },
+  "NEW": {
+   "trades": 67,
+   "net": -22174,
+   "pf": 0.77,
+   "dd": 49414,
+   "win_months": 44.4,
+   "per_year": -35942
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 175,
+   "net": 34808,
+   "pf": 1.21,
+   "dd": 36614,
+   "win_months": 59.3,
+   "per_year": 15582
+  },
+  "OLD": {
+   "trades": 40,
+   "net": 6880,
+   "pf": 1.16,
+   "dd": 15327,
+   "win_months": 23.1,
+   "per_year": 3244
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -25059,
+   "pf": 0.4,
+   "dd": 32197,
+   "win_months": 22.2,
+   "per_year": -40618
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 171,
+   "net": 16302,
+   "pf": 1.09,
+   "dd": 45076,
+   "win_months": 40.7,
+   "per_year": 7298
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -25168,
+   "pf": 0.8,
+   "dd": 35443,
+   "win_months": 42.3,
+   "per_year": -11866
+  },
+  "NEW": {
+   "trades": 51,
+   "net": -25176,
+   "pf": 0.65,
+   "dd": 41063,
+   "win_months": 33.3,
+   "per_year": -40808
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 172,
+   "net": 1293,
+   "pf": 1.01,
+   "dd": 28426,
+   "win_months": 29.6,
+   "per_year": 579
+  },
+  "OLD": {
+   "trades": 164,
+   "net": -23226,
+   "pf": 0.81,
+   "dd": 35974,
+   "win_months": 23.1,
+   "per_year": -10951
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -833,
+   "pf": 0.97,
+   "dd": 17344,
+   "win_months": 11.1,
+   "per_year": -1350
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 174,
+   "net": 9439,
+   "pf": 1.05,
+   "dd": 42923,
+   "win_months": 29.6,
+   "per_year": 4225
+  },
+  "OLD": {
+   "trades": 122,
+   "net": 6561,
+   "pf": 1.08,
+   "dd": 11826,
+   "win_months": 34.6,
+   "per_year": 3093
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -37111,
+   "pf": 0.34,
+   "dd": 45306,
+   "win_months": 11.1,
+   "per_year": -60154
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 169,
+   "net": 20389,
+   "pf": 1.13,
+   "dd": 29680,
+   "win_months": 48.1,
+   "per_year": 9127
+  },
+  "OLD": {
+   "trades": 131,
+   "net": 31407,
+   "pf": 1.28,
+   "dd": 16955,
+   "win_months": 30.8,
+   "per_year": 14808
+  },
+  "NEW": {
+   "trades": 71,
+   "net": -22833,
+   "pf": 0.75,
+   "dd": 47851,
+   "win_months": 33.3,
+   "per_year": -37011
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 174,
+   "net": 19250,
+   "pf": 1.1,
+   "dd": 30174,
+   "win_months": 40.7,
+   "per_year": 8618
+  },
+  "OLD": {
+   "trades": 151,
+   "net": -10665,
+   "pf": 0.92,
+   "dd": 47181,
+   "win_months": 34.6,
+   "per_year": -5028
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -9936,
+   "pf": 0.82,
+   "dd": 27395,
+   "win_months": 33.3,
+   "per_year": -16105
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 168,
+   "net": 17283,
+   "pf": 1.08,
+   "dd": 60015,
+   "win_months": 44.4,
+   "per_year": 7737
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -42815,
+   "pf": 0.73,
+   "dd": 58654,
+   "win_months": 38.5,
+   "per_year": -20186
+  },
+  "NEW": {
+   "trades": 72,
+   "net": -46153,
+   "pf": 0.54,
+   "dd": 62175,
+   "win_months": 33.3,
+   "per_year": -74810
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 190,
+   "net": 13185,
+   "pf": 1.05,
+   "dd": 63789,
+   "win_months": 44.4,
+   "per_year": 5902
+  },
+  "OLD": {
+   "trades": 189,
+   "net": -19895,
+   "pf": 0.91,
+   "dd": 50846,
+   "win_months": 38.5,
+   "per_year": -9380
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -26185,
+   "pf": 0.66,
+   "dd": 42213,
+   "win_months": 22.2,
+   "per_year": -42444
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 163,
+   "net": 48784,
+   "pf": 1.24,
+   "dd": 45235,
+   "win_months": 55.6,
+   "per_year": 21838
+  },
+  "OLD": {
+   "trades": 266,
+   "net": -52271,
+   "pf": 0.83,
+   "dd": 79324,
+   "win_months": 38.5,
+   "per_year": -24645
+  },
+  "NEW": {
+   "trades": 67,
+   "net": -31188,
+   "pf": 0.69,
+   "dd": 58443,
+   "win_months": 44.4,
+   "per_year": -50553
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 175,
+   "net": 27543,
+   "pf": 1.14,
+   "dd": 56435,
+   "win_months": 51.9,
+   "per_year": 12330
+  },
+  "OLD": {
+   "trades": 40,
+   "net": -10391,
+   "pf": 0.8,
+   "dd": 28552,
+   "win_months": 19.2,
+   "per_year": -4899
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -25573,
+   "pf": 0.39,
+   "dd": 32447,
+   "win_months": 22.2,
+   "per_year": -41451
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 171,
+   "net": 37695,
+   "pf": 1.19,
+   "dd": 45998,
+   "win_months": 48.1,
+   "per_year": 16874
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -43905,
+   "pf": 0.71,
+   "dd": 45096,
+   "win_months": 26.9,
+   "per_year": -20700
+  },
+  "NEW": {
+   "trades": 51,
+   "net": -29946,
+   "pf": 0.6,
+   "dd": 44714,
+   "win_months": 33.3,
+   "per_year": -48540
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 172,
+   "net": 20198,
+   "pf": 1.12,
+   "dd": 25175,
+   "win_months": 37.0,
+   "per_year": 9042
+  },
+  "OLD": {
+   "trades": 164,
+   "net": -23286,
+   "pf": 0.83,
+   "dd": 40796,
+   "win_months": 15.4,
+   "per_year": -10979
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -815,
+   "pf": 0.98,
+   "dd": 19942,
+   "win_months": 11.1,
+   "per_year": -1321
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 174,
+   "net": 29165,
+   "pf": 1.14,
+   "dd": 48827,
+   "win_months": 37.0,
+   "per_year": 13056
+  },
+  "OLD": {
+   "trades": 122,
+   "net": -1861,
+   "pf": 0.98,
+   "dd": 18782,
+   "win_months": 34.6,
+   "per_year": -878
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -40968,
+   "pf": 0.31,
+   "dd": 51112,
+   "win_months": 11.1,
+   "per_year": -66405
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 176,
+   "net": 24359,
+   "pf": 1.09,
+   "dd": 73773,
+   "win_months": 37.0,
+   "per_year": 10904
+  },
+  "OLD": {
+   "trades": 28,
+   "net": -33729,
+   "pf": 0.19,
+   "dd": 35962,
+   "win_months": 3.8,
+   "per_year": -15903
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -16411,
+   "pf": 0.78,
+   "dd": 43008,
+   "win_months": 33.3,
+   "per_year": -26600
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 174,
+   "net": 37268,
+   "pf": 1.18,
+   "dd": 51319,
+   "win_months": 29.6,
+   "per_year": 16683
+  },
+  "OLD": {
+   "trades": 151,
+   "net": -15830,
+   "pf": 0.9,
+   "dd": 51328,
+   "win_months": 46.2,
+   "per_year": -7464
+  },
+  "NEW": {
+   "trades": 45,
+   "net": 3832,
+   "pf": 1.06,
+   "dd": 37176,
+   "win_months": 44.4,
+   "per_year": 6212
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 168,
+   "net": 40341,
+   "pf": 1.18,
+   "dd": 73816,
+   "win_months": 48.1,
+   "per_year": 18059
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -59255,
+   "pf": 0.68,
+   "dd": 75952,
+   "win_months": 38.5,
+   "per_year": -27938
+  },
+  "NEW": {
+   "trades": 72,
+   "net": -46938,
+   "pf": 0.55,
+   "dd": 63347,
+   "win_months": 33.3,
+   "per_year": -76082
+  }
+ },
+ {
+  "base": "ORB|09:45|sl25|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 190,
+   "net": 29868,
+   "pf": 1.11,
+   "dd": 60674,
+   "win_months": 59.3,
+   "per_year": 13370
+  },
+  "OLD": {
+   "trades": 189,
+   "net": -43041,
+   "pf": 0.82,
+   "dd": 80081,
+   "win_months": 34.6,
+   "per_year": -20293
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -26337,
+   "pf": 0.67,
+   "dd": 45687,
+   "win_months": 22.2,
+   "per_year": -42689
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 163,
+   "net": 30476,
+   "pf": 1.16,
+   "dd": 44688,
+   "win_months": 44.4,
+   "per_year": 13643
+  },
+  "OLD": {
+   "trades": 266,
+   "net": 7083,
+   "pf": 1.03,
+   "dd": 43233,
+   "win_months": 50.0,
+   "per_year": 3340
+  },
+  "NEW": {
+   "trades": 67,
+   "net": -29198,
+   "pf": 0.73,
+   "dd": 50384,
+   "win_months": 33.3,
+   "per_year": -47328
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 175,
+   "net": 21237,
+   "pf": 1.11,
+   "dd": 53658,
+   "win_months": 51.9,
+   "per_year": 9507
+  },
+  "OLD": {
+   "trades": 40,
+   "net": 15719,
+   "pf": 1.4,
+   "dd": 16848,
+   "win_months": 26.9,
+   "per_year": 7411
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -27306,
+   "pf": 0.42,
+   "dd": 35088,
+   "win_months": 22.2,
+   "per_year": -44261
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 175,
+   "net": 13526,
+   "pf": 1.08,
+   "dd": 27428,
+   "win_months": 51.9,
+   "per_year": 6055
+  },
+  "OLD": {
+   "trades": 185,
+   "net": 31890,
+   "pf": 1.24,
+   "dd": 27804,
+   "win_months": 50.0,
+   "per_year": 15036
+  },
+  "NEW": {
+   "trades": 43,
+   "net": -15730,
+   "pf": 0.57,
+   "dd": 24558,
+   "win_months": 22.2,
+   "per_year": -25497
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "vix",
+  "rule": "vix>=14.5",
+  "SEL": {
+   "trades": 167,
+   "net": -4809,
+   "pf": 0.98,
+   "dd": 54811,
+   "win_months": 33.3,
+   "per_year": -2153
+  },
+  "OLD": {
+   "trades": 255,
+   "net": -11413,
+   "pf": 0.96,
+   "dd": 53739,
+   "win_months": 34.6,
+   "per_year": -5381
+  },
+  "NEW": {
+   "trades": 68,
+   "net": -25097,
+   "pf": 0.77,
+   "dd": 48893,
+   "win_months": 33.3,
+   "per_year": -40680
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 174,
+   "net": 16690,
+   "pf": 1.08,
+   "dd": 27391,
+   "win_months": 33.3,
+   "per_year": 7471
+  },
+  "OLD": {
+   "trades": 122,
+   "net": 8381,
+   "pf": 1.1,
+   "dd": 17351,
+   "win_months": 30.8,
+   "per_year": 3951
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -33569,
+   "pf": 0.41,
+   "dd": 44177,
+   "win_months": 22.2,
+   "per_year": -54412
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 169,
+   "net": 22330,
+   "pf": 1.13,
+   "dd": 25628,
+   "win_months": 51.9,
+   "per_year": 9996
+  },
+  "OLD": {
+   "trades": 131,
+   "net": 45925,
+   "pf": 1.4,
+   "dd": 18187,
+   "win_months": 38.5,
+   "per_year": 21653
+  },
+  "NEW": {
+   "trades": 71,
+   "net": -33821,
+   "pf": 0.69,
+   "dd": 56058,
+   "win_months": 33.3,
+   "per_year": -54822
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 174,
+   "net": 27414,
+   "pf": 1.14,
+   "dd": 24504,
+   "win_months": 44.4,
+   "per_year": 12272
+  },
+  "OLD": {
+   "trades": 151,
+   "net": -7410,
+   "pf": 0.95,
+   "dd": 44848,
+   "win_months": 46.2,
+   "per_year": -3494
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -22674,
+   "pf": 0.66,
+   "dd": 36035,
+   "win_months": 33.3,
+   "per_year": -36752
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 168,
+   "net": 29265,
+   "pf": 1.13,
+   "dd": 53714,
+   "win_months": 40.7,
+   "per_year": 13101
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -38175,
+   "pf": 0.78,
+   "dd": 56934,
+   "win_months": 30.8,
+   "per_year": -17999
+  },
+  "NEW": {
+   "trades": 72,
+   "net": -56728,
+   "pf": 0.51,
+   "dd": 66970,
+   "win_months": 33.3,
+   "per_year": -91951
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 190,
+   "net": 36429,
+   "pf": 1.15,
+   "dd": 51455,
+   "win_months": 48.1,
+   "per_year": 16308
+  },
+  "OLD": {
+   "trades": 189,
+   "net": -21308,
+   "pf": 0.9,
+   "dd": 57743,
+   "win_months": 38.5,
+   "per_year": -10046
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -34719,
+   "pf": 0.6,
+   "dd": 46619,
+   "win_months": 22.2,
+   "per_year": -56276
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs>=0.307",
+  "SEL": {
+   "trades": 163,
+   "net": 46305,
+   "pf": 1.2,
+   "dd": 47954,
+   "win_months": 48.1,
+   "per_year": 20728
+  },
+  "OLD": {
+   "trades": 266,
+   "net": -33688,
+   "pf": 0.9,
+   "dd": 89443,
+   "win_months": 38.5,
+   "per_year": -15883
+  },
+  "NEW": {
+   "trades": 67,
+   "net": -38101,
+   "pf": 0.67,
+   "dd": 60448,
+   "win_months": 33.3,
+   "per_year": -61758
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 175,
+   "net": 21830,
+   "pf": 1.1,
+   "dd": 70278,
+   "win_months": 51.9,
+   "per_year": 9772
+  },
+  "OLD": {
+   "trades": 40,
+   "net": 5354,
+   "pf": 1.11,
+   "dd": 22360,
+   "win_months": 23.1,
+   "per_year": 2524
+  },
+  "NEW": {
+   "trades": 40,
+   "net": -28781,
+   "pf": 0.4,
+   "dd": 37142,
+   "win_months": 11.1,
+   "per_year": -46652
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 171,
+   "net": 1937,
+   "pf": 1.01,
+   "dd": 78752,
+   "win_months": 44.4,
+   "per_year": 867
+  },
+  "OLD": {
+   "trades": 161,
+   "net": -30836,
+   "pf": 0.82,
+   "dd": 58807,
+   "win_months": 34.6,
+   "per_year": -14539
+  },
+  "NEW": {
+   "trades": 51,
+   "net": -32702,
+   "pf": 0.62,
+   "dd": 48459,
+   "win_months": 33.3,
+   "per_year": -53008
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 172,
+   "net": 10689,
+   "pf": 1.05,
+   "dd": 34853,
+   "win_months": 37.0,
+   "per_year": 4785
+  },
+  "OLD": {
+   "trades": 164,
+   "net": -29266,
+   "pf": 0.81,
+   "dd": 50783,
+   "win_months": 15.4,
+   "per_year": -13799
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -7109,
+   "pf": 0.83,
+   "dd": 25177,
+   "win_months": 11.1,
+   "per_year": -11524
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 174,
+   "net": 35024,
+   "pf": 1.15,
+   "dd": 31362,
+   "win_months": 37.0,
+   "per_year": 15679
+  },
+  "OLD": {
+   "trades": 122,
+   "net": 6273,
+   "pf": 1.06,
+   "dd": 11589,
+   "win_months": 30.8,
+   "per_year": 2958
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -37762,
+   "pf": 0.4,
+   "dd": 50631,
+   "win_months": 22.2,
+   "per_year": -61208
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "iv_rank",
+  "rule": "iv_rank>=78",
+  "SEL": {
+   "trades": 176,
+   "net": 25692,
+   "pf": 1.09,
+   "dd": 74277,
+   "win_months": 37.0,
+   "per_year": 11501
+  },
+  "OLD": {
+   "trades": 28,
+   "net": -26095,
+   "pf": 0.41,
+   "dd": 28328,
+   "win_months": 11.5,
+   "per_year": -12303
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -10815,
+   "pf": 0.86,
+   "dd": 36765,
+   "win_months": 33.3,
+   "per_year": -17530
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 174,
+   "net": 42729,
+   "pf": 1.19,
+   "dd": 49215,
+   "win_months": 33.3,
+   "per_year": 19128
+  },
+  "OLD": {
+   "trades": 151,
+   "net": -12314,
+   "pf": 0.93,
+   "dd": 51541,
+   "win_months": 50.0,
+   "per_year": -5806
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -10541,
+   "pf": 0.86,
+   "dd": 47452,
+   "win_months": 44.4,
+   "per_year": -17086
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 168,
+   "net": 40952,
+   "pf": 1.17,
+   "dd": 69356,
+   "win_months": 48.1,
+   "per_year": 18332
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -54893,
+   "pf": 0.73,
+   "dd": 78950,
+   "win_months": 38.5,
+   "per_year": -25881
+  },
+  "NEW": {
+   "trades": 72,
+   "net": -59247,
+   "pf": 0.52,
+   "dd": 70718,
+   "win_months": 22.2,
+   "per_year": -96034
+  }
+ },
+ {
+  "base": "ORB|09:45|sl35|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 190,
+   "net": 43451,
+   "pf": 1.16,
+   "dd": 47723,
+   "win_months": 51.9,
+   "per_year": 19451
+  },
+  "OLD": {
+   "trades": 189,
+   "net": -34219,
+   "pf": 0.86,
+   "dd": 71090,
+   "win_months": 38.5,
+   "per_year": -16134
+  },
+  "NEW": {
+   "trades": 52,
+   "net": -36101,
+   "pf": 0.61,
+   "dd": 51832,
+   "win_months": 22.2,
+   "per_year": -58516
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "gap_abs",
+  "rule": "0.132<=gap_abs<0.307",
+  "SEL": {
+   "trades": 177,
+   "net": -4363,
+   "pf": 0.98,
+   "dd": 50813,
+   "win_months": 48.1,
+   "per_year": -1953
+  },
+  "OLD": {
+   "trades": 136,
+   "net": -29101,
+   "pf": 0.77,
+   "dd": 34214,
+   "win_months": 30.8,
+   "per_year": -13721
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -20773,
+   "pf": 0.58,
+   "dd": 27863,
+   "win_months": 22.2,
+   "per_year": -33671
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 171,
+   "net": 46433,
+   "pf": 1.26,
+   "dd": 28871,
+   "win_months": 55.6,
+   "per_year": 20786
+  },
+  "OLD": {
+   "trades": 38,
+   "net": 25384,
+   "pf": 1.7,
+   "dd": 7319,
+   "win_months": 26.9,
+   "per_year": 11968
+  },
+  "NEW": {
+   "trades": 36,
+   "net": -19859,
+   "pf": 0.53,
+   "dd": 29743,
+   "win_months": 22.2,
+   "per_year": -32190
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 177,
+   "net": 46199,
+   "pf": 1.24,
+   "dd": 54141,
+   "win_months": 40.7,
+   "per_year": 20681
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -17912,
+   "pf": 0.88,
+   "dd": 40922,
+   "win_months": 42.3,
+   "per_year": -8445
+  },
+  "NEW": {
+   "trades": 51,
+   "net": -4104,
+   "pf": 0.94,
+   "dd": 27287,
+   "win_months": 44.4,
+   "per_year": -6652
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 181,
+   "net": -1221,
+   "pf": 0.99,
+   "dd": 47323,
+   "win_months": 29.6,
+   "per_year": -547
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -26268,
+   "pf": 0.77,
+   "dd": 30360,
+   "win_months": 11.5,
+   "per_year": -12385
+  },
+  "NEW": {
+   "trades": 47,
+   "net": -16518,
+   "pf": 0.67,
+   "dd": 27276,
+   "win_months": 11.1,
+   "per_year": -26774
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 182,
+   "net": 15864,
+   "pf": 1.11,
+   "dd": 30266,
+   "win_months": 48.1,
+   "per_year": 7102
+  },
+  "OLD": {
+   "trades": 172,
+   "net": -4197,
+   "pf": 0.96,
+   "dd": 17374,
+   "win_months": 23.1,
+   "per_year": -1979
+  },
+  "NEW": {
+   "trades": 34,
+   "net": 2647,
+   "pf": 1.09,
+   "dd": 10058,
+   "win_months": 22.2,
+   "per_year": 4291
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 167,
+   "net": 17566,
+   "pf": 1.1,
+   "dd": 35633,
+   "win_months": 44.4,
+   "per_year": 7864
+  },
+  "OLD": {
+   "trades": 132,
+   "net": -27893,
+   "pf": 0.8,
+   "dd": 43019,
+   "win_months": 30.8,
+   "per_year": -13151
+  },
+  "NEW": {
+   "trades": 73,
+   "net": -45135,
+   "pf": 0.56,
+   "dd": 57091,
+   "win_months": 22.2,
+   "per_year": -73160
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 177,
+   "net": -1174,
+   "pf": 0.99,
+   "dd": 38443,
+   "win_months": 44.4,
+   "per_year": -526
+  },
+  "OLD": {
+   "trades": 176,
+   "net": -15642,
+   "pf": 0.91,
+   "dd": 53528,
+   "win_months": 42.3,
+   "per_year": -7375
+  },
+  "NEW": {
+   "trades": 62,
+   "net": 4091,
+   "pf": 1.06,
+   "dd": 24221,
+   "win_months": 33.3,
+   "per_year": 6630
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 174,
+   "net": -119,
+   "pf": 1.0,
+   "dd": 38416,
+   "win_months": 44.4,
+   "per_year": -53
+  },
+  "OLD": {
+   "trades": 217,
+   "net": 64470,
+   "pf": 1.38,
+   "dd": 17271,
+   "win_months": 53.8,
+   "per_year": 30397
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -13019,
+   "pf": 0.7,
+   "dd": 21731,
+   "win_months": 33.3,
+   "per_year": -21103
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 188,
+   "net": 37710,
+   "pf": 1.14,
+   "dd": 65827,
+   "win_months": 48.1,
+   "per_year": 16881
+  },
+  "OLD": {
+   "trades": 183,
+   "net": 6205,
+   "pf": 1.03,
+   "dd": 28600,
+   "win_months": 42.3,
+   "per_year": 2926
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -61276,
+   "pf": 0.4,
+   "dd": 61276,
+   "win_months": 0.0,
+   "per_year": -99323
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 175,
+   "net": -396,
+   "pf": 1.0,
+   "dd": 55887,
+   "win_months": 33.3,
+   "per_year": -177
+  },
+  "OLD": {
+   "trades": 114,
+   "net": 28150,
+   "pf": 1.27,
+   "dd": 14330,
+   "win_months": 46.2,
+   "per_year": 13272
+  },
+  "NEW": {
+   "trades": 37,
+   "net": 3618,
+   "pf": 1.07,
+   "dd": 34100,
+   "win_months": 44.4,
+   "per_year": 5865
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 171,
+   "net": 65963,
+   "pf": 1.34,
+   "dd": 34624,
+   "win_months": 66.7,
+   "per_year": 29528
+  },
+  "OLD": {
+   "trades": 38,
+   "net": 34947,
+   "pf": 1.81,
+   "dd": 8644,
+   "win_months": 23.1,
+   "per_year": 16477
+  },
+  "NEW": {
+   "trades": 36,
+   "net": -22186,
+   "pf": 0.5,
+   "dd": 32855,
+   "win_months": 22.2,
+   "per_year": -35962
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 179,
+   "net": 42804,
+   "pf": 1.23,
+   "dd": 33960,
+   "win_months": 55.6,
+   "per_year": 19162
+  },
+  "OLD": {
+   "trades": 183,
+   "net": 15078,
+   "pf": 1.1,
+   "dd": 32130,
+   "win_months": 50.0,
+   "per_year": 7109
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -13633,
+   "pf": 0.73,
+   "dd": 30736,
+   "win_months": 22.2,
+   "per_year": -22097
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 181,
+   "net": 18047,
+   "pf": 1.09,
+   "dd": 40982,
+   "win_months": 29.6,
+   "per_year": 8079
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -24939,
+   "pf": 0.81,
+   "dd": 37635,
+   "win_months": 19.2,
+   "per_year": -11758
+  },
+  "NEW": {
+   "trades": 47,
+   "net": -11919,
+   "pf": 0.77,
+   "dd": 30836,
+   "win_months": 11.1,
+   "per_year": -19319
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 176,
+   "net": 35894,
+   "pf": 1.16,
+   "dd": 45235,
+   "win_months": 33.3,
+   "per_year": 16068
+  },
+  "OLD": {
+   "trades": 122,
+   "net": -10221,
+   "pf": 0.91,
+   "dd": 23164,
+   "win_months": 19.2,
+   "per_year": -4819
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -41005,
+   "pf": 0.37,
+   "dd": 54714,
+   "win_months": 11.1,
+   "per_year": -66466
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 167,
+   "net": 27197,
+   "pf": 1.13,
+   "dd": 35533,
+   "win_months": 44.4,
+   "per_year": 12175
+  },
+  "OLD": {
+   "trades": 132,
+   "net": -38328,
+   "pf": 0.76,
+   "dd": 44130,
+   "win_months": 26.9,
+   "per_year": -18071
+  },
+  "NEW": {
+   "trades": 73,
+   "net": -38114,
+   "pf": 0.66,
+   "dd": 66180,
+   "win_months": 33.3,
+   "per_year": -61779
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 171,
+   "net": 8743,
+   "pf": 1.04,
+   "dd": 49894,
+   "win_months": 29.6,
+   "per_year": 3914
+  },
+  "OLD": {
+   "trades": 151,
+   "net": 34993,
+   "pf": 1.23,
+   "dd": 37829,
+   "win_months": 46.2,
+   "per_year": 16499
+  },
+  "NEW": {
+   "trades": 45,
+   "net": -4268,
+   "pf": 0.94,
+   "dd": 47325,
+   "win_months": 33.3,
+   "per_year": -6918
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 172,
+   "net": 4628,
+   "pf": 1.02,
+   "dd": 62068,
+   "win_months": 48.1,
+   "per_year": 2072
+  },
+  "OLD": {
+   "trades": 160,
+   "net": -64855,
+   "pf": 0.67,
+   "dd": 83544,
+   "win_months": 34.6,
+   "per_year": -30578
+  },
+  "NEW": {
+   "trades": 75,
+   "net": -1721,
+   "pf": 0.98,
+   "dd": 57901,
+   "win_months": 44.4,
+   "per_year": -2790
+  }
+ },
+ {
+  "base": "MOM|15|sl20|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 188,
+   "net": 30708,
+   "pf": 1.1,
+   "dd": 72948,
+   "win_months": 51.9,
+   "per_year": 13747
+  },
+  "OLD": {
+   "trades": 183,
+   "net": 18179,
+   "pf": 1.08,
+   "dd": 33689,
+   "win_months": 38.5,
+   "per_year": 8571
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -67598,
+   "pf": 0.36,
+   "dd": 71762,
+   "win_months": 11.1,
+   "per_year": -109571
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "gap_abs",
+  "rule": "0.132<=gap_abs<0.307",
+  "SEL": {
+   "trades": 177,
+   "net": -2647,
+   "pf": 0.99,
+   "dd": 45751,
+   "win_months": 44.4,
+   "per_year": -1185
+  },
+  "OLD": {
+   "trades": 136,
+   "net": -46131,
+   "pf": 0.7,
+   "dd": 48625,
+   "win_months": 34.6,
+   "per_year": -21750
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -25642,
+   "pf": 0.57,
+   "dd": 33489,
+   "win_months": 11.1,
+   "per_year": -41564
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 171,
+   "net": 30400,
+   "pf": 1.14,
+   "dd": 43594,
+   "win_months": 51.9,
+   "per_year": 13609
+  },
+  "OLD": {
+   "trades": 38,
+   "net": 25856,
+   "pf": 1.64,
+   "dd": 9053,
+   "win_months": 30.8,
+   "per_year": 12191
+  },
+  "NEW": {
+   "trades": 36,
+   "net": -6784,
+   "pf": 0.86,
+   "dd": 20709,
+   "win_months": 33.3,
+   "per_year": -10996
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 177,
+   "net": 23057,
+   "pf": 1.1,
+   "dd": 84419,
+   "win_months": 48.1,
+   "per_year": 10322
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -30160,
+   "pf": 0.83,
+   "dd": 46605,
+   "win_months": 30.8,
+   "per_year": -14220
+  },
+  "NEW": {
+   "trades": 51,
+   "net": 5492,
+   "pf": 1.07,
+   "dd": 19230,
+   "win_months": 44.4,
+   "per_year": 8902
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 181,
+   "net": -14827,
+   "pf": 0.93,
+   "dd": 54517,
+   "win_months": 37.0,
+   "per_year": -6638
+  },
+  "OLD": {
+   "trades": 163,
+   "net": -42234,
+   "pf": 0.71,
+   "dd": 46306,
+   "win_months": 11.5,
+   "per_year": -19913
+  },
+  "NEW": {
+   "trades": 47,
+   "net": -2543,
+   "pf": 0.96,
+   "dd": 32547,
+   "win_months": 22.2,
+   "per_year": -4123
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 182,
+   "net": 9935,
+   "pf": 1.06,
+   "dd": 33802,
+   "win_months": 44.4,
+   "per_year": 4447
+  },
+  "OLD": {
+   "trades": 172,
+   "net": -16537,
+   "pf": 0.88,
+   "dd": 29518,
+   "win_months": 23.1,
+   "per_year": -7797
+  },
+  "NEW": {
+   "trades": 34,
+   "net": 3803,
+   "pf": 1.12,
+   "dd": 15602,
+   "win_months": 22.2,
+   "per_year": 6165
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 167,
+   "net": 12498,
+   "pf": 1.06,
+   "dd": 39822,
+   "win_months": 48.1,
+   "per_year": 5595
+  },
+  "OLD": {
+   "trades": 132,
+   "net": -7514,
+   "pf": 0.96,
+   "dd": 38784,
+   "win_months": 38.5,
+   "per_year": -3543
+  },
+  "NEW": {
+   "trades": 73,
+   "net": -35310,
+   "pf": 0.71,
+   "dd": 48955,
+   "win_months": 22.2,
+   "per_year": -57234
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 177,
+   "net": -4107,
+   "pf": 0.98,
+   "dd": 39137,
+   "win_months": 40.7,
+   "per_year": -1838
+  },
+  "OLD": {
+   "trades": 176,
+   "net": -7319,
+   "pf": 0.96,
+   "dd": 54248,
+   "win_months": 42.3,
+   "per_year": -3451
+  },
+  "NEW": {
+   "trades": 62,
+   "net": 10649,
+   "pf": 1.15,
+   "dd": 32129,
+   "win_months": 44.4,
+   "per_year": 17261
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "pcr",
+  "rule": "pcr>=0.921",
+  "SEL": {
+   "trades": 172,
+   "net": -2594,
+   "pf": 0.99,
+   "dd": 90373,
+   "win_months": 33.3,
+   "per_year": -1161
+  },
+  "OLD": {
+   "trades": 160,
+   "net": -106643,
+   "pf": 0.55,
+   "dd": 117952,
+   "win_months": 30.8,
+   "per_year": -50280
+  },
+  "NEW": {
+   "trades": 75,
+   "net": 17183,
+   "pf": 1.16,
+   "dd": 35385,
+   "win_months": 55.6,
+   "per_year": 27852
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 188,
+   "net": 17111,
+   "pf": 1.05,
+   "dd": 86967,
+   "win_months": 44.4,
+   "per_year": 7660
+  },
+  "OLD": {
+   "trades": 183,
+   "net": -22841,
+   "pf": 0.91,
+   "dd": 60103,
+   "win_months": 42.3,
+   "per_year": -10769
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -46115,
+   "pf": 0.59,
+   "dd": 51646,
+   "win_months": 22.2,
+   "per_year": -74749
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 175,
+   "net": 7010,
+   "pf": 1.03,
+   "dd": 52735,
+   "win_months": 44.4,
+   "per_year": 3138
+  },
+  "OLD": {
+   "trades": 114,
+   "net": 41637,
+   "pf": 1.36,
+   "dd": 19871,
+   "win_months": 46.2,
+   "per_year": 19631
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -6470,
+   "pf": 0.9,
+   "dd": 47255,
+   "win_months": 33.3,
+   "per_year": -10488
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "or5_pct",
+  "rule": "or5_pct<0.211",
+  "SEL": {
+   "trades": 178,
+   "net": 60314,
+   "pf": 1.26,
+   "dd": 57792,
+   "win_months": 37.0,
+   "per_year": 27000
+  },
+  "OLD": {
+   "trades": 436,
+   "net": -68852,
+   "pf": 0.87,
+   "dd": 86392,
+   "win_months": 42.3,
+   "per_year": -32462
+  },
+  "NEW": {
+   "trades": 19,
+   "net": -18529,
+   "pf": 0.43,
+   "dd": 23155,
+   "win_months": 11.1,
+   "per_year": -30035
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 179,
+   "net": 37911,
+   "pf": 1.18,
+   "dd": 31780,
+   "win_months": 59.3,
+   "per_year": 16971
+  },
+  "OLD": {
+   "trades": 183,
+   "net": 47738,
+   "pf": 1.28,
+   "dd": 32585,
+   "win_months": 53.8,
+   "per_year": 22508
+  },
+  "NEW": {
+   "trades": 44,
+   "net": -16541,
+   "pf": 0.73,
+   "dd": 38700,
+   "win_months": 22.2,
+   "per_year": -26811
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 175,
+   "net": 5892,
+   "pf": 1.02,
+   "dd": 71522,
+   "win_months": 37.0,
+   "per_year": 2638
+  },
+  "OLD": {
+   "trades": 67,
+   "net": 5217,
+   "pf": 1.07,
+   "dd": 20962,
+   "win_months": 7.7,
+   "per_year": 2460
+  },
+  "NEW": {
+   "trades": 32,
+   "net": -29336,
+   "pf": 0.47,
+   "dd": 44394,
+   "win_months": 11.1,
+   "per_year": -47551
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 176,
+   "net": 19583,
+   "pf": 1.07,
+   "dd": 61770,
+   "win_months": 29.6,
+   "per_year": 8766
+  },
+  "OLD": {
+   "trades": 122,
+   "net": -7602,
+   "pf": 0.94,
+   "dd": 27509,
+   "win_months": 23.1,
+   "per_year": -3584
+  },
+  "NEW": {
+   "trades": 48,
+   "net": -21778,
+   "pf": 0.7,
+   "dd": 41113,
+   "win_months": 22.2,
+   "per_year": -35300
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 167,
+   "net": 39239,
+   "pf": 1.16,
+   "dd": 35457,
+   "win_months": 44.4,
+   "per_year": 17565
+  },
+  "OLD": {
+   "trades": 132,
+   "net": -814,
+   "pf": 1.0,
+   "dd": 30072,
+   "win_months": 34.6,
+   "per_year": -384
+  },
+  "NEW": {
+   "trades": 73,
+   "net": -26853,
+   "pf": 0.8,
+   "dd": 52677,
+   "win_months": 33.3,
+   "per_year": -43526
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 171,
+   "net": 18886,
+   "pf": 1.07,
+   "dd": 64742,
+   "win_months": 40.7,
+   "per_year": 8454
+  },
+  "OLD": {
+   "trades": 151,
+   "net": 31780,
+   "pf": 1.17,
+   "dd": 38295,
+   "win_months": 53.8,
+   "per_year": 14984
+  },
+  "NEW": {
+   "trades": 45,
+   "net": 1942,
+   "pf": 1.02,
+   "dd": 43632,
+   "win_months": 33.3,
+   "per_year": 3147
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 174,
+   "net": 5382,
+   "pf": 1.02,
+   "dd": 59613,
+   "win_months": 37.0,
+   "per_year": 2409
+  },
+  "OLD": {
+   "trades": 217,
+   "net": 80902,
+   "pf": 1.33,
+   "dd": 25456,
+   "win_months": 50.0,
+   "per_year": 38144
+  },
+  "NEW": {
+   "trades": 29,
+   "net": 419,
+   "pf": 1.01,
+   "dd": 31233,
+   "win_months": 33.3,
+   "per_year": 679
+  }
+ },
+ {
+  "base": "MOM|15|sl30|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 188,
+   "net": 29781,
+   "pf": 1.09,
+   "dd": 69630,
+   "win_months": 51.9,
+   "per_year": 13332
+  },
+  "OLD": {
+   "trades": 183,
+   "net": -12692,
+   "pf": 0.95,
+   "dd": 59611,
+   "win_months": 38.5,
+   "per_year": -5984
+  },
+  "NEW": {
+   "trades": 54,
+   "net": -57420,
+   "pf": 0.52,
+   "dd": 64300,
+   "win_months": 11.1,
+   "per_year": -93073
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 154,
+   "net": -7694,
+   "pf": 0.96,
+   "dd": 37391,
+   "win_months": 40.7,
+   "per_year": -3444
+  },
+  "OLD": {
+   "trades": 106,
+   "net": 27829,
+   "pf": 1.34,
+   "dd": 17074,
+   "win_months": 50.0,
+   "per_year": 13121
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -18430,
+   "pf": 0.57,
+   "dd": 35214,
+   "win_months": 33.3,
+   "per_year": -29874
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 152,
+   "net": 20072,
+   "pf": 1.12,
+   "dd": 41566,
+   "win_months": 55.6,
+   "per_year": 8985
+  },
+  "OLD": {
+   "trades": 37,
+   "net": 25095,
+   "pf": 1.63,
+   "dd": 11602,
+   "win_months": 19.2,
+   "per_year": 11832
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -21452,
+   "pf": 0.41,
+   "dd": 29620,
+   "win_months": 11.1,
+   "per_year": -34771
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 159,
+   "net": -15239,
+   "pf": 0.93,
+   "dd": 87951,
+   "win_months": 29.6,
+   "per_year": -6822
+  },
+  "OLD": {
+   "trades": 145,
+   "net": -16454,
+   "pf": 0.87,
+   "dd": 43968,
+   "win_months": 34.6,
+   "per_year": -7758
+  },
+  "NEW": {
+   "trades": 41,
+   "net": 5434,
+   "pf": 1.1,
+   "dd": 26035,
+   "win_months": 33.3,
+   "per_year": 8808
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 158,
+   "net": -5698,
+   "pf": 0.97,
+   "dd": 72337,
+   "win_months": 37.0,
+   "per_year": -2551
+  },
+  "OLD": {
+   "trades": 66,
+   "net": 10118,
+   "pf": 1.18,
+   "dd": 12801,
+   "win_months": 15.4,
+   "per_year": 4771
+  },
+  "NEW": {
+   "trades": 27,
+   "net": -15875,
+   "pf": 0.6,
+   "dd": 27636,
+   "win_months": 22.2,
+   "per_year": -25732
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "iv",
+  "rule": "9.81<=iv<12.4",
+  "SEL": {
+   "trades": 157,
+   "net": -3595,
+   "pf": 0.98,
+   "dd": 75065,
+   "win_months": 29.6,
+   "per_year": -1609
+  },
+  "OLD": {
+   "trades": 114,
+   "net": -4433,
+   "pf": 0.95,
+   "dd": 20104,
+   "win_months": 34.6,
+   "per_year": -2090
+  },
+  "NEW": {
+   "trades": 38,
+   "net": -38191,
+   "pf": 0.32,
+   "dd": 44685,
+   "win_months": 22.2,
+   "per_year": -61905
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 151,
+   "net": -28979,
+   "pf": 0.84,
+   "dd": 46000,
+   "win_months": 25.9,
+   "per_year": -12972
+  },
+  "OLD": {
+   "trades": 112,
+   "net": -51196,
+   "pf": 0.6,
+   "dd": 51196,
+   "win_months": 23.1,
+   "per_year": -24138
+  },
+  "NEW": {
+   "trades": 59,
+   "net": -19177,
+   "pf": 0.78,
+   "dd": 51652,
+   "win_months": 22.2,
+   "per_year": -31084
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 162,
+   "net": -15760,
+   "pf": 0.92,
+   "dd": 57378,
+   "win_months": 40.7,
+   "per_year": -7055
+  },
+  "OLD": {
+   "trades": 160,
+   "net": -8152,
+   "pf": 0.95,
+   "dd": 33448,
+   "win_months": 42.3,
+   "per_year": -3844
+  },
+  "NEW": {
+   "trades": 53,
+   "net": 7685,
+   "pf": 1.13,
+   "dd": 30692,
+   "win_months": 33.3,
+   "per_year": 12456
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 160,
+   "net": -19311,
+   "pf": 0.9,
+   "dd": 70092,
+   "win_months": 37.0,
+   "per_year": -8645
+  },
+  "OLD": {
+   "trades": 189,
+   "net": 30730,
+   "pf": 1.18,
+   "dd": 18362,
+   "win_months": 53.8,
+   "per_year": 14488
+  },
+  "NEW": {
+   "trades": 22,
+   "net": -8832,
+   "pf": 0.72,
+   "dd": 13489,
+   "win_months": 22.2,
+   "per_year": -14316
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 160,
+   "net": -21394,
+   "pf": 0.92,
+   "dd": 75545,
+   "win_months": 40.7,
+   "per_year": -9577
+  },
+  "OLD": {
+   "trades": 150,
+   "net": -22552,
+   "pf": 0.88,
+   "dd": 52360,
+   "win_months": 34.6,
+   "per_year": -10633
+  },
+  "NEW": {
+   "trades": 43,
+   "net": -39843,
+   "pf": 0.55,
+   "dd": 56630,
+   "win_months": 11.1,
+   "per_year": -64582
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 154,
+   "net": 30362,
+   "pf": 1.15,
+   "dd": 22880,
+   "win_months": 48.1,
+   "per_year": 13592
+  },
+  "OLD": {
+   "trades": 106,
+   "net": 41198,
+   "pf": 1.44,
+   "dd": 16698,
+   "win_months": 46.2,
+   "per_year": 19424
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -2531,
+   "pf": 0.94,
+   "dd": 36901,
+   "win_months": 33.3,
+   "per_year": -4103
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 152,
+   "net": 42865,
+   "pf": 1.22,
+   "dd": 55621,
+   "win_months": 51.9,
+   "per_year": 19188
+  },
+  "OLD": {
+   "trades": 37,
+   "net": 19370,
+   "pf": 1.39,
+   "dd": 14129,
+   "win_months": 23.1,
+   "per_year": 9133
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -11986,
+   "pf": 0.7,
+   "dd": 32538,
+   "win_months": 22.2,
+   "per_year": -19428
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "prev_range_pct",
+  "rule": "0.687<=prev_range_pct<1.04",
+  "SEL": {
+   "trades": 159,
+   "net": 18840,
+   "pf": 1.08,
+   "dd": 73881,
+   "win_months": 51.9,
+   "per_year": 8434
+  },
+  "OLD": {
+   "trades": 145,
+   "net": -40878,
+   "pf": 0.73,
+   "dd": 63808,
+   "win_months": 30.8,
+   "per_year": -19273
+  },
+  "NEW": {
+   "trades": 41,
+   "net": 14957,
+   "pf": 1.26,
+   "dd": 28568,
+   "win_months": 33.3,
+   "per_year": 24243
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 156,
+   "net": 5592,
+   "pf": 1.03,
+   "dd": 46635,
+   "win_months": 29.6,
+   "per_year": 2503
+  },
+  "OLD": {
+   "trades": 146,
+   "net": -37330,
+   "pf": 0.72,
+   "dd": 46299,
+   "win_months": 11.5,
+   "per_year": -17601
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -459,
+   "pf": 0.99,
+   "dd": 32145,
+   "win_months": 11.1,
+   "per_year": -744
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 158,
+   "net": 19224,
+   "pf": 1.13,
+   "dd": 30550,
+   "win_months": 37.0,
+   "per_year": 8606
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -18175,
+   "pf": 0.87,
+   "dd": 40409,
+   "win_months": 26.9,
+   "per_year": -8569
+  },
+  "NEW": {
+   "trades": 30,
+   "net": 2517,
+   "pf": 1.09,
+   "dd": 18727,
+   "win_months": 11.1,
+   "per_year": 4080
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 151,
+   "net": -2148,
+   "pf": 0.99,
+   "dd": 40038,
+   "win_months": 33.3,
+   "per_year": -962
+  },
+  "OLD": {
+   "trades": 112,
+   "net": -43119,
+   "pf": 0.7,
+   "dd": 43119,
+   "win_months": 15.4,
+   "per_year": -20330
+  },
+  "NEW": {
+   "trades": 59,
+   "net": -22919,
+   "pf": 0.77,
+   "dd": 67348,
+   "win_months": 22.2,
+   "per_year": -37150
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 146,
+   "net": -6021,
+   "pf": 0.97,
+   "dd": 62049,
+   "win_months": 37.0,
+   "per_year": -2695
+  },
+  "OLD": {
+   "trades": 129,
+   "net": 25130,
+   "pf": 1.18,
+   "dd": 44364,
+   "win_months": 46.2,
+   "per_year": 11848
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -6868,
+   "pf": 0.89,
+   "dd": 49244,
+   "win_months": 33.3,
+   "per_year": -11133
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 160,
+   "net": 3384,
+   "pf": 1.02,
+   "dd": 45380,
+   "win_months": 40.7,
+   "per_year": 1515
+  },
+  "OLD": {
+   "trades": 189,
+   "net": 31048,
+   "pf": 1.16,
+   "dd": 21326,
+   "win_months": 50.0,
+   "per_year": 14639
+  },
+  "NEW": {
+   "trades": 22,
+   "net": -3181,
+   "pf": 0.91,
+   "dd": 23733,
+   "win_months": 22.2,
+   "per_year": -5156
+  }
+ },
+ {
+  "base": "MOM|25|sl20|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 160,
+   "net": 10832,
+   "pf": 1.04,
+   "dd": 64502,
+   "win_months": 55.6,
+   "per_year": 4849
+  },
+  "OLD": {
+   "trades": 150,
+   "net": -19821,
+   "pf": 0.9,
+   "dd": 55333,
+   "win_months": 34.6,
+   "per_year": -9345
+  },
+  "NEW": {
+   "trades": 43,
+   "net": -56584,
+   "pf": 0.4,
+   "dd": 73370,
+   "win_months": 11.1,
+   "per_year": -91717
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 154,
+   "net": -14124,
+   "pf": 0.93,
+   "dd": 44653,
+   "win_months": 44.4,
+   "per_year": -6323
+  },
+  "OLD": {
+   "trades": 106,
+   "net": 31040,
+   "pf": 1.33,
+   "dd": 21384,
+   "win_months": 57.7,
+   "per_year": 14635
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -16179,
+   "pf": 0.66,
+   "dd": 37052,
+   "win_months": 33.3,
+   "per_year": -26225
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 152,
+   "net": 22077,
+   "pf": 1.11,
+   "dd": 46945,
+   "win_months": 55.6,
+   "per_year": 9883
+  },
+  "OLD": {
+   "trades": 37,
+   "net": 15313,
+   "pf": 1.29,
+   "dd": 18075,
+   "win_months": 23.1,
+   "per_year": 7220
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -5917,
+   "pf": 0.86,
+   "dd": 15166,
+   "win_months": 33.3,
+   "per_year": -9591
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 157,
+   "net": -9749,
+   "pf": 0.95,
+   "dd": 51607,
+   "win_months": 44.4,
+   "per_year": -4364
+  },
+  "OLD": {
+   "trades": 164,
+   "net": 14303,
+   "pf": 1.1,
+   "dd": 41994,
+   "win_months": 42.3,
+   "per_year": 6744
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -38878,
+   "pf": 0.32,
+   "dd": 49409,
+   "win_months": 0.0,
+   "per_year": -63017
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "vix",
+  "rule": "12.8<=vix<14.5",
+  "SEL": {
+   "trades": 158,
+   "net": -695,
+   "pf": 1.0,
+   "dd": 76611,
+   "win_months": 37.0,
+   "per_year": -311
+  },
+  "OLD": {
+   "trades": 66,
+   "net": 3803,
+   "pf": 1.05,
+   "dd": 17562,
+   "win_months": 19.2,
+   "per_year": 1793
+  },
+  "NEW": {
+   "trades": 27,
+   "net": -15123,
+   "pf": 0.67,
+   "dd": 34648,
+   "win_months": 22.2,
+   "per_year": -24513
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 158,
+   "net": 3114,
+   "pf": 1.02,
+   "dd": 31518,
+   "win_months": 44.4,
+   "per_year": 1394
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -36001,
+   "pf": 0.75,
+   "dd": 52961,
+   "win_months": 23.1,
+   "per_year": -16974
+  },
+  "NEW": {
+   "trades": 30,
+   "net": 73,
+   "pf": 1.0,
+   "dd": 19235,
+   "win_months": 11.1,
+   "per_year": 119
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 151,
+   "net": -1002,
+   "pf": 0.99,
+   "dd": 32474,
+   "win_months": 48.1,
+   "per_year": -448
+  },
+  "OLD": {
+   "trades": 112,
+   "net": -30289,
+   "pf": 0.81,
+   "dd": 51177,
+   "win_months": 26.9,
+   "per_year": -14281
+  },
+  "NEW": {
+   "trades": 59,
+   "net": 5523,
+   "pf": 1.06,
+   "dd": 34858,
+   "win_months": 33.3,
+   "per_year": 8953
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5<0.952",
+  "SEL": {
+   "trades": 162,
+   "net": -13563,
+   "pf": 0.94,
+   "dd": 67535,
+   "win_months": 37.0,
+   "per_year": -6072
+  },
+  "OLD": {
+   "trades": 160,
+   "net": 6932,
+   "pf": 1.04,
+   "dd": 36723,
+   "win_months": 42.3,
+   "per_year": 3268
+  },
+  "NEW": {
+   "trades": 53,
+   "net": 29064,
+   "pf": 1.56,
+   "dd": 22780,
+   "win_months": 55.6,
+   "per_year": 47110
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 160,
+   "net": -25837,
+   "pf": 0.89,
+   "dd": 80848,
+   "win_months": 44.4,
+   "per_year": -11566
+  },
+  "OLD": {
+   "trades": 189,
+   "net": 73927,
+   "pf": 1.4,
+   "dd": 25374,
+   "win_months": 57.7,
+   "per_year": 34855
+  },
+  "NEW": {
+   "trades": 22,
+   "net": -4505,
+   "pf": 0.86,
+   "dd": 11909,
+   "win_months": 22.2,
+   "per_year": -7302
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail30",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 160,
+   "net": -25897,
+   "pf": 0.91,
+   "dd": 77511,
+   "win_months": 48.1,
+   "per_year": -11593
+  },
+  "OLD": {
+   "trades": 150,
+   "net": -52479,
+   "pf": 0.78,
+   "dd": 84648,
+   "win_months": 30.8,
+   "per_year": -24743
+  },
+  "NEW": {
+   "trades": 43,
+   "net": -26252,
+   "pf": 0.72,
+   "dd": 43042,
+   "win_months": 11.1,
+   "per_year": -42553
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "gap_abs",
+  "rule": "gap_abs<0.132",
+  "SEL": {
+   "trades": 154,
+   "net": 40685,
+   "pf": 1.18,
+   "dd": 31090,
+   "win_months": 51.9,
+   "per_year": 18213
+  },
+  "OLD": {
+   "trades": 106,
+   "net": 33273,
+   "pf": 1.29,
+   "dd": 26241,
+   "win_months": 42.3,
+   "per_year": 15688
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -549,
+   "pf": 0.99,
+   "dd": 39008,
+   "win_months": 22.2,
+   "per_year": -890
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "or5_pct",
+  "rule": "0.211<=or5_pct<0.297",
+  "SEL": {
+   "trades": 152,
+   "net": 56407,
+   "pf": 1.26,
+   "dd": 46707,
+   "win_months": 55.6,
+   "per_year": 25251
+  },
+  "OLD": {
+   "trades": 37,
+   "net": 9015,
+   "pf": 1.14,
+   "dd": 21249,
+   "win_months": 15.4,
+   "per_year": 4250
+  },
+  "NEW": {
+   "trades": 29,
+   "net": -805,
+   "pf": 0.98,
+   "dd": 23740,
+   "win_months": 33.3,
+   "per_year": -1305
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "prev_range_pct",
+  "rule": "prev_range_pct<0.687",
+  "SEL": {
+   "trades": 157,
+   "net": 12367,
+   "pf": 1.06,
+   "dd": 48210,
+   "win_months": 55.6,
+   "per_year": 5536
+  },
+  "OLD": {
+   "trades": 164,
+   "net": 40268,
+   "pf": 1.24,
+   "dd": 39703,
+   "win_months": 50.0,
+   "per_year": 18985
+  },
+  "NEW": {
+   "trades": 37,
+   "net": -29035,
+   "pf": 0.51,
+   "dd": 49053,
+   "win_months": 11.1,
+   "per_year": -47064
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "vix",
+  "rule": "vix<12.8",
+  "SEL": {
+   "trades": 156,
+   "net": 23960,
+   "pf": 1.12,
+   "dd": 28509,
+   "win_months": 33.3,
+   "per_year": 10726
+  },
+  "OLD": {
+   "trades": 146,
+   "net": -53341,
+   "pf": 0.67,
+   "dd": 68009,
+   "win_months": 15.4,
+   "per_year": -25149
+  },
+  "NEW": {
+   "trades": 37,
+   "net": 12758,
+   "pf": 1.27,
+   "dd": 30146,
+   "win_months": 22.2,
+   "per_year": 20679
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "iv",
+  "rule": "iv<9.81",
+  "SEL": {
+   "trades": 158,
+   "net": 41840,
+   "pf": 1.25,
+   "dd": 26361,
+   "win_months": 48.1,
+   "per_year": 18730
+  },
+  "OLD": {
+   "trades": 162,
+   "net": -26313,
+   "pf": 0.84,
+   "dd": 55848,
+   "win_months": 23.1,
+   "per_year": -12406
+  },
+  "NEW": {
+   "trades": 30,
+   "net": -271,
+   "pf": 0.99,
+   "dd": 21516,
+   "win_months": 11.1,
+   "per_year": -440
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "iv_rank",
+  "rule": "36<=iv_rank<78",
+  "SEL": {
+   "trades": 151,
+   "net": 29319,
+   "pf": 1.13,
+   "dd": 28880,
+   "win_months": 44.4,
+   "per_year": 13125
+  },
+  "OLD": {
+   "trades": 112,
+   "net": -14812,
+   "pf": 0.91,
+   "dd": 40713,
+   "win_months": 19.2,
+   "per_year": -6984
+  },
+  "NEW": {
+   "trades": 59,
+   "net": 11820,
+   "pf": 1.11,
+   "dd": 50567,
+   "win_months": 33.3,
+   "per_year": 19160
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "iv_rv5",
+  "rule": "iv_rv5>=1.35",
+  "SEL": {
+   "trades": 146,
+   "net": 4301,
+   "pf": 1.02,
+   "dd": 68091,
+   "win_months": 40.7,
+   "per_year": 1926
+  },
+  "OLD": {
+   "trades": 129,
+   "net": 41178,
+   "pf": 1.26,
+   "dd": 41548,
+   "win_months": 57.7,
+   "per_year": 19415
+  },
+  "NEW": {
+   "trades": 37,
+   "net": 7403,
+   "pf": 1.1,
+   "dd": 38399,
+   "win_months": 44.4,
+   "per_year": 12000
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "pcr",
+  "rule": "pcr<0.772",
+  "SEL": {
+   "trades": 160,
+   "net": -1326,
+   "pf": 1.0,
+   "dd": 54060,
+   "win_months": 44.4,
+   "per_year": -593
+  },
+  "OLD": {
+   "trades": 189,
+   "net": 79769,
+   "pf": 1.37,
+   "dd": 28501,
+   "win_months": 46.2,
+   "per_year": 37610
+  },
+  "NEW": {
+   "trades": 22,
+   "net": -1453,
+   "pf": 0.96,
+   "dd": 27306,
+   "win_months": 22.2,
+   "per_year": -2355
+  }
+ },
+ {
+  "base": "MOM|25|sl30|trail60",
+  "feature": "tdte",
+  "rule": "tdte>=3",
+  "SEL": {
+   "trades": 160,
+   "net": 11654,
+   "pf": 1.04,
+   "dd": 65828,
+   "win_months": 48.1,
+   "per_year": 5217
+  },
+  "OLD": {
+   "trades": 150,
+   "net": -49142,
+   "pf": 0.8,
+   "dd": 91817,
+   "win_months": 30.8,
+   "per_year": -23169
+  },
+  "NEW": {
+   "trades": 43,
+   "net": -45576,
+   "pf": 0.55,
+   "dd": 62365,
+   "win_months": 11.1,
+   "per_year": -73874
+  }
+ }
+]
