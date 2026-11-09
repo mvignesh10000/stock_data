@@ -1,0 +1,170 @@
+[
+ {
+  "name": "ORB|09:45|ITM4",
+  "fills": 887,
+  "2021-23": {
+   "days_traded": 413,
+   "net": 29740,
+   "per_year": 14022,
+   "pf": 1.04,
+   "dd": 97863,
+   "win_months": 50.0
+  },
+  "2024-26": {
+   "days_traded": 474,
+   "net": -33753,
+   "per_year": -11840,
+   "pf": 0.97,
+   "dd": 228851,
+   "win_months": 42.9
+  },
+  "all": {
+   "days_traded": 887,
+   "net": -4013,
+   "per_year": -807,
+   "pf": 1.0,
+   "dd": 228851,
+   "win_months": 45.9
+  }
+ },
+ {
+  "name": "ORB|09:45|ITM8",
+  "fills": 884,
+  "2021-23": {
+   "days_traded": 412,
+   "net": -161496,
+   "per_year": -76143,
+   "pf": 0.82,
+   "dd": 192149,
+   "win_months": 38.5
+  },
+  "2024-26": {
+   "days_traded": 472,
+   "net": -69610,
+   "per_year": -24418,
+   "pf": 0.95,
+   "dd": 296892,
+   "win_months": 48.6
+  },
+  "all": {
+   "days_traded": 884,
+   "net": -231106,
+   "per_year": -46484,
+   "pf": 0.9,
+   "dd": 364230,
+   "win_months": 44.3
+  }
+ },
+ {
+  "name": "ORB|10:15|ITM4",
+  "fills": 596,
+  "2021-23": {
+   "days_traded": 280,
+   "net": 61561,
+   "per_year": 29025,
+   "pf": 1.11,
+   "dd": 40207,
+   "win_months": 46.2
+  },
+  "2024-26": {
+   "days_traded": 316,
+   "net": -47838,
+   "per_year": -16780,
+   "pf": 0.94,
+   "dd": 171262,
+   "win_months": 62.9
+  },
+  "all": {
+   "days_traded": 596,
+   "net": 13723,
+   "per_year": 2760,
+   "pf": 1.01,
+   "dd": 171262,
+   "win_months": 55.7
+  }
+ },
+ {
+  "name": "ORB|10:15|ITM8",
+  "fills": 595,
+  "2021-23": {
+   "days_traded": 280,
+   "net": -85892,
+   "per_year": -40497,
+   "pf": 0.86,
+   "dd": 125306,
+   "win_months": 34.6
+  },
+  "2024-26": {
+   "days_traded": 315,
+   "net": -78224,
+   "per_year": -27439,
+   "pf": 0.92,
+   "dd": 216589,
+   "win_months": 60.0
+  },
+  "all": {
+   "days_traded": 595,
+   "net": -164116,
+   "per_year": -33010,
+   "pf": 0.89,
+   "dd": 219450,
+   "win_months": 49.2
+  }
+ },
+ {
+  "name": "EMA|ITM4",
+  "fills": 2885,
+  "2021-23": {
+   "days_traded": 526,
+   "net": -212084,
+   "per_year": -99994,
+   "pf": 0.84,
+   "dd": 281073,
+   "win_months": 30.8
+  },
+  "2024-26": {
+   "days_traded": 707,
+   "net": -317386,
+   "per_year": -111332,
+   "pf": 0.85,
+   "dd": 482052,
+   "win_months": 31.4
+  },
+  "all": {
+   "days_traded": 1233,
+   "net": -529470,
+   "per_year": -106495,
+   "pf": 0.85,
+   "dd": 650737,
+   "win_months": 31.1
+  }
+ },
+ {
+  "name": "EMA|ITM8",
+  "fills": 2885,
+  "2021-23": {
+   "days_traded": 526,
+   "net": -651711,
+   "per_year": -307270,
+   "pf": 0.59,
+   "dd": 689796,
+   "win_months": 15.4
+  },
+  "2024-26": {
+   "days_traded": 707,
+   "net": -468034,
+   "per_year": -164176,
+   "pf": 0.81,
+   "dd": 646096,
+   "win_months": 34.3
+  },
+  "all": {
+   "days_traded": 1233,
+   "net": -1119745,
+   "per_year": -225220,
+   "pf": 0.73,
+   "dd": 1223451,
+   "win_months": 26.2
+  }
+ }
+]

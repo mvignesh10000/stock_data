@@ -1,0 +1,2030 @@
+[
+ {
+  "name": "ORB|09:30|b0.0|opp|time",
+  "SEL": {
+   "trades": 1404,
+   "net": -499671,
+   "per_year": -84184,
+   "pf": 0.79,
+   "dd": 576917,
+   "win_rate": 38.7,
+   "win_months": 29.2
+  },
+  "T1": {
+   "trades": 719,
+   "net": -375361,
+   "per_year": -126138,
+   "pf": 0.81,
+   "dd": 425448,
+   "win_rate": 40.1,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 683,
+   "net": -464591,
+   "per_year": -163663,
+   "pf": 0.8,
+   "dd": 625381,
+   "win_rate": 40.7,
+   "win_months": 22.9
+  },
+  "ALL": {
+   "trades": 2806,
+   "net": -1339623,
+   "per_year": -114010,
+   "pf": 0.8,
+   "dd": 1487550,
+   "win_rate": 39.6,
+   "win_months": 27.3
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.0|opp|2R",
+  "SEL": {
+   "trades": 1404,
+   "net": -597797,
+   "per_year": -100716,
+   "pf": 0.74,
+   "dd": 660911,
+   "win_rate": 40.3,
+   "win_months": 23.6
+  },
+  "T1": {
+   "trades": 719,
+   "net": -517179,
+   "per_year": -173795,
+   "pf": 0.73,
+   "dd": 552844,
+   "win_rate": 41.0,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 683,
+   "net": -530516,
+   "per_year": -186886,
+   "pf": 0.77,
+   "dd": 665127,
+   "win_rate": 41.6,
+   "win_months": 22.9
+  },
+  "ALL": {
+   "trades": 2806,
+   "net": -1645492,
+   "per_year": -140042,
+   "pf": 0.75,
+   "dd": 1782318,
+   "win_rate": 40.8,
+   "win_months": 24.5
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.0|opp|trail",
+  "SEL": {
+   "trades": 1404,
+   "net": -664517,
+   "per_year": -111957,
+   "pf": 0.63,
+   "dd": 670334,
+   "win_rate": 32.1,
+   "win_months": 15.3
+  },
+  "T1": {
+   "trades": 719,
+   "net": -469399,
+   "per_year": -157738,
+   "pf": 0.69,
+   "dd": 480386,
+   "win_rate": 33.9,
+   "win_months": 25.0
+  },
+  "T2": {
+   "trades": 683,
+   "net": -441763,
+   "per_year": -155621,
+   "pf": 0.77,
+   "dd": 563141,
+   "win_rate": 35.9,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 2806,
+   "net": -1575679,
+   "per_year": -134100,
+   "pf": 0.7,
+   "dd": 1629943,
+   "win_rate": 33.5,
+   "win_months": 22.4
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.0|mid|time",
+  "SEL": {
+   "trades": 1404,
+   "net": -565616,
+   "per_year": -95294,
+   "pf": 0.72,
+   "dd": 582052,
+   "win_rate": 26.9,
+   "win_months": 25.0
+  },
+  "T1": {
+   "trades": 719,
+   "net": -400297,
+   "per_year": -134517,
+   "pf": 0.76,
+   "dd": 436186,
+   "win_rate": 28.8,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 683,
+   "net": -648227,
+   "per_year": -228353,
+   "pf": 0.68,
+   "dd": 776965,
+   "win_rate": 29.4,
+   "win_months": 14.3
+  },
+  "ALL": {
+   "trades": 2806,
+   "net": -1614141,
+   "per_year": -137374,
+   "pf": 0.72,
+   "dd": 1721796,
+   "win_rate": 28.0,
+   "win_months": 23.8
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.0|mid|2R",
+  "SEL": {
+   "trades": 1404,
+   "net": -737942,
+   "per_year": -124327,
+   "pf": 0.61,
+   "dd": 740994,
+   "win_rate": 32.5,
+   "win_months": 9.7
+  },
+  "T1": {
+   "trades": 719,
+   "net": -605864,
+   "per_year": -203597,
+   "pf": 0.61,
+   "dd": 617452,
+   "win_rate": 34.1,
+   "win_months": 19.4
+  },
+  "T2": {
+   "trades": 683,
+   "net": -771280,
+   "per_year": -271701,
+   "pf": 0.6,
+   "dd": 858339,
+   "win_rate": 35.1,
+   "win_months": 14.3
+  },
+  "ALL": {
+   "trades": 2806,
+   "net": -2115086,
+   "per_year": -180007,
+   "pf": 0.61,
+   "dd": 2157166,
+   "win_rate": 33.5,
+   "win_months": 13.3
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.0|mid|trail",
+  "SEL": {
+   "trades": 1404,
+   "net": -732067,
+   "per_year": -123337,
+   "pf": 0.57,
+   "dd": 736281,
+   "win_rate": 25.4,
+   "win_months": 11.1
+  },
+  "T1": {
+   "trades": 719,
+   "net": -463207,
+   "per_year": -155658,
+   "pf": 0.67,
+   "dd": 465522,
+   "win_rate": 28.1,
+   "win_months": 16.7
+  },
+  "T2": {
+   "trades": 683,
+   "net": -519878,
+   "per_year": -183139,
+   "pf": 0.71,
+   "dd": 634185,
+   "win_rate": 29.4,
+   "win_months": 22.9
+  },
+  "ALL": {
+   "trades": 2806,
+   "net": -1715152,
+   "per_year": -145970,
+   "pf": 0.65,
+   "dd": 1773943,
+   "win_rate": 27.1,
+   "win_months": 15.4
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.001|opp|time",
+  "SEL": {
+   "trades": 1153,
+   "net": -344522,
+   "per_year": -58044,
+   "pf": 0.83,
+   "dd": 414591,
+   "win_rate": 41.8,
+   "win_months": 41.7
+  },
+  "T1": {
+   "trades": 596,
+   "net": -95503,
+   "per_year": -32093,
+   "pf": 0.94,
+   "dd": 220875,
+   "win_rate": 47.1,
+   "win_months": 41.7
+  },
+  "T2": {
+   "trades": 556,
+   "net": -360607,
+   "per_year": -127032,
+   "pf": 0.82,
+   "dd": 552987,
+   "win_rate": 43.5,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 2305,
+   "net": -800633,
+   "per_year": -68139,
+   "pf": 0.85,
+   "dd": 925383,
+   "win_rate": 43.6,
+   "win_months": 39.9
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.001|opp|2R",
+  "SEL": {
+   "trades": 1153,
+   "net": -418459,
+   "per_year": -70501,
+   "pf": 0.79,
+   "dd": 488712,
+   "win_rate": 42.5,
+   "win_months": 37.5
+  },
+  "T1": {
+   "trades": 596,
+   "net": -118705,
+   "per_year": -39890,
+   "pf": 0.92,
+   "dd": 239893,
+   "win_rate": 47.5,
+   "win_months": 41.7
+  },
+  "T2": {
+   "trades": 556,
+   "net": -367739,
+   "per_year": -129544,
+   "pf": 0.81,
+   "dd": 559372,
+   "win_rate": 43.9,
+   "win_months": 31.4
+  },
+  "ALL": {
+   "trades": 2305,
+   "net": -904902,
+   "per_year": -77013,
+   "pf": 0.83,
+   "dd": 1034511,
+   "win_rate": 44.1,
+   "win_months": 37.1
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.001|opp|trail",
+  "SEL": {
+   "trades": 1153,
+   "net": -543234,
+   "per_year": -91523,
+   "pf": 0.64,
+   "dd": 548728,
+   "win_rate": 33.5,
+   "win_months": 23.6
+  },
+  "T1": {
+   "trades": 596,
+   "net": -251882,
+   "per_year": -84643,
+   "pf": 0.79,
+   "dd": 283202,
+   "win_rate": 38.1,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 556,
+   "net": -376208,
+   "per_year": -132528,
+   "pf": 0.76,
+   "dd": 488613,
+   "win_rate": 38.3,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 2305,
+   "net": -1171324,
+   "per_year": -99687,
+   "pf": 0.73,
+   "dd": 1212568,
+   "win_rate": 35.8,
+   "win_months": 27.3
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.001|mid|time",
+  "SEL": {
+   "trades": 1153,
+   "net": -419511,
+   "per_year": -70678,
+   "pf": 0.77,
+   "dd": 447004,
+   "win_rate": 34.9,
+   "win_months": 38.9
+  },
+  "T1": {
+   "trades": 596,
+   "net": -149275,
+   "per_year": -50163,
+   "pf": 0.9,
+   "dd": 263355,
+   "win_rate": 40.6,
+   "win_months": 38.9
+  },
+  "T2": {
+   "trades": 556,
+   "net": -505908,
+   "per_year": -178218,
+   "pf": 0.73,
+   "dd": 633132,
+   "win_rate": 37.1,
+   "win_months": 22.9
+  },
+  "ALL": {
+   "trades": 2305,
+   "net": -1074693,
+   "per_year": -91463,
+   "pf": 0.79,
+   "dd": 1174533,
+   "win_rate": 36.9,
+   "win_months": 35.0
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.001|mid|2R",
+  "SEL": {
+   "trades": 1153,
+   "net": -553675,
+   "per_year": -93282,
+   "pf": 0.69,
+   "dd": 560101,
+   "win_rate": 36.7,
+   "win_months": 25.0
+  },
+  "T1": {
+   "trades": 596,
+   "net": -268053,
+   "per_year": -90078,
+   "pf": 0.81,
+   "dd": 333253,
+   "win_rate": 42.4,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 556,
+   "net": -570001,
+   "per_year": -200796,
+   "pf": 0.69,
+   "dd": 655371,
+   "win_rate": 38.7,
+   "win_months": 25.7
+  },
+  "ALL": {
+   "trades": 2305,
+   "net": -1391730,
+   "per_year": -118445,
+   "pf": 0.72,
+   "dd": 1458805,
+   "win_rate": 38.7,
+   "win_months": 25.9
+  }
+ },
+ {
+  "name": "ORB|09:30|b0.001|mid|trail",
+  "SEL": {
+   "trades": 1153,
+   "net": -588206,
+   "per_year": -99100,
+   "pf": 0.61,
+   "dd": 594857,
+   "win_rate": 31.2,
+   "win_months": 18.1
+  },
+  "T1": {
+   "trades": 596,
+   "net": -235151,
+   "per_year": -79021,
+   "pf": 0.8,
+   "dd": 256253,
+   "win_rate": 36.7,
+   "win_months": 22.2
+  },
+  "T2": {
+   "trades": 556,
+   "net": -386203,
+   "per_year": -136049,
+   "pf": 0.75,
+   "dd": 481265,
+   "win_rate": 36.7,
+   "win_months": 31.4
+  },
+  "ALL": {
+   "trades": 2305,
+   "net": -1209560,
+   "per_year": -102941,
+   "pf": 0.71,
+   "dd": 1254032,
+   "win_rate": 34.0,
+   "win_months": 22.4
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.0|opp|time",
+  "SEL": {
+   "trades": 1292,
+   "net": -371652,
+   "per_year": -62615,
+   "pf": 0.82,
+   "dd": 449950,
+   "win_rate": 41.6,
+   "win_months": 36.1
+  },
+  "T1": {
+   "trades": 679,
+   "net": -225091,
+   "per_year": -75640,
+   "pf": 0.87,
+   "dd": 284487,
+   "win_rate": 44.8,
+   "win_months": 36.1
+  },
+  "T2": {
+   "trades": 633,
+   "net": -401171,
+   "per_year": -141322,
+   "pf": 0.81,
+   "dd": 556887,
+   "win_rate": 44.5,
+   "win_months": 31.4
+  },
+  "ALL": {
+   "trades": 2604,
+   "net": -997914,
+   "per_year": -84929,
+   "pf": 0.83,
+   "dd": 1157108,
+   "win_rate": 43.1,
+   "win_months": 35.0
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.0|opp|2R",
+  "SEL": {
+   "trades": 1292,
+   "net": -447939,
+   "per_year": -75468,
+   "pf": 0.79,
+   "dd": 517106,
+   "win_rate": 42.6,
+   "win_months": 29.2
+  },
+  "T1": {
+   "trades": 679,
+   "net": -300619,
+   "per_year": -101021,
+   "pf": 0.83,
+   "dd": 355913,
+   "win_rate": 45.2,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 633,
+   "net": -417730,
+   "per_year": -147155,
+   "pf": 0.8,
+   "dd": 557743,
+   "win_rate": 44.9,
+   "win_months": 31.4
+  },
+  "ALL": {
+   "trades": 2604,
+   "net": -1166288,
+   "per_year": -99259,
+   "pf": 0.8,
+   "dd": 1323104,
+   "win_rate": 43.8,
+   "win_months": 30.1
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.0|opp|trail",
+  "SEL": {
+   "trades": 1292,
+   "net": -573616,
+   "per_year": -96642,
+   "pf": 0.65,
+   "dd": 577939,
+   "win_rate": 33.3,
+   "win_months": 20.8
+  },
+  "T1": {
+   "trades": 679,
+   "net": -320078,
+   "per_year": -107560,
+   "pf": 0.77,
+   "dd": 348944,
+   "win_rate": 36.4,
+   "win_months": 22.2
+  },
+  "T2": {
+   "trades": 633,
+   "net": -395218,
+   "per_year": -139225,
+   "pf": 0.77,
+   "dd": 504178,
+   "win_rate": 38.2,
+   "win_months": 28.6
+  },
+  "ALL": {
+   "trades": 2604,
+   "net": -1288912,
+   "per_year": -109695,
+   "pf": 0.73,
+   "dd": 1351171,
+   "win_rate": 35.3,
+   "win_months": 23.1
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.0|mid|time",
+  "SEL": {
+   "trades": 1292,
+   "net": -476649,
+   "per_year": -80305,
+   "pf": 0.75,
+   "dd": 490513,
+   "win_rate": 30.7,
+   "win_months": 31.9
+  },
+  "T1": {
+   "trades": 679,
+   "net": -303492,
+   "per_year": -101987,
+   "pf": 0.81,
+   "dd": 345953,
+   "win_rate": 33.7,
+   "win_months": 25.0
+  },
+  "T2": {
+   "trades": 633,
+   "net": -522785,
+   "per_year": -184163,
+   "pf": 0.72,
+   "dd": 681297,
+   "win_rate": 33.8,
+   "win_months": 25.7
+  },
+  "ALL": {
+   "trades": 2604,
+   "net": -1302926,
+   "per_year": -110887,
+   "pf": 0.76,
+   "dd": 1415637,
+   "win_rate": 32.2,
+   "win_months": 28.7
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.0|mid|2R",
+  "SEL": {
+   "trades": 1292,
+   "net": -668839,
+   "per_year": -112685,
+   "pf": 0.63,
+   "dd": 668839,
+   "win_rate": 34.6,
+   "win_months": 18.1
+  },
+  "T1": {
+   "trades": 679,
+   "net": -554492,
+   "per_year": -186333,
+   "pf": 0.64,
+   "dd": 577212,
+   "win_rate": 36.8,
+   "win_months": 22.2
+  },
+  "T2": {
+   "trades": 633,
+   "net": -542255,
+   "per_year": -191022,
+   "pf": 0.7,
+   "dd": 644429,
+   "win_rate": 37.3,
+   "win_months": 20.0
+  },
+  "ALL": {
+   "trades": 2604,
+   "net": -1765586,
+   "per_year": -150263,
+   "pf": 0.66,
+   "dd": 1835040,
+   "win_rate": 35.8,
+   "win_months": 19.6
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.0|mid|trail",
+  "SEL": {
+   "trades": 1292,
+   "net": -651831,
+   "per_year": -109819,
+   "pf": 0.59,
+   "dd": 658496,
+   "win_rate": 27.8,
+   "win_months": 15.3
+  },
+  "T1": {
+   "trades": 679,
+   "net": -307766,
+   "per_year": -103423,
+   "pf": 0.77,
+   "dd": 327037,
+   "win_rate": 32.0,
+   "win_months": 19.4
+  },
+  "T2": {
+   "trades": 633,
+   "net": -436315,
+   "per_year": -153702,
+   "pf": 0.73,
+   "dd": 540680,
+   "win_rate": 33.2,
+   "win_months": 17.1
+  },
+  "ALL": {
+   "trades": 2604,
+   "net": -1395913,
+   "per_year": -118801,
+   "pf": 0.69,
+   "dd": 1462934,
+   "win_rate": 30.2,
+   "win_months": 16.8
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.001|opp|time",
+  "SEL": {
+   "trades": 929,
+   "net": -201544,
+   "per_year": -33956,
+   "pf": 0.88,
+   "dd": 241925,
+   "win_rate": 43.1,
+   "win_months": 43.1
+  },
+  "T1": {
+   "trades": 509,
+   "net": -44681,
+   "per_year": -15015,
+   "pf": 0.97,
+   "dd": 172156,
+   "win_rate": 47.7,
+   "win_months": 44.4
+  },
+  "T2": {
+   "trades": 463,
+   "net": -242502,
+   "per_year": -85427,
+   "pf": 0.85,
+   "dd": 427536,
+   "win_rate": 45.8,
+   "win_months": 42.9
+  },
+  "ALL": {
+   "trades": 1901,
+   "net": -488728,
+   "per_year": -41594,
+   "pf": 0.89,
+   "dd": 614791,
+   "win_rate": 45.0,
+   "win_months": 43.4
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.001|opp|2R",
+  "SEL": {
+   "trades": 929,
+   "net": -244974,
+   "per_year": -41273,
+   "pf": 0.85,
+   "dd": 280396,
+   "win_rate": 43.6,
+   "win_months": 41.7
+  },
+  "T1": {
+   "trades": 509,
+   "net": -94036,
+   "per_year": -31600,
+   "pf": 0.93,
+   "dd": 193519,
+   "win_rate": 47.7,
+   "win_months": 44.4
+  },
+  "T2": {
+   "trades": 463,
+   "net": -235076,
+   "per_year": -82811,
+   "pf": 0.85,
+   "dd": 432684,
+   "win_rate": 46.0,
+   "win_months": 42.9
+  },
+  "ALL": {
+   "trades": 1901,
+   "net": -574085,
+   "per_year": -48858,
+   "pf": 0.87,
+   "dd": 695190,
+   "win_rate": 45.3,
+   "win_months": 42.7
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.001|opp|trail",
+  "SEL": {
+   "trades": 929,
+   "net": -373287,
+   "per_year": -62891,
+   "pf": 0.69,
+   "dd": 383041,
+   "win_rate": 35.4,
+   "win_months": 25.0
+  },
+  "T1": {
+   "trades": 509,
+   "net": -207716,
+   "per_year": -69801,
+   "pf": 0.8,
+   "dd": 226978,
+   "win_rate": 37.7,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 463,
+   "net": -208060,
+   "per_year": -73294,
+   "pf": 0.83,
+   "dd": 345713,
+   "win_rate": 38.7,
+   "win_months": 45.7
+  },
+  "ALL": {
+   "trades": 1901,
+   "net": -789063,
+   "per_year": -67154,
+   "pf": 0.77,
+   "dd": 859719,
+   "win_rate": 36.8,
+   "win_months": 31.5
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.001|mid|time",
+  "SEL": {
+   "trades": 929,
+   "net": -270839,
+   "per_year": -45630,
+   "pf": 0.82,
+   "dd": 293886,
+   "win_rate": 36.8,
+   "win_months": 37.5
+  },
+  "T1": {
+   "trades": 509,
+   "net": -138460,
+   "per_year": -46529,
+   "pf": 0.89,
+   "dd": 246650,
+   "win_rate": 41.7,
+   "win_months": 38.9
+  },
+  "T2": {
+   "trades": 463,
+   "net": -323290,
+   "per_year": -113886,
+   "pf": 0.78,
+   "dd": 507570,
+   "win_rate": 39.7,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 1901,
+   "net": -732589,
+   "per_year": -62348,
+   "pf": 0.83,
+   "dd": 852219,
+   "win_rate": 38.8,
+   "win_months": 37.1
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.001|mid|2R",
+  "SEL": {
+   "trades": 929,
+   "net": -402880,
+   "per_year": -67876,
+   "pf": 0.73,
+   "dd": 408440,
+   "win_rate": 38.2,
+   "win_months": 31.9
+  },
+  "T1": {
+   "trades": 509,
+   "net": -273611,
+   "per_year": -91945,
+   "pf": 0.78,
+   "dd": 326685,
+   "win_rate": 42.2,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 463,
+   "net": -326166,
+   "per_year": -114900,
+   "pf": 0.78,
+   "dd": 494497,
+   "win_rate": 40.6,
+   "win_months": 31.4
+  },
+  "ALL": {
+   "trades": 1901,
+   "net": -1002657,
+   "per_year": -85332,
+   "pf": 0.76,
+   "dd": 1108198,
+   "win_rate": 39.9,
+   "win_months": 30.8
+  }
+ },
+ {
+  "name": "ORB|09:45|b0.001|mid|trail",
+  "SEL": {
+   "trades": 929,
+   "net": -433403,
+   "per_year": -73019,
+   "pf": 0.65,
+   "dd": 443696,
+   "win_rate": 33.3,
+   "win_months": 20.8
+  },
+  "T1": {
+   "trades": 509,
+   "net": -191313,
+   "per_year": -64290,
+   "pf": 0.82,
+   "dd": 208978,
+   "win_rate": 37.3,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 463,
+   "net": -255841,
+   "per_year": -90126,
+   "pf": 0.79,
+   "dd": 385148,
+   "win_rate": 36.7,
+   "win_months": 42.9
+  },
+  "ALL": {
+   "trades": 1901,
+   "net": -880557,
+   "per_year": -74941,
+   "pf": 0.75,
+   "dd": 953198,
+   "win_rate": 35.2,
+   "win_months": 28.0
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.0|opp|time",
+  "SEL": {
+   "trades": 1046,
+   "net": -103367,
+   "per_year": -17415,
+   "pf": 0.94,
+   "dd": 243567,
+   "win_rate": 43.4,
+   "win_months": 38.9
+  },
+  "T1": {
+   "trades": 570,
+   "net": -107478,
+   "per_year": -36117,
+   "pf": 0.92,
+   "dd": 242994,
+   "win_rate": 47.0,
+   "win_months": 33.3
+  },
+  "T2": {
+   "trades": 534,
+   "net": -417270,
+   "per_year": -146993,
+   "pf": 0.76,
+   "dd": 526283,
+   "win_rate": 44.4,
+   "win_months": 25.7
+  },
+  "ALL": {
+   "trades": 2150,
+   "net": -628115,
+   "per_year": -53457,
+   "pf": 0.87,
+   "dd": 729442,
+   "win_rate": 44.6,
+   "win_months": 34.3
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.0|opp|2R",
+  "SEL": {
+   "trades": 1046,
+   "net": -161936,
+   "per_year": -27283,
+   "pf": 0.9,
+   "dd": 272834,
+   "win_rate": 44.2,
+   "win_months": 38.9
+  },
+  "T1": {
+   "trades": 570,
+   "net": -189731,
+   "per_year": -63758,
+   "pf": 0.86,
+   "dd": 277762,
+   "win_rate": 47.2,
+   "win_months": 36.1
+  },
+  "T2": {
+   "trades": 534,
+   "net": -403727,
+   "per_year": -142222,
+   "pf": 0.77,
+   "dd": 524938,
+   "win_rate": 44.6,
+   "win_months": 25.7
+  },
+  "ALL": {
+   "trades": 2150,
+   "net": -755394,
+   "per_year": -64289,
+   "pf": 0.84,
+   "dd": 847732,
+   "win_rate": 45.1,
+   "win_months": 35.0
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.0|opp|trail",
+  "SEL": {
+   "trades": 1046,
+   "net": -379804,
+   "per_year": -63989,
+   "pf": 0.71,
+   "dd": 389345,
+   "win_rate": 35.9,
+   "win_months": 30.6
+  },
+  "T1": {
+   "trades": 570,
+   "net": -216551,
+   "per_year": -72770,
+   "pf": 0.81,
+   "dd": 237766,
+   "win_rate": 37.7,
+   "win_months": 25.0
+  },
+  "T2": {
+   "trades": 534,
+   "net": -370118,
+   "per_year": -130382,
+   "pf": 0.74,
+   "dd": 431819,
+   "win_rate": 38.0,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 2150,
+   "net": -966473,
+   "per_year": -82253,
+   "pf": 0.75,
+   "dd": 1009423,
+   "win_rate": 36.9,
+   "win_months": 30.1
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.0|mid|time",
+  "SEL": {
+   "trades": 1046,
+   "net": -135078,
+   "per_year": -22758,
+   "pf": 0.91,
+   "dd": 244359,
+   "win_rate": 35.9,
+   "win_months": 38.9
+  },
+  "T1": {
+   "trades": 570,
+   "net": -131245,
+   "per_year": -44104,
+   "pf": 0.9,
+   "dd": 243884,
+   "win_rate": 38.6,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 534,
+   "net": -457437,
+   "per_year": -161143,
+   "pf": 0.71,
+   "dd": 531470,
+   "win_rate": 36.5,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 2150,
+   "net": -723759,
+   "per_year": -61597,
+   "pf": 0.83,
+   "dd": 777004,
+   "win_rate": 36.7,
+   "win_months": 35.7
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.0|mid|2R",
+  "SEL": {
+   "trades": 1046,
+   "net": -310842,
+   "per_year": -52370,
+   "pf": 0.78,
+   "dd": 349111,
+   "win_rate": 38.6,
+   "win_months": 31.9
+  },
+  "T1": {
+   "trades": 570,
+   "net": -375128,
+   "per_year": -126059,
+   "pf": 0.7,
+   "dd": 410919,
+   "win_rate": 39.5,
+   "win_months": 16.7
+  },
+  "T2": {
+   "trades": 534,
+   "net": -472421,
+   "per_year": -166421,
+   "pf": 0.7,
+   "dd": 540717,
+   "win_rate": 38.0,
+   "win_months": 31.4
+  },
+  "ALL": {
+   "trades": 2150,
+   "net": -1158391,
+   "per_year": -98586,
+   "pf": 0.73,
+   "dd": 1192252,
+   "win_rate": 38.7,
+   "win_months": 28.0
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.0|mid|trail",
+  "SEL": {
+   "trades": 1046,
+   "net": -428306,
+   "per_year": -72160,
+   "pf": 0.66,
+   "dd": 435029,
+   "win_rate": 31.9,
+   "win_months": 26.4
+  },
+  "T1": {
+   "trades": 570,
+   "net": -175322,
+   "per_year": -58916,
+   "pf": 0.84,
+   "dd": 191294,
+   "win_rate": 35.3,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 534,
+   "net": -382130,
+   "per_year": -134614,
+   "pf": 0.72,
+   "dd": 431428,
+   "win_rate": 34.6,
+   "win_months": 28.6
+  },
+  "ALL": {
+   "trades": 2150,
+   "net": -985757,
+   "per_year": -83894,
+   "pf": 0.73,
+   "dd": 1016845,
+   "win_rate": 33.5,
+   "win_months": 27.3
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.001|opp|time",
+  "SEL": {
+   "trades": 646,
+   "net": 9951,
+   "per_year": 1677,
+   "pf": 1.01,
+   "dd": 106651,
+   "win_rate": 44.3,
+   "win_months": 43.1
+  },
+  "T1": {
+   "trades": 361,
+   "net": -63256,
+   "per_year": -21257,
+   "pf": 0.93,
+   "dd": 166118,
+   "win_rate": 46.5,
+   "win_months": 41.7
+  },
+  "T2": {
+   "trades": 310,
+   "net": -186327,
+   "per_year": -65638,
+   "pf": 0.82,
+   "dd": 299404,
+   "win_rate": 46.5,
+   "win_months": 37.1
+  },
+  "ALL": {
+   "trades": 1317,
+   "net": -239631,
+   "per_year": -20394,
+   "pf": 0.92,
+   "dd": 335932,
+   "win_rate": 45.4,
+   "win_months": 41.3
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.001|opp|2R",
+  "SEL": {
+   "trades": 646,
+   "net": -5897,
+   "per_year": -994,
+   "pf": 0.99,
+   "dd": 108903,
+   "win_rate": 44.7,
+   "win_months": 43.1
+  },
+  "T1": {
+   "trades": 361,
+   "net": -81984,
+   "per_year": -27550,
+   "pf": 0.91,
+   "dd": 164817,
+   "win_rate": 46.5,
+   "win_months": 38.9
+  },
+  "T2": {
+   "trades": 310,
+   "net": -190464,
+   "per_year": -67095,
+   "pf": 0.82,
+   "dd": 300313,
+   "win_rate": 46.5,
+   "win_months": 37.1
+  },
+  "ALL": {
+   "trades": 1317,
+   "net": -278345,
+   "per_year": -23689,
+   "pf": 0.91,
+   "dd": 351759,
+   "win_rate": 45.6,
+   "win_months": 40.6
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.001|opp|trail",
+  "SEL": {
+   "trades": 646,
+   "net": -247793,
+   "per_year": -41748,
+   "pf": 0.7,
+   "dd": 253232,
+   "win_rate": 34.7,
+   "win_months": 34.7
+  },
+  "T1": {
+   "trades": 361,
+   "net": -121474,
+   "per_year": -40820,
+   "pf": 0.83,
+   "dd": 126674,
+   "win_rate": 38.5,
+   "win_months": 33.3
+  },
+  "T2": {
+   "trades": 310,
+   "net": -78703,
+   "per_year": -27725,
+   "pf": 0.9,
+   "dd": 186964,
+   "win_rate": 42.3,
+   "win_months": 40.0
+  },
+  "ALL": {
+   "trades": 1317,
+   "net": -447970,
+   "per_year": -38125,
+   "pf": 0.81,
+   "dd": 480903,
+   "win_rate": 37.5,
+   "win_months": 35.7
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.001|mid|time",
+  "SEL": {
+   "trades": 646,
+   "net": 15724,
+   "per_year": 2649,
+   "pf": 1.02,
+   "dd": 102437,
+   "win_rate": 40.9,
+   "win_months": 45.8
+  },
+  "T1": {
+   "trades": 361,
+   "net": -68697,
+   "per_year": -23085,
+   "pf": 0.92,
+   "dd": 154117,
+   "win_rate": 42.7,
+   "win_months": 41.7
+  },
+  "T2": {
+   "trades": 310,
+   "net": -198646,
+   "per_year": -69978,
+   "pf": 0.8,
+   "dd": 298626,
+   "win_rate": 42.3,
+   "win_months": 45.7
+  },
+  "ALL": {
+   "trades": 1317,
+   "net": -251619,
+   "per_year": -21414,
+   "pf": 0.91,
+   "dd": 354260,
+   "win_rate": 41.7,
+   "win_months": 44.8
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.001|mid|2R",
+  "SEL": {
+   "trades": 646,
+   "net": -60612,
+   "per_year": -10212,
+   "pf": 0.94,
+   "dd": 130162,
+   "win_rate": 42.0,
+   "win_months": 43.1
+  },
+  "T1": {
+   "trades": 361,
+   "net": -148750,
+   "per_year": -49986,
+   "pf": 0.83,
+   "dd": 208797,
+   "win_rate": 42.9,
+   "win_months": 36.1
+  },
+  "T2": {
+   "trades": 310,
+   "net": -206308,
+   "per_year": -72677,
+   "pf": 0.79,
+   "dd": 319886,
+   "win_rate": 42.6,
+   "win_months": 40.0
+  },
+  "ALL": {
+   "trades": 1317,
+   "net": -415670,
+   "per_year": -35376,
+   "pf": 0.86,
+   "dd": 466201,
+   "win_rate": 42.4,
+   "win_months": 40.6
+  }
+ },
+ {
+  "name": "ORB|10:15|b0.001|mid|trail",
+  "SEL": {
+   "trades": 646,
+   "net": -250387,
+   "per_year": -42185,
+   "pf": 0.7,
+   "dd": 255827,
+   "win_rate": 33.9,
+   "win_months": 36.1
+  },
+  "T1": {
+   "trades": 361,
+   "net": -108487,
+   "per_year": -36456,
+   "pf": 0.85,
+   "dd": 119375,
+   "win_rate": 38.5,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 310,
+   "net": -99654,
+   "per_year": -35105,
+   "pf": 0.87,
+   "dd": 192992,
+   "win_rate": 41.3,
+   "win_months": 40.0
+  },
+  "ALL": {
+   "trades": 1317,
+   "net": -458528,
+   "per_year": -39024,
+   "pf": 0.8,
+   "dd": 491927,
+   "win_rate": 36.9,
+   "win_months": 35.7
+  }
+ },
+ {
+  "name": "MOMC|sig09:45|in14:30|thr0.0",
+  "SEL": {
+   "trades": 1471,
+   "net": -650953,
+   "per_year": -109671,
+   "pf": 0.58,
+   "dd": 659355,
+   "win_rate": 40.2,
+   "win_months": 13.9
+  },
+  "T1": {
+   "trades": 738,
+   "net": -480413,
+   "per_year": -161440,
+   "pf": 0.6,
+   "dd": 486406,
+   "win_rate": 40.8,
+   "win_months": 16.7
+  },
+  "T2": {
+   "trades": 704,
+   "net": -674047,
+   "per_year": -237448,
+   "pf": 0.47,
+   "dd": 701708,
+   "win_rate": 34.7,
+   "win_months": 14.3
+  },
+  "ALL": {
+   "trades": 2913,
+   "net": -1805413,
+   "per_year": -153652,
+   "pf": 0.55,
+   "dd": 1814802,
+   "win_rate": 39.0,
+   "win_months": 14.7
+  }
+ },
+ {
+  "name": "MOMC|sig09:45|in14:30|thr0.003",
+  "SEL": {
+   "trades": 753,
+   "net": -286506,
+   "per_year": -48270,
+   "pf": 0.64,
+   "dd": 290402,
+   "win_rate": 41.6,
+   "win_months": 23.6
+  },
+  "T1": {
+   "trades": 420,
+   "net": -283574,
+   "per_year": -95293,
+   "pf": 0.6,
+   "dd": 305110,
+   "win_rate": 42.4,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 329,
+   "net": -318355,
+   "per_year": -112148,
+   "pf": 0.45,
+   "dd": 325415,
+   "win_rate": 36.8,
+   "win_months": 20.0
+  },
+  "ALL": {
+   "trades": 1502,
+   "net": -888435,
+   "per_year": -75611,
+   "pf": 0.57,
+   "dd": 893574,
+   "win_rate": 40.7,
+   "win_months": 24.5
+  }
+ },
+ {
+  "name": "MOMC|sig09:45|in15:00|thr0.0",
+  "SEL": {
+   "trades": 1471,
+   "net": -798611,
+   "per_year": -134549,
+   "pf": 0.33,
+   "dd": 799615,
+   "win_rate": 29.8,
+   "win_months": 1.4
+  },
+  "T1": {
+   "trades": 738,
+   "net": -526058,
+   "per_year": -176778,
+   "pf": 0.42,
+   "dd": 529659,
+   "win_rate": 34.1,
+   "win_months": 8.3
+  },
+  "T2": {
+   "trades": 704,
+   "net": -708672,
+   "per_year": -249646,
+   "pf": 0.29,
+   "dd": 719467,
+   "win_rate": 27.6,
+   "win_months": 5.7
+  },
+  "ALL": {
+   "trades": 2913,
+   "net": -2033341,
+   "per_year": -173050,
+   "pf": 0.34,
+   "dd": 2036820,
+   "win_rate": 30.3,
+   "win_months": 4.2
+  }
+ },
+ {
+  "name": "MOMC|sig09:45|in15:00|thr0.003",
+  "SEL": {
+   "trades": 753,
+   "net": -381906,
+   "per_year": -64343,
+   "pf": 0.38,
+   "dd": 381906,
+   "win_rate": 31.6,
+   "win_months": 11.1
+  },
+  "T1": {
+   "trades": 420,
+   "net": -304722,
+   "per_year": -102400,
+   "pf": 0.41,
+   "dd": 318165,
+   "win_rate": 36.4,
+   "win_months": 8.3
+  },
+  "T2": {
+   "trades": 329,
+   "net": -377329,
+   "per_year": -132923,
+   "pf": 0.25,
+   "dd": 377657,
+   "win_rate": 27.1,
+   "win_months": 5.7
+  },
+  "ALL": {
+   "trades": 1502,
+   "net": -1063957,
+   "per_year": -90550,
+   "pf": 0.35,
+   "dd": 1063957,
+   "win_rate": 32.0,
+   "win_months": 9.1
+  }
+ },
+ {
+  "name": "MOMC|sig14:30|in14:30|thr0.0",
+  "SEL": {
+   "trades": 1472,
+   "net": -609941,
+   "per_year": -102762,
+   "pf": 0.6,
+   "dd": 620648,
+   "win_rate": 39.6,
+   "win_months": 13.9
+  },
+  "T1": {
+   "trades": 738,
+   "net": -529930,
+   "per_year": -178079,
+   "pf": 0.57,
+   "dd": 550545,
+   "win_rate": 40.4,
+   "win_months": 16.7
+  },
+  "T2": {
+   "trades": 703,
+   "net": -761805,
+   "per_year": -268363,
+   "pf": 0.43,
+   "dd": 771193,
+   "win_rate": 33.1,
+   "win_months": 11.4
+  },
+  "ALL": {
+   "trades": 2913,
+   "net": -1901676,
+   "per_year": -161845,
+   "pf": 0.54,
+   "dd": 1911704,
+   "win_rate": 38.2,
+   "win_months": 14.0
+  }
+ },
+ {
+  "name": "MOMC|sig14:30|in14:30|thr0.003",
+  "SEL": {
+   "trades": 971,
+   "net": -338698,
+   "per_year": -57063,
+   "pf": 0.66,
+   "dd": 349212,
+   "win_rate": 41.5,
+   "win_months": 16.7
+  },
+  "T1": {
+   "trades": 484,
+   "net": -257753,
+   "per_year": -86616,
+   "pf": 0.66,
+   "dd": 281423,
+   "win_rate": 42.4,
+   "win_months": 33.3
+  },
+  "T2": {
+   "trades": 461,
+   "net": -443392,
+   "per_year": -156195,
+   "pf": 0.47,
+   "dd": 452781,
+   "win_rate": 35.6,
+   "win_months": 17.1
+  },
+  "ALL": {
+   "trades": 1916,
+   "net": -1039843,
+   "per_year": -88497,
+   "pf": 0.6,
+   "dd": 1049777,
+   "win_rate": 40.3,
+   "win_months": 21.0
+  }
+ },
+ {
+  "name": "MOMC|sig14:30|in15:00|thr0.0",
+  "SEL": {
+   "trades": 1472,
+   "net": -739706,
+   "per_year": -124624,
+   "pf": 0.36,
+   "dd": 740375,
+   "win_rate": 30.9,
+   "win_months": 5.6
+  },
+  "T1": {
+   "trades": 738,
+   "net": -571020,
+   "per_year": -191888,
+   "pf": 0.38,
+   "dd": 583624,
+   "win_rate": 34.7,
+   "win_months": 0.0
+  },
+  "T2": {
+   "trades": 703,
+   "net": -717133,
+   "per_year": -252626,
+   "pf": 0.28,
+   "dd": 719608,
+   "win_rate": 28.0,
+   "win_months": 2.9
+  },
+  "ALL": {
+   "trades": 2913,
+   "net": -2027859,
+   "per_year": -172584,
+   "pf": 0.34,
+   "dd": 2030938,
+   "win_rate": 31.2,
+   "win_months": 3.5
+  }
+ },
+ {
+  "name": "MOMC|sig14:30|in15:00|thr0.003",
+  "SEL": {
+   "trades": 971,
+   "net": -464924,
+   "per_year": -78330,
+   "pf": 0.39,
+   "dd": 465738,
+   "win_rate": 33.4,
+   "win_months": 8.3
+  },
+  "T1": {
+   "trades": 484,
+   "net": -313067,
+   "per_year": -105204,
+   "pf": 0.44,
+   "dd": 327291,
+   "win_rate": 36.6,
+   "win_months": 8.3
+  },
+  "T2": {
+   "trades": 461,
+   "net": -464860,
+   "per_year": -163758,
+   "pf": 0.31,
+   "dd": 467336,
+   "win_rate": 29.1,
+   "win_months": 14.3
+  },
+  "ALL": {
+   "trades": 1916,
+   "net": -1242852,
+   "per_year": -105775,
+   "pf": 0.38,
+   "dd": 1245930,
+   "win_rate": 33.1,
+   "win_months": 9.8
+  }
+ },
+ {
+  "name": "EMA|9/21",
+  "SEL": {
+   "trades": 1472,
+   "net": -2283225,
+   "per_year": -384674,
+   "pf": 0.45,
+   "dd": 2306552,
+   "win_rate": 35.1,
+   "win_months": 2.8
+  },
+  "T1": {
+   "trades": 738,
+   "net": -1348103,
+   "per_year": -453021,
+   "pf": 0.55,
+   "dd": 1348103,
+   "win_rate": 40.0,
+   "win_months": 5.6
+  },
+  "T2": {
+   "trades": 704,
+   "net": -2143208,
+   "per_year": -754994,
+   "pf": 0.46,
+   "dd": 2226595,
+   "win_rate": 35.7,
+   "win_months": 11.4
+  },
+  "ALL": {
+   "trades": 2914,
+   "net": -5774535,
+   "per_year": -491450,
+   "pf": 0.48,
+   "dd": 5783885,
+   "win_rate": 36.5,
+   "win_months": 5.6
+  }
+ },
+ {
+  "name": "EMA|20/50",
+  "SEL": {
+   "trades": 1472,
+   "net": -1277484,
+   "per_year": -215228,
+   "pf": 0.63,
+   "dd": 1277484,
+   "win_rate": 43.3,
+   "win_months": 18.1
+  },
+  "T1": {
+   "trades": 738,
+   "net": -876717,
+   "per_year": -294615,
+   "pf": 0.66,
+   "dd": 963858,
+   "win_rate": 44.7,
+   "win_months": 16.7
+  },
+  "T2": {
+   "trades": 704,
+   "net": -1259736,
+   "per_year": -443771,
+   "pf": 0.61,
+   "dd": 1370228,
+   "win_rate": 42.5,
+   "win_months": 17.1
+  },
+  "ALL": {
+   "trades": 2914,
+   "net": -3413937,
+   "per_year": -290548,
+   "pf": 0.63,
+   "dd": 3451816,
+   "win_rate": 43.4,
+   "win_months": 17.5
+  }
+ },
+ {
+  "name": "MR|k1.5",
+  "SEL": {
+   "trades": 332,
+   "net": -274698,
+   "per_year": -46281,
+   "pf": 0.49,
+   "dd": 306840,
+   "win_rate": 25.3,
+   "win_months": 29.2
+  },
+  "T1": {
+   "trades": 153,
+   "net": -153474,
+   "per_year": -51574,
+   "pf": 0.6,
+   "dd": 153474,
+   "win_rate": 31.4,
+   "win_months": 36.1
+  },
+  "T2": {
+   "trades": 208,
+   "net": -334538,
+   "per_year": -117849,
+   "pf": 0.51,
+   "dd": 352172,
+   "win_rate": 25.0,
+   "win_months": 25.7
+  },
+  "ALL": {
+   "trades": 693,
+   "net": -762710,
+   "per_year": -64911,
+   "pf": 0.52,
+   "dd": 784639,
+   "win_rate": 26.6,
+   "win_months": 30.1
+  }
+ },
+ {
+  "name": "MR|k2.0",
+  "SEL": {
+   "trades": 122,
+   "net": -111855,
+   "per_year": -18845,
+   "pf": 0.47,
+   "dd": 119943,
+   "win_rate": 19.7,
+   "win_months": 19.4
+  },
+  "T1": {
+   "trades": 57,
+   "net": -38414,
+   "per_year": -12909,
+   "pf": 0.72,
+   "dd": 78079,
+   "win_rate": 29.8,
+   "win_months": 27.8
+  },
+  "T2": {
+   "trades": 88,
+   "net": -27457,
+   "per_year": -9672,
+   "pf": 0.89,
+   "dd": 70817,
+   "win_rate": 30.7,
+   "win_months": 37.1
+  },
+  "ALL": {
+   "trades": 267,
+   "net": -177725,
+   "per_year": -15126,
+   "pf": 0.7,
+   "dd": 203125,
+   "win_rate": 25.5,
+   "win_months": 25.9
+  }
+ },
+ {
+  "name": "GAP|0.003|fade",
+  "SEL": {
+   "trades": 664,
+   "net": -205444,
+   "per_year": -34613,
+   "pf": 0.76,
+   "dd": 219598,
+   "win_rate": 35.7,
+   "win_months": 27.8
+  },
+  "T1": {
+   "trades": 396,
+   "net": -310752,
+   "per_year": -104426,
+   "pf": 0.64,
+   "dd": 324641,
+   "win_rate": 34.8,
+   "win_months": 25.0
+  },
+  "T2": {
+   "trades": 270,
+   "net": -284232,
+   "per_year": -100127,
+   "pf": 0.61,
+   "dd": 286221,
+   "win_rate": 36.3,
+   "win_months": 34.3
+  },
+  "ALL": {
+   "trades": 1330,
+   "net": -800428,
+   "per_year": -68122,
+   "pf": 0.67,
+   "dd": 814582,
+   "win_rate": 35.6,
+   "win_months": 28.7
+  }
+ },
+ {
+  "name": "GAP|0.003|go",
+  "SEL": {
+   "trades": 307,
+   "net": -132424,
+   "per_year": -22311,
+   "pf": 0.65,
+   "dd": 142342,
+   "win_rate": 28.7,
+   "win_months": 31.9
+  },
+  "T1": {
+   "trades": 184,
+   "net": -180661,
+   "per_year": -60710,
+   "pf": 0.55,
+   "dd": 188052,
+   "win_rate": 26.6,
+   "win_months": 30.6
+  },
+  "T2": {
+   "trades": 109,
+   "net": -147645,
+   "per_year": -52011,
+   "pf": 0.57,
+   "dd": 156646,
+   "win_rate": 26.6,
+   "win_months": 25.7
+  },
+  "ALL": {
+   "trades": 600,
+   "net": -460730,
+   "per_year": -39211,
+   "pf": 0.59,
+   "dd": 477223,
+   "win_rate": 27.7,
+   "win_months": 30.1
+  }
+ },
+ {
+  "name": "GAP|0.006|fade",
+  "SEL": {
+   "trades": 253,
+   "net": -43404,
+   "per_year": -7313,
+   "pf": 0.91,
+   "dd": 88236,
+   "win_rate": 38.7,
+   "win_months": 40.3
+  },
+  "T1": {
+   "trades": 160,
+   "net": -132646,
+   "per_year": -44575,
+   "pf": 0.72,
+   "dd": 169563,
+   "win_rate": 35.0,
+   "win_months": 36.1
+  },
+  "T2": {
+   "trades": 102,
+   "net": -96893,
+   "per_year": -34133,
+   "pf": 0.74,
+   "dd": 122680,
+   "win_rate": 39.2,
+   "win_months": 45.7
+  },
+  "ALL": {
+   "trades": 515,
+   "net": -272944,
+   "per_year": -23229,
+   "pf": 0.79,
+   "dd": 338068,
+   "win_rate": 37.7,
+   "win_months": 40.6
+  }
+ },
+ {
+  "name": "GAP|0.006|go",
+  "SEL": {
+   "trades": 114,
+   "net": -42712,
+   "per_year": -7196,
+   "pf": 0.71,
+   "dd": 47999,
+   "win_rate": 28.9,
+   "win_months": 26.4
+  },
+  "T1": {
+   "trades": 68,
+   "net": -70311,
+   "per_year": -23627,
+   "pf": 0.52,
+   "dd": 76029,
+   "win_rate": 30.9,
+   "win_months": 22.2
+  },
+  "T2": {
+   "trades": 42,
+   "net": -94601,
+   "per_year": -33325,
+   "pf": 0.33,
+   "dd": 101176,
+   "win_rate": 16.7,
+   "win_months": 8.6
+  },
+  "ALL": {
+   "trades": 224,
+   "net": -207624,
+   "per_year": -17670,
+   "pf": 0.52,
+   "dd": 219487,
+   "win_rate": 27.2,
+   "win_months": 21.0
+  }
+ }
+]

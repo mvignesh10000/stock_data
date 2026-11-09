@@ -1085,3 +1085,22 @@ Positional preview (v14, stopped at 193/576 configs because the user requires in
 before expiry with wings 3 % beyond the shorts is positive in all three blocks in 33 configs, e.g. T-2 15:15 entry, no leg SL,
 weekly stop Rs 4k, exit expiry morning: PF 1.26 / 1.35 / 1.42, ~Rs 30k/yr per lot, but 5-year DD Rs 47k and worst day -Rs 22k
 (overnight gaps), margin ~Rs 1.15L. Parked, not pursued.
+
+## Round 11: intraday NIFTY futures (2026-11-09), research/fut/
+Data: index 1-min as the futures proxy, 2,915 days 2015-01-09..2026-11-06 (debashis74017 + Upstox, joined cleanly). Costs at
+today's rates: futures STT 0.05 % of sell notional since 1-Apr-2026 (verified: Budget 2026, effective 1 April) -> ~Rs 962 per
+round trip per lot (~14.8 pts) + 1 pt slippage per fill (+1 on stops). Flat by 15:25. Select on 2015-2020, test 2021-23 and 2024-26.
+**v16, 52 configs (ORB 36, momentum-into-close 8, EMA 2, mean reversion 2, gap 4): every config PF < 1 in every block**
+(ORB 0.57-1.02 / 0.61-0.97 / 0.60-0.90; momentum-into-close 0.25-0.66; EMA 0.45-0.66; MR 0.47-0.89; gap 0.33-0.91).
+**Gross edge exists:** with zero costs and zero slippage, 11-year PF: ORB 1.15-1.29 (Rs 63-80k/yr per lot), EMA 20/50 1.29
+(Rs 1.44L/yr); MR and gap ~1.0-1.09 (no edge). With the pre-April-2026 STT (0.02 %) the slower ORBs were marginally positive
+(PF 1.02-1.05). The trend edge is ~8 pts per trade against ~19 pts of cost.
+**v16b, fewer bigger trades + day filters (36 variants):** nearly all fail out of sample; best survivor ORB 11:15 + 0.1 % buffer
+on gap days (|gap| >= 0.39 %): PF 1.30 / 1.03 / 1.14, Rs 3-17k/yr per lot on ~20 trades/yr: not meaningful.
+**v17, the same signals executed with deep ITM options (to avoid futures STT), real option prices 2021-11..2026-11:**
+ORB ITM-200 PF 1.04-1.11 (2021-23) / 0.94-0.97 (2024-26); ITM-400 0.82-0.95; EMA flip 0.59-0.85. ITM spreads and residual
+time value eat the STT saving.
+**Conclusion after rounds 9-11:** across 5 years of NIFTY options and 11 years of NIFTY futures, no intraday strategy outside
+expiry day survives realistic costs out of sample. The only robust intraday edge found is the expiry-day iron fly (Strategy B).
+Trend-following has a real gross edge that today's STT (futures) or option friction consumes; costs, not signal discovery, are
+the binding constraint.
