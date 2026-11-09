@@ -1011,3 +1011,10 @@ VIX filter (skip if VIX at 09:15 < 12, thin premium): PF 1.38-1.49 -> 1.52-1.68 
 worse on the third, 2023 still negative or flat. A mild risk filter, not an edge.
 **Against the user's targets:** nothing reaches DD <= 6% (Rs 12k) with 1 lot over 5 years, or >= 85% winning months
 (best about 64%). Next: confirm the candidate region unchanged on BANKNIFTY 2021-24 and SENSEX 2023-26 (untouched instruments).
+
+**Cross-instrument check, SENSEX (untouched instrument):** the NIFTY candidate region unchanged (09:20 fly, leg SL 30/50%,
+overall SL Rs 1,500/3,000; wings by premium Rs 10, the pre-declared index-scaled value, and also Rs 3; lot 20):
+2023-05..2024-09 (Dhan, 71 expiries) PF 1.08-1.10, net +Rs 6.5k..8.0k, DD Rs 16.9k..38.7k;
+2024-10 -> (Upstox, 29 expiries so far) PF 0.55-0.77, net -Rs 7.5k..-17.7k.
+**The NIFTY fly region does not transfer to SENSEX.** Together with the failed one-shot selection, this says the NIFTY
+expiry-day fly "edge" is weak and period-dependent rather than a structural premium. BANKNIFTY 2021-24 check pending.
