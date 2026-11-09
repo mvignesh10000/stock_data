@@ -124,7 +124,8 @@ def describe(name, k):
 
 
 def main():
-    names = [n for n in U if os.path.exists(U[n]["cache"])]
+    only = [a for a in sys.argv[1:] if a in U]  # e.g. `python research/v10_upx.py NIFTY`
+    names = [n for n in (only or U) if os.path.exists(U[n]["cache"])]
     out = {"protocol": __doc__, "per_index": {}, "portfolio": {}}
     chosen = {}
     for name in names:
@@ -151,7 +152,7 @@ def main():
         over = sum(1 for _, _, mg in ser if mg > CAP)
         out["portfolio"] = {"train": metrics(ser, 0, SPLIT - 1), "test_2026": metrics(ser, SPLIT), "full": metrics(ser), "days_margin_over_cap": over}
         print("PORTFOLIO", out["portfolio"])
-    json.dump(out, open(f"{OUT}/v10.json", "w"), indent=1)
+    json.dump(out, open(f"{OUT}/v10_{'_'.join(names)}.json", "w"), indent=1)
 
 
 if __name__ == "__main__":
