@@ -242,9 +242,8 @@ def main():
         if now() >= t_exit:
             flatten("time exit")
             break
-        if not ({"sce", "spe"} & open_legs):  # both shorts stopped -> wings have no purpose
-            flatten("both shorts stopped")
-            break
+        # both shorts stopped: KEEP the wings until the time exit (backtest = AlgoTest partial square-off;
+        # on strong trend days a wing can run from ~Rs 3 to Rs 100+)
         time.sleep(1)
     l = br.ltp(list(k.values()))
     log("==== done", name, "gross P&L Rs", round(mtm(l), 0), "entries", {g: round(v, 2) for g, v in entry.items()},

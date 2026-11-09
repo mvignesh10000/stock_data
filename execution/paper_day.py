@@ -119,9 +119,9 @@ def main():
                             pos[o].update(exit=round(f2, 2), exit_t=hm(t, 1), why="trailed SL")
                             events.append(f"{hm(t, 1)} trailed SL {pos[o]['strike']} {pos[o]['opt']} filled {f2:.2f}")
             mtm = sum(((p["exit"] if p["exit"] is not None else data[g][t][3]) - p["entry"]) * (-1 if p["side"] == "S" else 1) * LOT for g, p in pos.items())
-            done = all(p["exit"] is not None for g, p in pos.items() if p["side"] == "S")
-            if mtm <= -OSL or t == exit_bar or done:
-                why = "overall SL" if mtm <= -OSL else ("time exit" if t == exit_bar else "both shorts stopped")
+            # wings stay open after both shorts are stopped (backtest semantics: partial square-off)
+            if mtm <= -OSL or t == exit_bar:
+                why = "overall SL" if mtm <= -OSL else "time exit"
                 for g, p in pos.items():
                     if p["exit"] is None:
                         c = data[g][t][3]
