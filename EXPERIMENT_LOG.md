@@ -979,3 +979,35 @@ Rs 2,000 overall stop. 16 of 30 leg stops came from momentary spike prints (no c
 New engine option `exec.stop_on_close` (+ `catastrophe_mult`): stops fire on the 1-minute close and fill at the next bar's
 open, as our own executor could do. Result on 2026: SENSEX PF 0.48 (-Rs 16.7k), NIFTY PF 1.07 (worse than 1.18 with resting
 stops). Spike stops are not the main problem; SENSEX expiry days moved too much for this structure in 2026.
+
+## Round 6: v11 discovery on 5 years of NIFTY (2026-11-09)
+Data: NIFTY weekly options 2021-11-15..2026-11-03, 1,230 trading days / 259 expiry days, true exchange 1-min OHLC:
+Upstox full chains (2024-10 ->), Breeze full chains (2024-01..09), Dhan rolling ATM+/-10 (2021-11..2024-09; matches Breeze
+on the overlap: expiry dates 100%, closes within 1% on 98% of traded minutes). Costs at today's rates (STT 0.15%).
+Dhan expiry dates come from the exchange calendar (settlement on the last-30-min average spot means 15:29 premiums cannot
+identify expiry days); checked by the ATM straddle jumping 1.9x (p5) the day after each expiry.
+
+**Protocol:** 208 configs in 6 families; select on 2024-01..2026-03; test once on 2021-11..2023-12 (never seen) and
+2026-03-25..11-03 (holdout).
+
+| Family | Median PF 2024-26 / 2021-23 / 2026 | Share of configs profitable |
+|---|---|---|
+| F1 expiry short fly | 0.98 / 1.13 / 1.04 | 50 / 59 / 57 % |
+| F2 expiry short strangle | 0.83 / 1.06 / 0.71 | 23 / 62 / 8 % |
+| F3 expiry ORB long (long gamma) | 0.80 / 1.26 / 1.46 | 11 / 89 / 81 % |
+| F4 expiry momentum long | 0.92 / 1.26 / 1.59 | 25 / 92 / 100 % |
+| F5 DTE1-2 straddle | 0.76 / 0.69 / 0.61 | 6 / 12 / 25 % |
+| F6 ORB credit spread | 0.93 / 1.06 / 0.75 | 33 / 89 / 0 % |
+
+**The selection rule failed out of sample:** the top selection-UPI config (fly, leg SL 80%, overall SL Rs 1,500) made
+PF 1.56 in 2024-26 but PF 1.03 (DD Rs 27k) in 2021-23 and PF 0.54 (-Rs 18k) in 2026.
+**A region that is positive in all three blocks exists** (found by looking at all blocks, so it is a candidate, not a
+result): expiry-day fly at 09:20, wings by premium ~Rs 3, leg SL 30-50%. Over 2021-26, 1 lot:
+SL50 / overall SL 3000 / trail-BE: +Rs 122.7k, PF 1.49, DD Rs 24.7k, worst day -Rs 3.9k, 64% winning months, 2023 -Rs 16.7k;
+SL30 / overall SL 1500: +Rs 101.2k, DD Rs 19.8k, 56% winning months, 2023 -Rs 9.3k.
+Long gamma (F3/F4) is profitable when the fly is weak in 2026 but is positively correlated with it (daily corr +0.24..+0.30),
+and both lose in 2023: combinations raise DD (Rs 42-97k) without raising winning months.
+VIX filter (skip if VIX at 09:15 < 12, thin premium): PF 1.38-1.49 -> 1.52-1.68 and DD -Rs 5-8k on two of three configs,
+worse on the third, 2023 still negative or flat. A mild risk filter, not an edge.
+**Against the user's targets:** nothing reaches DD <= 6% (Rs 12k) with 1 lot over 5 years, or >= 85% winning months
+(best about 64%). Next: confirm the candidate region unchanged on BANKNIFTY 2021-24 and SENSEX 2023-26 (untouched instruments).

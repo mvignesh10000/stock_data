@@ -1,0 +1,101 @@
+{
+ "chosen": [
+  {
+   "id": 17,
+   "fam": "F1",
+   "key": [
+    "09:20",
+    80,
+    3,
+    1500,
+    "sl_legs"
+   ],
+   "sel": {
+    "net": 69793,
+    "ann_pct": 15.62,
+    "dd": 10332,
+    "ulcer": 1.775,
+    "upi": 8.8,
+    "worst_day": -2925,
+    "pf": 1.56,
+    "trades": 116,
+    "win_months_pct": 59.3,
+    "months": 27
+   },
+   "plateau_net_median": 39283.0,
+   "old": {
+    "net": 3193,
+    "ann_pct": 0.75,
+    "dd": 26923,
+    "ulcer": 5.604,
+    "upi": 0.13,
+    "worst_day": -2536,
+    "pf": 1.03,
+    "trades": 111,
+    "win_months_pct": 38.5,
+    "months": 26
+   },
+   "new": {
+    "net": -18082,
+    "ann_pct": -14.95,
+    "dd": 20923,
+    "ulcer": 5.127,
+    "upi": -2.92,
+    "worst_day": -2570,
+    "pf": 0.54,
+    "trades": 32,
+    "win_months_pct": 33.3,
+    "months": 9
+   }
+  },
+  {
+   "id": 16,
+   "fam": "F1",
+   "key": [
+    "09:20",
+    80,
+    3,
+    1500,
+    "none"
+   ],
+   "sel": {
+    "net": 69269,
+    "ann_pct": 15.5,
+    "dd": 10940,
+    "ulcer": 1.819,
+    "upi": 8.52,
+    "worst_day": -3465,
+    "pf": 1.55,
+    "trades": 116,
+    "win_months_pct": 59.3,
+    "months": 27
+   },
+   "plateau_net_median": 43035.0,
+   "old": {
+    "net": 3909,
+    "ann_pct": 0.92,
+    "dd": 26963,
+    "ulcer": 5.602,
+    "upi": 0.16,
+    "worst_day": -2467,
+    "pf": 1.04,
+    "trades": 111,
+    "win_months_pct": 42.3,
+    "months": 26
+   },
+   "new": {
+    "net": -18938,
+    "ann_pct": -15.66,
+    "dd": 21780,
+    "ulcer": 5.399,
+    "upi": -2.9,
+    "worst_day": -2691,
+    "pf": 0.53,
+    "trades": 32,
+    "win_months_pct": 33.3,
+    "months": 9
+   }
+  }
+ ],
+ "protocol": "v11 strategy discovery on 5 years of NIFTY weekly options (Dhan 2021-11..2024-09 + Breeze 2024 + Upstox 2024-10..2026-11).\n\nObjective (user): max drawdown <= 6 % of Rs 2L (Rs 12k) incl. worst day; maximise smoothness (UPI) and the share of winning\nmonths (target >= 85 %); raw return secondary. Costs at today's rates (STT 0.15 %), slippage 0.5 %/fill + 1 % on stops,\ntrue exchange 1-min OHLC everywhere (pessimistic intrabar stops).\n\nProtocol, chosen to use the never-seen data for testing:\n  SELECT on 2024-01-01..2026-03-24 (the period earlier rounds already studied: no new information is spent),\n  TEST once on two independent blocks: OLD = 2021-11-15..2023-12-31 (never looked at) and NEW = 2026-03-25..latest (holdout).\nFamilies (an algo trader's menu, both sides of gamma):\n  F1 expiry-day short fly (ATM short, premium-picked wings), early or LATE entries (theta-only window)\n  F2 expiry-day short strangle by premium with wings, with/without re-entry\n  F3 expiry-day ORB long option (buy the breakout side, long gamma), SL + trailing\n  F4 expiry-day momentum long (buy CE/PE when premium jumps X % from the 09:20 reference)\n  F5 DTE1-2 intraday short straddle with wings (non-expiry theta)\n  F6 expiry-day ORB directional credit spread (sell ATM on the breakout side, hedge 4 strikes out)\nRegime layer (second step, research/v11_regime.py): day features known by the entry minute (gap, prior-day range,\nopening-range width, VIX) applied to the families that survive here.\nSelection: per family, keep configs whose selection-period metrics pass the hard DD cap and whose +/-1 grid neighbours are\nalso positive (plateau); rank by UPI. Report the top configs and the best 2-3 strategy portfolio on both test blocks.\n"
+}
