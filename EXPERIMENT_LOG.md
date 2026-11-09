@@ -1018,3 +1018,15 @@ overall SL Rs 1,500/3,000; wings by premium Rs 10, the pre-declared index-scaled
 2024-10 -> (Upstox, 29 expiries so far) PF 0.55-0.77, net -Rs 7.5k..-17.7k.
 **The NIFTY fly region does not transfer to SENSEX.** Together with the failed one-shot selection, this says the NIFTY
 expiry-day fly "edge" is weak and period-dependent rather than a structural premium. BANKNIFTY 2021-24 check pending.
+
+## Round 7: NIFTY calendar spread (2026-11-09), research/v13_calendar.py
+Expiry-day calendar straddle: sell current-week ATM CE+PE, buy next-week ATM CE+PE (same strike, 1:1), 256 expiry days
+2021-11..2026-11, grid entry {09:20, 10:30} x overall SL {2000, 3000, none} x front-leg SL {none, 50 %}, exit 15:15.
+Python simulator validated against the Rust engine on the plain straddle: 255 common days, per-day |diff| median Rs 18,
+same sign 99.2 %.
+**Calendar: rejected.** PF 0.36-0.88 in every config and every block (2021-23 0.35-0.59, 2024-26 0.37-0.88, 2026 0.12-0.30),
+5-year net -Rs 135k..-212k per lot. The long next-week legs lose on expiry day (IV falls into expiry, back-week theta, and
+4 legs of costs) more than they hedge. Caveat (conservative for 2021-24): Dhan next-week data covers ATM+/-3 only.
+Side finding (control): plain short ATM straddle at 09:20, leg SL 50 %, overall SL Rs 2,000: 5-year PF 1.72-1.76,
+DD Rs 17.6k, but the 2026 holdout PF 0.76 (Strategy B: 1.31), about 1.7x the margin of Strategy B, and no protection
+against a gap through the stops. Not adopted; Strategy B stays the candidate.
