@@ -5,6 +5,8 @@
 | Bid/ask recorder | 09:12 → self-stops 15:41 | `etl/scheduler/run_recorder.sh` (or `python etl/bidask_recorder.py`) | `data/upstox/bidask/date=YYYY-MM-DD/part-HHMMSS.parquet` (new part every 60 s) |
 | Compaction + spread summary | 15:50 | `python etl/scheduler/compact_bidask.py` | `…/date=…/day.parquet`, `data/upstox/bidask/spread_summary.parquet` |
 | Iron-fly executor (optional, paper by default) | 09:15 | `python execution/upstox_ironfly.py NIFTY` (exits at once on non-expiry days) | `data/upstox/exec.log` |
+| Strategy B, all accounts (optional, paper by default) | 09:12 | `python execution/run_b.py` (exits at once on non-expiry days) | `data/upstox/exec_<acct>.log`, `b_ledger_<acct>.csv` |
+| Strategy W, overnight weekly fly (optional, paper by default) | 09:12 | `python execution/upstox_weekly.py --account <acct>` (stays up to 15:31; enters 15:15 three trading days before expiry; exits 09:20 on expiry morning) | `data/upstox/weekly_<acct>.log`, `weekly_ledger_<acct>.csv`, `weekly_state_<acct>.json` |
 | Weekly lake top-up | Sat 10:00 | `python etl/upstox_backfill.py index NIFTY SENSEX` (resumable, only new expiries) | `data/upstox/{index,options}/` |
 
 Install: Linux/macOS → paste `crontab.txt` into `crontab -e` (fix the path). Windows → edit and run `windows_task.ps1`.

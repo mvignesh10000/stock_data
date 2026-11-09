@@ -1,0 +1,555 @@
+{
+ "rule": "Pre-declared selection for the v14 positional weekly grid (written before the grid finished).\n\nRule: among configs with SELECTION (2024-01..2026-03) net > 0 and SELECTION max DD <= Rs 60k per lot, score = median SELECTION\nPF over the config and all its one-parameter neighbours (plateau); pick the top score. Report the top 10 with their untouched\nresults on OLD (2021-11..2023-12) and NEW (2026-03-25..2026-11-06), plus the share of the whole grid that is profitable in each block.\n",
+ "pick": {
+  "name": "fly|T-4@15:15|wp20|sl0|osl4000|none|close",
+  "key": [
+   4,
+   "15:15",
+   "fly",
+   [
+    "p",
+    20
+   ],
+   0,
+   4000,
+   "none",
+   "close"
+  ],
+  "OLD": {
+   "net": -82032,
+   "pf": 0.77,
+   "dd": 107756,
+   "worst_day": -14038,
+   "win_months": 42.3,
+   "per_year": -38677
+  },
+  "SEL": {
+   "net": 148267,
+   "pf": 1.39,
+   "dd": 49823,
+   "worst_day": -15794,
+   "win_months": 51.9,
+   "per_year": 66372
+  },
+  "NEW": {
+   "net": 11987,
+   "pf": 1.1,
+   "dd": 23290,
+   "worst_day": -10549,
+   "win_months": 55.6,
+   "per_year": 19431
+  },
+  "all": {
+   "net": 78222,
+   "pf": 1.09,
+   "dd": 107756,
+   "worst_day": -15794,
+   "win_months": 49.2,
+   "per_year": 15733
+  },
+  "margin_p50": 94519,
+  "margin_max": 208195
+ },
+ "top10": [
+  {
+   "name": "fly|T-4@15:15|wp20|sl0|osl4000|none|close",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "p",
+     20
+    ],
+    0,
+    4000,
+    "none",
+    "close"
+   ],
+   "OLD": {
+    "net": -82032,
+    "pf": 0.77,
+    "dd": 107756,
+    "worst_day": -14038,
+    "win_months": 42.3,
+    "per_year": -38677
+   },
+   "SEL": {
+    "net": 148267,
+    "pf": 1.39,
+    "dd": 49823,
+    "worst_day": -15794,
+    "win_months": 51.9,
+    "per_year": 66372
+   },
+   "NEW": {
+    "net": 11987,
+    "pf": 1.1,
+    "dd": 23290,
+    "worst_day": -10549,
+    "win_months": 55.6,
+    "per_year": 19431
+   },
+   "all": {
+    "net": 78222,
+    "pf": 1.09,
+    "dd": 107756,
+    "worst_day": -15794,
+    "win_months": 49.2,
+    "per_year": 15733
+   },
+   "margin_p50": 94519,
+   "margin_max": 208195
+  },
+  {
+   "name": "fly|T-4@15:15|wd0.03|sl0|osl4000|none|close",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "d",
+     0.03
+    ],
+    0,
+    4000,
+    "none",
+    "close"
+   ],
+   "OLD": {
+    "net": -22959,
+    "pf": 0.91,
+    "dd": 52372,
+    "worst_day": -10931,
+    "win_months": 34.6,
+    "per_year": -10825
+   },
+   "SEL": {
+    "net": 193382,
+    "pf": 1.52,
+    "dd": 43650,
+    "worst_day": -14381,
+    "win_months": 51.9,
+    "per_year": 86568
+   },
+   "NEW": {
+    "net": 233,
+    "pf": 1.0,
+    "dd": 23481,
+    "worst_day": -9903,
+    "win_months": 44.4,
+    "per_year": 378
+   },
+   "all": {
+    "net": 170657,
+    "pf": 1.22,
+    "dd": 58180,
+    "worst_day": -14381,
+    "win_months": 44.3,
+    "per_year": 34325
+   },
+   "margin_p50": 112669,
+   "margin_max": 189850
+  },
+  {
+   "name": "fly|T-2@15:15|wd0.03|sl0|osl4000|none|early",
+   "key": [
+    2,
+    "15:15",
+    "fly",
+    [
+     "d",
+     0.03
+    ],
+    0,
+    4000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": 35480,
+    "pf": 1.26,
+    "dd": 31766,
+    "worst_day": -11636,
+    "win_months": 46.2,
+    "per_year": 16728
+   },
+   "SEL": {
+    "net": 83396,
+    "pf": 1.35,
+    "dd": 38657,
+    "worst_day": -21868,
+    "win_months": 59.3,
+    "per_year": 37333
+   },
+   "NEW": {
+    "net": 34896,
+    "pf": 1.42,
+    "dd": 21745,
+    "worst_day": -10758,
+    "win_months": 55.6,
+    "per_year": 56563
+   },
+   "all": {
+    "net": 153772,
+    "pf": 1.34,
+    "dd": 46743,
+    "worst_day": -21868,
+    "win_months": 54.1,
+    "per_year": 30929
+   },
+   "margin_p50": 114774,
+   "margin_max": 190275
+  },
+  {
+   "name": "fly|T-4@15:15|wp20|sl0|osl8000|none|close",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "p",
+     20
+    ],
+    0,
+    8000,
+    "none",
+    "close"
+   ],
+   "OLD": {
+    "net": 52910,
+    "pf": 1.13,
+    "dd": 55879,
+    "worst_day": -18055,
+    "win_months": 57.7,
+    "per_year": 24946
+   },
+   "SEL": {
+    "net": 191136,
+    "pf": 1.37,
+    "dd": 53584,
+    "worst_day": -19782,
+    "win_months": 55.6,
+    "per_year": 85563
+   },
+   "NEW": {
+    "net": 51622,
+    "pf": 1.34,
+    "dd": 25660,
+    "worst_day": -11014,
+    "win_months": 55.6,
+    "per_year": 83675
+   },
+   "all": {
+    "net": 295669,
+    "pf": 1.27,
+    "dd": 70351,
+    "worst_day": -19782,
+    "win_months": 57.4,
+    "per_year": 59469
+   },
+   "margin_p50": 94805,
+   "margin_max": 208195
+  },
+  {
+   "name": "fly|T-4@15:15|wd0.03|sl0|osl4000|none|early",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "d",
+     0.03
+    ],
+    0,
+    4000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": -41997,
+    "pf": 0.82,
+    "dd": 71143,
+    "worst_day": -10673,
+    "win_months": 34.6,
+    "per_year": -19801
+   },
+   "SEL": {
+    "net": 119627,
+    "pf": 1.36,
+    "dd": 45543,
+    "worst_day": -12774,
+    "win_months": 59.3,
+    "per_year": 53551
+   },
+   "NEW": {
+    "net": 1749,
+    "pf": 1.02,
+    "dd": 24131,
+    "worst_day": -9492,
+    "win_months": 33.3,
+    "per_year": 2835
+   },
+   "all": {
+    "net": 79378,
+    "pf": 1.12,
+    "dd": 71143,
+    "worst_day": -12774,
+    "win_months": 45.9,
+    "per_year": 15966
+   },
+   "margin_p50": 112410,
+   "margin_max": 186400
+  },
+  {
+   "name": "strangle|T-4@15:15|wp20|sl0|osl4000|none|early",
+   "key": [
+    4,
+    "15:15",
+    "strangle",
+    [
+     "p",
+     20
+    ],
+    0,
+    4000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": -26053,
+    "pf": 0.89,
+    "dd": 54596,
+    "worst_day": -10791,
+    "win_months": 42.3,
+    "per_year": -12283
+   },
+   "SEL": {
+    "net": 118214,
+    "pf": 1.54,
+    "dd": 20025,
+    "worst_day": -9437,
+    "win_months": 66.7,
+    "per_year": 52919
+   },
+   "NEW": {
+    "net": 17826,
+    "pf": 1.23,
+    "dd": 11108,
+    "worst_day": -7472,
+    "win_months": 44.4,
+    "per_year": 28895
+   },
+   "all": {
+    "net": 109987,
+    "pf": 1.2,
+    "dd": 54596,
+    "worst_day": -10791,
+    "win_months": 54.1,
+    "per_year": 22122
+   },
+   "margin_p50": 84070,
+   "margin_max": 185926
+  },
+  {
+   "name": "fly|T-4@15:15|wp20|sl0|osl4000|none|early",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "p",
+     20
+    ],
+    0,
+    4000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": -85524,
+    "pf": 0.73,
+    "dd": 97959,
+    "worst_day": -12664,
+    "win_months": 30.8,
+    "per_year": -40323
+   },
+   "SEL": {
+    "net": 116096,
+    "pf": 1.36,
+    "dd": 48466,
+    "worst_day": -15794,
+    "win_months": 59.3,
+    "per_year": 51971
+   },
+   "NEW": {
+    "net": 7477,
+    "pf": 1.08,
+    "dd": 19755,
+    "worst_day": -10549,
+    "win_months": 44.4,
+    "per_year": 12120
+   },
+   "all": {
+    "net": 38049,
+    "pf": 1.05,
+    "dd": 97959,
+    "worst_day": -15794,
+    "win_months": 45.9,
+    "per_year": 7653
+   },
+   "margin_p50": 94519,
+   "margin_max": 208195
+  },
+  {
+   "name": "fly|T-4@15:15|wd0.015|sl0|osl4000|none|early",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "d",
+     0.015
+    ],
+    0,
+    4000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": 17935,
+    "pf": 1.07,
+    "dd": 19834,
+    "worst_day": -8111,
+    "win_months": 50.0,
+    "per_year": 8456
+   },
+   "SEL": {
+    "net": 49222,
+    "pf": 1.18,
+    "dd": 40591,
+    "worst_day": -7597,
+    "win_months": 63.0,
+    "per_year": 22034
+   },
+   "NEW": {
+    "net": -2056,
+    "pf": 0.98,
+    "dd": 19066,
+    "worst_day": -6481,
+    "win_months": 44.4,
+    "per_year": -3332
+   },
+   "all": {
+    "net": 65101,
+    "pf": 1.11,
+    "dd": 51569,
+    "worst_day": -8111,
+    "win_months": 55.7,
+    "per_year": 13094
+   },
+   "margin_p50": 84959,
+   "margin_max": 160349
+  },
+  {
+   "name": "strangle|T-4@15:15|wd0.015|sl0|osl4000|none|early",
+   "key": [
+    4,
+    "15:15",
+    "strangle",
+    [
+     "d",
+     0.015
+    ],
+    0,
+    4000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": -22782,
+    "pf": 0.91,
+    "dd": 55394,
+    "worst_day": -7548,
+    "win_months": 50.0,
+    "per_year": -10741
+   },
+   "SEL": {
+    "net": 75760,
+    "pf": 1.31,
+    "dd": 30660,
+    "worst_day": -12832,
+    "win_months": 59.3,
+    "per_year": 33914
+   },
+   "NEW": {
+    "net": 7058,
+    "pf": 1.09,
+    "dd": 12016,
+    "worst_day": -7552,
+    "win_months": 33.3,
+    "per_year": 11440
+   },
+   "all": {
+    "net": 60035,
+    "pf": 1.11,
+    "dd": 55394,
+    "worst_day": -12832,
+    "win_months": 52.5,
+    "per_year": 12075
+   },
+   "margin_p50": 87046,
+   "margin_max": 163264
+  },
+  {
+   "name": "fly|T-4@15:15|wp20|sl0|osl8000|none|early",
+   "key": [
+    4,
+    "15:15",
+    "fly",
+    [
+     "p",
+     20
+    ],
+    0,
+    8000,
+    "none",
+    "early"
+   ],
+   "OLD": {
+    "net": 25185,
+    "pf": 1.07,
+    "dd": 44426,
+    "worst_day": -12664,
+    "win_months": 53.8,
+    "per_year": 11874
+   },
+   "SEL": {
+    "net": 146349,
+    "pf": 1.38,
+    "dd": 56801,
+    "worst_day": -19782,
+    "win_months": 66.7,
+    "per_year": 65513
+   },
+   "NEW": {
+    "net": 22314,
+    "pf": 1.17,
+    "dd": 22126,
+    "worst_day": -11014,
+    "win_months": 55.6,
+    "per_year": 36168
+   },
+   "all": {
+    "net": 193847,
+    "pf": 1.23,
+    "dd": 67639,
+    "worst_day": -19782,
+    "win_months": 60.7,
+    "per_year": 38990
+   },
+   "margin_p50": 94740,
+   "margin_max": 208195
+  }
+ ]
+}

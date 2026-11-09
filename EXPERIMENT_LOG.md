@@ -1104,3 +1104,20 @@ time value eat the STT saving.
 expiry day survives realistic costs out of sample. The only robust intraday edge found is the expiry-day iron fly (Strategy B).
 Trend-following has a real gross edge that today's STT (futures) or option friction consumes; costs, not signal discovery, are
 the binding constraint.
+
+## Round 12: overnight weekly fly (Strategy W) and the B + W portfolio (2026-11-09)
+v14 grid completed: 576 positional configs. Profitable share: 2021-23 39 %, 2024-26 37 %, 2026 66 %.
+**Pre-declared pick (research/v14_select.py, committed before the grid finished) failed:** fly T-4 15:15, Rs 20 wings, weekly
+stop Rs 4k: PF 1.39 in 2024-26 but 0.77 (-Rs 38.7k/yr, DD Rs 1.08L) in 2021-23. Selection on 2024-26 is weakly informative
+(53 % of 2024-26 winners also win 2021-23 vs 30 % of losers; 37 % win both test blocks).
+**Robust structure:** of 80 configs profitable in all three blocks, 69 are flies and 52 use wings 3 % beyond the shorts. Family
+"fly + 3 % wings + 15:15 entry + no leg SL" (24 configs, none picked): median PF 1.27 / 1.15 / 1.10, profitable in 92 / 96 / 79 %.
+(Recognised after seeing all blocks: strong evidence, not a clean holdout.)
+**Strategy W** (remaining choices fixed by reasoning: T-3, weekly stop Rs 8k, no adjustments, exit 09:20 on expiry morning):
+5-year PF 1.17, Rs 28.9k/yr per lot, DD Rs 64.2k, bootstrap p95 DD Rs 1.35L, worst day -Rs 17.0k (2-Mar-2026 gap), 56 % winning
+months, longest losing run 7 months; blocks 1.23 / 1.09 / 1.35; slippage x2 PF 1.12. Daily correlation with Strategy B -0.01.
+**Portfolio on Rs 5L:** B 2 lots Rs 49.6k/yr (9.9 %), DD 9.9 %, p95 Rs 81.6k; **B 2 lots + W 1 lot Rs 78.5k/yr (15.7 %), DD 12.4 %,
+p95 Rs 1.33L, 64 % winning months**; B 2 + W 2 Rs 1.07L/yr but DD 22.3 % (too much for Rs 5L). Margins never stack (W exits 09:20
+on expiry morning as B enters). Sim margin for W median Rs 1.12L vs Upstox fly +/-800 Rs 1.06L.
+Executor: execution/upstox_weekly.py (state file across days, product D, holiday-aware T-3 detection, weekly stop every minute,
+exit 09:20 expiry morning, ledger + kill-switch); paper-tested 9-Nov-2026. Card: STRATEGY_W_CARD.md.

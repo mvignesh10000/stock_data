@@ -54,8 +54,9 @@ def wait_until(hhmm):
 class Broker:
     """Thin OrderApiV3 wrapper. In paper mode orders are simulated against live LTP."""
 
-    def __init__(self, live, slip_pct=0.5):
+    def __init__(self, live, slip_pct=0.5, product="I"):
         self.live, self.slip, self.paper, self.n = live, slip_pct / 100, {}, 0
+        self.product = product  # "I" intraday (Strategy B), "D" carry-forward/NRML (Strategy W)
 
     def _req(self, method, path, body=None):
         req = urllib.request.Request(HFT + path, method=method, data=json.dumps(body).encode() if body else None, headers={
@@ -76,7 +77,7 @@ class Broker:
         return out
 
     def place(self, key, side, qty, otype, price, trigger=0.0):
-        body = {"quantity": qty, "product": "I", "validity": "DAY", "price": tick(price), "tag": ALGO_TAG,
+        body = {"quantity": qty, "product": self.product, "validity": "DAY", "price": tick(price), "tag": ALGO_TAG,
                 "instrument_token": key, "order_type": otype, "transaction_type": side, "disclosed_quantity": 0,
                 "trigger_price": tick(trigger) if trigger else 0, "is_amo": False, "slice": True}
         if self.live:
