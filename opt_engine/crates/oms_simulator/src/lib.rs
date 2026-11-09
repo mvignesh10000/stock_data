@@ -68,6 +68,12 @@ pub struct ExecConfig {
     /// After a stop moves (e.g. SL-to-breakeven) re-check it against the SAME bar's high/low.
     /// 1-minute bars do not tell which leg moved first, so assume the worst.
     pub pessimistic_same_bar: bool,
+    /// Stop-loss on the 1-minute CLOSE (own executor, not a resting exchange order): a stop fires when the previous
+    /// bar closed beyond it and fills at this bar's open (+ stop slippage). Default false = resting stop on highs/lows.
+    pub stop_on_close: bool,
+    /// With stop_on_close: an additional resting "catastrophe" stop at stop x this multiple, checked on intrabar
+    /// highs/lows (0 = none).
+    pub catastrophe_mult: f64,
 }
 
 /// NSE margin approximation calibrated on the exchange SPAN file (via a broker SPAN calculator,
@@ -134,6 +140,8 @@ impl Default for ExecConfig {
             costs: CostModel::default(),
             margin: MarginModel::default(),
             pessimistic_same_bar: true,
+            stop_on_close: false,
+            catastrophe_mult: 0.0,
         }
     }
 }
@@ -283,6 +291,14 @@ impl<'a> VirtualOms<'a> {
         let (sl, side, lots) = match p.stop {
             Some(sl) => (sl, p.side, p.lots),
             None => return false,
+        };
+        let sl = if self.cfg.stop_on_close {
+            if self.cfg.catastrophe_mult <= 0.0 {
+                return false;
+            }
+            if side == Side::Sell { sl * self.cfg.catastrophe_mult } else { sl / self.cfg.catastrophe_mult }
+        } else {
+            sl
         };
         let bar = match self.day.bar(p.strike, p.is_call, m) {
             Some(b) => *b,
@@ -458,7 +474,40 @@ impl<'a> VirtualOms<'a> {
             };
             let (hi, lo, op) = (bar.high as f64, bar.low as f64, bar.open as f64);
             let mut fired: Option<(&'static str, f64)> = None;
+            if self.cfg.stop_on_close {
+                if let Some(sl) = p.stop {
+                    let prev_close = if m > 0 && p.entry_minute < m - 1 { self.day.bar(p.strike, p.is_call, m - 1).map(|b| b.close as f64) } else { None };
+                    let cm = self.cfg.catastrophe_mult;
+                    let (ss, sp) = (self.cfg.sl_slippage_pct / 100.0, self.cfg.min_slippage_pts);
+                    match p.side {
+                        Side::Sell => {
+                            if prev_close.map(|c| c >= sl).unwrap_or(false) {
+                                fired = Some(("SL", op * (1.0 + ss) + sp));
+                            } else if cm > 0.0 && hi >= sl * cm {
+                                fired = Some(("SL", (sl * cm).max(op) * (1.0 + ss) + sp));
+                            }
+                        }
+                        Side::Buy => {
+                            if prev_close.map(|c| c <= sl).unwrap_or(false) {
+                                fired = Some(("SL", (op * (1.0 - ss) - sp).max(0.0)));
+                            } else if cm > 0.0 && lo <= sl / cm {
+                                fired = Some(("SL", ((sl / cm).min(op) * (1.0 - ss) - sp).max(0.0)));
+                            }
+                        }
+                    }
+                }
+                if fired.is_none() {
+                    if let Some(t) = p.target {
+                        match p.side {
+                            Side::Sell if lo <= t => fired = Some(("TGT", t.min(op))),
+                            Side::Buy if hi >= t => fired = Some(("TGT", t.max(op))),
+                            _ => {}
+                        }
+                    }
+                }
+            }
             match p.side {
+                _ if self.cfg.stop_on_close => {}
                 Side::Sell => {
                     if let Some(sl) = p.stop {
                         if hi >= sl {

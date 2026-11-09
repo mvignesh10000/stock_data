@@ -972,3 +972,10 @@ has shrunk. -Rs 67/day over 32 days is about 1.5 standard errors below the earli
 mostly untradeable (fly400 traded on 20 of 47 days). With wings by premium (~Rs 3): all 47 days traded, +Rs 17,136,
 PF 1.80, DD Rs 5,490, worst day -Rs 2,293, positive each year (2017 +1.5k, 2018 +2.5k, 2019 +2.4k, 2020 +10.7k).
 The same rule on 2024-26 makes +Rs 92.4k, PF 1.80.
+
+**SENSEX first look (2026-05-07..11-05, 27 expiry days, frozen NIFTY fly rules, lot 20; test-period data, not used for selection):**
+PF 0.42-0.44 for every wing choice (OTM 10/15/20, premium Rs 3/10), net about -Rs 20k, DD about Rs 27k; half the days end at the
+Rs 2,000 overall stop. 16 of 30 leg stops came from momentary spike prints (no close above the trigger within 3 min).
+New engine option `exec.stop_on_close` (+ `catastrophe_mult`): stops fire on the 1-minute close and fill at the next bar's
+open, as our own executor could do. Result on 2026: SENSEX PF 0.48 (-Rs 16.7k), NIFTY PF 1.07 (worse than 1.18 with resting
+stops). Spike stops are not the main problem; SENSEX expiry days moved too much for this structure in 2026.
