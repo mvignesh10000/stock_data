@@ -50,8 +50,9 @@ def spec(kind, month):
 
 
 def exists(slug):
-    r = subprocess.run(["kaggle", "datasets", "files", slug], capture_output=True, text=True)
-    return r.returncode == 0 and "404" not in r.stdout + r.stderr
+    r = subprocess.run(["kaggle", "datasets", "status", slug], capture_output=True, text=True)
+    out = (r.stdout + r.stderr).lower()
+    return r.returncode == 0 and "not found" not in out and "404 client error" not in out
 
 
 def pull(kind, month):
