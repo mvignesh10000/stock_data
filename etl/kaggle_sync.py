@@ -3,19 +3,21 @@
 
 Datasets (owner = the Kaggle account of KAGGLE_API_TOKEN):
   history : <user>/upstox-nifty-sensex-1min        index/VIX 1-min + every expired NIFTY/SENSEX option (1-min OHLC+OI)
+  dhan    : <user>/dhan-expired-options-rolling-1min  Dhan rolling ATM+/-10 expired index options (2021-11 ->)
   bidask  : <user>/upstox-bidask-1s-YYYY-MM        1-second bid/ask/IV/greeks snapshots, one dataset per month
             (keeps each daily upload bounded, about 1 GB at most)
 Kaggle stores a flat file list: lake path "options/NIFTY/expiry=2026-11-03.parquet" <-> "options__NIFTY__expiry_eq_2026-11-03.parquet".
 
 Usage:
-  python etl/kaggle_sync.py pull history|bidask [--month YYYY-MM]   # restore into data/upstox (no-op if dataset absent)
-  python etl/kaggle_sync.py push history|bidask [--month YYYY-MM]   # create (private) or add a new version
+  python etl/kaggle_sync.py pull history|bidask|dhan [--month YYYY-MM]   # restore into data/upstox (no-op if dataset absent)
+  python etl/kaggle_sync.py push history|bidask|dhan [--month YYYY-MM]   # create (private) or add a new version
 Needs: pip install kaggle; env KAGGLE_API_TOKEN.
 """
 import datetime as dt, glob, json, os, shutil, subprocess, sys, tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LAKE = os.path.join(ROOT, "data/upstox")
+DHAN = os.path.join(ROOT, "data/dhan")
 STAGE = os.path.join(ROOT, "data/kaggle_stage")
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 
@@ -36,11 +38,15 @@ def dec(flat):
 
 
 def spec(kind, month):
+    """-> (slug, title, files, root). Files are stored relative to root."""
+    if kind == "dhan":
+        files = glob.glob(f"{DHAN}/*/*.parquet")
+        return "dhan-expired-options-rolling-1min", "Dhan expired index options rolling 1-min", files, DHAN
     if kind == "history":
         files = glob.glob(f"{LAKE}/index/*_1min.parquet") + glob.glob(f"{LAKE}/options/*/expiry=*.parquet")
-        return "upstox-nifty-sensex-1min", "Upstox NIFTY SENSEX options 1-min", files
+        return "upstox-nifty-sensex-1min", "Upstox NIFTY SENSEX options 1-min", files, LAKE
     files = glob.glob(f"{LAKE}/bidask/date={month}-*/day.parquet")
-    return f"upstox-bidask-1s-{month}", f"Upstox NIFTY SENSEX bid-ask 1s {month}", files
+    return f"upstox-bidask-1s-{month}", f"Upstox NIFTY SENSEX bid-ask 1s {month}", files, LAKE
 
 
 def exists(slug):
@@ -49,28 +55,28 @@ def exists(slug):
 
 
 def pull(kind, month):
-    slug, _, _ = spec(kind, month)
+    slug, _, _, root = spec(kind, month)
     ref = f"{user()}/{slug}"
     if not exists(ref):
         print("no dataset yet:", ref)
         return
-    tmp = tempfile.mkdtemp(dir=os.path.dirname(LAKE))
+    tmp = tempfile.mkdtemp(dir=os.path.dirname(root))
     subprocess.run(["kaggle", "datasets", "download", ref, "-p", tmp, "--unzip", "-q"], check=True)
     n = 0
     for f in os.listdir(tmp):
         if not f.endswith(".parquet"):
             continue
-        dst = os.path.join(LAKE, dec(f))
+        dst = os.path.join(root, dec(f))
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         if not os.path.exists(dst):  # local files win (they may be newer)
             shutil.move(os.path.join(tmp, f), dst)
             n += 1
     shutil.rmtree(tmp, ignore_errors=True)
-    print("pulled", ref, n, "files ->", LAKE)
+    print("pulled", ref, n, "files ->", root)
 
 
 def push(kind, month):
-    slug, title, files = spec(kind, month)
+    slug, title, files, root = spec(kind, month)
     if not files:
         print("nothing to push for", slug)
         return
@@ -79,7 +85,7 @@ def push(kind, month):
     shutil.rmtree(d, ignore_errors=True)
     os.makedirs(d)
     for f in files:
-        dst = os.path.join(d, enc(os.path.relpath(f, LAKE)))
+        dst = os.path.join(d, enc(os.path.relpath(f, root)))
         try:
             os.link(f, dst)
         except OSError:
