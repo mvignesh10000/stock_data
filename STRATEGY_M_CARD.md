@@ -18,7 +18,7 @@ makes worthless faster, holds it only from 15:20 to 09:20, and so also collects 
 | Expiry choice | on expiry day use next week's contract; the night before expiry use the expiring contract (exit 09:20) |
 | Product / orders | carry-forward (NRML / "D"), limit orders with a buffer |
 | Margin (Upstox, 10-Nov-2026) | naked ₹1.68L · with 4 % wing **₹0.84L** · with 3 % wing ₹0.69L per lot |
-| Trades | ~100 nights a year per lot (≈ 50 up, 50 down) |
+| Trades | ~150 nights a year per lot (≈ 75 up, 75 down) |
 
 ## Backtest, 1 lot (65), naked short leg, today's costs (STT 0.15 %, slippage 0.5 %/fill, brokerage ₹20/order)
 | | Value |
@@ -31,7 +31,7 @@ makes worthless faster, holds it only from 15:20 to 09:20, and so also collects 
 | By year | 2021 (6 wk) +9.0k · 2022 +105.7k · 2023 +38.2k · 2024 +54.6k · 2025 +75.0k · 2026 +85.0k |
 | Blocks (PF / ₹ per yr) | 2021-23 1.42 / 70.6k · 2024-26Q1 1.53 / 81.5k · 2026 holdout 1.19 / 41.7k |
 | Up leg only / down leg only | ₹39.6k/yr PF 1.49 · ₹32.7k/yr PF 1.33 (both positive every year) |
-| With the 4 % wing (clean data, 2024-26 only) | PF 1.37, ₹58k/yr (vs ₹81k naked in the same period): the wing costs ≈ ₹250-300 per trade |
+| With the 4 % wing (clean data, 2024-26 only) | PF 1.37, ₹58k/yr (vs ₹81k naked in the same period): the wing costs ≈ ₹150 per trade, about 30 % of the profit |
 
 ## Why believe it (and how much)
 1. **11 years of index data (2015-2026, 2,912 nights).** Holding from 15:20 to next 09:20 after an up day (> 0.3 %) earned
@@ -68,7 +68,7 @@ clean holdout for M. The clean evidence is point 1 (signal) and point 2 (options
 | B 2 + M 1 | ₹120.8k (24.2 %) | ₹46.5k (9.3 %) | ₹89k | 69 % | −₹37.2k | 0 |
 | **B 2 + W 1 + M 1** | **₹149.0k (29.8 %)** | **₹45.7k (9.1 %)** | ₹90k | **75 %** | −₹26.0k | 0 |
 | B 2 + W 1 + M 2 | ₹221.3k (44.3 %) | ₹74.2k (14.8 %) | ₹1.52L | 74 % | −₹55.2k | 0 |
-M figures are for the naked leg; with the wing take about a quarter off M's line (≈ ₹130k/yr for B2+W1+M1).
+M figures are for the naked leg; with the wing take about 30 % off M's line (≈ ₹128k/yr for B2+W1+M1).
 Margin never exceeds the capital: nights W ₹1.1L + M ₹0.84L (winged); expiry day B ₹3.3L after W and M have exited at 09:20.
 Idle margin can sit in pledged liquid funds / G-secs (about 6-7 %/yr extra on the pledged part; keep ~50 % cash for overnight positions).
 
