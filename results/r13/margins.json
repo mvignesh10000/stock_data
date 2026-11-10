@@ -1,0 +1,32 @@
+{
+ "expiry": "2026-11-17",
+ "spot": 25044.65,
+ "lot": 65,
+ "atm": 25050,
+ "elm_expiry_day_per_short_lot": 32558.045000000002,
+ "margins": {
+  "naked short straddle": 187100.81,
+  "iron fly +-100": 66545.96000000002,
+  "iron fly +-200": 68300.96,
+  "iron fly +-400": 73684.26000000001,
+  "iron fly +-800": 91492.96,
+  "iron fly +-1200": 114675.21000000002,
+  "put credit spread ATM/-200": 40571.76500000001,
+  "put credit spread ATM/-500": 54654.66500000001,
+  "call credit spread ATM/+200": 40042.795000000006,
+  "synthetic long (CE buy, PE sell)": 183062.165,
+  "synthetic long + PE wing -250": 57676.515000000014,
+  "synthetic long + PE wing -500": 69637.16500000001,
+  "long ATM call": 14982.5,
+  "call debit spread ATM/+200": 37883.625,
+  "call debit spread -200/ATM (ITM)": 39715.195,
+  "short strangle +-300": 182950.3,
+  "iron condor +-300/+-500": 72127.25000000001,
+  "M: naked short ATM PE": 168079.665,
+  "M: naked short ATM CE": 168864.345,
+  "M: short ATM PE + PE wing -750 (3%)": 68616.66500000001,
+  "M: short ATM PE + PE wing -1000 (4%)": 83757.11500000002,
+  "M: short ATM CE + CE wing +1000 (4%)": 81948.29500000001,
+  "M + W together (fly +-750 plus short PE/-1000 wing)": 170879.73500000002
+ }
+}

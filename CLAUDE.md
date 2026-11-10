@@ -1,5 +1,7 @@
 # Working rules for this repo (read first)
 
+**Round 13 (2026-11-10): Strategy M (overnight momentum premium) in `STRATEGY_M_CARD.md`, code `research/r13/`; recommended portfolio B2 + W1 + M1.**
+
 **Latest handoff: `HANDOFF_2026-11-09T1931IST.md`** (state, data, APIs, Kaggle, validation methods, strategies, next ideas).
 
 Current focus (user, 2026-11-09): **NIFTY only**. SENSEX/BANKNIFTY downloads were stopped on purpose; the live candidate is

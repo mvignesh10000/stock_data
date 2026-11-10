@@ -1121,3 +1121,38 @@ p95 Rs 1.33L, 64 % winning months**; B 2 + W 2 Rs 1.07L/yr but DD 22.3 % (too mu
 on expiry morning as B enters). Sim margin for W median Rs 1.12L vs Upstox fly +/-800 Rs 1.06L.
 Executor: execution/upstox_weekly.py (state file across days, product D, holiday-aware T-3 detection, weekly stop every minute,
 exit 09:20 expiry morning, ledger + kill-switch); paper-tested 9-Nov-2026. Card: STRATEGY_W_CARD.md.
+
+## Round 13: overnight momentum (Strategy M), margin facts, new portfolio (2026-11-10), research/r13/
+Goal (user): more profit per rupee of margin, lower drawdown, more winning months, expiry and non-expiry days.
+**Premium decomposition (s1_decomp.py, gross points per unit, short option):** no leg has a large unconditional premium. ATM legs
+earn 0-5 pts per segment (|t| < 1.5) against ~1.5 pts of cost per leg; the only t > 2.5 cells are 1-3 % OTM puts at tdte 0-1
+(premium Rs 3-18, earn 1.5-4 pts, worst -110..-330): pennies in front of a steamroller. Unconditional selling has no usable edge.
+**Overnight drift (idx.py, 2,912 nights 2015-2026):** spot 15:20 -> next 09:20 = +6.9 bp (t 5.7), intraday -2.6 bp. But the
+synthetic future (K + C - P) shows the basis is 17.7 pts at 15:20 and 9.2 pts at 09:20 (carry 4.7 pts per calendar day): the
+tradable unconditional overnight return 2021-26 is +0.05 pts. **The famous overnight drift is carry, not alpha.**
+**Conditional on the day's move it is real:** after 09:20->15:20 > +0.3 %: +8.2 bp net of carry and 2 bp cost, t 3.5, n 876,
+positive 11 of 12 years, monotonic in the size of the move. No stable sub-filter (weekday, weekend, VIX, trend flip sign between
+2015-20 and 2021-26). Short side with futures: negative 2015-2021, positive 2022-26.
+**Real option prices 2021-26 (s2/s4/on2.py, 1 lot, all costs):**
+| Structure (thr 0.3 %) | Rs/yr | PF | DD | WM | note |
+|---|---|---|---|---|---|
+| up: synthetic long | 68.0k | 1.41 | 51.5k | 62 % | margin 1.83L |
+| up: long ATM call | 28.3k | 1.33 | 34.8k | 52 % | no margin, pays theta |
+| up: short ATM put | 39.6k | 1.49 | 25.8k | 69 % | |
+| down: short ATM call | 32.7k | 1.33 | 29.1k | 65 % | |
+| down: synthetic short | 76.0k | 1.36 | 58.6k | 62 % | |
+| **M = short put after up / short call after down** | **72.3k** | **1.42** | **35.0k** | **69 %** | Sharpe 1.58, every year positive |
+| synthetic both ways | 144.0k | 1.40 | 70.3k | 67 % | twice the gap risk |
+Rejected: put/call credit spreads with 1-2 % wings (wing decay eats the edge, PF 0.9-1.1), call debit spreads (PF 0.88-1.02),
+all-nights synthetic long (PF 0.90), ITM calls (2021-23 numbers not trusted: far strikes are stale in the Dhan rolling data).
+**Unseen data, 2017-2020 monthly options (zen.py, on2_zen.py):** M unchanged: +3.5k, +2.2k, +21.3k, +32.7k, PF 1.13 (index 2.3x
+lower, monthly options costlier). Down leg alone PF 1.22; up leg alone PF 1.04.
+**Robustness (m_robust.py):** 15 variants (threshold 0-0.5 %, entry 15:10/15:25, exit 09:17/09:25/09:45, slippage x2, wings):
+5-year PF 1.26-1.48 for all naked variants; 4 % wing PF 1.37 in 2024-26 (pre-2024 wing prices untestable).
+**Real margins (margins.py, Upstox 10-Nov-2026, non-expiry):** naked straddle 1.87L; iron fly +-200 / +-800 / +-1200 = 0.68L /
+0.91L / 1.15L; put credit spread ATM/-200 0.41L; naked short ATM option 1.68L, with 4 % wing 0.84L; synthetic long 1.83L, with
+-500 put 0.70L; long call = premium. Expiry day adds 2 % ELM (Rs 32.6k) per short leg, so margin is driven by the number of
+short legs, not by the wing price.
+**Portfolio (portfolio.py, Rs 5L):** B2+W1 76.8k/yr, DD 12.4 %, 64 % winning months -> **B2+W1+M1 149.0k/yr (29.8 %), DD 9.1 %,
+p95 DD 90k, 75 % winning months, no losing year, Sharpe 2.0.** Correlations: M vs B -0.01, M vs W -0.10.
+Card: STRATEGY_M_CARD.md. Next: executor for M (paper), far-wing prices from live chains, bid/ask recorder at 15:20 and 09:20.
