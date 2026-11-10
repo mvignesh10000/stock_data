@@ -1,6 +1,6 @@
 # Working rules for this repo (read first)
 
-**Round 13 (2026-11-10): Strategy M (overnight momentum premium) in `STRATEGY_M_CARD.md`, code `research/r13/`; recommended portfolio B2 + W1 + M1.**
+**Round 13 (2026-11-10): Strategy M (overnight momentum premium) in `STRATEGY_M_CARD.md`, code `research/r13/`; final choice M-safe (trend filter + 3 % wing), executor `execution/upstox_m.py`; recommended portfolio B2 + W1 + M-safe 1.**
 
 **Latest handoff: `HANDOFF_2026-11-09T1931IST.md`** (state, data, APIs, Kaggle, validation methods, strategies, next ideas).
 
@@ -13,7 +13,7 @@ Strategy B in `STRATEGY_CARD.md` plus overnight Strategy W in `STRATEGY_W_CARD.m
   session goes idle. Run long jobs as tracked background tasks (`run_in_background`, at most 2 h; use
   `timeout 6900 …` and restart the next chunk when notified), and make every job resumable.
 - **Code, configs, Markdown, small results (< ~5 MB)** → commit and push to GitHub on the working branch
-  (currently `claude/nifty-options-strategy-discovery-ifg0wm`) right after each meaningful step.
+  (currently `claude/nifty-trading-strategies-6ln3vy`) right after each meaningful step.
 - **Datasets and any large files** (Parquet lake, raw downloads, big result dumps) → Kaggle via the API, never git
   (`data/` is git-ignored). Use `etl/kaggle_sync.py push|pull history|bidask`, or `kaggle datasets create/version -p DIR`
   for other sets. Datasets are private by default. Upload progress at natural checkpoints, not only at the end.

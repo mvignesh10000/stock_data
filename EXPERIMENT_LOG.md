@@ -1156,3 +1156,19 @@ short legs, not by the wing price.
 **Portfolio (portfolio.py, Rs 5L):** B2+W1 76.8k/yr, DD 12.4 %, 64 % winning months -> **B2+W1+M1 149.0k/yr (29.8 %), DD 9.1 %,
 p95 DD 90k, 75 % winning months, no losing year, Sharpe 2.0.** Correlations: M vs B -0.01, M vs W -0.10.
 Card: STRATEGY_M_CARD.md. Next: executor for M (paper), far-wing prices from live chains, bid/ask recorder at 15:20 and 09:20.
+
+## Round 14: safest M, executor, intraday afternoon momentum (2026-11-10), research/r13/mom.py
+**Index study, 4 blocks 2015-2026:** (a) M's up signal aligned with the 5-day trend: +13.7 bp a night net of carry, t 5.8, t >= 2.0 in
+every block; against the trend +3.2 bp (t 0.6); down signals +4.1 / -0.4 bp (not significant). (b) Intraday continuation: the move
+09:20 -> 12:00 (|r| > 0.3 %) continues to 15:20 by +8.1 bp (t 4.3, positive in all blocks, both directions); 13:00 +6.9 (t 4.8).
+(c) Gap follow-through: nothing (2.3 bp, t 0.9). (d) Nights after flat days by trend: weak (one block).
+**M variants (1 lot, naked; 2021-26 | 2017-20):** both legs PF 1.42, 72.3k/yr, DD 35.0k | PF 1.13, DD 49k; **both + trend filter
+PF 1.36, 44.9k/yr, DD 38.9k | PF 1.51, 30.7k/yr, DD 19.9k**; up + filter PF 1.66, 30.4k/yr, DD 24.5k | PF 1.72, DD 11.0k (10/10 years).
+With wings, 2024+ only: both 4 % PF 1.28, 49.7k/yr, DD 35.3k; both + filter 4 % 34.9k, DD 37.5k; **both + filter 3 % (M-safe) PF 1.25,
+29.5k/yr, DD 34.2k**; up + filter 4 % PF 1.36, 17.2k, DD 25.1k.
+**Portfolio 2024+ (Rs 5L):** B2+W1 92.1k/yr, DD 12.4 % -> B2+W1+M-safe 121.7k/yr (24.3 %), DD 8.3 %, p95 87k, 71 % winning months.
+**N = intraday afternoon momentum with a short ATM option (12:00 -> 15:20, non-expiry days): rejected.** PF 1.23, 20.7k/yr, DD 44k,
+2022 negative; 13:00 entry PF 1.07 and fails 2021-23 and the 2026 holdout; 2017-20: 12:00 loses 42k in 2020; with a 3 % wing PF 1.13.
+The index effect is real but half of it (delta 0.5) minus option costs leaves too little. Lead, not tested further: on expiry days
+the same trade added ~18k/yr (2024 negative).
+**Executor:** execution/upstox_m.py (paper default), paper-tested with forced entry/exit.
