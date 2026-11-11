@@ -41,5 +41,9 @@ fade version -5..-9 bp; futures STT ~5 bp absorbs it (2015-20 +7 bp vs 2021-26 +
 **FVG / smart money concepts (5-min bars, 11 years, 4,500-4,800 FVG trades, 1,500-2,300 sweep trades; stop at structure, target 1-3 R, exit 15:15; random-entry placebo with the same stop distance):**
 FVG (displacement candle >= 1.5x average range, entry at gap edge or 50 %, stop at candle-1 extreme): gross R -0.07..0.00 (placebo -0.09..-0.18), net of costs -0.54..-0.79 R,
 trend alignment does not help. Liquidity sweep and rejection (previous-day high/low and opening range): gross R -0.11..-0.23, no better than placebo. Stops are 11-15 bp of the index,
-so a 6 bp cost is ~0.5 R per trade: such tight-stop patterns cannot pay on NIFTY even with a small real edge. Not tested separately: order blocks, CHoCH, premium/discount (subjective
-variants of the same price patterns; trend alignment covers premium/discount roughly).
+so a 6 bp cost is ~0.5 R per trade: such tight-stop patterns cannot pay on NIFTY even with a small real edge.
+
+**Order blocks, BOS/CHoCH, premium/discount (`smc3.py`, added after the first pass; same harness, 3-bar fractal swings, OB = last opposite candle before the structure-breaking leg, limit at OB edge, stop beyond OB):**
+OB after any structure break (3,939 trades): gross R -0.15..-0.19, placebo -0.18..-0.21, net about -0.94 R. BOS only (2,893): -0.15..-0.18. CHoCH only (1,759): -0.24..-0.25 (worse than placebo).
+Premium/discount filter (long only below 50 % of the day's range so far, short only above): OB all -0.17..-0.21; BOS-only subset (n=370) -0.07..-0.15 R, better than its placebo (-0.14..-0.37) but still negative and a small sample;
+FVG + premium/discount (2,107) -0.12..-0.14 R. No variant has positive gross R, every year-by-year row is mostly negative, stops are about 10 bp so costs add -0.5 R. First-pass note that trend alignment "covers" premium/discount was wrong; they are separate and were tested separately here.
