@@ -2,7 +2,7 @@
 
 **Round 13 (2026-11-10): Strategy M (overnight momentum premium) in `STRATEGY_M_CARD.md`, code `research/r13/`; final choice M-safe (trend filter + 3 % wing), executor `execution/upstox_m.py`; recommended portfolio B2 + W1 + M-safe 1.**
 
-**Latest handoff: `HANDOFF_2026-11-09T1931IST.md`** (state, data, APIs, Kaggle, validation methods, strategies, next ideas).
+**Latest handoff: `HANDOFF_2026-11-11_R13-14.md`** (rounds 13-14, Strategy M; read it after the older `HANDOFF_2026-11-09T1931IST.md`, which still covers data, APIs, B and W) (state, data, APIs, Kaggle, validation methods, strategies, next ideas).
 
 Current focus (user, 2026-11-09): **NIFTY only**. SENSEX/BANKNIFTY downloads were stopped on purpose; the live candidate is
 Strategy B in `STRATEGY_CARD.md` plus overnight Strategy W in `STRATEGY_W_CARD.md` (user accepted overnight on 2026-11-09); 5-year NIFTY cache = `opt_engine build-cache --parquet-dir data/parquet/NIFTY_UPX

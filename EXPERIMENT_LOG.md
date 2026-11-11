@@ -1170,5 +1170,5 @@ With wings, 2024+ only: both 4 % PF 1.28, 49.7k/yr, DD 35.3k; both + filter 4 % 
 **N = intraday afternoon momentum with a short ATM option (12:00 -> 15:20, non-expiry days): rejected.** PF 1.23, 20.7k/yr, DD 44k,
 2022 negative; 13:00 entry PF 1.07 and fails 2021-23 and the 2026 holdout; 2017-20: 12:00 loses 42k in 2020; with a 3 % wing PF 1.13.
 The index effect is real but half of it (delta 0.5) minus option costs leaves too little. Lead, not tested further: on expiry days
-the same trade added ~18k/yr (2024 negative).
+the same trade (all days incl. expiry, naked) made 38.9k/yr PF 1.34, positive every year 2021-26; not tested separately or with wings.
 **Executor:** execution/upstox_m.py (paper default), paper-tested with forced entry/exit.
