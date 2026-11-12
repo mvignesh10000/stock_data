@@ -4,6 +4,8 @@
 
 **Round 15 (2026-11-11): independent review + VIX rule + FVG/SMC tests in `research/r15/REVIEW.md` (no new edge found; FVG/sweeps fail; Reddit and credit-spread ideas rejected).**
 
+**Paper-trading spec for the executors: `PAPER_TRADING_CONFIG.md` (B + W + M-safe, shadow variants, acceptance criteria).**
+
 **Latest handoff: `HANDOFF_2026-11-11_R13-14.md`** (rounds 13-14, Strategy M; read it after the older `HANDOFF_2026-11-09T1931IST.md`, which still covers data, APIs, B and W) (state, data, APIs, Kaggle, validation methods, strategies, next ideas).
 
 Current focus (user, 2026-11-09): **NIFTY only**. SENSEX/BANKNIFTY downloads were stopped on purpose; the live candidate is
