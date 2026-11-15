@@ -1,6 +1,6 @@
 # SMC + Fibonacci High-Probability Zone (HPZ): local test report
 
-- run: `hpz_seed42`  |  git: `d817de4a76fe743f44339ebd020bc239ebcfdc89`  |  seed: 42
+- run: `hpz_seed42`  |  git: `52a2818c706e8c1bdd256b9020ad5dd21cab67c7`  |  seed: 42
 - data: NIFTY 50 index (1-min vendor file, resampled) and 100 Nifty 100 stocks (15-min vendor files). Index-only and stock-only splits are shown where relevant.
 - Survivorship bias: the stock list is today's Nifty 100 constituents, so every stock is a survivor. Results for stocks are optimistic.
 
