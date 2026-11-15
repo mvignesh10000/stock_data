@@ -1,0 +1,18 @@
+[package]
+name = "smc_fib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = { version = "0.4", default-features = false, features = ["std"] }
+csv = "1"
+rand = "0.8"
+rand_chacha = "0.3"
+rayon = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+statrs = "0.17"
+toml = "0.8"
+
+[profile.release]
+opt-level = 3
