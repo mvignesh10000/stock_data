@@ -1,0 +1,48 @@
+# HPZ test configuration (see docs/smc_fib_test_plan.md)
+run_id = "hpz_nocost_seed42"
+seed = 42
+data_dir = "data/raw"
+results_dir = "results"
+
+# Fibonacci probability width: sigma = c * ATR(14). Fixed (not in the grid) to keep 64 cells.
+c = 0.5
+
+random_draws = 1000        # E1 random-level control draws (seeded)
+random_entry_runs = 1000   # E2 / E3 random-entry control runs (seeded)
+bootstrap_reps = 10000
+bootstrap_seed = 42
+
+horizon_m15 = 16
+horizon_d1 = 10
+
+# [up, down] barrier multiples of ATR; first pair is the primary +1/-1, second is +2/-1
+barriers = [[1.0, 1.0], [2.0, 1.0]]
+
+# Walk-forward: train on the trailing 3 years, trade the next calendar year unchanged
+wf_first_year = 2018
+wf_last_year = 2025
+wf_train_years = 3
+wf_min_trades = 30
+
+[grid]
+k = [2, 3]
+d = [1.0, 1.5]
+n = [50, 100]
+variant = ["A", "B"]
+tau = [0.5, 0.7]
+target = ["2R", "ext"]
+
+# Fixed before running; E1 and E2 report this cell, controls are computed on it
+[reference]
+k = 2
+d = 1.0
+n = 100
+variant = "A"
+tau = 0.5
+
+[costs]
+stock_d1_rt_bps = 0.0
+stock_m15_rt_bps = 0.0
+stock_slip_bps = 0.0
+index_rt_bps = 0.0
+index_slip_bps = 0.0

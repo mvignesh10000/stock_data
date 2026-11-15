@@ -82,7 +82,7 @@ fn main() -> data::Res<()> {
             let dir = Path::new(&cfg.results_dir).join(&cfg.run_id);
             fs::create_dir_all(&dir)?;
             fs::copy(cfg_path, dir.join("config.toml"))?;
-            let manifest = Path::new(&cfg.data_dir).join("MANIFEST");
+            let manifest = Path::new(&cfg.data_dir).parent().unwrap_or(Path::new(".")).join("MANIFEST");
             if manifest.exists() {
                 fs::copy(&manifest, dir.join("data_manifest.txt"))?;
             }
