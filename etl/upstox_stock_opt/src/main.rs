@@ -291,22 +291,14 @@ fn contracts(api: &mut Api, key: &str, expiry: NaiveDate) -> Res<Vec<(String, St
         .unwrap_or_default())
 }
 
-fn existing_datasets(owner: &str) -> Res<HashSet<String>> {
-    let out = Command::new("kaggle")
-        .args(["datasets", "list", "--mine", "-v", "--page-size", "200"])
-        .output()?;
-    if !out.status.success() {
-        return Err(format!("kaggle list failed: {}", String::from_utf8_lossy(&out.stderr)).into());
-    }
-    let mut set = HashSet::new();
-    for line in String::from_utf8_lossy(&out.stdout).lines() {
-        if let Some(r) = line.split(',').next() {
-            if r.starts_with(&format!("{owner}/")) {
-                set.insert(r.to_string());
-            }
-        }
-    }
-    Ok(set)
+/// Direct existence check: `kaggle datasets files` exits 0 only when the dataset exists.
+/// (`datasets list` is not used: it omitted datasets that do exist.)
+fn on_kaggle(id: &str) -> bool {
+    Command::new("kaggle")
+        .args(["datasets", "files", id, "--page-size", "1"])
+        .output()
+        .map(|o| o.status.success())
+        .unwrap_or(false)
 }
 
 /// Downloads every file of an existing dataset into `dir`, so a new version keeps them.
@@ -333,13 +325,15 @@ fn publish(owner: &str, slug: &str, dir: &Path, on_kaggle: bool, note: &str) -> 
     let meta = json!({ "title": title, "id": id, "licenses": [{ "name": "other" }] });
     fs::write(dir.join("dataset-metadata.json"), serde_json::to_string_pretty(&meta)?)?;
     let dir_s = dir.to_str().unwrap();
-    let st = if on_kaggle {
-        Command::new("kaggle").args(["datasets", "version", "-p", dir_s, "-m", note]).status()?
+    let out = if on_kaggle {
+        Command::new("kaggle").args(["datasets", "version", "-p", dir_s, "-m", note]).output()?
     } else {
-        Command::new("kaggle").args(["datasets", "create", "-p", dir_s]).status()?
+        Command::new("kaggle").args(["datasets", "create", "-p", dir_s]).output()?
     };
-    if !st.success() {
-        return Err(format!("kaggle upload failed for {id}").into());
+    let text = format!("{}{}", String::from_utf8_lossy(&out.stdout), String::from_utf8_lossy(&out.stderr));
+    // The CLI can exit 0 while printing an error (for example "slug already in use"), so check the text too.
+    if !out.status.success() || text.to_lowercase().contains("error") {
+        return Err(format!("kaggle upload failed for {id}: {}", text.trim()).into());
     }
     Ok(())
 }
@@ -367,6 +361,13 @@ fn run_symbol(
     // Files already on Kaggle come back first: a new dataset version replaces the whole file set.
     if on_kaggle {
         restore(&format!("{owner}/{ds_slug}"), &dir)?;
+        let restored = fs::read_dir(&dir)?
+            .filter_map(|e| e.ok())
+            .filter(|e| e.path().extension().map_or(false, |x| x == "parquet"))
+            .count();
+        if restored == 0 {
+            return Err(format!("{sym}: dataset exists on Kaggle but restored no files; not uploading").into());
+        }
     }
     let exps = expiries(api, key, from, to)?;
     if exps.is_empty() {
@@ -477,9 +478,6 @@ fn main() -> Res<()> {
         .build();
     let mut api = Api { agent, token, lim: Limiter { hist: VecDeque::new() }, calls: 0 };
 
-    let on_kaggle = existing_datasets(&owner)?;
-    println!("kaggle: {} datasets already under {owner}", on_kaggle.len());
-
     let text = fs::read_to_string(&symbols_path)?;
     for line in text.lines().skip(1) {
         let Some((sym, key)) = line.split_once(',') else { continue };
@@ -487,7 +485,7 @@ fn main() -> Res<()> {
             continue;
         }
         let ds = format!("{owner}/upstox-stock-options-15m-{}", sanitize(sym));
-        let remote = on_kaggle.contains(&ds);
+        let remote = on_kaggle(&ds);
         if let Err(e) = run_symbol(&mut api, &owner, sym, key, from, to, &work, remote) {
             eprintln!("{sym}: FAILED: {e} (will retry on the next run)");
         }
