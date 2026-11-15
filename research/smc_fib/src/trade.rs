@@ -196,6 +196,9 @@ pub fn random_expectancies(
             let t = list[rng.gen_range(0..list.len())];
             let s = &prep[si].s;
             let a = prep[si].atr[t];
+            if !a.is_finite() {
+                continue;
+            }
             let dir: i8 = if rng.gen_bool(0.5) { 1 } else { -1 };
             let e = t + 1;
             let entry = s.bars[e].o;
@@ -225,15 +228,21 @@ pub struct Summary {
 }
 
 /// Daily return series on `days` (sorted): the sum of RISK * R of trades exiting that day.
-pub fn daily_returns(tr: &[&TradeRec], days: &[i32]) -> Vec<f64> {
-    let mut by_day: BTreeMap<i32, f64> = BTreeMap::new();
+pub fn daily_returns(tr: &[&TradeRec], days: &[i32], nsym: usize) -> Vec<f64> {
+    // equal-capital sleeves: each symbol risks RISK of its own sleeve per trade; the portfolio
+    // return is the average over all `nsym` sleeves, so one day can never lose more than RISK per sleeve
+    let mut by_sym_day: BTreeMap<(i32, u32), f64> = BTreeMap::new();
     for t in tr {
-        *by_day.entry(t.exit_day).or_insert(0.0) += RISK * t.r;
+        *by_sym_day.entry((t.exit_day, t.sym)).or_insert(0.0) += RISK * t.r;
+    }
+    let mut by_day: BTreeMap<i32, f64> = BTreeMap::new();
+    for ((d, _), v) in by_sym_day {
+        *by_day.entry(d).or_insert(0.0) += v / nsym as f64;
     }
     days.iter().map(|d| by_day.get(d).copied().unwrap_or(0.0)).collect()
 }
 
-pub fn summarize(tr: &[&TradeRec], days: &[i32]) -> Summary {
+pub fn summarize(tr: &[&TradeRec], days: &[i32], nsym: usize) -> Summary {
     let n = tr.len();
     if n == 0 || days.is_empty() {
         return Summary::default();
@@ -241,7 +250,7 @@ pub fn summarize(tr: &[&TradeRec], days: &[i32]) -> Summary {
     let total: f64 = tr.iter().map(|t| t.r).sum();
     let wins: f64 = tr.iter().filter(|t| t.r > 0.0).map(|t| t.r).sum();
     let losses: f64 = -tr.iter().filter(|t| t.r < 0.0).map(|t| t.r).sum::<f64>();
-    let rets = daily_returns(tr, days);
+    let rets = daily_returns(tr, days, nsym);
     let (mut eq, mut peak, mut mdd) = (1.0f64, 1.0f64, 0.0f64);
     for r in &rets {
         eq = (eq * (1.0 + r)).max(1e-9);

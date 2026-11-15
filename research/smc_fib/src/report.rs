@@ -100,7 +100,7 @@ pub fn render(out: &RunOut) -> String {
     let _ = writeln!(s, "- Stock daily costs (46 bps total) are applied to daily trades; intraday MIS costs (13 bps) to 15-min trades; index 5 bps.");
     let _ = writeln!(s, "- Sector robustness not run: the data has no sector mapping.");
     let _ = writeln!(s, "- The walk-forward selects on train trades only; the OOS years are not used to choose parameters. The reference cell for E1 and E2 was fixed before running (k=2, d=1.0, N=100, variant A, tau=0.5, c=0.5).");
-    let _ = writeln!(s, "- Results are per-symbol trades pooled over the universe with 1 % risk per trade; daily returns add the R of trades that exit on the same day (no margin or capacity constraints).");
+    let _ = writeln!(s, "- Portfolio metrics use equal-capital sleeves: each symbol has its own sleeve, risks 1 % of it per trade (one position at a time), and the portfolio return is the average over all sleeves. Stocks and the index are pooled this way; no margin or capacity limits.");
     s
 }
 

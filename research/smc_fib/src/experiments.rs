@@ -684,6 +684,7 @@ fn cell_label(arm: &ArmOut, c: usize) -> String {
 }
 
 fn walk_forward(cfg: &Config, arm: &ArmOut, prep: &[Prepared], days: &[i32], loaded: &Loaded) -> E3Arm {
+    let nsym = prep.len();
     let (first, last) = (cfg.wf_first_year, cfg.wf_last_year);
     let mut folds = Vec::new();
     let mut oos: Vec<&TradeRec> = Vec::new();
@@ -733,19 +734,19 @@ fn walk_forward(cfg: &Config, arm: &ArmOut, prep: &[Prepared], days: &[i32], loa
     }
     oos.sort_by_key(|t| (t.entry_day, t.sym));
     let oos_days: Vec<i32> = days.iter().copied().filter(|d| (first..=last).contains(&year_of(*d))).collect();
-    let oos_sum = summarize(&oos, &oos_days);
+    let oos_sum = summarize(&oos, &oos_days, nsym);
     let r_vec: Vec<f64> = oos.iter().map(|t| t.r).collect();
     let (blo, bhi) = stats::block_bootstrap_ci(&r_vec, 10, cfg.bootstrap_reps, cfg.bootstrap_seed);
     let rnd = random_expectancies(prep, &oos, arm.cost_idx, arm.cost_stk, arm.h, cfg.random_entry_runs, cfg.seed ^ 0xA5A5);
     let p = stats::pvalue_ge(&rnd, oos_sum.expectancy);
-    let rets = daily_returns(&oos, &oos_days);
+    let rets = daily_returns(&oos, &oos_days, nsym);
     let sr = stats::sharpe_daily(&rets);
     let cell_sr: Vec<f64> = arm
         .cell_trades
         .iter()
         .map(|tr| {
             let v: Vec<&TradeRec> = tr.iter().filter(|t| (first..=last).contains(&year_of(t.entry_day))).collect();
-            stats::sharpe_daily(&daily_returns(&v, &oos_days))
+            stats::sharpe_daily(&daily_returns(&v, &oos_days, nsym))
         })
         .collect();
     let var = stats::sample_var(&cell_sr);
@@ -764,7 +765,7 @@ fn walk_forward(cfg: &Config, arm: &ArmOut, prep: &[Prepared], days: &[i32], loa
 
     let regime_of = |t: &TradeRec| regime_at(&loaded.regime, t.entry_day);
     let mut slices = Vec::new();
-    let mut add = |name: &str, v: Vec<&TradeRec>| slices.push(Slice { name: name.into(), s: summarize(&v, &oos_days) });
+    let mut add = |name: &str, v: Vec<&TradeRec>| slices.push(Slice { name: name.into(), s: summarize(&v, &oos_days, nsym) });
     add("NIFTY above 200-DMA", oos.iter().copied().filter(|t| regime_of(t) == Some(true)).collect());
     add("NIFTY below 200-DMA", oos.iter().copied().filter(|t| regime_of(t) == Some(false)).collect());
     for (lbl, q) in [("liquidity tercile low", 0u8), ("liquidity tercile mid", 1), ("liquidity tercile high", 2), ("index", 3)] {
@@ -888,6 +889,7 @@ fn e1_crit(rows: &[E1Row], primary: &str) -> E1Crit {
 }
 
 fn analyse_arm(cfg: &Config, prep: &[Prepared], tf: Tf, loaded: &Loaded, days: &[i32]) -> ArmReport {
+    let nsym = prep.len();
     let arm = run_arm(cfg, prep, tf);
     let nt = arm.targets.len();
     let ref_label = arm.combos[arm.ref_combo].label.clone();
@@ -953,11 +955,11 @@ fn analyse_arm(cfg: &Config, prep: &[Prepared], tf: Tf, loaded: &Loaded, days: &
             ("short", all.iter().copied().filter(|t| t.dir < 0).collect()),
         ];
         for (sp, v) in splits {
-            let s = summarize(&v, days);
+            let s = summarize(&v, days, nsym);
             e2_rows.push(E2Row { strategy: "HPZ".into(), target: tgt.clone(), split: sp.into(), s });
         }
         let rnd = random_expectancies(prep, &all, arm.cost_idx, arm.cost_stk, arm.h, cfg.random_entry_runs, cfg.seed ^ 0x5EED);
-        let obs = summarize(&all, days).expectancy;
+        let obs = summarize(&all, days, nsym).expectancy;
         e2_random.push(RandomRow {
             target: tgt.clone(),
             observed: obs,
@@ -968,7 +970,7 @@ fn analyse_arm(cfg: &Config, prep: &[Prepared], tf: Tf, loaded: &Loaded, days: &
         });
         for (bk, name) in ["SMC-only (OB)", "Fib-only", "MA20/50 touch"].iter().enumerate() {
             let v: Vec<&TradeRec> = arm.base_trades[bk * nt + ti].iter().collect();
-            baseline_rows.push(E2Row { strategy: (*name).into(), target: tgt.clone(), split: "pooled".into(), s: summarize(&v, days) });
+            baseline_rows.push(E2Row { strategy: (*name).into(), target: tgt.clone(), split: "pooled".into(), s: summarize(&v, days, nsym) });
         }
     }
     let e3 = walk_forward(cfg, &arm, prep, days, loaded);
