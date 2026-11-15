@@ -6,10 +6,11 @@
 //!   * candles    : GET /v2/expired-instruments/historical-candle/{key}/15minute/{expiry}/{expiry-92d}
 //! Output per expiry: one Parquet file (OHLC, volume, OI per contract per 15 min).
 //! Output per stock : one private Kaggle dataset `upstox-stock-options-15m-<symbol>` holding those
-//! files plus the underlying's daily candles. The stock's folder is deleted after a successful upload.
+//! files plus the underlying's daily candles. Every CHUNK_FILES new files are uploaded at once
+//! (a new dataset version once the dataset exists).
 //!
-//! Resumable: stocks whose dataset already exists on Kaggle are skipped, and expiries whose Parquet
-//! already exists locally are skipped. Rate limit: 960 calls per 30 min (and 240 per minute).
+//! Resumable: an existing Kaggle dataset is restored first, and only expiries missing from it are
+//! downloaded. Rate limit: 960 calls per 30 min (and 240 per minute).
 //!
 //! Usage:
 //!   KAGGLE_API_TOKEN=... UPSTOX_ACCESS_TOKEN=... upstox_stock_opt \
@@ -38,6 +39,8 @@ const MONEYNESS: f64 = 0.08;
 const BAND_DAYS: i64 = 35;
 const LOOKBACK_DAYS: i64 = 92;
 const DATE_FMT: &str = "%Y-%m-%d";
+/// Files written before each Kaggle upload: a crash loses at most this many expiries of work.
+const CHUNK_FILES: usize = 5;
 
 /// Sliding-window limiter for 960 requests / 30 min and 240 / min.
 struct Limiter {
@@ -306,26 +309,78 @@ fn existing_datasets(owner: &str) -> Res<HashSet<String>> {
     Ok(set)
 }
 
-fn upload(owner: &str, slug: &str, dir: &Path) -> Res<()> {
-    let id = format!("{owner}/{slug}");
-    let title = slug.replace('-', " ");
-    let meta = json!({ "title": title, "id": id, "licenses": [{ "name": "other" }] });
-    fs::write(dir.join("dataset-metadata.json"), serde_json::to_string_pretty(&meta)?)?;
+/// Downloads every file of an existing dataset into `dir`, so a new version keeps them.
+fn restore(id: &str, dir: &Path) -> Res<()> {
     let st = Command::new("kaggle")
-        .args(["datasets", "create", "-p", dir.to_str().unwrap()])
+        .args(["datasets", "download", id, "-p", dir.to_str().unwrap(), "--unzip", "-q"])
         .status()?;
     if !st.success() {
-        return Err(format!("kaggle create failed for {id}").into());
+        return Err(format!("kaggle download failed for {id}").into());
     }
     Ok(())
 }
 
-fn run_symbol(api: &mut Api, owner: &str, sym: &str, key: &str, from: NaiveDate, to: NaiveDate, work: &Path) -> Res<()> {
+/// Creates the dataset on first use, then uploads a new version containing every file in `dir`.
+fn publish(owner: &str, slug: &str, dir: &Path, on_kaggle: bool, note: &str) -> Res<()> {
+    for entry in fs::read_dir(dir)? {
+        let p = entry?.path();
+        if p.extension().map_or(false, |e| e == "tmp") {
+            fs::remove_file(p)?;
+        }
+    }
+    let id = format!("{owner}/{slug}");
+    let title = slug.replace('-', " ");
+    let meta = json!({ "title": title, "id": id, "licenses": [{ "name": "other" }] });
+    fs::write(dir.join("dataset-metadata.json"), serde_json::to_string_pretty(&meta)?)?;
+    let dir_s = dir.to_str().unwrap();
+    let st = if on_kaggle {
+        Command::new("kaggle").args(["datasets", "version", "-p", dir_s, "-m", note]).status()?
+    } else {
+        Command::new("kaggle").args(["datasets", "create", "-p", dir_s]).status()?
+    };
+    if !st.success() {
+        return Err(format!("kaggle upload failed for {id}").into());
+    }
+    Ok(())
+}
+
+fn expiry_path(dir: &Path, slug_sym: &str, e: NaiveDate) -> PathBuf {
+    dir.join(format!("options__{slug_sym}__expiry_eq_{}.parquet", e.format(DATE_FMT)))
+}
+
+fn run_symbol(
+    api: &mut Api,
+    owner: &str,
+    sym: &str,
+    key: &str,
+    from: NaiveDate,
+    to: NaiveDate,
+    work: &Path,
+    on_kaggle: bool,
+) -> Res<()> {
     let slug_sym = sanitize(sym);
     let ds_slug = format!("upstox-stock-options-15m-{slug_sym}");
     let dir = work.join(&slug_sym);
     fs::create_dir_all(&dir)?;
     let t0 = Instant::now();
+
+    // Files already on Kaggle come back first: a new dataset version replaces the whole file set.
+    if on_kaggle {
+        restore(&format!("{owner}/{ds_slug}"), &dir)?;
+    }
+    let exps = expiries(api, key, from, to)?;
+    if exps.is_empty() {
+        println!("{sym}: no expired expiries in range, skipped");
+        fs::remove_dir_all(&dir)?;
+        return Ok(());
+    }
+    let ul_path = dir.join(format!("underlying_daily__{slug_sym}.parquet"));
+    let todo: Vec<NaiveDate> = exps.iter().copied().filter(|e| !expiry_path(&dir, &slug_sym, *e).exists()).collect();
+    if todo.is_empty() && ul_path.exists() {
+        println!("{sym}: all {} expiries already on Kaggle", exps.len());
+        fs::remove_dir_all(&dir)?;
+        return Ok(());
+    }
 
     let days_url = format!(
         "{BASE}/v3/historical-candle/{}/days/1/{}/{}",
@@ -334,15 +389,15 @@ fn run_symbol(api: &mut Api, owner: &str, sym: &str, key: &str, from: NaiveDate,
         (from - Duration::days(BAND_DAYS + 25)).format(DATE_FMT)
     );
     let days = parse_candles(api.get(&days_url)?.as_ref());
-    write_underlying(&dir.join(format!("underlying_daily__{slug_sym}.parquet")), sym, &days)?;
-
-    let exps = expiries(api, key, from, to)?;
-    println!("{sym}: {} expiries, {} daily bars", exps.len(), days.len());
-    for e in exps {
-        let out = dir.join(format!("options__{slug_sym}__expiry_eq_{}.parquet", e.format(DATE_FMT)));
-        if out.exists() {
-            continue;
-        }
+    let mut pending = 0usize;
+    let mut on_remote = on_kaggle;
+    if !ul_path.exists() {
+        write_underlying(&ul_path, sym, &days)?;
+        pending += 1;
+    }
+    println!("{sym}: {} expiries, {} to download, {} daily bars", exps.len(), todo.len(), days.len());
+    for e in todo {
+        let out = expiry_path(&dir, &slug_sym, e);
         let lo_w = e - Duration::days(BAND_DAYS);
         let band: Vec<&Candle> = days.iter().filter(|d| d.ts.date() >= lo_w && d.ts.date() <= e).collect();
         if band.is_empty() {
@@ -379,6 +434,7 @@ fn run_symbol(api: &mut Api, owner: &str, sym: &str, key: &str, from: NaiveDate,
             }
         }
         write_options(&out, sym, &rows)?;
+        pending += 1;
         println!(
             "  {sym} {e}: {} contracts in band, {} rows, {} calls total, {:.0}s",
             sel.len(),
@@ -386,10 +442,18 @@ fn run_symbol(api: &mut Api, owner: &str, sym: &str, key: &str, from: NaiveDate,
             api.calls,
             t0.elapsed().as_secs_f64()
         );
+        if pending >= CHUNK_FILES {
+            publish(owner, &ds_slug, &dir, on_remote, &format!("{sym}: +{pending} files, through {e}"))?;
+            on_remote = true;
+            pending = 0;
+            println!("{sym}: chunk uploaded through {e}");
+        }
     }
 
-    upload(owner, &ds_slug, &dir)?;
-    println!("{sym}: uploaded dataset {owner}/{ds_slug}");
+    if pending > 0 {
+        publish(owner, &ds_slug, &dir, on_remote, &format!("{sym}: +{pending} files"))?;
+        println!("{sym}: uploaded to {owner}/{ds_slug}");
+    }
     fs::remove_dir_all(&dir)?;
     Ok(())
 }
@@ -423,11 +487,8 @@ fn main() -> Res<()> {
             continue;
         }
         let ds = format!("{owner}/upstox-stock-options-15m-{}", sanitize(sym));
-        if on_kaggle.contains(&ds) {
-            println!("{sym}: already on Kaggle ({ds}), skipped");
-            continue;
-        }
-        if let Err(e) = run_symbol(&mut api, &owner, sym, key, from, to, &work) {
+        let remote = on_kaggle.contains(&ds);
+        if let Err(e) = run_symbol(&mut api, &owner, sym, key, from, to, &work, remote) {
             eprintln!("{sym}: FAILED: {e} (will retry on the next run)");
         }
     }
