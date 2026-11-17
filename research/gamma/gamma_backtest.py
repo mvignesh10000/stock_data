@@ -19,7 +19,7 @@ BASE = dict(
     vol_k=2.0, min_lots=5, oi_x=0.03, oi_bars=3,               # 15m trigger
     sl_bars=8, max_risk=0.60, first_bar=1, last_bar=22,        # stop / entry window (bar idx 1=09:30 .. 22=14:45)
     exit_mode="target", target=1.0, hold_days=2, trail_bars=4, # exits
-    slip=0.01, capital=1_000_000, risk_pct=0.01, max_prem_pct=0.15,
+    spot_confirm=0, spot_ref="level", global_peak=0, slip=0.01, capital=1_000_000, risk_pct=0.01, max_prem_pct=0.15,
 )
 
 
@@ -100,7 +100,8 @@ def candidates(o, u, p):
                 if s.empty:
                     continue
                 r = s.sort_values("oi").iloc[-1]
-                out.append(dict(expiry=exp, d=D, side=side, key=s.oi.idxmax(), strike=r.strike, lot=int(r.lot_size),
+                gl = snap[(snap.opt == side) & snap.oi.notna()].oi.max()
+                out.append(dict(is_global=bool(r.oi >= gl), expiry=exp, d=D, side=side, key=s.oi.idxmax(), strike=r.strike, lot=int(r.lot_size),
                                 level=lvl, prev_close=pc, dte=dte, peak_oi=r.oi))
     return pd.DataFrame(out)
 
@@ -116,7 +117,7 @@ def costs(buy, sell, qty):
     return brk + exch + sebi + stt + stamp + gst
 
 
-def simulate(g, row, p, days):
+def simulate(g, row, p, og):
     """Scan the selected contract; return trade dict or None. g = grid df of that contract."""
     g = g.reset_index(drop=True)
     n = len(g)
@@ -138,6 +139,11 @@ def simulate(g, row, p, days):
             continue
         if not (g.close.values[i] > g.open.values[i] and g.close.values[i] > g.high.values[i - 1]):
             continue
+        if p["spot_confirm"]:                      # synthetic spot via put-call parity on the same strike
+            sp = row.strike + g.close.values[i] - og.close.values[i] if row.side == "CE" else row.strike + og.close.values[i] - g.close.values[i]
+            ref = row.level if p["spot_ref"] == "level" else row.strike
+            if not (sp >= ref if row.side == "CE" else sp <= ref):
+                continue
         entry_raw = g.open.values[i + 1]
         sl = g.low.values[i - p["sl_bars"]:i + 1].min()
         entry = entry_raw * (1 + p["slip"])
@@ -168,7 +174,7 @@ def simulate(g, row, p, days):
         q = lots * lot
         c = costs(entry, sell, q)
         gross = (sell - entry) * q
-        return dict(symbol=row.symbol, side=row.side, expiry=row.expiry, strike=row.strike, d=row.d, dte=row.dte,
+        return dict(symbol=row.symbol, side=row.side, level=row.level, expiry=row.expiry, strike=row.strike, d=row.d, dte=row.dte,
                     entry_ts=g.d.values[i + 1] + np.timedelta64(555 + 15 * int(g.b.values[i + 1]), "m"),
                     exit_ts=g.d.values[j_exit] + np.timedelta64(555 + 15 * int(g.b.values[j_exit]), "m"),
                     entry=entry, sl=sl, exit=sell, reason=why, lots=lots, lot=lot, qty=q,
@@ -193,6 +199,8 @@ def run(cands, symbols, p, gcache):
     trades = []
     busy = {}
     for row in cands.sort_values("d").itertuples():
+        if p["global_peak"] and not row.is_global:
+            continue
         o = symbols[row.symbol][0]
         k = (row.symbol, row.key)
         if k not in gcache:
@@ -201,7 +209,17 @@ def run(cands, symbols, p, gcache):
             gcache[k] = grid(c, days)
         if busy.get(row.symbol, pd.Timestamp.min) >= row.d:
             continue
-        t = simulate(gcache[k], row, p, None)
+        if p["spot_confirm"]:
+            ok = (o.expiry == row.expiry) & (o.strike == row.strike) & (o.opt == ("PE" if row.side == "CE" else "CE"))
+            if not ok.any():
+                continue
+            k2 = (row.symbol, o[ok].instrument_key.iloc[0])
+            if k2 not in gcache:
+                gcache[k2] = grid(o[o.instrument_key == k2[1]], sorted(o[o.expiry == row.expiry].d.unique()))
+            og = gcache[k2]
+        else:
+            og = None
+        t = simulate(gcache[k], row, p, og)
         if t:
             busy[row.symbol] = pd.Timestamp(t["exit_ts"]).normalize()
             trades.append(t)

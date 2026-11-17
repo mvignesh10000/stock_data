@@ -57,3 +57,24 @@ Even with zero slippage the strategy loses after costs; each extra 1 % of slippa
 - STT/exchange rates are approximate (0.1 % STT assumed).
 
 Files: `trades_base.csv` (every trade: entry/exit time, strike, entry, SL, exit, reason, lots, ret, R, costs, P&L), `summary.csv` (all variants).
+
+## Audit (second pass: looking for mistakes)
+Code re-check: OI data is live per bar (64 % of bars change OI, 0.9 % zeros) so OI handling is sound; put-call-parity spot and CE/PE sign conventions verified; the base run reproduces bit-for-bit after the changes (320 trades, −₹393,944).
+**Real gap found:** the base rules never required the *underlying* to cross the level, only the option's OI/volume/price signal, which also fires on non-breakouts. Fixes tested (intraday synthetic spot = strike + CE − PE on the same strike; params `spot_confirm`, `spot_ref`, `global_peak`, `dte_max` in `BASE`):
+
+| Variant (slip 1 %, 2×/2-day exit) | Trades | Win % | PF | Net ₹ | Calls ₹ | Puts ₹ | In-sample (<Dec-25) | Out-of-sample |
+|---|---|---|---|---|---|---|---|---|
+| Base (no spot check), DTE≤14 | 320 | 29.7 | 0.77 | −393,944 | −544,833 | +150,888 | −169,721* | −224,223* |
+| Spot ≥ level, DTE≤14 | 167 | 31.7 | 0.87 | −104,473 | −208,352 | +103,879 | −99,044 | −5,428 |
+| Spot ≥ strike (crossed the peak-OI strike), DTE≤14 | 196 | 35.7 | 1.06 | **+48,837** | −177,400 | +226,238 | +67,083 | −18,245 |
+| + strike must be chain-wide max OI | 111 | 32.4 | 0.87 | −63,798 | −208,970 | +145,172 | +19,883 | −83,681 |
+| Spot ≥ strike, DTE≤30 (video examples reach 29 DTE) | 360 | 36.4 | 0.92 | −132,785 | −331,943 | +199,158 | −57,590 | −75,194 |
+(*base split at Oct-25, not Dec-25.) All variants in `audit_variants.csv`, `audit_spot.csv`.
+
+**What the audit shows**
+1. The spot-breakout check is the most valuable fix: it cuts losses by 60–100 % and is the only variant to turn marginally positive (+4.9 %, PF 1.06, 196 trades) – but it is negative out-of-sample, so it is not a proven edge.
+2. **Calls lose in every one of the 8 variants** (−₹1.8 L to −₹3.4 L); **puts win in 7 of 8** (+₹0.6–2.3 L). Underlying check: over all 43 stocks, 2-day forward return after a 40-day-high breakout is +0.15 % (win 50 %) and after a breakdown +0.35 % (win 52 %), so neither direction has a spot drift – the call loss is not a coding artefact but means resistance breakouts did not follow through in Oct-24→Nov-26 on these stocks, whereas downside-trap/short-covering setups did.
+3. Where the daily high did break the level (look-ahead diagnostic), puts averaged +0.40 R (44 % win) and calls still −0.32 R.
+4. The "2–3×" winners in the video are the right tail: only ~13 % of trades reach 2×, so the strategy needs ≥ 33–40 % win rate with perfect stop discipline and near-zero slippage; with realistic slippage it sits at break-even.
+
+**Honest conclusion:** I found one genuine omission (spot confirmation) and fixed it, but I cannot reproduce the profitability traders claim. The only consistently positive component is the **put / support-breakdown side** (~+₹1–2 L over 21 months on ₹10 L, 36–80 trades, 95 % CI includes zero). What could still explain the gap: (a) discretionary selection of "A+" levels and stocks by traders (we use a mechanical swing), (b) the 43-stock subset of mostly large caps vs the mid-cap F&O names in the video (BIOCON, POWERINDIA, SAMMAANCAP, CGPOWER, FORTIS have much thinner OI and bigger gamma moves – not in the data), (c) survivorship/cherry-picked examples in the video.
